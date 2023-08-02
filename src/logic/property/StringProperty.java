@@ -1,23 +1,42 @@
 package logic.property;
 
-import logic.enums.PropertyType;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 class StringProperty extends Property{
     private String value;
 
-    protected StringProperty(String nameValue, PropertyType typeValue, boolean isRandomInitValue) {
-        super(nameValue, typeValue, isRandomInitValue);
+    protected StringProperty(String nameValue, boolean isRandomInitValue) {
+        super(nameValue, isRandomInitValue);
         this.value = getRandomString();
     }
 
-    protected StringProperty(String nameValue, PropertyType typeValue, boolean isRandomInitValue, String init) {
-        super(nameValue, typeValue, isRandomInitValue);
+    protected StringProperty(String nameValue, boolean isRandomInitValue, String init) {
+        super(nameValue, isRandomInitValue);
         this.value = init;
+    }
+
+    @Override
+    public String toString() {
+        String str = super.toString() + "\nType: String";
+        return str;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        StringProperty that = (StringProperty) o;
+        return Objects.equals(value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), value);
     }
 
     private String getRandomString(){
