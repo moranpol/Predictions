@@ -3,33 +3,33 @@ package logic.property;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
-class IntProperty extends Property{
+public class IntProperty extends Property{
     private int from;
     private int to;
     private int value;
 
-    protected IntProperty(String nameValue, boolean isRandomInitValue, int fromValue, int toValue, int init) {
+    public IntProperty(String nameValue, boolean isRandomInitValue, int fromValue, int toValue, int init) {
         super(nameValue, isRandomInitValue);
         this.from = fromValue;
         this.to = toValue;
         this.value = init;
     }
 
-    protected IntProperty(String nameValue, boolean isRandomInitValue, int init) {
+    public IntProperty(String nameValue, boolean isRandomInitValue, int init) {
         super(nameValue, isRandomInitValue);
         this.from = (int)Double.NEGATIVE_INFINITY;;
         this.to = (int)Double.POSITIVE_INFINITY;;
         this.value = init;
     }
 
-    protected IntProperty(String nameValue, boolean isRandomInitValue, int fromValue, int toValue) {
+    public IntProperty(String nameValue, boolean isRandomInitValue, int fromValue, int toValue) {
         super(nameValue, isRandomInitValue);
         this.from = fromValue;
         this.to = toValue;
         this.value = ThreadLocalRandom.current().nextInt(from, to + 1);
     }
 
-    protected IntProperty(String nameValue, boolean isRandomInitValue){
+    public IntProperty(String nameValue, boolean isRandomInitValue){
         super(nameValue, isRandomInitValue);
         this.from = (int)Double.NEGATIVE_INFINITY;;
         this.to = (int)Double.POSITIVE_INFINITY;;

@@ -5,15 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="create new classes">
-      <change afterPath="$PROJECT_DIR$/src/logic/Tick.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/EntityDefinition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/EntityInstance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/enums/PropertyType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/property/PropertyInstance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/property/Range.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/enums/PropertyType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/property/BooleanProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/property/BooleanProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/property/FloatProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/property/FloatProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/Entity.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/property/IntProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/property/IntProperty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/property/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/property/Property.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/property/StringProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/property/StringProperty.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +60,12 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\src\resources" />
+      <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\src" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -68,7 +74,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1690789124949</updated>
-      <workItem from="1690789125851" duration="13944000" />
+      <workItem from="1690789125851" duration="25370000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />
@@ -102,7 +108,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1690904020988</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL‎-00005" summary="create new classes">
+      <option name="closed" value="true" />
+      <created>1690972058642</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL‎-00005" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1690972058643</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
