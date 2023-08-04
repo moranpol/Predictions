@@ -1,13 +1,13 @@
-package logic;
+package logic.entity;
 
-import logic.property.Property;
+import logic.property.PropertyDefinition;
 
 import java.util.List;
 
 public class EntityDefinition {
     private final String name;
     private int population;
-    private List<Property> propertiesOfAllPopulation;
+    private List<PropertyDefinition> propertiesOfAllPopulation;
 
     public EntityDefinition(String nameValue, int populationValue) {
         this.name = nameValue;
@@ -19,7 +19,21 @@ public class EntityDefinition {
     public String toString(){
         StringBuilder str = new StringBuilder();
         str.append("Name:" + this.name + "\nPopulation: " + this.population + "\n Properties:\n");
-        //print property - todo
+        for (PropertyDefinition prop : this.propertiesOfAllPopulation) {
+            str.append("#" + prop);
+        }
         return  str.toString();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<PropertyDefinition> getPropertiesOfAllPopulation() {
+        return propertiesOfAllPopulation;
+    }
+
+    public int getPopulation() {
+        return population;
     }
 }

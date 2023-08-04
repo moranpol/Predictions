@@ -3,59 +3,31 @@ package logic.property;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class IntProperty extends Property{
-    private int from;
-    private int to;
+public class IntProperty extends PropertyInstance{
+    private Range range;
     private int value;
 
-    public IntProperty(String nameValue, boolean isRandomInitValue, int fromValue, int toValue, int init) {
-        super(nameValue, isRandomInitValue);
-        this.from = fromValue;
-        this.to = toValue;
-        this.value = init;
-    }
-
-    public IntProperty(String nameValue, boolean isRandomInitValue, int init) {
-        super(nameValue, isRandomInitValue);
-        this.from = (int)Double.NEGATIVE_INFINITY;;
-        this.to = (int)Double.POSITIVE_INFINITY;;
-        this.value = init;
-    }
-
-    public IntProperty(String nameValue, boolean isRandomInitValue, int fromValue, int toValue) {
-        super(nameValue, isRandomInitValue);
-        this.from = fromValue;
-        this.to = toValue;
-        this.value = ThreadLocalRandom.current().nextInt(from, to + 1);
-    }
-
-    public IntProperty(String nameValue, boolean isRandomInitValue){
-        super(nameValue, isRandomInitValue);
-        this.from = (int)Double.NEGATIVE_INFINITY;;
-        this.to = (int)Double.POSITIVE_INFINITY;;
-        this.value = ThreadLocalRandom.current().nextInt();
-    }
-
-    @Override
-    public String toString() {
-        String str = super.toString() + "\nType: Integer";
-        if(this.from != (int)Double.NEGATIVE_INFINITY){
-            str += "\nRange: " +this.from + "-" + this.to;
+    public IntProperty(PropertyDefinition prop) {
+        super(prop.getName());
+        this.range = prop.getRange();
+        if(prop.isRandomInit()){
+            this.value = ThreadLocalRandom.current().nextInt((int)this.range.getFrom(), (int)(this.range.getTo()) + 1);
         }
-        return str;
+        else{
+            this.value = (int)prop.getValue() ;
+        }
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         IntProperty that = (IntProperty) o;
-        return from == that.from && to == that.to && value == that.value;
+        return value == that.value && Objects.equals(range, that.range);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), from, to, value);
+        return Objects.hash(range, value);
     }
 }

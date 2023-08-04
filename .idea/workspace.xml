@@ -4,16 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="create new classes">
-      <change afterPath="$PROJECT_DIR$/src/logic/EntityDefinition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/EntityInstance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/enums/PropertyType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/property/PropertyInstance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logic/property/Range.java" afterDir="false" />
+    <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="create new classes and updates with scheme">
+      <change afterPath="$PROJECT_DIR$/src/logic/action/Action.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/action/Calculation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/action/Condition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/action/Decrease.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/action/Increase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/action/Kill.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/action/MultipleCondition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/action/Set.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/action/SingleCondition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/action/expression/Expression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/entity/EntityInstance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/enums/Arithmetics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/enums/Logicals.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/enums/Operators.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/environment/EnvironmentDefinition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/environment/EnvironmentInstance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logic/property/PropertyDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/Entity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/entity/EntityDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/EntityInstance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/enums/PropertyType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/enums/PropertyType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/property/BooleanProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/property/BooleanProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/property/FloatProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/property/FloatProperty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic/property/IntProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/property/IntProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic/property/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/property/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/property/Property.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/property/PropertyInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/property/PropertyInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/property/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/property/Range.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logic/property/StringProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic/property/StringProperty.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +93,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1690789124949</updated>
-      <workItem from="1690789125851" duration="25370000" />
+      <workItem from="1690789125851" duration="39714000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />
@@ -116,7 +135,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1690972058643</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎-00006" summary="create new classes and updates with scheme">
+      <option name="closed" value="true" />
+      <created>1691082254106</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1691082254107</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,6 +165,7 @@
     <MESSAGE value="update" />
     <MESSAGE value="new brunch Moran" />
     <MESSAGE value="create new classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="create new classes" />
+    <MESSAGE value="create new classes and updates with scheme" />
+    <option name="LAST_COMMIT_MESSAGE" value="create new classes and updates with scheme" />
   </component>
 </project>

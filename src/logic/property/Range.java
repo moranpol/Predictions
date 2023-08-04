@@ -13,4 +13,12 @@ class Range {
     public String toString(){
         return ("\nRange: " + this.from + " - " +this.to);
     }
+
+    public Number getFrom() {
+        return from;
+    }
+
+    public Number getTo() {
+        return to;
+    }
 }

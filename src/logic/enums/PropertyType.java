@@ -1,7 +1,7 @@
 package logic.enums;
 
 public enum PropertyType {
-    INT,
+    DECIMAL,
     FLOAT,
     STRING,
     BOOLEAN

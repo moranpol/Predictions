@@ -6,37 +6,30 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-class StringProperty extends Property{
+public class StringProperty extends PropertyInstance{
     private String value;
 
-    protected StringProperty(String nameValue, boolean isRandomInitValue) {
-        super(nameValue, isRandomInitValue);
-        this.value = getRandomString();
-    }
-
-    protected StringProperty(String nameValue, boolean isRandomInitValue, String init) {
-        super(nameValue, isRandomInitValue);
-        this.value = init;
-    }
-
-    @Override
-    public String toString() {
-        String str = super.toString() + "\nType: String";
-        return str;
+    public StringProperty(PropertyDefinition prop) {
+        super(prop.getName());
+        if(prop.isRandomInit()){
+            this.value = getRandomString();
+        }
+        else{
+            this.value = (String)prop.getValue();
+        }
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         StringProperty that = (StringProperty) o;
         return Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), value);
+        return Objects.hash(value);
     }
 
     private String getRandomString(){
