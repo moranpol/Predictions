@@ -1,14 +1,7 @@
 package logic.entity;
 
-import logic.entity.EntityDefinition;
-import logic.property.FloatProperty;
-import logic.property.IntProperty;
-import logic.property.StringProperty;
-import logic.property.BooleanProperty;
-
 import logic.property.PropertyDefinition;
 import logic.property.PropertyInstance;
-
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;

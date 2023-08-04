@@ -2,7 +2,7 @@ package logic;
 
 public class Tick {
     private int stepsRange;
-    private int maxSteps;
+    private final int maxSteps;
     private int stepsCounter;
 
     public Tick(int stepsRangeValue, int maxStepsValue) {
@@ -11,11 +11,11 @@ public class Tick {
         this.stepsCounter = 0;
     }
 
-    protected boolean isMaxSteps(){
+    public boolean isMaxSteps(){
         return (maxSteps > stepsCounter);
     }
 
-    protected void addTick(){
+    public void addTick(){
         stepsCounter += stepsRange;
     }
 }

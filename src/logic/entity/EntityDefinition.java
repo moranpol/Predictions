@@ -1,7 +1,6 @@
 package logic.entity;
 
 import logic.property.PropertyDefinition;
-
 import java.util.List;
 
 public class EntityDefinition {

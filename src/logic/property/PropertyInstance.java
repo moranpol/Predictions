@@ -3,7 +3,7 @@ package logic.property;
 import logic.enums.PropertyType;
 
 public abstract class PropertyInstance {
-    private String name;
+    private final String name;
 
     public PropertyInstance(String name) {
         this.name = name;

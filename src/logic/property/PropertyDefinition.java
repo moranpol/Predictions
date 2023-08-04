@@ -1,17 +1,16 @@
 package logic.property;
 
 import logic.enums.PropertyType;
-
 import java.util.Objects;
 
 public class PropertyDefinition {
     private PropertyType type;
     private final String name;
     private final boolean isRandomInit;
-    private Range range;
+    private final Range range;
     private Object value;
 
-    //todo- constractors ? builders ?
+    //todo- constructors ? builders ?
     //if range null and random init return exception
     //type - check if int, float, string, bool
     //if not random init and not value return exception

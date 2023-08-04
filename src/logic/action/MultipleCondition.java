@@ -9,6 +9,11 @@ public class MultipleCondition extends Condition{
     private List<Condition> conditions;
     private Logicals logic;
 
+    public MultipleCondition(String entityName) {
+        //todo
+        super(entityName);
+    }
+
     @Override
     public void activateAction(EntityInstance mainEntity) {
         //todo

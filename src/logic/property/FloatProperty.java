@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class FloatProperty extends PropertyInstance{
-    private Range range;
+    private final Range range;
     private float value;
 
     public FloatProperty(PropertyDefinition prop) {
