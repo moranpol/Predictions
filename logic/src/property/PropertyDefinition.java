@@ -1,6 +1,7 @@
 package property;
 
 import enums.PropertyType;
+import generated.PRDEnvProperty;
 import generated.PRDProperty;
 import java.util.Objects;
 
@@ -20,6 +21,13 @@ public class PropertyDefinition {
         this.name = property.getPRDName();
         this.type = Enum.valueOf(PropertyType.class, property.getType());
         this.isRandomInit = property.getPRDValue().isRandomInitialize();
+        this.range = new Range(property.getPRDRange());
+    }
+
+    public PropertyDefinition(PRDEnvProperty property) {
+        this.name = property.getPRDName();
+        this.type = Enum.valueOf(PropertyType.class, property.getType());
+        this.isRandomInit = false;
         this.range = new Range(property.getPRDRange());
     }
 
