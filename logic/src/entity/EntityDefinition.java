@@ -1,6 +1,10 @@
 package entity;
 
+import generated.PRDEntity;
+import generated.PRDProperty;
 import property.PropertyDefinition;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class EntityDefinition {
@@ -8,10 +12,13 @@ public class EntityDefinition {
     private int population;
     private List<PropertyDefinition> propertiesOfAllPopulation;
 
-    public EntityDefinition(String nameValue, int populationValue) {
-        this.name = nameValue;
-        this.population = populationValue;
-        //build list with XML - todo
+    public EntityDefinition(PRDEntity entity) {
+        this.name = entity.getName();
+        this.population = entity.getPRDPopulation();
+        this.propertiesOfAllPopulation = new ArrayList<>();
+        for (PRDProperty prop : entity.getPRDProperties().getPRDProperty()) {
+            propertiesOfAllPopulation.add(new PropertyDefinition(prop));
+        }
     }
 
     @Override
