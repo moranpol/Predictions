@@ -1,6 +1,7 @@
 package property;
 
 import java.util.Objects;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class BooleanProperty extends PropertyInstance {
@@ -9,8 +10,8 @@ public class BooleanProperty extends PropertyInstance {
     public BooleanProperty(PropertyDefinition prop) {
         super(prop.getName());
         if(prop.isRandomInit()){
-            int boolValue = ThreadLocalRandom.current().nextInt(0, 2);
-            this.value = (boolValue == 1) ? true : false;
+            Random random = new Random();
+            this.value = random.nextBoolean();
         }
         else{
             this.value = (boolean)prop.getValue();

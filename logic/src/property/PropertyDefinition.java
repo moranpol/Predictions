@@ -28,7 +28,7 @@ public class PropertyDefinition {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PropertyDefinition property = (PropertyDefinition) o;
-        return isRandomInit == property.isRandomInit && type == property.type && Objects.equals(name, property.name) && Objects.equals(range, property.range) && Objects.equals(value, property.value);
+        return isRandomInit == property.isRandomInit && type == property.type && Objects.equals(name, property.name) && Objects.equals(range, property.range) && Objects.equals(init, property.init);
     }
 
     @Override

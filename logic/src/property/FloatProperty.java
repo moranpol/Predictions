@@ -1,7 +1,7 @@
 package property;
 
 import java.util.Objects;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 public class FloatProperty extends PropertyInstance{
     private final Range range;
@@ -11,7 +11,8 @@ public class FloatProperty extends PropertyInstance{
         super(prop.getName());
         this.range = prop.getRange();
         if(prop.isRandomInit()){
-            this.value = ThreadLocalRandom.current().nextInt((int)this.range.getFrom(), (int)(this.range.getTo()) + 1);
+            Random random = new Random();
+            this.value = (float)this.range.getFrom() + random.nextFloat() * ((float)this.range.getTo() - (float)this.range.getFrom());
         }
         else{
             this.value = (float)prop.getValue() ;
