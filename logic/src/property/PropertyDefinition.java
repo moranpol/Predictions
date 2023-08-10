@@ -1,8 +1,12 @@
 package property;
 
+import com.oracle.jrockit.jfr.InvalidValueException;
 import enums.PropertyType;
 import jaxb.schema.generated.PRDEnvProperty;
 import jaxb.schema.generated.PRDProperty;
+import jaxb.schema.generated.PRDRange;
+
+import javax.naming.InvalidNameException;
 import java.util.Objects;
 
 public class PropertyDefinition {
@@ -68,5 +72,15 @@ public class PropertyDefinition {
 
     public Object getValue() {
         return init;
+    }
+
+    private boolean validateInit(boolean isRandomInit, PRDRange range){
+        if(isNumericValue() && isRandomInit && range == null){
+            throw new
+        }
+    }
+
+    private boolean isNumericValue(){
+        return (this.type == PropertyType.DECIMAL || this.type == PropertyType.FLOAT);
     }
 }

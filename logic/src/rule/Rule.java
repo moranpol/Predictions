@@ -15,6 +15,7 @@ public class Rule {
         this.name = rule.getName();
         this.activation = new Activation(rule.getPRDActivation());
         //todo - actionList
+        //todo - check expressions
     }
 
     public void activeRule(Tick ticks, Map<String, List<EntityInstance>> entities){

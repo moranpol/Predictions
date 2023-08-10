@@ -33,7 +33,7 @@ public class LoadXml {
         }
     }
 
-    public WorldDefinition load() throws IOException, JAXBException {
+    public WorldDefinition loadAndValidateXml() throws IOException, JAXBException {
         InputStream inputStream = Files.newInputStream(new File(this.filePath).toPath());
         this.prdWorld = deserializeFrom(inputStream);
         //todo - create world WorldDefinition with prdWorld
@@ -48,10 +48,10 @@ public class LoadXml {
     }
 
     private boolean validateFileName(String fileName){
-        return (fileName.length() >= 4 && fileName.endsWith(".xml"));
+        return (fileName.endsWith(".xml"));
     }
 
-    private WorldDefinition validateXML(){
+    private WorldDefinition validatePrdWorld(){
         try {
             EnvironmentDefinition environment = new EnvironmentDefinition(prdWorld.getPRDEvironment());
             Map<String,EntityDefinition> entities = new HashMap<>();
@@ -71,14 +71,14 @@ public class LoadXml {
         return null;
     }
 
-    private boolean validateRuleActions(Map<String,EntityDefinition> entities){
+    private boolean validateRuleActions(Map<String,EntityDefinition> entities) throws InvalidNameException {
         for (PRDRule rule : this.prdWorld.getPRDRules().getPRDRule()) {
             for (PRDAction action : rule.getPRDActions().getPRDAction()) {
                 if(!entities.containsKey(action.getEntity())) {
-                    return false;
+                    throw new InvalidNameException(action.getEntity() + "not exist.");
                 }
                 if(!entities.get(action.getEntity()).getPropertiesOfAllPopulation().containsKey(action.getProperty())){
-                    return false;
+                    throw new InvalidNameException(action.getProperty() + "not exist in " + action.getEntity() + "entity.");
                 }
             }
         }
