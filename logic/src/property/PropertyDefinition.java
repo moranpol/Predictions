@@ -1,8 +1,8 @@
 package property;
 
 import enums.PropertyType;
-import generated.PRDEnvProperty;
-import generated.PRDProperty;
+import jaxb.schema.generated.PRDEnvProperty;
+import jaxb.schema.generated.PRDProperty;
 import java.util.Objects;
 
 public class PropertyDefinition {

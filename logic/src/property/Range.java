@@ -1,6 +1,6 @@
 package property;
 
-import generated.PRDRange;
+import jaxb.schema.generated.PRDRange;
 
 public class Range {
     private final Number from;

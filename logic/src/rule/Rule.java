@@ -1,7 +1,7 @@
 package rule;
 
 import entity.EntityInstance;
-import generated.PRDRule;
+import jaxb.schema.generated.PRDRule;
 import rule.action.Action;
 import java.util.List;
 import java.util.Map;

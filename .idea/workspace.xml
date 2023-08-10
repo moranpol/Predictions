@@ -4,11 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="updates">
+    <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="updates on some classes">
+      <change afterPath="$PROJECT_DIR$/logic/src/exceptions/InvalidNameException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logic/src/jaxb/LoadXml.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logic/src/world/WorldDefinition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logic/src/world/WorldInstance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityInstance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/environment/EnvironmentDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/environment/EnvironmentDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/environment/EnvironmentInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/environment/EnvironmentInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/ObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/ObjectFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDActivation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDActivation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDBySecond.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDBySecond.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDByTicks.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDByTicks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDDivide.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDDivide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDElse.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDElse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDEntities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDEnvProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDEnvProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDEvironment.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDEvironment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDMultiply.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDMultiply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDRange.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDRange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDRule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDRules.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDRules.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDTermination.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDTermination.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDThen.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDThen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/generated/PRDWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/schema/generated/PRDWorld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/property/PropertyDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/PropertyDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/property/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/Range.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/Activation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/Rule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +110,14 @@
       <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\src" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main (1)">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="logic" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ui.Main" />
       <module name="Predictions" />
@@ -93,6 +133,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -105,7 +146,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1690789124949</updated>
-      <workItem from="1690789125851" duration="64443000" />
+      <workItem from="1690789125851" duration="84634000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />
@@ -187,7 +228,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1691478490207</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL‎-00011" summary="updates on some classes">
+      <option name="closed" value="true" />
+      <created>1691517739433</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL‎-00011" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1691517739434</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,7 +247,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/ofir" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -212,6 +273,7 @@
     <MESSAGE value="create new classes and updates with scheme" />
     <MESSAGE value="create more classes and updates" />
     <MESSAGE value="updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="updates" />
+    <MESSAGE value="updates on some classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="updates on some classes" />
   </component>
 </project>

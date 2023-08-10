@@ -1,6 +1,6 @@
 package rule;
 
-import generated.PRDActivation;
+import jaxb.schema.generated.PRDActivation;
 
 import java.util.Random;
 
