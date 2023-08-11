@@ -13,7 +13,7 @@ public class EntityDefinition {
     private int population;
     private Map<String, PropertyDefinition> propertiesOfAllPopulation;
 
-    public EntityDefinition(PRDEntity entity) throws InvalidNameException {
+    public EntityDefinition(PRDEntity entity){
         this.name = entity.getName();
         this.population = entity.getPRDPopulation();
         this.propertiesOfAllPopulation = new HashMap<>();

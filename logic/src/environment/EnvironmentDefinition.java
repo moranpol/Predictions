@@ -12,7 +12,7 @@ import java.util.Map;
 public class EnvironmentDefinition {
     private Map<String, PropertyDefinition> properties;
 
-    public EnvironmentDefinition(PRDEvironment environment) throws InvalidNameException {
+    public EnvironmentDefinition(PRDEvironment environment){
         this.properties = new HashMap<>();
         for (PRDEnvProperty prop : environment.getPRDEnvProperty()) {
             if(!properties.containsKey(prop.getPRDName())){

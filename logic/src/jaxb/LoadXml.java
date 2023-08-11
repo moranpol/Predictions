@@ -7,6 +7,7 @@ import jaxb.schema.generated.PRDAction;
 import jaxb.schema.generated.PRDEntity;
 import jaxb.schema.generated.PRDRule;
 import jaxb.schema.generated.PRDWorld;
+import rule.Rule;
 import world.WorldDefinition;
 
 import javax.xml.bind.JAXBContext;
@@ -21,15 +22,15 @@ import java.util.Map;
 
 public class LoadXml {
     private final static String JAXB_XML_PACKAGE_NAME = "jaxb.schema.generated";
-    private String filePath;
+    private final String filePath;
     private PRDWorld prdWorld = null;
 
-    public LoadXml(String filePath) throws InvalidNameException {
+    public LoadXml(String filePath){
         if(validateFileName(filePath)){
             this.filePath = filePath;
         }
         else{
-            throw new InvalidNameException("must end with .xml");
+            throw new InvalidNameException("file name must end with .xml");
         }
     }
 
@@ -52,36 +53,32 @@ public class LoadXml {
     }
 
     private WorldDefinition validatePrdWorld(){
-        try {
-            EnvironmentDefinition environment = new EnvironmentDefinition(prdWorld.getPRDEvironment());
-            Map<String,EntityDefinition> entities = new HashMap<>();
-            for (PRDEntity entity : this.prdWorld.getPRDEntities().getPRDEntity()) {
-                entities.put(entity.getName(), new EntityDefinition(entity));
-            }
-            if (validateRuleActions(entities)){
-                for (PRDRule rule : this.prdWorld.getPRDRules().getPRDRule()) {
-                    //todo
-                }
-            }
+        EnvironmentDefinition environment = new EnvironmentDefinition(this.prdWorld.getPRDEvironment());
+        Map<String,EntityDefinition> entities = new HashMap<>();
+        List<Rule> rules = new ArrayList<>();
 
-        } catch (InvalidNameException e) {
-            throw new RuntimeException(e);
+        for (PRDEntity entity : this.prdWorld.getPRDEntities().getPRDEntity()) {
+            entities.put(entity.getName(), new EntityDefinition(entity));
+            validateRuleActions(entities);
+            for (PRDRule rule : this.prdWorld.getPRDRules().getPRDRule()) {
+                rules.add(new Rule(rule));
+            }
+            //todo - validate termination
         }
 
         return null;
     }
 
-    private boolean validateRuleActions(Map<String,EntityDefinition> entities) throws InvalidNameException {
+    private void validateRuleActions(Map<String,EntityDefinition> entities){
         for (PRDRule rule : this.prdWorld.getPRDRules().getPRDRule()) {
             for (PRDAction action : rule.getPRDActions().getPRDAction()) {
                 if(!entities.containsKey(action.getEntity())) {
-                    throw new InvalidNameException(action.getEntity() + "not exist.");
+                    throw new InvalidNameException(action.getEntity() + "not exist for action.");
                 }
                 if(!entities.get(action.getEntity()).getPropertiesOfAllPopulation().containsKey(action.getProperty())){
-                    throw new InvalidNameException(action.getProperty() + "not exist in " + action.getEntity() + "entity.");
+                    throw new InvalidNameException(action.getProperty() + "not exist in " + action.getEntity() + "entity for action.");
                 }
             }
         }
-        return true;
     }
 }

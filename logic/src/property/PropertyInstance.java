@@ -1,12 +1,14 @@
 package property;
 
-import enums.PropertyType;
-
 public abstract class PropertyInstance {
     private final String name;
 
     public PropertyInstance(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public static PropertyInstance createPropertyInstance(PropertyDefinition property) {
