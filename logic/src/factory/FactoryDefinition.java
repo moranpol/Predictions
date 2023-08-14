@@ -22,10 +22,10 @@ public abstract class FactoryDefinition {
         List<Rule> rules = new ArrayList<>();
 
         for (PRDEntity entity : prdWorld.getPRDEntities().getPRDEntity()) {
-            //entities.put();
+            entities.put(entity.getName(), createEntityDefinition(entity));
         }
 
-        createRule(entities);
+        //createRule(entities);
         for (PRDRule rule : prdWorld.getPRDRules().getPRDRule()) {
             rules.add(new Rule(rule));
         }
