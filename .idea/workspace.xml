@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="new factory">
+    <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/FloatProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/FloatProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/IntProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/IntProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/Range.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +117,7 @@
       <updated>1690789124949</updated>
       <workItem from="1690789125851" duration="90072000" />
       <workItem from="1691737187656" duration="10725000" />
-      <workItem from="1691999273269" duration="16356000" />
+      <workItem from="1691999273269" duration="18292000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />
@@ -250,7 +247,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1692014954183</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL‎-00017" summary="update">
+      <option name="closed" value="true" />
+      <created>1692017792521</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL‎-00017" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1692017792522</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,9 +293,9 @@
     <MESSAGE value="updates" />
     <MESSAGE value="updates on some classes" />
     <MESSAGE value="start to load xml and check it" />
-    <MESSAGE value="update" />
     <MESSAGE value="finished validate property" />
     <MESSAGE value="new factory" />
-    <option name="LAST_COMMIT_MESSAGE" value="new factory" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>

@@ -22,7 +22,7 @@ public abstract class FactoryDefinition {
         List<Rule> rules = new ArrayList<>();
 
         for (PRDEntity entity : prdWorld.getPRDEntities().getPRDEntity()) {
-            entities.put(entity.getName(), new EntityDefinition(entity));
+            //entities.put();
         }
 
         createRule(entities);
@@ -49,15 +49,13 @@ public abstract class FactoryDefinition {
     }
 
     private static PropertyDefinition createEnvironmentPropertyDefinition(PRDEnvProperty prdEnvProperty){
-        if(prdEnvProperty.getPRDRange() == null){
-            return new PropertyDefinition(createPropertyType(prdEnvProperty.getType()), prdEnvProperty.getPRDName(),
-                    null, null, null);
+        Range range = null;
+        if(prdEnvProperty.getPRDRange() != null){
+            range = createRange(prdEnvProperty.getPRDRange());
         }
-        else {
-            Range range = createRange(prdEnvProperty.getPRDRange());
-            return new PropertyDefinition(createPropertyType(prdEnvProperty.getType()), prdEnvProperty.getPRDName(),
-                    null, range, null);
-        }
+
+        return new PropertyDefinition(createPropertyType(prdEnvProperty.getType()), prdEnvProperty.getPRDName(),
+                null, range, null);
     }
 
     private static Range createRange(PRDRange prdRange){
@@ -72,7 +70,7 @@ public abstract class FactoryDefinition {
         Map<String, PropertyDefinition> properties = new HashMap<>();
         for (PRDProperty prop : prdEntity.getPRDProperties().getPRDProperty()) {
             if(!properties.containsKey(prop.getPRDName())){
-                properties.put(prop.getPRDName(), );
+                properties.put(prop.getPRDName(), createEntityPropertyDefinition(prop));
             }
             else{
                 throw new InvalidNameException("property " + prop.getPRDName() + " name in " + prdEntity.getName() +
@@ -80,22 +78,26 @@ public abstract class FactoryDefinition {
             }
         }
 
+        return new EntityDefinition(prdEntity.getName(), prdEntity.getPRDPopulation(), properties);
     }
 
     private static PropertyDefinition createEntityPropertyDefinition(PRDProperty prdProperty){
-        if(prdProperty.getPRDValue().isRandomInitialize()){
-            return new PropertyDefinition( createPropertyType(prdProperty.getType()), prdProperty.getPRDName(),
-                    null, null, null);
+        PropertyType type = createPropertyType(prdProperty.getType());
+        Range range = null;
+        Object init = null;
+        if (prdProperty.getPRDRange() != null){
+            range = createRange(prdProperty.getPRDRange());
         }
-        else {
-            Range range = createRange(prdProperty.getPRDRange());
-            return new PropertyDefinition( createPropertyType(prdProperty.getType()), prdProperty.getPRDName(),
-                    null, range, null);
+        if(prdProperty.getPRDValue().getInit() != null){
+            init = createInitByType(type, prdProperty.getPRDValue().getInit());
         }
+
+        return new PropertyDefinition(type, prdProperty.getPRDName(), prdProperty.getPRDValue().isRandomInitialize(),
+                range, init);
     }
 
-    private static Rule createRule(Map<String,EntityDefinition> entities){
-        for (PRDRule rule : this.prdWorld.getPRDRules().getPRDRule()) {
+    private static Rule createRule(Map<String, EntityDefinition> entities, PRDRules rules){
+        for (PRDRule rule : rules.getPRDRule()) {
             for (PRDAction action : rule.getPRDActions().getPRDAction()) {
                 if(!entities.containsKey(action.getEntity())) {
                     throw new InvalidNameException(action.getEntity() + " entity name not exist - action name: "
@@ -107,6 +109,8 @@ public abstract class FactoryDefinition {
                 }
             }
         }
+
+        return null;
     }
 
     private static void validateCalculationActions(Map<String,EntityDefinition> entities, PRDAction action, String ruleName){
@@ -126,7 +130,7 @@ public abstract class FactoryDefinition {
                 Objects.equals(actionType, ActionType.DECREASE.name()));
     }
 
-    private static Object updateInitByType(PropertyType type, String value) {
+    private static Object createInitByType(PropertyType type, String value) {
         Object init = new Object();
         switch (type) {
             case DECIMAL:
@@ -142,6 +146,7 @@ public abstract class FactoryDefinition {
                 init = value;
                 break;
         }
+
         return init;
     }
 }
