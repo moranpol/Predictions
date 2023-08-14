@@ -4,19 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/logic/src/exceptions/ValueOutOfBoundException.java" afterDir="false" />
+    <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="finished validate property">
+      <change afterPath="$PROJECT_DIR$/logic/src/enums/ActionType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/enums/PropertyType.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/enums/PropertyType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/environment/EnvironmentDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/environment/EnvironmentDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/exceptions/InvalidNameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/exceptions/InvalidNameException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/exceptions/MissMatchValuesException.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/exceptions/MissMatchValuesException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/exceptions/ValueOutOfBoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/exceptions/ValueOutOfBoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/jaxb/LoadXml.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/LoadXml.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/property/PropertyDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/PropertyDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/PropertyInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/PropertyInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/world/WorldDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/world/WorldDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/world/WorldInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/world/WorldInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/property/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/Range.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +121,8 @@
       <option name="presentableId" value="Default" />
       <updated>1690789124949</updated>
       <workItem from="1690789125851" duration="90072000" />
-      <workItem from="1691737187656" duration="10154000" />
+      <workItem from="1691737187656" duration="10725000" />
+      <workItem from="1691999273269" duration="13092000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />
@@ -228,7 +228,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1691694085379</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL‎-00014" summary="finished validate property">
+      <option name="closed" value="true" />
+      <created>1691774237390</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL‎-00014" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1691774237391</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,7 +253,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/ofir" />
+                        <option value="Moran" />
                       </list>
                     </value>
                   </entry>
@@ -267,6 +275,7 @@
     <MESSAGE value="updates on some classes" />
     <MESSAGE value="start to load xml and check it" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="finished validate property" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished validate property" />
   </component>
 </project>

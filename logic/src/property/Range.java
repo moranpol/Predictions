@@ -3,12 +3,12 @@ package property;
 import jaxb.schema.generated.PRDRange;
 
 public class Range {
-    private final Number from;
-    private final Number to;
+    private final double from;
+    private final double to;
 
-    public Range(PRDRange range) {
-        this.from = range.getFrom();
-        this.to = range.getTo();
+    public Range(double from, double to) {
+        this.from = from;
+        this.to = to;
     }
 
     @Override
@@ -16,11 +16,11 @@ public class Range {
         return ("\nRange: " + this.from + " - " +this.to);
     }
 
-    public Number getFrom() {
+    public double getFrom() {
         return from;
     }
 
-    public Number getTo() {
+    public double getTo() {
         return to;
     }
 }

@@ -22,7 +22,8 @@ public class EntityDefinition {
                 propertiesOfAllPopulation.put(prop.getPRDName(), new PropertyDefinition(prop));
             }
             else{
-                throw new InvalidNameException("property " + prop.getPRDName() + "name in " + this.name + "entity already exist");
+                throw new InvalidNameException("property " + prop.getPRDName() + " name in "
+                        + this.name + " entity already exist");
             }
         }
     }

@@ -1,7 +1,5 @@
 package exceptions;
 
-import property.Range;
-
 public class ValueOutOfBoundException extends RuntimeException{
     private final String message;
 
