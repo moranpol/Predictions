@@ -60,21 +60,4 @@ public class PropertyDefinition {
     public Object getValue() {
         return init;
     }
-
-    private void updateInitByType(PRDValue value){
-        switch (this.type){
-            case DECIMAL:
-                this.init = Integer.parseInt(value.getInit());
-                break;
-            case FLOAT:
-                this.init = Float.parseFloat(value.getInit());
-                break;
-            case BOOLEAN:
-                this.init = Boolean.parseBoolean(value.getInit());
-                break;
-            case STRING:
-                this.init = value.getInit();
-                break;
-        }
-    }
 }
