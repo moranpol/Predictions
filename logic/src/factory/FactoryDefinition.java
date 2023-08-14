@@ -44,17 +44,19 @@ public abstract class FactoryDefinition {
                 throw new InvalidNameException("environment " + prop.getPRDName() + " name already exist");
             }
         }
+
         return new EnvironmentDefinition(environmentVariables);
     }
 
     private static PropertyDefinition createEnvironmentPropertyDefinition(PRDEnvProperty prdEnvProperty){
-        PropertyType type = createPropertyType(prdEnvProperty.getType());
         if(prdEnvProperty.getPRDRange() == null){
-            return new PropertyDefinition(type, prdEnvProperty.getPRDName(), null, null, null);
+            return new PropertyDefinition(createPropertyType(prdEnvProperty.getType()), prdEnvProperty.getPRDName(),
+                    null, null, null);
         }
         else {
             Range range = createRange(prdEnvProperty.getPRDRange());
-            return new PropertyDefinition(type, prdEnvProperty.getPRDName(),null, range, null);
+            return new PropertyDefinition(createPropertyType(prdEnvProperty.getType()), prdEnvProperty.getPRDName(),
+                    null, range, null);
         }
     }
 
@@ -67,8 +69,29 @@ public abstract class FactoryDefinition {
     }
 
     private static EntityDefinition createEntityDefinition(PRDEntity prdEntity){
+        Map<String, PropertyDefinition> properties = new HashMap<>();
+        for (PRDProperty prop : prdEntity.getPRDProperties().getPRDProperty()) {
+            if(!properties.containsKey(prop.getPRDName())){
+                properties.put(prop.getPRDName(), );
+            }
+            else{
+                throw new InvalidNameException("property " + prop.getPRDName() + " name in " + prdEntity.getName() +
+                        " entity already exist");
+            }
+        }
 
+    }
 
+    private static PropertyDefinition createEntityPropertyDefinition(PRDProperty prdProperty){
+        if(prdProperty.getPRDValue().isRandomInitialize()){
+            return new PropertyDefinition( createPropertyType(prdProperty.getType()), prdProperty.getPRDName(),
+                    null, null, null);
+        }
+        else {
+            Range range = createRange(prdProperty.getPRDRange());
+            return new PropertyDefinition( createPropertyType(prdProperty.getType()), prdProperty.getPRDName(),
+                    null, range, null);
+        }
     }
 
     private static Rule createRule(Map<String,EntityDefinition> entities){
@@ -103,5 +126,22 @@ public abstract class FactoryDefinition {
                 Objects.equals(actionType, ActionType.DECREASE.name()));
     }
 
-
+    private static Object updateInitByType(PropertyType type, String value) {
+        Object init = new Object();
+        switch (type) {
+            case DECIMAL:
+                init = Integer.parseInt(value);
+                break;
+            case FLOAT:
+                init = Float.parseFloat(value);
+                break;
+            case BOOLEAN:
+                init = Boolean.parseBoolean(value);
+                break;
+            case STRING:
+                init = value;
+                break;
+        }
+        return init;
+    }
 }

@@ -14,7 +14,7 @@ public class EnvironmentDefinition {
 
     public EnvironmentDefinition(Map<String, PropertyDefinition> properties) {
         this.properties = properties;
-}
+    }
 
     public Map<String, PropertyDefinition> getProperties() {
         return properties;
