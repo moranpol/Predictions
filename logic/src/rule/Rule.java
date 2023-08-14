@@ -1,7 +1,7 @@
 package rule;
 
 import entity.EntityInstance;
-import generated.PRDRule;
+import jaxb.schema.generated.PRDRule;
 import rule.action.Action;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +15,7 @@ public class Rule {
         this.name = rule.getName();
         this.activation = new Activation(rule.getPRDActivation());
         //todo - actionList
+        //todo - check expressions
     }
 
     public void activeRule(Tick ticks, Map<String, List<EntityInstance>> entities){

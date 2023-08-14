@@ -13,7 +13,7 @@ public class EntityInstance {
     public EntityInstance(EntityDefinition entityDetails) {
         this.name = entityDetails.getName();
         this.properties = new HashMap<>();
-        for (PropertyDefinition prop : entityDetails.getPropertiesOfAllPopulation()) {
+        for (PropertyDefinition prop : entityDetails.getPropertiesOfAllPopulation().values()) {
             this.properties.put(prop.getName(), PropertyInstance.createPropertyInstance(prop));
         }
     }

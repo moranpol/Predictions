@@ -10,7 +10,7 @@ public class EnvironmentInstance {
 
     public EnvironmentInstance(EnvironmentDefinition environmentDetails){
         this.properties = new HashMap<>();
-        for (PropertyDefinition prop : environmentDetails.getProperties()) {
+        for (PropertyDefinition prop : environmentDetails.getProperties().values()) {
             this.properties.put(prop.getName(), PropertyInstance.createPropertyInstance(prop));
         }
     }

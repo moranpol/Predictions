@@ -1,24 +1,22 @@
 package environment;
 
-import generated.PRDEvironment;
-import generated.PRDEnvProperty;
+import exceptions.InvalidNameException;
+import jaxb.schema.generated.PRDEnvProperty;
+import jaxb.schema.generated.PRDEvironment;
 import property.PropertyDefinition;
+import world.WorldDefinition;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EnvironmentDefinition {
-    private List<PropertyDefinition> properties;
+    private Map<String, PropertyDefinition> properties;
 
-    public EnvironmentDefinition(PRDEvironment environment) {
-        this.properties = new ArrayList<>();
-        //for (environment.getPRDEnvProperty() prop : this.properties) {
+    public EnvironmentDefinition(Map<String, PropertyDefinition> properties) {
+        this.properties = properties;
+}
 
-        //}
-        ///
-    }
-
-    public List<PropertyDefinition> getProperties() {
+    public Map<String, PropertyDefinition> getProperties() {
         return properties;
     }
 }

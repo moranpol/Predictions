@@ -1,34 +1,25 @@
 package property;
 
 import enums.PropertyType;
-import generated.PRDEnvProperty;
-import generated.PRDProperty;
+import jaxb.schema.generated.PRDEnvProperty;
+import jaxb.schema.generated.PRDProperty;
+import jaxb.schema.generated.PRDValue;
+
 import java.util.Objects;
 
 public class PropertyDefinition {
-    private PropertyType type;
+    private final PropertyType type;
     private final String name;
-    private final boolean isRandomInit;
+    private Boolean isRandomInit;
     private final Range range;
     private Object init;
 
-    //todo
-    //if range null and random init return exception
-    //type - check if int, float, string, bool
-    //if not random init and not value return exception
-    //type is like value
-    public PropertyDefinition(PRDProperty property) {
-        this.name = property.getPRDName();
-        this.type = Enum.valueOf(PropertyType.class, property.getType());
-        this.isRandomInit = property.getPRDValue().isRandomInitialize();
-        this.range = new Range(property.getPRDRange());
-    }
-
-    public PropertyDefinition(PRDEnvProperty property) {
-        this.name = property.getPRDName();
-        this.type = Enum.valueOf(PropertyType.class, property.getType());
-        this.isRandomInit = false;
-        this.range = new Range(property.getPRDRange());
+    public PropertyDefinition(PropertyType type, String name, Boolean isRandomInit, Range range, Object init) {
+        this.type = type;
+        this.name = name;
+        this.isRandomInit = isRandomInit;
+        this.range = range;
+        this.init = init;
     }
 
     @Override
@@ -68,5 +59,22 @@ public class PropertyDefinition {
 
     public Object getValue() {
         return init;
+    }
+
+    private void updateInitByType(PRDValue value){
+        switch (this.type){
+            case DECIMAL:
+                this.init = Integer.parseInt(value.getInit());
+                break;
+            case FLOAT:
+                this.init = Float.parseFloat(value.getInit());
+                break;
+            case BOOLEAN:
+                this.init = Boolean.parseBoolean(value.getInit());
+                break;
+            case STRING:
+                this.init = value.getInit();
+                break;
+        }
     }
 }

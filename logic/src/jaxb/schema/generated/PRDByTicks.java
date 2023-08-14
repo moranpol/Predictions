@@ -6,7 +6,7 @@
 //
 
 
-package generated;
+package jaxb.schema.generated;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
