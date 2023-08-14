@@ -5,13 +5,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class IntProperty extends PropertyInstance{
     private final Range range;
-    private int value;
+    private Integer value;
 
     public IntProperty(PropertyDefinition prop) {
         super(prop.getName());
         this.range = prop.getRange();
         if(prop.isRandomInit()){
-            this.value = ThreadLocalRandom.current().nextInt((int)this.range.getFrom(), (int)(this.range.getTo()) + 1);
+            this.value = ThreadLocalRandom.current().nextInt(this.range.getFrom().intValue(),
+                    (this.range.getTo().intValue()) + 1);
         }
         else{
             this.value = (int)prop.getValue() ;

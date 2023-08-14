@@ -126,20 +126,22 @@ public abstract class FactoryDefinition {
                 Objects.equals(actionType, ActionType.DECREASE.name()));
     }
 
-    private static void updateInitByType(PropertyType type){
-        switch (){
+    private static Object updateInitByType(PropertyType type, String value) {
+        Object init = new Object();
+        switch (type) {
             case DECIMAL:
-                this.init = Integer.parseInt(value.getInit());
+                init = Integer.parseInt(value);
                 break;
             case FLOAT:
-                this.init = Float.parseFloat(value.getInit());
+                init = Float.parseFloat(value);
                 break;
             case BOOLEAN:
-                this.init = Boolean.parseBoolean(value.getInit());
+                init = Boolean.parseBoolean(value);
                 break;
             case STRING:
-                this.init = value.getInit();
+                init = value;
                 break;
         }
+        return init;
     }
 }

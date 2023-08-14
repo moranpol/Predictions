@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="new factory">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/environment/EnvironmentDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/environment/EnvironmentDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/PropertyDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/PropertyDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/property/FloatProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/FloatProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/property/IntProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/IntProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/property/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/Range.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +47,9 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
   <component name="ProjectId" id="2TKQ74079pfdOh4AyXGL12bEtSN" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -115,7 +120,7 @@
       <updated>1690789124949</updated>
       <workItem from="1690789125851" duration="90072000" />
       <workItem from="1691737187656" duration="10725000" />
-      <workItem from="1691999273269" duration="14476000" />
+      <workItem from="1691999273269" duration="16356000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />
@@ -237,7 +242,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1692013456034</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL‎-00016" summary="new factory">
+      <option name="closed" value="true" />
+      <created>1692014954183</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL‎-00016" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1692014954183</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

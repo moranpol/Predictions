@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class EntityDefinition {
     private final String name;
-    private int population;
+    private Integer population;
     private Map<String, PropertyDefinition> propertiesOfAllPopulation;
 
     public EntityDefinition(PRDEntity entity){

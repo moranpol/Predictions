@@ -5,14 +5,15 @@ import java.util.Random;
 
 public class FloatProperty extends PropertyInstance{
     private final Range range;
-    private float value;
+    private Float value;
 
     public FloatProperty(PropertyDefinition prop) {
         super(prop.getName());
         this.range = prop.getRange();
         if(prop.isRandomInit()){
             Random random = new Random();
-            this.value = (float)this.range.getFrom() + random.nextFloat() * ((float)this.range.getTo() - (float)this.range.getFrom());
+            this.value = this.range.getFrom().floatValue() + random.nextFloat() *
+                    (this.range.getTo().floatValue() - this.range.getFrom().floatValue());
         }
         else{
             this.value = (float)prop.getValue() ;
