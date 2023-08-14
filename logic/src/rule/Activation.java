@@ -5,12 +5,12 @@ import jaxb.schema.generated.PRDActivation;
 import java.util.Random;
 
 public class Activation {
-    private int ticks;
-    private double probability;
+    private Integer ticks;
+    private Double probability;
 
     public Activation(PRDActivation activation) {
         this.ticks = 1;
-        this.probability = 1;
+        this.probability = 1.0;
 
         if(activation != null){
             if(activation.getTicks() != null) {
