@@ -1,5 +1,7 @@
 package property;
 
+import enums.PropertyType;
+
 public abstract class PropertyInstance {
     private final String name;
 
@@ -31,4 +33,6 @@ public abstract class PropertyInstance {
         }
         return newProperty;
     }
+
+    public abstract PropertyType getType();
 }
