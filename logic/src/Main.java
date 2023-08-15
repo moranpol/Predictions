@@ -13,7 +13,7 @@ public class Main {
             System.out.println(world);
         } catch (JAXBException | IOException e) {
             System.out.println("File not found");
-        } catch (InvalidNameException e) {
+        } catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
