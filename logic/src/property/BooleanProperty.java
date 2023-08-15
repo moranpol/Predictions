@@ -2,10 +2,13 @@ package property;
 
 import java.util.Objects;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class BooleanProperty extends PropertyInstance {
     boolean value;
+
+    public Object getValue() {
+        return value;
+    }
 
     public BooleanProperty(PropertyDefinition prop) {
         super(prop.getName());
@@ -30,4 +33,5 @@ public class BooleanProperty extends PropertyInstance {
     public int hashCode() {
         return Objects.hash(value);
     }
+
 }

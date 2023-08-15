@@ -15,5 +15,7 @@ public class EnvironmentInstance {
         }
     }
 
-
+    public Map<String, PropertyInstance> getProperties() {
+        return properties;
+    }
 }

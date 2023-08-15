@@ -9,6 +9,10 @@ import java.util.concurrent.ThreadLocalRandom;
 public class StringProperty extends PropertyInstance{
     private String value;
 
+    public String getValue() {
+        return value;
+    }
+
     public StringProperty(PropertyDefinition prop) {
         super(prop.getName());
         if(prop.isRandomInit()){

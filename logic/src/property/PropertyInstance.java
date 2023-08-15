@@ -3,6 +3,8 @@ package property;
 public abstract class PropertyInstance {
     private final String name;
 
+    public abstract Object getValue();
+
     public PropertyInstance(String name) {
         this.name = name;
     }

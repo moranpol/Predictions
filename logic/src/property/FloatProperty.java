@@ -7,6 +7,13 @@ public class FloatProperty extends PropertyInstance{
     private final Range range;
     private Float value;
 
+    public Range getRange() {
+        return range;
+    }
+    public Float getValue() {
+        return value;
+    }
+
     public FloatProperty(PropertyDefinition prop) {
         super(prop.getName());
         this.range = prop.getRange();

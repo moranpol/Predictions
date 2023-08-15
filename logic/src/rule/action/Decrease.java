@@ -1,6 +1,5 @@
 package rule.action;
 
-import rule.action.expression.Expression;
 import entity.EntityInstance;
 
 import java.util.List;
