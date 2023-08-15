@@ -7,6 +7,14 @@ public class IntProperty extends PropertyInstance{
     private final Range range;
     private Integer value;
 
+    public Range getRange() {
+        return range;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+
     public IntProperty(PropertyDefinition prop) {
         super(prop.getName());
         this.range = prop.getRange();

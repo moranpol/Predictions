@@ -1,4 +1,8 @@
 package rule.action.expression;
 
-public class Expression {
+import enums.PropertyType;
+
+public interface Expression {
+    public Object getValue();
+    public PropertyType getType();
 }
