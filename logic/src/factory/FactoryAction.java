@@ -1,32 +1,55 @@
 package factory;
 
 import entity.EntityDefinition;
-import enums.ActionType;
-import enums.Arithmetics;
-import enums.PropertyType;
+import enums.*;
 import exceptions.InvalidNameException;
 import exceptions.MissMatchValuesException;
 import jaxb.schema.generated.PRDAction;
+import jaxb.schema.generated.PRDCondition;
 import rule.action.*;
 import rule.action.expression.Expression;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public abstract class FactoryAction {
 
-    public static Action createAction(PRDAction prdAction, Map<String, EntityDefinition> entities, String ruleName){
+    public static List<Action> createActionList(List<PRDAction> prdActionList, Map<String, EntityDefinition> entities, String ruleName){
+        List<Action> actionList = new ArrayList<>();
+        for (PRDAction action : prdActionList) {
+            actionList.add(createAction(action, entities, ruleName));
+        }
+
+        return actionList;
+    }
+
+    private static Action createAction(PRDAction prdAction, Map<String, EntityDefinition> entities, String ruleName){
         ActionType type = createActionType(prdAction.getType());
         validateAction(prdAction, entities, ruleName, type);
         Action action = null;
-
         switch (type){
             case INCREASE:
-
+                action = createIncreaseAction(prdAction, ruleName);
+                break;
+            case DECREASE:
+                action = createDecreaseAction(prdAction, ruleName);
+                break;
+            case CALCULATION:
+                action = createCalculationAction(prdAction, ruleName);
+                break;
+            case SET:
+                action = createSetAction(prdAction);
+                break;
+            case KILL:
+                action = createKillAction(prdAction);
+                break;
+            case CONDITION:
+                action = createCondition(prdAction, entities, ruleName);
+                break;
         }
 
-
-        return null;
+        return action;
     }
 
     private static void validateAction(PRDAction prdAction, Map<String, EntityDefinition> entities, String ruleName, ActionType type){
@@ -50,7 +73,7 @@ public abstract class FactoryAction {
     }
 
     private static ActionType createActionType(String type){
-        return Enum.valueOf(ActionType.class, type);
+        return Enum.valueOf(ActionType.class, type.toUpperCase());
     }
 
     private static Increase createIncreaseAction(PRDAction prdAction, String ruleName){
@@ -80,9 +103,8 @@ public abstract class FactoryAction {
             arithmetics = Arithmetics.MULTIPLY;
             //arg1 = FactoryExpression.createExpression();
             //arg2 = FactoryExpression.createExpression();
-
         }
-        else if(prdAction.getPRDMultiply() != null){
+        else{
             arithmetics = Arithmetics.DIVIDE;
             //arg1 = FactoryExpression.createExpression();
             //arg2 = FactoryExpression.createExpression();
@@ -103,8 +125,68 @@ public abstract class FactoryAction {
         return new Set(prdAction.getEntity(), prdAction.getProperty(), null);
     }
 
-    private static Condition createCondition(PRDAction prdAction){
+    private static Condition createCondition(PRDAction prdAction, Map<String, EntityDefinition> entities, String ruleName){
+        Condition condition = createConditionHelper(prdAction.getPRDCondition(), prdAction.getEntity());
 
+        if(prdAction.getPRDElse() != null){
+            condition.setElseActions(createActionList(prdAction.getPRDElse().getPRDAction(), entities, ruleName));
+        }
+        condition.setThenActions(createActionList(prdAction.getPRDThen().getPRDAction(), entities, ruleName));
+
+        return condition;
+    }
+
+    private static Condition createConditionHelper(PRDCondition prdCondition, String entityName){
+        Condition condition = null;
+
+        switch (prdCondition.getSingularity()){
+            case "multiple":
+                condition = createMultipleCondition(prdCondition, entityName);
+                break;
+            case "single":
+                condition = createSingleCondition(prdCondition);
+        }
+
+        return condition;
+    }
+
+    private static SingleCondition createSingleCondition(PRDCondition prdCondition) {
+        //todo - FactoryExpression.createExpression()
+        return new SingleCondition(prdCondition.getEntity(), prdCondition.getProperty(),
+                null, createOperator(prdCondition.getOperator()));
+    }
+
+    private static Operators createOperator(String operator){
+        Operators operatorType = null;
+        switch (operator){
+            case "=":
+                operatorType = Operators.EQUAL;
+                break;
+            case "!=":
+                operatorType = Operators.NOTEQUAL;
+                break;
+            case "bt":
+                operatorType = Operators.BT;
+                break;
+            case "lt":
+                operatorType = Operators.LT;
+                break;
+        }
+
+        return operatorType;
+    }
+
+    private static MultipleCondition createMultipleCondition(PRDCondition prdCondition, String entityName) {
+        List<Condition> conditionList = new ArrayList<>();
+        for (PRDCondition condition : prdCondition.getPRDCondition()) {
+            conditionList.add(createConditionHelper(condition, entityName));
+        }
+
+        return new MultipleCondition(entityName, conditionList, createLogical(prdCondition.getLogical()));
+    }
+
+    private static Logicals createLogical(String logical){
+        return Enum.valueOf(Logicals.class, logical.toUpperCase());
     }
 
     private static void validateExpressionNumeric(Expression expression, String actionName, String ruleName){

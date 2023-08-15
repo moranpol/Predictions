@@ -2,6 +2,7 @@ package rule.action;
 
 import entity.EntityInstance;
 import enums.Arithmetics;
+import rule.action.expression.Expression;
 
 import java.util.List;
 import java.util.Map;

@@ -11,4 +11,11 @@ public abstract class Action {
     }
 
     public abstract void activateAction(Map<String, List<EntityInstance>> entities);
+
+    @Override
+    public String toString() {
+        return "Action{" +
+                "entityName='" + entityName + '\'' +
+                '}';
+    }
 }

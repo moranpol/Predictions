@@ -1,16 +1,16 @@
 package factory;
 
 import entity.EntityDefinition;
-import enums.ActionType;
 import enums.PropertyType;
 import environment.EnvironmentDefinition;
 import exceptions.InvalidNameException;
-import exceptions.MissMatchValuesException;
 import jaxb.schema.generated.*;
 import property.PropertyDefinition;
 import property.Range;
+import rule.Activation;
 import rule.Rule;
 import rule.action.Action;
+import termination.Termination;
 import world.WorldDefinition;
 
 import java.util.*;
@@ -26,13 +26,11 @@ public abstract class FactoryDefinition {
             entities.put(entity.getName(), createEntityDefinition(entity));
         }
 
-        //createRule(entities);
         for (PRDRule rule : prdWorld.getPRDRules().getPRDRule()) {
-            rules.add(new Rule(rule));
+            rules.add(createRule(entities, rule));
         }
-        //todo - validate termination
 
-        return null;
+        return new WorldDefinition(environment, entities, rules, createTermination(prdWorld.getPRDTermination()));
     }
 
     private static EnvironmentDefinition createEnvironmentDefinition(PRDEvironment prdEvironment){
@@ -64,7 +62,7 @@ public abstract class FactoryDefinition {
     }
 
     private static PropertyType createPropertyType(String type){
-        return Enum.valueOf(PropertyType.class, type);
+        return Enum.valueOf(PropertyType.class, type.toUpperCase());
     }
 
     private static EntityDefinition createEntityDefinition(PRDEntity prdEntity){
@@ -98,14 +96,24 @@ public abstract class FactoryDefinition {
     }
 
     private static Rule createRule(Map<String, EntityDefinition> entities, PRDRule prdRule){
-        List<Action> actions = new ArrayList<>();
-        for (PRDAction action : prdRule.getPRDActions().getPRDAction()) {
-            actions.add(FactoryAction.createAction(action, entities, prdRule.getName()));
-        }
-
-        return null;
+        List<Action> actions = FactoryAction.createActionList(prdRule.getPRDActions().getPRDAction(), entities, prdRule.getName());
+        return new Rule(prdRule.getName(), actions, createActivation(prdRule.getPRDActivation()));
     }
 
+    private static Activation createActivation(PRDActivation prdActivation){
+        Integer ticks = 1;
+        Double probability = 1.0;
+        if(prdActivation != null){
+            if(prdActivation.getTicks() != null) {
+                ticks = prdActivation.getTicks();
+            }
+            if (prdActivation.getProbability() != null){
+                probability = prdActivation.getProbability();
+            }
+        }
+
+        return new Activation(ticks, probability);
+    }
 
     private static Object createInitByType(PropertyType type, String value) {
         Object init = new Object();
@@ -126,4 +134,30 @@ public abstract class FactoryDefinition {
 
         return init;
     }
+
+    private static Termination createTermination(PRDTermination prdTermination){
+        Integer seconds = null;
+        Integer ticks = null;
+
+        for (Object termination : prdTermination.getPRDByTicksOrPRDBySecond()) {
+            if (isTerminationBySeconds(termination)) {
+                PRDBySecond prdBySecond = (PRDBySecond)termination;
+                seconds = prdBySecond.getCount();
+            } else if (isTerminationByTicks(prdTermination.getPRDByTicksOrPRDBySecond().get(0))) {
+                PRDByTicks prdByTicks = (PRDByTicks)termination;
+                ticks = prdByTicks.getCount();
+            }
+        }
+
+        return new Termination(ticks, seconds);
+    }
+
+    private static Boolean isTerminationByTicks(Object termination){
+        return (termination.getClass() == PRDByTicks.class);
+    }
+
+    private static Boolean isTerminationBySeconds(Object termination){
+        return (termination.getClass() == PRDBySecond.class);
+    }
+
 }
