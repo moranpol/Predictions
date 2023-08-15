@@ -8,7 +8,6 @@ import java.util.Map;
 public class Kill extends Action{
 
     public Kill(String entityName) {
-        //todo
         super(entityName);
     }
 

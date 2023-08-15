@@ -15,6 +15,8 @@ public class EntityInstance {
         this.properties = new HashMap<>();
         for (PropertyDefinition prop : entityDetails.getPropertiesOfAllPopulation().values()) {
             this.properties.put(prop.getName(), PropertyInstance.createPropertyInstance(prop));
+            // hello moran
+            //hello ofir
         }
     }
 }

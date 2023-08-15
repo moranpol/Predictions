@@ -13,7 +13,6 @@ public class SingleCondition extends Condition{
     private Operators operator;
 
     public SingleCondition(String entityName, String propertyName, Expression value, Operators operator) {
-        //todo
         super(entityName);
         this.propertyName = propertyName;
         this.value = value;
