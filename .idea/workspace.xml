@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/logic/src/factory/FactoryAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/StringProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/StringProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/Activation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Calculation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Decrease.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Decrease.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Increase.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Increase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Kill.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Kill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/MultipleCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Set.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Set.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/SingleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/SingleCondition.java" afterDir="false" />
-    </list>
+    <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -128,7 +113,7 @@
       <updated>1690789124949</updated>
       <workItem from="1690789125851" duration="90072000" />
       <workItem from="1691737187656" duration="10725000" />
-      <workItem from="1691999273269" duration="30148000" />
+      <workItem from="1691999273269" duration="30429000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />
