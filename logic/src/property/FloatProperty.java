@@ -1,5 +1,7 @@
 package property;
 
+import enums.PropertyType;
+
 import java.util.Objects;
 import java.util.Random;
 
@@ -25,6 +27,10 @@ public class FloatProperty extends PropertyInstance{
         else{
             this.value = (float)prop.getValue() ;
         }
+    }
+    @Override
+    public PropertyType getType(){
+        return PropertyType.FLOAT;
     }
 
     @Override
