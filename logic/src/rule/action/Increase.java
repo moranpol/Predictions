@@ -10,7 +10,6 @@ public class Increase extends Action{
     private Expression by;
 
     public Increase(String entityName, String propertyName, Expression by) {
-        //todo
         super(entityName);
         this.propertyName = propertyName;
         this.by = by;
@@ -19,7 +18,5 @@ public class Increase extends Action{
     @Override
     public void activateAction(Map<String, List<EntityInstance>> entities) {
         //todo
-        Number value;
-        //value = by.decipher
     }
 }

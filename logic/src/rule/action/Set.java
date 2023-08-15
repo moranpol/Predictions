@@ -9,10 +9,10 @@ public class Set extends Action{
     private final String propertyName;
     private Expression value;
 
-    public Set(String entityName) {
-        //todo
+    public Set(String entityName, String propertyName, Expression value) {
         super(entityName);
-        propertyName = null;
+        this.propertyName = propertyName;
+        this.value = value;
     }
 
     @Override

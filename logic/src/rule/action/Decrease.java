@@ -9,10 +9,10 @@ public class Decrease extends Action{
     private final String propertyName;
     private Expression by;
 
-    public Decrease(String entityName) {
-        //todo
+    public Decrease(String entityName, String propertyName, Expression by) {
         super(entityName);
-        propertyName = null;
+        this.propertyName = propertyName;
+        this.by = by;
     }
 
     @Override

@@ -10,6 +10,7 @@ import jaxb.schema.generated.*;
 import property.PropertyDefinition;
 import property.Range;
 import rule.Rule;
+import rule.action.Action;
 import world.WorldDefinition;
 
 import java.util.*;
@@ -96,39 +97,15 @@ public abstract class FactoryDefinition {
                 range, init);
     }
 
-    private static Rule createRule(Map<String, EntityDefinition> entities, PRDRules rules){
-        for (PRDRule rule : rules.getPRDRule()) {
-            for (PRDAction action : rule.getPRDActions().getPRDAction()) {
-                if(!entities.containsKey(action.getEntity())) {
-                    throw new InvalidNameException(action.getEntity() + " entity name not exist - action name: "
-                            + action.getType() + " in rule: " + rule.getName());
-                }
-                if(!entities.get(action.getEntity()).getPropertiesOfAllPopulation().containsKey(action.getProperty())){
-                    throw new InvalidNameException(action.getProperty() + " property name not exist in " + action.getEntity() +
-                            " entity name - action name: " + action.getType() + " in rule: " + rule.getName());
-                }
-            }
+    private static Rule createRule(Map<String, EntityDefinition> entities, PRDRule prdRule){
+        List<Action> actions = new ArrayList<>();
+        for (PRDAction action : prdRule.getPRDActions().getPRDAction()) {
+            actions.add(FactoryAction.createAction(action, entities, prdRule.getName()));
         }
 
         return null;
     }
 
-    private static void validateCalculationActions(Map<String,EntityDefinition> entities, PRDAction action, String ruleName){
-        if(!isNumericValue(entities.get(action.getEntity()).getPropertiesOfAllPopulation().get(action.getProperty()).getType())){
-            throw new MissMatchValuesException("property type not numeric for calculation action "
-                    + action.getType() + " in rule: " + ruleName);
-        }
-    }
-
-    private static boolean isNumericValue(PropertyType type){
-        return (type == PropertyType.DECIMAL || type == PropertyType.FLOAT);
-    }
-
-    private static boolean isCalculationAction(String actionType){
-        return (Objects.equals(actionType, ActionType.CALCULATION.name()) ||
-                Objects.equals(actionType, ActionType.INCREASE.name()) ||
-                Objects.equals(actionType, ActionType.DECREASE.name()));
-    }
 
     private static Object createInitByType(PropertyType type, String value) {
         Object init = new Object();

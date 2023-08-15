@@ -45,7 +45,7 @@ public class StringProperty extends PropertyInstance{
         for(int i = 0; i < sizeOfString; i++){
             int randomIndex = new Random().nextInt(asciiList.size());
             int randomInteger = asciiList.get(randomIndex);
-            returnString.append(Character.toString((char)randomInteger));
+            returnString.append((char) randomInteger);
         }
 
         return returnString.toString();

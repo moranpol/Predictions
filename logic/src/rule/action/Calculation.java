@@ -12,10 +12,12 @@ public class Calculation extends Action{
     private Expression arg2;
     private Arithmetics arithmetic;
 
-    public Calculation(String entityName) {
-        //todo
+    public Calculation(String entityName, String propertyName, Expression arg1, Expression arg2, Arithmetics arithmetic) {
         super(entityName);
-        propertyName = null;
+        this.propertyName = propertyName;
+        this.arg1 = arg1;
+        this.arg2 = arg2;
+        this.arithmetic = arithmetic;
     }
 
     @Override

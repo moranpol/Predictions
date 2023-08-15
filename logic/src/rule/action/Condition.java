@@ -7,7 +7,6 @@ public abstract class Condition extends Action{
     private List<Action> elseActions;
 
     public Condition(String entityName) {
-        //todo
         super(entityName);
     }
 }
