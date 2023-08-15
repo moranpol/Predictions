@@ -126,7 +126,7 @@ public abstract class FactoryAction {
     }
 
     private static Condition createCondition(PRDAction prdAction, Map<String, EntityDefinition> entities, String ruleName){
-        Condition condition = createConditionHelper(prdAction.getPRDCondition());
+        Condition condition = createConditionHelper(prdAction.getPRDCondition(), prdAction.getEntity());
 
         if(prdAction.getPRDElse() != null){
             condition.setElseActions(createActionList(prdAction.getPRDElse().getPRDAction(), entities, ruleName));
@@ -136,12 +136,12 @@ public abstract class FactoryAction {
         return condition;
     }
 
-    private static Condition createConditionHelper(PRDCondition prdCondition){
+    private static Condition createConditionHelper(PRDCondition prdCondition, String entityName){
         Condition condition = null;
 
         switch (prdCondition.getSingularity()){
             case "multiple":
-                condition = createMultipleCondition(prdCondition);
+                condition = createMultipleCondition(prdCondition, entityName);
                 break;
             case "single":
                 condition = createSingleCondition(prdCondition);
@@ -176,13 +176,13 @@ public abstract class FactoryAction {
         return operatorType;
     }
 
-    private static MultipleCondition createMultipleCondition(PRDCondition prdCondition) {
+    private static MultipleCondition createMultipleCondition(PRDCondition prdCondition, String entityName) {
         List<Condition> conditionList = new ArrayList<>();
         for (PRDCondition condition : prdCondition.getPRDCondition()) {
-            conditionList.add(createConditionHelper(condition));
+            conditionList.add(createConditionHelper(condition, entityName));
         }
 
-        return new MultipleCondition(null ,conditionList, createLogical(prdCondition.getLogical()));
+        return new MultipleCondition(entityName, conditionList, createLogical(prdCondition.getLogical()));
     }
 
     private static Logicals createLogical(String logical){
