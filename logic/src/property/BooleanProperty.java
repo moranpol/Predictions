@@ -1,10 +1,17 @@
 package property;
 
+import enums.PropertyType;
+
 import java.util.Objects;
 import java.util.Random;
 
 public class BooleanProperty extends PropertyInstance {
     boolean value;
+
+    @Override
+    public PropertyType getType(){
+        return PropertyType.BOOLEAN;
+    }
 
     public Object getValue() {
         return value;

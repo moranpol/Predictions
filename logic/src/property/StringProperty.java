@@ -1,5 +1,7 @@
 package property;
 
+import enums.PropertyType;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +13,10 @@ public class StringProperty extends PropertyInstance{
 
     public String getValue() {
         return value;
+    }
+    @Override
+    public PropertyType getType(){
+        return PropertyType.STRING;
     }
 
     public StringProperty(PropertyDefinition prop) {

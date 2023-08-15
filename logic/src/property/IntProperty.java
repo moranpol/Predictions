@@ -1,5 +1,7 @@
 package property;
 
+import enums.PropertyType;
+
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -13,6 +15,10 @@ public class IntProperty extends PropertyInstance{
 
     public Integer getValue() {
         return value;
+    }
+    @Override
+    public PropertyType getType(){
+        return PropertyType.DECIMAL;
     }
 
     public IntProperty(PropertyDefinition prop) {
