@@ -16,12 +16,4 @@ public class Termination {
     public Integer getSeconds() {
         return seconds;
     }
-
-    @Override
-    public String toString() {
-        return "Termination{" +
-                "ticks=" + ticks +
-                ", seconds=" + seconds +
-                '}';
-    }
 }

@@ -1,34 +1,31 @@
 package rule.action.expression.helper;
 
-import com.sun.xml.internal.bind.v2.runtime.property.Property;
-import com.sun.xml.internal.fastinfoset.util.StringArray;
 import enums.PropertyType;
 import property.PropertyDefinition;
-import property.PropertyInstance;
 import rule.action.expression.Expression;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Helper implements Expression {
-
     private final String funcName;
     private final ArrayList<String> variables;
+    private final HelperFunction helperFunction;
 
-    public Helper(String... strings) {
+    public Helper(HelperFunction helperFunction, String... strings) {
         this.funcName = strings[0];
-        variables = new ArrayList<String>();
+        variables = new ArrayList<>();
         variables.addAll(Arrays.asList(strings).subList(1, strings.length));
+        this.helperFunction = helperFunction;
     }
 
     @Override
     public Object getValue() {
         switch (this.funcName){
             case "environment":
-                return HelperFunction.environment(this.variables.get(1));
+                return helperFunction.environment(this.variables.get(0));
             case "random":
-                return HelperFunction.random(Integer.parseInt(this.variables.get(1)));
+                return helperFunction.random(Integer.parseInt(this.variables.get(0)));
         }
         return null;
     }
@@ -37,7 +34,7 @@ public class Helper implements Expression {
     public PropertyType getType() {
         switch (this.funcName){
             case "environment":
-                PropertyDefinition prop = HelperFunction.getEnvironmentDefinition().getProperties().get(this.variables.get(1));
+                PropertyDefinition prop = helperFunction.getEnvironmentDefinition().getProperties().get(this.variables.get(0));
                 return prop.getType();
             case "random":
                 return PropertyType.DECIMAL;

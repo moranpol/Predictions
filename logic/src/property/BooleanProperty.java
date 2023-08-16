@@ -3,29 +3,23 @@ package property;
 import enums.PropertyType;
 
 import java.util.Objects;
-import java.util.Random;
 
 public class BooleanProperty extends PropertyInstance {
     boolean value;
+
+    public BooleanProperty(String name, boolean value) {
+        super(name);
+        this.value = value;
+    }
 
     @Override
     public PropertyType getType(){
         return PropertyType.BOOLEAN;
     }
 
-    public Object getValue() {
-        return value;
-    }
-
-    public BooleanProperty(PropertyDefinition prop) {
-        super(prop.getName());
-        if(prop.isRandomInit()){
-            Random random = new Random();
-            this.value = random.nextBoolean();
-        }
-        else{
-            this.value = (boolean)prop.getValue();
-        }
+    @Override
+    public void setValue(Object value) {
+        this.value = (Boolean)value;
     }
 
     @Override
@@ -41,4 +35,7 @@ public class BooleanProperty extends PropertyInstance {
         return Objects.hash(value);
     }
 
+    public Object getValue() {
+        return value;
+    }
 }

@@ -1,10 +1,5 @@
 package rule.action;
 
-import entity.EntityInstance;
-
-import java.util.List;
-import java.util.Map;
-
 public class Kill extends Action{
 
     public Kill(String entityName) {
@@ -12,7 +7,7 @@ public class Kill extends Action{
     }
 
     @Override
-    public void activateAction(Map<String, List<EntityInstance>> entities) {
-        //todo
+    public void activateAction(Context context) {
+        context.getEntityInstance().killInstance();
     }
 }
