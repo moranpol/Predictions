@@ -16,7 +16,6 @@ import world.WorldDefinition;
 import java.util.*;
 
 public abstract class FactoryDefinition {
-
     public static WorldDefinition createWorldDefinition(PRDWorld prdWorld){
         EnvironmentDefinition environment = createEnvironmentDefinition(prdWorld.getPRDEvironment());
         Map<String, EntityDefinition> entities = new HashMap<>();
@@ -27,7 +26,7 @@ public abstract class FactoryDefinition {
         }
 
         for (PRDRule rule : prdWorld.getPRDRules().getPRDRule()) {
-            rules.add(createRule(entities, rule));
+            rules.add(createRule(entities, rule, environment));
         }
 
         return new WorldDefinition(environment, entities, rules, createTermination(prdWorld.getPRDTermination()));
@@ -54,7 +53,7 @@ public abstract class FactoryDefinition {
         }
 
         return new PropertyDefinition(createPropertyType(prdEnvProperty.getType()), prdEnvProperty.getPRDName(),
-                null, range, null);
+                true, range, null);
     }
 
     private static Range createRange(PRDRange prdRange){
@@ -95,8 +94,9 @@ public abstract class FactoryDefinition {
                 range, init);
     }
 
-    private static Rule createRule(Map<String, EntityDefinition> entities, PRDRule prdRule){
-        List<Action> actions = FactoryAction.createActionList(prdRule.getPRDActions().getPRDAction(), entities, prdRule.getName());
+    private static Rule createRule(Map<String, EntityDefinition> entities, PRDRule prdRule, EnvironmentDefinition environmentDefinition){
+        List<Action> actions = FactoryAction.createActionList(prdRule.getPRDActions().getPRDAction(), entities,
+                prdRule.getName(), environmentDefinition);
         return new Rule(prdRule.getName(), actions, createActivation(prdRule.getPRDActivation()));
     }
 
@@ -159,5 +159,4 @@ public abstract class FactoryDefinition {
     private static Boolean isTerminationBySeconds(Object termination){
         return (termination.getClass() == PRDBySecond.class);
     }
-
 }

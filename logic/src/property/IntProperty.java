@@ -3,33 +3,30 @@ package property;
 import enums.PropertyType;
 
 import java.util.Objects;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class IntProperty extends PropertyInstance{
     private final Range range;
     private Integer value;
 
-    public Range getRange() {
-        return range;
+    public IntProperty(String name, Range range, Integer value) {
+        super(name);
+        this.range = range;
+        this.value = value;
     }
 
-    public Integer getValue() {
-        return value;
-    }
     @Override
     public PropertyType getType(){
         return PropertyType.DECIMAL;
     }
 
-    public IntProperty(PropertyDefinition prop) {
-        super(prop.getName());
-        this.range = prop.getRange();
-        if(prop.isRandomInit()){
-            this.value = ThreadLocalRandom.current().nextInt(this.range.getFrom().intValue(),
-                    (this.range.getTo().intValue()) + 1);
-        }
-        else{
-            this.value = (int)prop.getValue() ;
+    @Override
+    public void setValue(Object value) {
+        if((Integer)value < this.range.getFrom()){
+            this.value = this.range.getFrom().intValue();
+        } else if ((Integer)value  > this.range.getTo()) {
+            this.value = this.range.getTo().intValue();
+        }else{
+            this.value = (Integer)value;
         }
     }
 
@@ -38,11 +35,15 @@ public class IntProperty extends PropertyInstance{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         IntProperty that = (IntProperty) o;
-        return value == that.value && Objects.equals(range, that.range);
+        return Objects.equals(value, that.value) && Objects.equals(range, that.range);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(range, value);
+    }
+
+    public Integer getValue() {
+        return value;
     }
 }

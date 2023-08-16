@@ -17,11 +17,4 @@ public class Activation {
         return (randomNumber < this.probability && (stepsCounter % this.ticks) == 0);
     }
 
-    @Override
-    public String toString() {
-        return "Activation{" +
-                "ticks=" + ticks +
-                ", probability=" + probability +
-                '}';
-    }
 }

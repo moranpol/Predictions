@@ -8,11 +8,8 @@ import java.util.Map;
 public class EnvironmentInstance {
     private Map<String, PropertyInstance> properties;
 
-    public EnvironmentInstance(EnvironmentDefinition environmentDetails){
-        this.properties = new HashMap<>();
-        for (PropertyDefinition prop : environmentDetails.getProperties().values()) {
-            this.properties.put(prop.getName(), PropertyInstance.createPropertyInstance(prop));
-        }
+    public EnvironmentInstance(Map<String, PropertyInstance> properties) {
+        this.properties = properties;
     }
 
     public Map<String, PropertyInstance> getProperties() {

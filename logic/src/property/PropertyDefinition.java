@@ -57,4 +57,25 @@ public class PropertyDefinition {
     public Object getValue() {
         return init;
     }
+
+    public void setInit(Object init) {
+        this.init = init;
+        if(type == PropertyType.DECIMAL) {
+            if ((Integer)init < this.range.getFrom()) {
+                this.init = this.range.getFrom();
+            } else if ((Integer) init > this.range.getTo()) {
+                this.init = this.range.getTo();
+            }
+        } else if (type == PropertyType.FLOAT) {
+            if ((Float)init < this.range.getFrom()) {
+                this.init = this.range.getFrom();
+            } else if ((Float) init > this.range.getTo()) {
+                this.init = this.range.getTo();
+            }
+        }
+    }
+
+    public void setRandomInit(Boolean randomInit) {
+        isRandomInit = randomInit;
+    }
 }
