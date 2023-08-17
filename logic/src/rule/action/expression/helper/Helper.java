@@ -6,6 +6,7 @@ import rule.action.expression.Expression;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Helper implements Expression {
     private final String funcName;
@@ -17,6 +18,19 @@ public class Helper implements Expression {
         variables = new ArrayList<>();
         variables.addAll(Arrays.asList(strings).subList(1, strings.length));
         this.helperFunction = helperFunction;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Helper helper = (Helper) o;
+        return Objects.equals(funcName, helper.funcName) && Objects.equals(variables, helper.variables) && Objects.equals(helperFunction, helper.helperFunction);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(funcName, variables, helperFunction);
     }
 
     @Override

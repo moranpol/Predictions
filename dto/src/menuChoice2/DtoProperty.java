@@ -1,14 +1,12 @@
-import enums.PropertyType;
-import property.Range;
+package menuChoice2;
 
-public class DtoPropertyDefinition {
-
+public class DtoProperty {
     private final String name;
-    private PropertyType type;
-    private DtoRange range;
-    private boolean isRandomInitialized;
+    private final String type;
+    private final DtoRange range;
+    private final boolean isRandomInitialized;
 
-    public DtoPropertyDefinition(String name, PropertyType type, Range range, boolean isRandomInitialized) {
+    public DtoProperty(String name, String type, DtoRange range, boolean isRandomInitialized) {
         this.name = name;
         this.type = type;
         this.range = new DtoRange(range.getFrom(), range.getTo());
@@ -19,7 +17,7 @@ public class DtoPropertyDefinition {
         return name;
     }
 
-    public PropertyType getType() {
+    public String getType() {
         return type;
     }
 

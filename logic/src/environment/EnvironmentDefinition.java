@@ -1,19 +1,28 @@
 package environment;
 
-import exceptions.InvalidNameException;
-import jaxb.schema.generated.PRDEnvProperty;
-import jaxb.schema.generated.PRDEvironment;
 import property.PropertyDefinition;
-import world.WorldDefinition;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class EnvironmentDefinition {
-    private Map<String, PropertyDefinition> properties;
+    private final Map<String, PropertyDefinition> properties;
 
     public EnvironmentDefinition(Map<String, PropertyDefinition> properties) {
         this.properties = properties;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EnvironmentDefinition that = (EnvironmentDefinition) o;
+        return Objects.equals(properties, that.properties);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(properties);
     }
 
     public Map<String, PropertyDefinition> getProperties() {

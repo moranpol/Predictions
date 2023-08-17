@@ -1,11 +1,13 @@
+package menuChoice2;
+
 import java.util.List;
 
 public class DtoRule {
 
     private final String name;
-    private DtoActivation activation;
-    private Integer numOfActions;
-    private List<String> actionNames;
+    private final DtoActivation activation;
+    private final Integer numOfActions;
+    private final List<String> actionNames;
 
     public DtoRule(String name, DtoActivation activation, Integer numOfActions, List<String> actionNames) {
         this.name = name;

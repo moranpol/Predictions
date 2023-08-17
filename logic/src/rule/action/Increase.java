@@ -1,14 +1,12 @@
 package rule.action;
 
-import entity.EntityInstance;
 import enums.PropertyType;
-import exceptions.MissMatchValuesException;
 import exceptions.ParseFloatToIntException;
+import helpers.ParseFunctions;
 import property.PropertyInstance;
 import rule.action.expression.Expression;
 
-import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 public class Increase extends Action{
     private final String propertyName;
@@ -18,6 +16,20 @@ public class Increase extends Action{
         super(entityName);
         this.propertyName = propertyName;
         this.by = by;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Increase increase = (Increase) o;
+        return Objects.equals(propertyName, increase.propertyName) && Objects.equals(by, increase.by);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), propertyName, by);
     }
 
     @Override
@@ -34,7 +46,8 @@ public class Increase extends Action{
                 propertyInstance.setValue((Integer)propertyInstance.getValue() + (Integer)by.getValue());
                 break;
             case FLOAT:
-                propertyInstance.setValue((Float)propertyInstance.getValue() + (Float) by.getValue());
+                Float floatExpression = ParseFunctions.parseNumericTypeToFloat(by.getValue());
+                propertyInstance.setValue((Float)propertyInstance.getValue() + floatExpression);
                 break;
         }
     }

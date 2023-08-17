@@ -1,6 +1,7 @@
 package property;
 
 import enums.PropertyType;
+import helpers.ParseFunctions;
 
 import java.util.Objects;
 
@@ -23,19 +24,13 @@ public class PropertyDefinition {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PropertyDefinition property = (PropertyDefinition) o;
-        return isRandomInit == property.isRandomInit && type == property.type && Objects.equals(name, property.name) && Objects.equals(range, property.range) && Objects.equals(init, property.init);
+        PropertyDefinition that = (PropertyDefinition) o;
+        return type == that.type && Objects.equals(name, that.name) && Objects.equals(isRandomInit, that.isRandomInit) && Objects.equals(range, that.range) && Objects.equals(init, that.init);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(type, name, isRandomInit, range, init);
-    }
-
-    @Override
-    public String toString(){
-        return ("Name: " + this.name + "\nType:" + this.type.name().toLowerCase() + this.range +
-                "\nIs random: " + this.isRandomInit + "\n");
     }
 
     public String getName() {
@@ -59,6 +54,10 @@ public class PropertyDefinition {
     }
 
     public void setInit(Object init) {
+        if(init instanceof String && type != PropertyType.STRING){
+            init = ParseFunctions.parseInitByType(type, (String)init);
+        }
+
         this.init = init;
         if(type == PropertyType.DECIMAL) {
             if ((Integer)init < this.range.getFrom()) {

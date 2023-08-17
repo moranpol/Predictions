@@ -4,7 +4,9 @@ import entity.EntityDefinition;
 import enums.PropertyType;
 import environment.EnvironmentDefinition;
 import exceptions.InvalidNameException;
+import helpers.CheckFunctions;
 import jaxb.schema.generated.*;
+import helpers.ParseFunctions;
 import property.PropertyDefinition;
 import property.Range;
 import rule.Activation;
@@ -16,6 +18,7 @@ import world.WorldDefinition;
 import java.util.*;
 
 public abstract class FactoryDefinition {
+
     public static WorldDefinition createWorldDefinition(PRDWorld prdWorld){
         EnvironmentDefinition environment = createEnvironmentDefinition(prdWorld.getPRDEvironment());
         Map<String, EntityDefinition> entities = new HashMap<>();
@@ -87,7 +90,7 @@ public abstract class FactoryDefinition {
             range = createRange(prdProperty.getPRDRange());
         }
         if(prdProperty.getPRDValue().getInit() != null){
-            init = createInitByType(type, prdProperty.getPRDValue().getInit());
+            init = ParseFunctions.parseInitByType(type, prdProperty.getPRDValue().getInit());
         }
 
         return new PropertyDefinition(type, prdProperty.getPRDName(), prdProperty.getPRDValue().isRandomInitialize(),
@@ -115,48 +118,20 @@ public abstract class FactoryDefinition {
         return new Activation(ticks, probability);
     }
 
-    private static Object createInitByType(PropertyType type, String value) {
-        Object init = new Object();
-        switch (type) {
-            case DECIMAL:
-                init = Integer.parseInt(value);
-                break;
-            case FLOAT:
-                init = Float.parseFloat(value);
-                break;
-            case BOOLEAN:
-                init = Boolean.parseBoolean(value);
-                break;
-            case STRING:
-                init = value;
-                break;
-        }
-
-        return init;
-    }
-
     private static Termination createTermination(PRDTermination prdTermination){
         Integer seconds = null;
         Integer ticks = null;
 
         for (Object termination : prdTermination.getPRDByTicksOrPRDBySecond()) {
-            if (isTerminationBySeconds(termination)) {
+            if (CheckFunctions.isPRDTerminationBySeconds(termination)) {
                 PRDBySecond prdBySecond = (PRDBySecond)termination;
                 seconds = prdBySecond.getCount();
-            } else if (isTerminationByTicks(prdTermination.getPRDByTicksOrPRDBySecond().get(0))) {
+            } else if (CheckFunctions.isPRDTerminationByTicks(prdTermination.getPRDByTicksOrPRDBySecond().get(0))) {
                 PRDByTicks prdByTicks = (PRDByTicks)termination;
                 ticks = prdByTicks.getCount();
             }
         }
 
         return new Termination(ticks, seconds);
-    }
-
-    private static Boolean isTerminationByTicks(Object termination){
-        return (termination.getClass() == PRDByTicks.class);
-    }
-
-    private static Boolean isTerminationBySeconds(Object termination){
-        return (termination.getClass() == PRDBySecond.class);
     }
 }

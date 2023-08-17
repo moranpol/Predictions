@@ -13,16 +13,6 @@ public class BooleanProperty extends PropertyInstance {
     }
 
     @Override
-    public PropertyType getType(){
-        return PropertyType.BOOLEAN;
-    }
-
-    @Override
-    public void setValue(Object value) {
-        this.value = (Boolean)value;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -35,6 +25,17 @@ public class BooleanProperty extends PropertyInstance {
         return Objects.hash(value);
     }
 
+    @Override
+    public PropertyType getType(){
+        return PropertyType.BOOLEAN;
+    }
+
+    @Override
+    public void setValue(Object value) {
+        this.value = (Boolean)value;
+    }
+
+    @Override
     public Object getValue() {
         return value;
     }

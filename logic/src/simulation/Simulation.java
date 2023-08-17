@@ -5,6 +5,7 @@ import world.WorldInstance;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Simulation {
     private final String startDateFormat;
@@ -19,6 +20,19 @@ public class Simulation {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH:mm:ss");
         startDateFormat = now.format(format);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Simulation that = (Simulation) o;
+        return Objects.equals(startDateFormat, that.startDateFormat) && Objects.equals(id, that.id) && Objects.equals(worldInstance, that.worldInstance) && terminationReason == that.terminationReason;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(startDateFormat, id, worldInstance, terminationReason);
     }
 
     public String getStartDateFormat() {

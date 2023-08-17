@@ -1,12 +1,11 @@
 package rule.action;
 
-import entity.EntityInstance;
 import enums.Arithmetics;
 import exceptions.MissMatchValuesException;
+import helpers.ParseFunctions;
 import rule.action.expression.Expression;
 
-import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 public class Calculation extends Action{
     private final String propertyName;
@@ -23,15 +22,29 @@ public class Calculation extends Action{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Calculation that = (Calculation) o;
+        return Objects.equals(propertyName, that.propertyName) && Objects.equals(arg1, that.arg1) && Objects.equals(arg2, that.arg2) && arithmetic == that.arithmetic;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), propertyName, arg1, arg2, arithmetic);
+    }
+
+    @Override
     public void activateAction(Context context) {
         setExpressionEntityInstance(arg1, context.getEntityInstance());
         setExpressionEntityInstance(arg2, context.getEntityInstance());
-        Float floatArg1 = parseFloat(arg1.getValue(), arg1.getType());
-        Float floatArg2 = parseFloat(arg2.getValue(), arg2.getType());
+        Float floatArg1 = ParseFunctions.parseNumericTypeToFloat(arg1.getValue());
+        Float floatArg2 = ParseFunctions.parseNumericTypeToFloat(arg2.getValue());
         switch (arithmetic){
             case DIVIDE:
                 if(floatArg2 != 0){
-                    context.getEntityInstance().getProperties().get(propertyName).setValue(floatArg1/floatArg2);
+                    context.getEntityInstance().getProperties().get(propertyName).setValue(floatArg1 / floatArg2);
                 }
                 else {
                     throw new MissMatchValuesException("Calculation divide action failed - expression arg2 is 0.\n " +
@@ -39,7 +52,7 @@ public class Calculation extends Action{
                 }
                 break;
             case MULTIPLY:
-                context.getEntityInstance().getProperties().get(propertyName).setValue(floatArg1*floatArg2);
+                context.getEntityInstance().getProperties().get(propertyName).setValue(floatArg1 * floatArg2);
                 break;
         }
     }

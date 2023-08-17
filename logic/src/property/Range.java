@@ -2,6 +2,8 @@ package property;
 
 import jaxb.schema.generated.PRDRange;
 
+import java.util.Objects;
+
 public class Range {
     private final Double from;
     private final Double to;
@@ -12,8 +14,16 @@ public class Range {
     }
 
     @Override
-    public String toString(){
-        return ("\nRange: " + this.from + " - " +this.to);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Range range = (Range) o;
+        return Objects.equals(from, range.from) && Objects.equals(to, range.to);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(from, to);
     }
 
     public Double getFrom() {
