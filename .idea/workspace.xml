@@ -5,25 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/Helper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/HelperFunction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/BooleanValue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/FloatValue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/IntValue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/StringValue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/environment/EnvironmentInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/environment/EnvironmentInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/BooleanProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/BooleanProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/FloatProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/FloatProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/IntProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/IntProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/PropertyInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/PropertyInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/StringProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/StringProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Calculation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Decrease.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Decrease.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Increase.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Increase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Set.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Set.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/SingleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/SingleCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/Expression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,9 +66,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "onboarding.tips.debug.path": "C:/Users/moran/Documents/Education/Second year/Java/Predictions/ui/src/Main.java",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "configurable.group.editor",
     "vue.rearranger.settings.migration": "true"
   }

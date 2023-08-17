@@ -12,6 +12,7 @@ public class DtoRule {
         this.activation = activation;
         this.numOfActions = numOfActions;
         this.actionNames = actionNames;
+
     }
 
     public String getName() {

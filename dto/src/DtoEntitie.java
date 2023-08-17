@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,5 +35,6 @@ public class DtoEntitie {
 
     public DtoTermination getTermination() {
         return termination;
+
     }
 }
