@@ -1,6 +1,7 @@
 package rule.action;
 
 import entity.EntityInstance;
+import enums.PropertyType;
 import rule.action.expression.Expression;
 import rule.action.expression.property.PropertyExpression;
 
@@ -25,6 +26,15 @@ public abstract class Action {
         if(expression instanceof PropertyExpression){
             PropertyExpression propertyExpression = (PropertyExpression)expression;
             propertyExpression.setEntityInstance(entityInstance);
+        }
+    }
+
+    public Float parseFloat(Object value, PropertyType type){
+        if (type == PropertyType.DECIMAL){
+            Integer intValue = (Integer)value;
+            return intValue.floatValue();
+        } else{
+            return (Float)value;
         }
     }
 }

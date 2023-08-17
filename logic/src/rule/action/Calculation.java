@@ -26,11 +26,12 @@ public class Calculation extends Action{
     public void activateAction(Context context) {
         setExpressionEntityInstance(arg1, context.getEntityInstance());
         setExpressionEntityInstance(arg2, context.getEntityInstance());
+        Float floatArg1 = parseFloat(arg1.getValue(), arg1.getType());
+        Float floatArg2 = parseFloat(arg2.getValue(), arg2.getType());
         switch (arithmetic){
             case DIVIDE:
-                if((Float)arg2.getValue() != 0){
-                    context.getEntityInstance().getProperties().get(propertyName).
-                            setValue((Float)arg1.getValue()/(Float)arg2.getValue());
+                if(floatArg2 != 0){
+                    context.getEntityInstance().getProperties().get(propertyName).setValue(floatArg1/floatArg2);
                 }
                 else {
                     throw new MissMatchValuesException("Calculation divide action failed - expression arg2 is 0.\n " +
@@ -38,8 +39,7 @@ public class Calculation extends Action{
                 }
                 break;
             case MULTIPLY:
-                context.getEntityInstance().getProperties().get(propertyName).
-                        setValue((Float)arg1.getValue()*(Float)arg2.getValue());
+                context.getEntityInstance().getProperties().get(propertyName).setValue(floatArg1*floatArg2);
                 break;
         }
     }
