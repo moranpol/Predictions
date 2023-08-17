@@ -2,7 +2,15 @@ import java.util.Scanner;
 
 public class Manu {
     static Scanner scanner = new Scanner(System.in);
-    boolean isSuccessLoad = false;
+    boolean isSuccessLoad;
+
+    //LogicManager logicManager;
+
+
+    public Manu() {
+        this.isSuccessLoad = false;
+        //logicManager = new LogicManager();
+    }
 
     private void StartManu(){
 
@@ -32,15 +40,14 @@ public class Manu {
 
     private void ReadXml(){
         System.out.println("Enter full path of XML file:\n");
-        String userInput = scanner.nextLine();
+        String path = scanner.nextLine();
         try {
-            // this.isSuccessLoad = dto.ReadWml
+            // this.isSuccessLoad = logicManager.ReadWml(path)
         } catch (Exception e) {
             String errorMessage = e.getMessage();
             System.out.println("Cant load file, " + errorMessage);
 
         }
-        //isFileLoad = true;
 
     }
 
