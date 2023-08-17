@@ -1,6 +1,3 @@
-import rule.Activation;
-import rule.action.Action;
-
 import java.util.List;
 
 public class DtoRule {
@@ -10,11 +7,12 @@ public class DtoRule {
     private Integer numOfActions;
     private List<String> actionNames;
 
-    public DtoRule(String name, Activation activation,List<Action> actionList) {
+    public DtoRule(String name, DtoActivation activation, Integer numOfActions, List<String> actionNames) {
         this.name = name;
-        //this.activation = activation;
-        this.numOfActions = actionList.size();
-        //this.actionNames = actionNames;
+        this.activation = activation;
+        this.numOfActions = numOfActions;
+        this.actionNames = actionNames;
+
     }
 
     public String getName() {
