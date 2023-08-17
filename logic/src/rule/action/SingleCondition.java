@@ -42,8 +42,18 @@ public class SingleCondition extends Condition{
     }
 
     private Boolean equalCondition(PropertyInstance property){
-        if(isNumericType(property.getType()) && isNumericType(value.getType())){
-            return ((Float)property.getValue() == (Float)value.getValue());
+        Integer propertyVal;
+        Integer ExpressionVal;
+        if(property.getType() == PropertyType.DECIMAL && value.getType() == PropertyType.DECIMAL){
+            return (Integer)property.getValue() == (Integer)value.getValue();
+        } else if (property.getType() == PropertyType.DECIMAL && value.getType() == PropertyType.FLOAT) {
+            propertyVal = (Integer)property.getValue();
+            return propertyVal.floatValue() == (Float)value.getValue();
+        } else if (property.getType() == PropertyType.FLOAT && value.getType() == PropertyType.DECIMAL) {
+            ExpressionVal = (Integer)value.getValue();
+            return (Float)property.getValue() == ExpressionVal.floatValue();
+        } else if (property.getType() == PropertyType.FLOAT && value.getType() == PropertyType.FLOAT) {
+            return (Float)property.getValue() == (Float)value.getValue();
         } else if (property.getType() == PropertyType.BOOLEAN && value.getType() == PropertyType.BOOLEAN) {
             return ((Boolean)property.getValue() == (Boolean)value.getValue());
         } else if (property.getType() == PropertyType.STRING && value.getType() == PropertyType.STRING) {
@@ -58,26 +68,40 @@ public class SingleCondition extends Condition{
     }
 
     private Boolean btCondition(PropertyInstance property){
-        if (!isNumericType(property.getType()) || !isNumericType(value.getType())){
+        if(!isNumericValue(property.getType()) && !isNumericValue(value.getType())){
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type bigger than " + value.getType() + " type.\n" +
                     "Entity name - " + getEntityName() + "\nProperty name - " + propertyName);
         }
-        
-        return ((Float)property.getValue() > (Float)value.getValue());
+
+        Float floatPropertyVal = parseFloat(property.getValue(), property.getType());
+        Float floatExpressionVal = parseFloat(value.getValue(), value.getType());
+
+        return floatPropertyVal > floatExpressionVal;
     }
 
     private Boolean ltCondition(PropertyInstance property){
-        if (!isNumericType(property.getType()) || !isNumericType(value.getType())){
+        Integer propertyVal;
+        Integer ExpressionVal;
+        if(property.getType() == PropertyType.DECIMAL && value.getType() == PropertyType.DECIMAL){
+            return (Integer)property.getValue() < (Integer)value.getValue();
+        } else if (property.getType() == PropertyType.DECIMAL && value.getType() == PropertyType.FLOAT) {
+            propertyVal = (Integer)property.getValue();
+            return propertyVal.floatValue() < (Float)value.getValue();
+        } else if (property.getType() == PropertyType.FLOAT && value.getType() == PropertyType.DECIMAL) {
+            ExpressionVal = (Integer)value.getValue();
+            return (Float)property.getValue() < ExpressionVal.floatValue();
+        } else if (property.getType() == PropertyType.FLOAT && value.getType() == PropertyType.FLOAT) {
+            return (Float)property.getValue() < (Float)value.getValue();
+        } else{
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type smaller than " + value.getType() + " type.\n" +
                     "Entity name - " + getEntityName() + "\nProperty name - " + propertyName);
         }
-
-        return ((Float)property.getValue() < (Float)value.getValue());
     }
 
-    private Boolean isNumericType(PropertyType type){
+    private Boolean isNumericValue(PropertyType type){
         return (type == PropertyType.DECIMAL || type == PropertyType.FLOAT);
     }
+
 }
