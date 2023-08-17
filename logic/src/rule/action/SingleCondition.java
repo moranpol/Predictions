@@ -73,7 +73,6 @@ public class SingleCondition extends Condition{
                     " type bigger than " + value.getType() + " type.\n" +
                     "Entity name - " + getEntityName() + "\nProperty name - " + propertyName);
         }
-
         Float floatPropertyVal = parseFloat(property.getValue(), property.getType());
         Float floatExpressionVal = parseFloat(value.getValue(), value.getType());
 

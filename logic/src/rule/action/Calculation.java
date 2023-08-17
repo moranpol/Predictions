@@ -39,8 +39,7 @@ public class Calculation extends Action{
                 }
                 break;
             case MULTIPLY:
-                context.getEntityInstance().getProperties().get(propertyName).
-                        setValue(floatArg1*floatArg2);
+                context.getEntityInstance().getProperties().get(propertyName).setValue(floatArg1*floatArg2);
                 break;
         }
     }
