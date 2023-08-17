@@ -1,15 +1,17 @@
+import manager.LogicManager;
+
 import java.util.Scanner;
 
 public class Manu {
     static Scanner scanner = new Scanner(System.in);
     boolean isSuccessLoad;
 
-    //LogicManager logicManager;
+    LogicManager logicManager;
 
 
     public Manu() {
         this.isSuccessLoad = false;
-        //logicManager = new LogicManager();
+        logicManager = new LogicManager();
     }
 
     private void StartManu(){
@@ -38,15 +40,17 @@ public class Manu {
     }
 
 
-    private void ReadXml(){
+    private void ReadXml()
+    {
+
         System.out.println("Enter full path of XML file:\n");
         String path = scanner.nextLine();
+        DtoXmlPath dtoXmlPath = new DtoXmlPath(path);
         try {
-            // this.isSuccessLoad = logicManager.ReadWml(path)
+            this.isSuccessLoad = logicManager.ReadXmlFile(dtoXmlPath);
         } catch (Exception e) {
             String errorMessage = e.getMessage();
             System.out.println("Cant load file, " + errorMessage);
-
         }
 
     }
