@@ -2,9 +2,10 @@ import java.util.Scanner;
 
 public class Manu {
     static Scanner scanner = new Scanner(System.in);
-    static boolean isFileLoad = false;
+    boolean isSuccessLoad = false;
 
     private void StartManu(){
+
         PrintManu();
         int choice = scanner.nextInt();
         while(choice != 5){
@@ -29,20 +30,21 @@ public class Manu {
     }
 
 
-    private static void ReadXml(){
+    private void ReadXml(){
         System.out.println("Enter full path of XML file:\n");
         String userInput = scanner.nextLine();
         try {
-            // world = PRD.ReadWml
+            // this.isSuccessLoad = dto.ReadWml
         } catch (Exception e) {
             String errorMessage = e.getMessage();
             System.out.println("Cant load file, " + errorMessage);
 
         }
-        isFileLoad = true;
+        //isFileLoad = true;
+
     }
 
-    private static void PrintManu(){
+    private void PrintManu(){
         System.out.println("Select an action:\n" +
                 "#1 - Read system information file from XML.\n" +
                 "#2 - Display simulation details.\n" +
