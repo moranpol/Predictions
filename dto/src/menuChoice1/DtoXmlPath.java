@@ -1,3 +1,5 @@
+package menuChoice1;
+
 public class DtoXmlPath {
     private final String path;
 

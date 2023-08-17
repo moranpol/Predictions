@@ -12,6 +12,20 @@ public class StringProperty extends PropertyInstance{
         this.value = value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        StringProperty that = (StringProperty) o;
+        return Objects.equals(value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), value);
+    }
+
     public String getValue() {
         return value;
     }
@@ -25,19 +39,4 @@ public class StringProperty extends PropertyInstance{
     public PropertyType getType(){
         return PropertyType.STRING;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        StringProperty that = (StringProperty) o;
-        return Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
-
 }

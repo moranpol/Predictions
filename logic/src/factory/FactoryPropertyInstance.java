@@ -28,7 +28,7 @@ public abstract class FactoryPropertyInstance {
                 newProperty = createStringProperty(property);
                 break;
             case BOOLEAN:
-                newProperty = createBoolean(property);
+                newProperty = createBooleanProperty(property);
                 break;
         }
 
@@ -42,7 +42,7 @@ public abstract class FactoryPropertyInstance {
                     (property.getRange().getTo().intValue()) + 1);
         }
         else{
-            value = (int)property.getValue() ;
+            value = (Integer)property.getValue() ;
         }
 
         return new IntProperty(property.getName(), property.getRange(), value);
@@ -74,7 +74,7 @@ public abstract class FactoryPropertyInstance {
         return new StringProperty(property.getName(), value);
     }
 
-    private static BooleanProperty createBoolean(PropertyDefinition property){
+    private static BooleanProperty createBooleanProperty(PropertyDefinition property){
         Boolean value = null;
         if(property.isRandomInit()){
             Random random = new Random();

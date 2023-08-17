@@ -1,18 +1,29 @@
 package entity;
 
-import property.PropertyDefinition;
 import property.PropertyInstance;
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class EntityInstance {
     private Boolean isDead;
-    private Map<String, PropertyInstance> properties;
+    private final Map<String, PropertyInstance> properties;
 
     public EntityInstance(Map<String, PropertyInstance> properties) {
         this.isDead = false;
         this.properties = properties;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EntityInstance that = (EntityInstance) o;
+        return Objects.equals(isDead, that.isDead) && Objects.equals(properties, that.properties);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isDead, properties);
     }
 
     public Map<String, PropertyInstance> getProperties() {

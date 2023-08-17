@@ -7,11 +7,12 @@ import rule.action.Context;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Rule {
     private final String name;
-    private List<Action> actionList;
-    private Activation activation;
+    private final List<Action> actionList;
+    private final Activation activation;
 
     public String getName() {
         return name;
@@ -21,6 +22,27 @@ public class Rule {
         this.name = name;
         this.actionList = actionList;
         this.activation = activation;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rule rule = (Rule) o;
+        return Objects.equals(name, rule.name) && Objects.equals(actionList, rule.actionList) && Objects.equals(activation, rule.activation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, actionList, activation);
+    }
+
+    public List<Action> getActionList() {
+        return actionList;
+    }
+
+    public Activation getActivation() {
+        return activation;
     }
 
     public void activeRule(Map<String, EntityManager> entities, Integer currentTick){

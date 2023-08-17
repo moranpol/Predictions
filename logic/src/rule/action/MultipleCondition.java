@@ -4,6 +4,7 @@ import entity.EntityInstance;
 import enums.Logicals;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MultipleCondition extends Condition{
     private final List<Condition> conditions;
@@ -13,6 +14,20 @@ public class MultipleCondition extends Condition{
         super(entityName);
         this.conditions = conditions;
         this.logic = logic;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        MultipleCondition that = (MultipleCondition) o;
+        return Objects.equals(conditions, that.conditions) && logic == that.logic;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), conditions, logic);
     }
 
     @Override

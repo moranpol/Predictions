@@ -1,12 +1,9 @@
 package entity;
 
-import exceptions.InvalidNameException;
-import jaxb.schema.generated.PRDEntity;
-import jaxb.schema.generated.PRDProperty;
 import property.PropertyDefinition;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class EntityDefinition {
     private final String name;
@@ -20,13 +17,16 @@ public class EntityDefinition {
     }
 
     @Override
-    public String toString(){
-        StringBuilder str = new StringBuilder();
-        str.append("Name:" + this.name + "\nPopulation: " + this.population + "\n Properties:\n");
-        for (PropertyDefinition prop : this.propertiesOfAllPopulation.values()) {
-            str.append("#" + prop);
-        }
-        return  str.toString();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EntityDefinition that = (EntityDefinition) o;
+        return Objects.equals(name, that.name) && Objects.equals(population, that.population) && Objects.equals(propertiesOfAllPopulation, that.propertiesOfAllPopulation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, population, propertiesOfAllPopulation);
     }
 
     public String getName() {

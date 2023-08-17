@@ -5,6 +5,7 @@ import enums.*;
 import environment.EnvironmentDefinition;
 import exceptions.InvalidNameException;
 import exceptions.MissMatchValuesException;
+import helpers.CheckFunctions;
 import jaxb.schema.generated.PRDAction;
 import jaxb.schema.generated.PRDCondition;
 import rule.action.*;
@@ -67,8 +68,8 @@ public abstract class FactoryAction {
                         prdAction.getEntity() + " entity name - action name: " + prdAction.getType() +
                         " in rule: " + ruleName);
             }
-            if(isNumericAction(type) &&
-                    !isNumericValue(entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation().get(prdAction.getProperty()).getType())){
+            if(CheckFunctions.isNumericAction(type) &&
+                    !CheckFunctions.isNumericValue(entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation().get(prdAction.getProperty()).getType())){
                 throw new MissMatchValuesException("action " + prdAction.getType() + " in " + ruleName +
                         " is numeric action but property " + prdAction.getProperty() + " type is not numeric.");
             }
@@ -121,7 +122,7 @@ public abstract class FactoryAction {
         validateExpressionNumeric(arg1, prdAction.getType(), ruleName);
         validateExpressionNumeric(arg2, prdAction.getType(), ruleName);
 
-        return new Calculation(prdAction.getEntity(), prdAction.getProperty(), arg1, arg2, arithmetics);
+        return new Calculation(prdAction.getEntity(), prdAction.getResultProp(), arg1, arg2, arithmetics);
     }
 
     private static Kill createKillAction(PRDAction prdAction){
@@ -205,17 +206,9 @@ public abstract class FactoryAction {
     }
 
     private static void validateExpressionNumeric(Expression expression, String actionName, String ruleName){
-        if(!isNumericValue(expression.getType())){
+        if(!CheckFunctions.isNumericValue(expression.getType())){
             throw new MissMatchValuesException("action " + actionName + " in " + ruleName +
                     " is numeric action but expression type is not numeric.");
         }
-    }
-
-    private static Boolean isNumericValue(PropertyType type){
-        return (type == PropertyType.DECIMAL || type == PropertyType.FLOAT);
-    }
-
-    private static Boolean isNumericAction(ActionType type){
-        return (type == ActionType.INCREASE || type == ActionType.DECREASE || type == ActionType.CALCULATION);
     }
 }
