@@ -1,6 +1,3 @@
-import property.PropertyDefinition;
-import rule.Rule;
-import termination.Termination;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,37 +9,32 @@ public class DtoEntitie {
     private  List<DtoRule> rules;
     private DtoTermination termination;
 
-    public DtoEntitie(String name, Integer population, List<PropertyDefinition> propertyDefinitions, List<Rule> rules, Termination termination) {
+    public DtoEntitie(String name, Integer population, List<DtoPropertyDefinition> propertyDefinitions, List<DtoRule> rules, DtoTermination termination) {
         this.name = name;
         this.population = population;
-        //this.termination = termination;
-        this.propertyDefinitions = new ArrayList<DtoPropertyDefinition>();
-        for(PropertyDefinition prop : propertyDefinitions){
-            this.propertyDefinitions.add(new DtoPropertyDefinition(prop.getName(), prop.getType(), prop.getRange(), prop.isRandomInit()));
-        }
+        this.termination = termination;
+        this.propertyDefinitions = propertyDefinitions;
+        this.rules = rules;
 
-
-        this.rules = new ArrayList<>(DtoRule);
-        //this.rules.addAll(rules);
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public Integer getPopulation() {
-        return this.population;
+        return population;
     }
 
-    public List<PropertyDefinition> getPropertyDefinitions() {
-        return this.propertyDefinitions;
+    public List<DtoPropertyDefinition> getPropertyDefinitions() {
+        return propertyDefinitions;
     }
 
-    public List<Rule> getRules() {
-        return this.rules;
+    public List<DtoRule> getRules() {
+        return rules;
     }
 
-    public Termination getTermination() {
-        return this.termination;
+    public DtoTermination getTermination() {
+        return termination;
     }
 }
