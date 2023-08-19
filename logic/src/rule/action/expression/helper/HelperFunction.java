@@ -4,10 +4,11 @@ import environment.EnvironmentDefinition;
 import exceptions.InvalidNameException;
 import property.PropertyDefinition;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Random;
 
-public class HelperFunction {
+public class HelperFunction implements Serializable {
     private final EnvironmentDefinition environmentDefinition;
 
     public HelperFunction(EnvironmentDefinition environmentDefinitionVariables) {
@@ -34,7 +35,8 @@ public class HelperFunction {
     public Object environment(String environmentName) {
         PropertyDefinition prop = environmentDefinition.getProperties().get(environmentName);
         if(prop == null){
-            throw new InvalidNameException("There isn't environment variable: " +(String)environmentName);
+            throw new InvalidNameException("environment helper function failed.\n    " +
+                    "There isn't environment variable: " + environmentName);
         }
         return prop.getValue();
     }

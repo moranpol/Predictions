@@ -3,9 +3,10 @@ package rule.action.expression.value;
 import enums.PropertyType;
 import rule.action.expression.Expression;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class StringValue implements Expression {
+public class StringValue implements Expression, Serializable {
 
     private String value;
 

@@ -5,11 +5,12 @@ import environment.EnvironmentDefinition;
 import rule.Rule;
 import termination.Termination;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class WorldDefinition {
+public class WorldDefinition implements Serializable {
     private final EnvironmentDefinition environmentVariables;
     private final Map<String, EntityDefinition> entities;
     private final List<Rule> rules;

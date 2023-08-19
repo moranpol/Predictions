@@ -1,10 +1,12 @@
 package entity;
 
 import property.PropertyInstance;
+
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
-public class EntityInstance {
+public class EntityInstance implements Serializable {
     private Boolean isDead;
     private final Map<String, PropertyInstance> properties;
 

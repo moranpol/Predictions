@@ -5,11 +5,12 @@ import environment.EnvironmentInstance;
 import rule.Rule;
 import termination.Termination;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class WorldInstance {
+public class WorldInstance implements Serializable {
     private final Map<String, EntityManager> entities;
     private final EnvironmentInstance environmentVariables;
     private final List<Rule> rules;
@@ -41,6 +42,10 @@ public class WorldInstance {
 
     public EnvironmentInstance getEnvironmentVariables() {
         return environmentVariables;
+    }
+
+    public Map<String, EntityManager> getEntities() {
+        return entities;
     }
 
     public void runSimulationTick(Integer currentTick) {

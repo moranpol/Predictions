@@ -5,9 +5,10 @@ import enums.PropertyType;
 import property.PropertyDefinition;
 import rule.action.expression.Expression;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class PropertyExpression implements Expression {
+public class PropertyExpression implements Expression, Serializable {
     private final PropertyDefinition propertyDefinition;
     private EntityInstance entityInstance;
     private final String propertyName;

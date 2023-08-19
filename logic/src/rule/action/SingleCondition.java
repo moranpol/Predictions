@@ -72,10 +72,10 @@ public class SingleCondition extends Condition{
     }
 
     private Boolean btCondition(PropertyInstance property){
-        if(!CheckFunctions.isNumericValue(property.getType()) && !CheckFunctions.isNumericValue(value.getType())){
+        if(!CheckFunctions.isNumericValue(property.getType()) || !CheckFunctions.isNumericValue(value.getType())){
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type bigger than " + value.getType() + " type.\n" +
-                    "Entity name - " + getEntityName() + "\nProperty name - " + propertyName);
+                    "    Entity name - " + getEntityName() + "\n    Property name - " + propertyName);
         }
         Float floatPropertyVal = ParseFunctions.parseNumericTypeToFloat(property.getValue());
         Float floatExpressionVal = ParseFunctions.parseNumericTypeToFloat(value.getValue());
@@ -84,10 +84,10 @@ public class SingleCondition extends Condition{
     }
 
     private Boolean ltCondition(PropertyInstance property){
-        if(!CheckFunctions.isNumericValue(property.getType()) && !CheckFunctions.isNumericValue(value.getType())){
+        if(!CheckFunctions.isNumericValue(property.getType()) || !CheckFunctions.isNumericValue(value.getType())){
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type smaller than " + value.getType() + " type.\n" +
-                    "Entity name - " + getEntityName() + "\nProperty name - " + propertyName);
+                    "    Entity name - " + getEntityName() + "\n    Property name - " + propertyName);
         }
         Float floatPropertyVal = ParseFunctions.parseNumericTypeToFloat(property.getValue());
         Float floatExpressionVal = ParseFunctions.parseNumericTypeToFloat(value.getValue());

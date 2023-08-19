@@ -1,10 +1,9 @@
 package property;
 
-import jaxb.schema.generated.PRDRange;
-
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Range {
+public class Range implements Serializable {
     private final Double from;
     private final Double to;
 

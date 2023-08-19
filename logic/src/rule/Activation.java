@@ -1,9 +1,10 @@
 package rule;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Random;
 
-public class Activation {
+public class Activation implements Serializable {
     private final Integer ticks;
     private final Double probability;
 
