@@ -1,16 +1,16 @@
-package menuChoice2;
+package menuChoice3;
 
-public class DtoProperty {
+import menuChoice2.DtoRange;
+
+public class DtoEnvironmentDetails {
     private final String name;
     private final String type;
     private final DtoRange range;
-    private final boolean isRandomInitialized;
 
-    public DtoProperty(String name, String type, DtoRange range, boolean isRandomInitialized) {
+    public DtoEnvironmentDetails(String name, String type, DtoRange range) {
         this.name = name;
         this.type = type;
         this.range = range;
-        this.isRandomInitialized = isRandomInitialized;
     }
 
     public String getName() {
@@ -23,9 +23,5 @@ public class DtoProperty {
 
     public DtoRange getRange() {
         return range;
-    }
-
-    public boolean isRandomInitialized() {
-        return isRandomInitialized;
     }
 }

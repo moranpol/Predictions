@@ -1,12 +1,14 @@
 package environment;
 
 import property.*;
+
+import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class EnvironmentInstance {
+public class EnvironmentInstance implements Serializable {
     private final Map<String, PropertyInstance> properties;
 
     public EnvironmentInstance(Map<String, PropertyInstance> properties) {

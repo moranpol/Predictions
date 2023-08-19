@@ -4,11 +4,12 @@ import enums.PropertyType;
 import property.PropertyDefinition;
 import rule.action.expression.Expression;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Helper implements Expression {
+public class Helper implements Expression, Serializable {
     private final String funcName;
     private final ArrayList<String> variables;
     private final HelperFunction helperFunction;

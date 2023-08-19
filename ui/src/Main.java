@@ -1,6 +1,8 @@
+import manager.UIManager;
+
 public class Main {
     public static void main(String[] args) {
-        Manu menu = new Manu();
-        menu.startManu();
+        UIManager menu = new UIManager();
+        menu.startMenu();
     }
 }

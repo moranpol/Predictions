@@ -98,9 +98,13 @@ public abstract class FactoryDefinition {
     }
 
     private static Rule createRule(Map<String, EntityDefinition> entities, PRDRule prdRule, EnvironmentDefinition environmentDefinition){
-        List<Action> actions = FactoryAction.createActionList(prdRule.getPRDActions().getPRDAction(), entities,
-                prdRule.getName(), environmentDefinition);
-        return new Rule(prdRule.getName(), actions, createActivation(prdRule.getPRDActivation()));
+        try{
+            List<Action> actions = FactoryAction.createActionList(prdRule.getPRDActions().getPRDAction(), entities,
+                    environmentDefinition);
+            return new Rule(prdRule.getName(), actions, createActivation(prdRule.getPRDActivation()));
+        } catch (Exception e){
+            throw new RuntimeException(e.getMessage() + "\n    Rule name: " + prdRule.getName());
+        }
     }
 
     private static Activation createActivation(PRDActivation prdActivation){

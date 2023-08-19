@@ -3,9 +3,10 @@ package property;
 import enums.PropertyType;
 import helpers.ParseFunctions;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class PropertyDefinition {
+public class PropertyDefinition implements Serializable {
     private final PropertyType type;
     private final String name;
     private Boolean isRandomInit;
@@ -54,24 +55,7 @@ public class PropertyDefinition {
     }
 
     public void setInit(Object init) {
-        if(init instanceof String && type != PropertyType.STRING){
-            init = ParseFunctions.parseInitByType(type, (String)init);
-        }
-
         this.init = init;
-        if(type == PropertyType.DECIMAL) {
-            if ((Integer)init < this.range.getFrom()) {
-                this.init = this.range.getFrom();
-            } else if ((Integer) init > this.range.getTo()) {
-                this.init = this.range.getTo();
-            }
-        } else if (type == PropertyType.FLOAT) {
-            if ((Float)init < this.range.getFrom()) {
-                this.init = this.range.getFrom();
-            } else if ((Float) init > this.range.getTo()) {
-                this.init = this.range.getTo();
-            }
-        }
     }
 
     public void setRandomInit(Boolean randomInit) {

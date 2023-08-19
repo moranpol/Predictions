@@ -37,8 +37,8 @@ public class Increase extends Action{
         setExpressionEntityInstance(by, context.getEntityInstance());
         PropertyInstance propertyInstance = context.getEntityInstance().getProperties().get(propertyName);
         if(propertyInstance.getType() == PropertyType.DECIMAL && by.getType() == PropertyType.FLOAT){
-            throw new ParseFloatToIntException("Increase action failed.\nEntity name - " + getEntityName() +
-                    "\nProperty name - " + propertyName);
+            throw new ParseFloatToIntException("Increase action failed.\n    Entity name - " + getEntityName() +
+                    "\n    Property name - " + propertyName);
         }
 
         switch (propertyInstance.getType()){

@@ -37,8 +37,8 @@ public class Decrease extends Action{
         setExpressionEntityInstance(by, context.getEntityInstance());
         PropertyInstance propertyInstance = context.getEntityInstance().getProperties().get(propertyName);
         if(propertyInstance.getType() == PropertyType.DECIMAL && by.getType() == PropertyType.FLOAT){
-            throw new ParseFloatToIntException("Decrease action failed.\nEntity name - " + getEntityName() +
-                    "\nProperty name - " + propertyName);
+            throw new ParseFloatToIntException("Decrease action failed.\n    Entity name - " + getEntityName() +
+                    "\n    Property name - " + propertyName);
         }
 
         switch (propertyInstance.getType()){

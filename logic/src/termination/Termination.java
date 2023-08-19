@@ -1,8 +1,9 @@
 package termination;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Termination {
+public class Termination implements Serializable {
     private final Integer ticks;
     private final Integer seconds;
 

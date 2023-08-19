@@ -44,12 +44,12 @@ public class Set extends Action{
             Float floatExpression = ParseFunctions.parseNumericTypeToFloat(value.getValue());
             propertyInstance.setValue(floatExpression);
         } else if (propertyInstance.getType() == PropertyType.DECIMAL && value.getType() == PropertyType.FLOAT) {
-            throw new ParseFloatToIntException("Set action failed.\nEntity name - " + getEntityName() +
-                    "\nProperty name - " + propertyName);
+            throw new ParseFloatToIntException("Set action failed.\n    Entity name - " + getEntityName() +
+                    "\n    Property name - " + propertyName);
         } else{
             throw new MissMatchValuesException("Expression value type is " + value.getType() + " and property type is "
-                    + propertyInstance.getType() + ".\nSet action failed.\nEntity name - " + getEntityName() +
-                    "\nProperty name - " + propertyName);
+                    + propertyInstance.getType() + ".\n    Set action failed.\n    Entity name - " + getEntityName() +
+                    "\n    Property name - " + propertyName);
         }
 
     }

@@ -5,14 +5,15 @@ import enums.PropertyType;
 import rule.action.expression.Expression;
 import rule.action.expression.property.PropertyExpression;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public abstract class Action {
+public abstract class Action implements Serializable {
     private final String entityName;
 
-    protected Action(String entityName) {
+    public Action(String entityName) {
         this.entityName = entityName;
     }
 

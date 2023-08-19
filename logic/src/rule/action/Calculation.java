@@ -48,7 +48,7 @@ public class Calculation extends Action{
                 }
                 else {
                     throw new MissMatchValuesException("Calculation divide action failed - expression arg2 is 0.\n " +
-                            "Entity name - " + getEntityName() + "\nProperty name - " + propertyName);
+                            "    Entity name - " + getEntityName() + "\n    Property name - " + propertyName);
                 }
                 break;
             case MULTIPLY:

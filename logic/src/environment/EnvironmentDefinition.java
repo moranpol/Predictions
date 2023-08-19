@@ -2,10 +2,11 @@ package environment;
 
 import property.PropertyDefinition;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
-public class EnvironmentDefinition {
+public class EnvironmentDefinition implements Serializable {
     private final Map<String, PropertyDefinition> properties;
 
     public EnvironmentDefinition(Map<String, PropertyDefinition> properties) {

@@ -3,11 +3,12 @@ package simulation;
 import enums.TerminationType;
 import world.WorldInstance;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class Simulation {
+public class Simulation implements Serializable {
     private final String startDateFormat;
     private final Integer id;
     private final WorldInstance worldInstance;
@@ -41,6 +42,10 @@ public class Simulation {
 
     public Integer getId() {
         return id;
+    }
+
+    public WorldInstance getWorldInstance() {
+        return worldInstance;
     }
 
     public TerminationType getTerminationReason() {

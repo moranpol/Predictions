@@ -1,9 +1,10 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class EntityManager {
+public class EntityManager implements Serializable {
     private final String name;
     private final List<EntityInstance> entityInstance;
 

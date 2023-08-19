@@ -12,52 +12,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/dto.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/logic.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/ui.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice2/DtoActivation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice2/DtoTermination.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice2/DtoWorldInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logic/src/exceptions/ParseFailedException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logic/src/helpers/CheckFunctions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logic/src/helpers/ParseFunctions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice3/DtoEnvironmentDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice3/DtoEnvironmentInitialize.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice3/DtoSimulationDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice4/DtoAmountOfEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice4/DtoEntityName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice4/DtoPastSimulationDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice4/DtoPropertyHistogram.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice4/DtoPropertyName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice4/DtoSimulationIdChoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/menuChoice5or6/DtoFilePath.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logic/src/exceptions/SimulationFailedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/manager/UIManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dto/src/DtoEntitie.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/menuChoice2/DtoEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dto/src/DtoPropertyDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/menuChoice2/DtoProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dto/src/DtoRange.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/menuChoice2/DtoRange.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dto/src/DtoRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/menuChoice2/DtoRule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dto/src/DtoXmlPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/menuChoice1/DtoXmlPath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/menuChoice2/DtoProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/menuChoice2/DtoProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityInstance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/environment/EnvironmentDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/environment/EnvironmentDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/environment/EnvironmentInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/environment/EnvironmentInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/exceptions/InvalidNameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/exceptions/InvalidNameException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/exceptions/ParseFloatToIntException.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/exceptions/ParseFloatToIntException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/exceptions/ValueOutOfBoundException.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/factory/FactoryAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/factory/FactoryAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/factory/FactoryPropertyInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/factory/FactoryPropertyInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/jaxb/LoadXml.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/jaxb/LoadXml.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/manager/LogicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/manager/LogicManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/BooleanProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/BooleanProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/FloatProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/FloatProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/IntProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/IntProperty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/property/PropertyDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/PropertyDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/property/PropertyInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/PropertyInstance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/property/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/Range.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/property/StringProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/StringProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/resources/predictions-v1.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/resources/predictions-v1.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/resources/predictions-v1.xsd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/Activation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/Rule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Action.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Calculation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Context.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Context.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Decrease.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Decrease.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Increase.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Increase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/MultipleCondition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Set.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Set.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/SingleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/SingleCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/Expression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/Helper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/HelperFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/HelperFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/property/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/property/PropertyExpression.java" afterDir="false" />
@@ -70,8 +64,7 @@
       <change beforePath="$PROJECT_DIR$/logic/src/world/WorldDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/world/WorldDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/world/WorldInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/world/WorldInstance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/Manu.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/Manu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/ui.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ui.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/Manu.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +146,7 @@
       <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="Application.Main (2)">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="logic" />
@@ -183,8 +176,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main (2)" />
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -391,10 +384,19 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="7" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="((HashMap.Node)((HashMap)entities).entrySet().toArray()[0]).getValue()" custom="java.util.HashMap.Node,java.util.HashMap" />
         <watch expression="((HashMap.Node)((HashMap)entities).entrySet().toArray()[0]).getValue()" custom="java.util.HashMap.Node,java.util.HashMap" />
+        <watch expression="((EntityInstance)((java.util.LinkedList)((EntityManager)((HashMap.Node)((HashMap)logicManager.simulations.get(0).worldInstance.entities).entrySet().toArray()[0]).getValue()).entityInstance).get(8)).properties" custom="java.util.HashMap.Node,entity.EntityInstance,entity.EntityManager,java.util.HashMap,java.util.LinkedList" />
       </configuration>
     </watches-manager>
   </component>
