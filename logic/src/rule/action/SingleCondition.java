@@ -4,6 +4,7 @@ import entity.EntityInstance;
 import enums.Operators;
 import enums.PropertyType;
 import exceptions.MissMatchValuesException;
+import exceptions.ParseFailedException;
 import helpers.CheckFunctions;
 import helpers.ParseFunctions;
 import property.PropertyInstance;
@@ -60,11 +61,14 @@ public class SingleCondition extends Condition{
                     ParseFunctions.parseNumericTypeToFloat(value.getValue()));
         } else if (property.getType() == PropertyType.BOOLEAN && value.getType() == PropertyType.BOOLEAN) {
             return ((Boolean)property.getValue() == (Boolean)value.getValue());
-        } else if (property.getType() == PropertyType.STRING && value.getType() == PropertyType.STRING) {
+        } else if (property.getType() == PropertyType.STRING) {
             String propValue = (String)property.getValue();
-            return (propValue.equals((String)value.getValue()));
+            return (propValue.equals(value.getValue().toString()));
+        } else{
+            throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
+                    " type equals to " + value.getType() + " type.\n" +
+                    "    Entity name - " + getEntityName() + "\n    Property name - " + propertyName);
         }
-        return false;
     }
 
     private Boolean notEqualCondition(PropertyInstance property){

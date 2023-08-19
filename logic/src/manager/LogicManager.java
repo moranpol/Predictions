@@ -236,6 +236,9 @@ public class LogicManager {
 
     //choice 6
     public void loadSimulationsFromFile(DtoFilePath filePath){
+        if(!filePath.getFilePath().endsWith(".txt")){
+            throw new InvalidNameException("file name must end with .txt");
+        }
         try (ObjectInputStream in =
                      new ObjectInputStream(
                              Files.newInputStream(Paths.get(filePath.getFilePath())))) {
