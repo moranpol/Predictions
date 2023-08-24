@@ -61,7 +61,7 @@ public class SingleCondition extends Condition{
                     ParseFunctions.parseNumericTypeToFloat(value.getValue()));
         } else if (property.getType() == PropertyType.BOOLEAN && value.getType() == PropertyType.BOOLEAN) {
             return ((Boolean)property.getValue() == (Boolean)value.getValue());
-        } else if (property.getType() == PropertyType.STRING) {
+        } else if (property.getType() == PropertyType.STRING && value.getType() == PropertyType.STRING) {
             String propValue = (String)property.getValue();
             return (propValue.equals(value.getValue().toString()));
         } else{
