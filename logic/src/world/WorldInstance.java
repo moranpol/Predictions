@@ -40,10 +40,6 @@ public class WorldInstance implements Serializable {
         return termination;
     }
 
-    public EnvironmentInstance getEnvironmentVariables() {
-        return environmentVariables;
-    }
-
     public Map<String, EntityManager> getEntities() {
         return entities;
     }
