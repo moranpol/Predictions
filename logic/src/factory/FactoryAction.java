@@ -81,7 +81,7 @@ public abstract class FactoryAction {
     private static Increase createIncreaseAction(PRDAction prdAction, EnvironmentDefinition environmentDefinition,
                                                  Map<String, EntityDefinition> entities){
         Expression expression = FactoryExpression.createExpression(prdAction.getBy(), environmentDefinition,
-                entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation());
+                entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation(), entities);
         validateExpressionNumeric(expression, prdAction.getType());
 
         return new Increase(prdAction.getEntity(), prdAction.getProperty(), expression);
@@ -90,7 +90,7 @@ public abstract class FactoryAction {
     private static Decrease createDecreaseAction(PRDAction prdAction, EnvironmentDefinition environmentDefinition,
                                                  Map<String, EntityDefinition> entities){
         Expression expression = FactoryExpression.createExpression(prdAction.getBy(), environmentDefinition,
-                entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation());
+                entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation(), entities);
         validateExpressionNumeric(expression, prdAction.getType());
 
         return new Decrease(prdAction.getEntity(), prdAction.getProperty(), expression);
@@ -105,16 +105,16 @@ public abstract class FactoryAction {
         if(prdAction.getPRDMultiply() != null){
             arithmetics = Arithmetics.MULTIPLY;
             arg1 = FactoryExpression.createExpression(prdAction.getPRDMultiply().getArg1(), environmentDefinition,
-                    entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation());
+                    entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation(), entities);
             arg2 = FactoryExpression.createExpression(prdAction.getPRDMultiply().getArg2(), environmentDefinition,
-                    entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation());
+                    entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation(), entities);
         }
         else{
             arithmetics = Arithmetics.DIVIDE;
             arg1 = FactoryExpression.createExpression(prdAction.getPRDDivide().getArg1(), environmentDefinition,
-                    entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation());
+                    entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation(), entities);
             arg2 = FactoryExpression.createExpression(prdAction.getPRDDivide().getArg2(), environmentDefinition,
-                    entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation());
+                    entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation(), entities);
         }
         validateExpressionNumeric(arg1, prdAction.getType());
         validateExpressionNumeric(arg2, prdAction.getType());
@@ -130,7 +130,7 @@ public abstract class FactoryAction {
                                        Map<String, EntityDefinition> entities){
         return new Set(prdAction.getEntity(), prdAction.getProperty(),
                 FactoryExpression.createExpression(prdAction.getValue(), environmentDefinition,
-                        entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation()));
+                        entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation(), entities));
     }
 
     private static Condition createCondition(PRDAction prdAction, Map<String, EntityDefinition> entities,
@@ -165,7 +165,7 @@ public abstract class FactoryAction {
                                                          Map<String, EntityDefinition> entities) {
         validateSingleCondition(prdCondition, entities);
         return new SingleCondition(prdCondition.getEntity(), prdCondition.getProperty(),
-                FactoryExpression.createExpression(prdCondition.getValue(), environmentDefinition, entities.get(prdCondition.getEntity()).getPropertiesOfAllPopulation()),
+                FactoryExpression.createExpression(prdCondition.getValue(), environmentDefinition, entities.get(prdCondition.getEntity()).getPropertiesOfAllPopulation(), entities),
                 createOperator(prdCondition.getOperator()));
     }
 

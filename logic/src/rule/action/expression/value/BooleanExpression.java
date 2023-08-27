@@ -1,16 +1,17 @@
 package rule.action.expression.value;
 
+import entity.EntityInstance;
 import enums.PropertyType;
 import rule.action.expression.Expression;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class FloatValue implements Expression, Serializable {
+public class BooleanExpression implements Expression, Serializable {
 
-    private Float value;
+    private Boolean value;
 
-    public FloatValue(Float value) {
+    public BooleanExpression(Boolean value) {
         this.value = value;
     }
 
@@ -18,7 +19,7 @@ public class FloatValue implements Expression, Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FloatValue that = (FloatValue) o;
+        BooleanExpression that = (BooleanExpression) o;
         return Objects.equals(value, that.value);
     }
 
@@ -28,12 +29,12 @@ public class FloatValue implements Expression, Serializable {
     }
 
     @Override
-    public Object getValue() {
+    public Object getValue(EntityInstance entityInstance) {
         return this.value;
     }
 
     @Override
     public PropertyType getType() {
-        return PropertyType.FLOAT;
+        return PropertyType.BOOLEAN;
     }
 }

@@ -34,7 +34,6 @@ public class Increase extends Action{
 
     @Override
     public void activateAction(Context context) {
-        setExpressionEntityInstance(by, context.getEntityInstance());
         PropertyInstance propertyInstance = context.getEntityInstance().getProperties().get(propertyName);
         if(propertyInstance.getType() == PropertyType.DECIMAL && by.getType() == PropertyType.FLOAT){
             throw new ParseFloatToIntException("Increase action failed.\n    Entity name - " + getEntityName() +
@@ -43,10 +42,10 @@ public class Increase extends Action{
 
         switch (propertyInstance.getType()){
             case DECIMAL:
-                propertyInstance.setValue((Integer)propertyInstance.getValue() + (Integer)by.getValue());
+                propertyInstance.setValue((Integer)propertyInstance.getValue() + (Integer)by.getValue(context.getEntityInstance()));
                 break;
             case FLOAT:
-                Float floatExpression = ParseFunctions.parseNumericTypeToFloat(by.getValue());
+                Float floatExpression = ParseFunctions.parseNumericTypeToFloat(by.getValue(context.getEntityInstance()));
                 propertyInstance.setValue((Float)propertyInstance.getValue() + floatExpression);
                 break;
         }

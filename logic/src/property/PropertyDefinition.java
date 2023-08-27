@@ -21,19 +21,6 @@ public class PropertyDefinition implements Serializable {
         this.init = init;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PropertyDefinition that = (PropertyDefinition) o;
-        return type == that.type && Objects.equals(name, that.name) && Objects.equals(isRandomInit, that.isRandomInit) && Objects.equals(range, that.range) && Objects.equals(init, that.init);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type, name, isRandomInit, range, init);
-    }
-
     public String getName() {
         return name;
     }

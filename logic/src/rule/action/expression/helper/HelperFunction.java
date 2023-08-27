@@ -1,31 +1,27 @@
 package rule.action.expression.helper;
 
+import entity.EntityInstance;
 import environment.EnvironmentDefinition;
 import exceptions.InvalidNameException;
+import exceptions.MissMatchValuesException;
+import helpers.CheckFunctions;
+import helpers.ParseFunctions;
 import property.PropertyDefinition;
+import rule.action.expression.Expression;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.Random;
 
 public class HelperFunction implements Serializable {
     private final EnvironmentDefinition environmentDefinition;
+    private EntityInstance entityInstance;
 
     public HelperFunction(EnvironmentDefinition environmentDefinitionVariables) {
         environmentDefinition = environmentDefinitionVariables;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        HelperFunction that = (HelperFunction) o;
-        return Objects.equals(environmentDefinition, that.environmentDefinition);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(environmentDefinition);
+    public void setEntityInstance(EntityInstance entityInstance) {
+        this.entityInstance = entityInstance;
     }
 
     public EnvironmentDefinition getEnvironmentDefinition() {
@@ -41,8 +37,44 @@ public class HelperFunction implements Serializable {
         return prop.getValue();
     }
 
-    public Object random(int number){
+    public Integer random(Integer number){
         Random random = new Random();
-        return random.nextInt(number +1);
+        return random.nextInt(number + 1);
+    }
+    
+    public Object evaluate(String propertyOfEntity){
+        String[] parts = propertyOfEntity.split("\\.");
+        if(!entityInstance.getName().equals(parts[0])){
+            throw new InvalidNameException(parts[0]  + " entity name does not refer to the entity in the context .\n" +
+                    "    Helper function name - evaluate");
+        }
+        if(entityInstance.getProperties().containsKey(parts[1])){
+            return entityInstance.getProperties().get(parts[1]).getValue();
+        } else {
+            throw new InvalidNameException(parts[1] + " property name not exist in " + parts[0]
+                    + " entity name.\n    Helper function name - evaluate");
+        }
+    }
+
+    public Float percent(Expression number, Expression percentage){
+        if(!CheckFunctions.isNumericValue(number.getType()) || !CheckFunctions.isNumericValue(percentage.getType())){
+            throw new MissMatchValuesException("Percent helper function failed - expression is not a number");
+        }
+
+        return (ParseFunctions.parseNumericTypeToFloat(number.getValue(entityInstance)) * ParseFunctions.parseNumericTypeToFloat(percentage.getValue(entityInstance))) / 100;
+    }
+
+    public Integer ticks(String propertyOfEntity){
+        String[] parts = propertyOfEntity.split("\\.");
+        if(!entityInstance.getName().equals(parts[0])){
+            throw new InvalidNameException(parts[0]  + " entity name does not refer to the entity in the context .\n" +
+                    "    Helper function name - ticks");
+        }
+        if(entityInstance.getProperties().containsKey(parts[1])){
+            return entityInstance.getProperties().get(parts[1]).getCurrValueCounterByTicks();
+        } else {
+           throw new InvalidNameException(parts[1] + " property name not exist in " + parts[0]
+                   + " entity name.\n    Helper function name - ticks");
+        }
     }
 }

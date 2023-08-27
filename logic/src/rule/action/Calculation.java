@@ -37,10 +37,8 @@ public class Calculation extends Action{
 
     @Override
     public void activateAction(Context context) {
-        setExpressionEntityInstance(arg1, context.getEntityInstance());
-        setExpressionEntityInstance(arg2, context.getEntityInstance());
-        Float floatArg1 = ParseFunctions.parseNumericTypeToFloat(arg1.getValue());
-        Float floatArg2 = ParseFunctions.parseNumericTypeToFloat(arg2.getValue());
+        Float floatArg1 = ParseFunctions.parseNumericTypeToFloat(arg1.getValue(context.getEntityInstance()));
+        Float floatArg2 = ParseFunctions.parseNumericTypeToFloat(arg2.getValue(context.getEntityInstance()));
         switch (arithmetic){
             case DIVIDE:
                 if(floatArg2 != 0){

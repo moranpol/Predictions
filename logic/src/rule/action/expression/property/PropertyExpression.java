@@ -10,7 +10,6 @@ import java.util.Objects;
 
 public class PropertyExpression implements Expression, Serializable {
     private final PropertyDefinition propertyDefinition;
-    private EntityInstance entityInstance;
     private final String propertyName;
 
     public PropertyExpression(String propertyName, PropertyDefinition propertyDefinition) {
@@ -18,26 +17,23 @@ public class PropertyExpression implements Expression, Serializable {
         this.propertyDefinition = propertyDefinition;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PropertyExpression that = (PropertyExpression) o;
-        return Objects.equals(propertyDefinition, that.propertyDefinition) && Objects.equals(entityInstance, that.entityInstance) && Objects.equals(propertyName, that.propertyName);
+        return Objects.equals(propertyDefinition, that.propertyDefinition) && Objects.equals(propertyName, that.propertyName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(propertyDefinition, entityInstance, propertyName);
-    }
-
-    public void setEntityInstance(EntityInstance entityInstance) {
-        this.entityInstance = entityInstance;
+        return Objects.hash(propertyDefinition, propertyName);
     }
 
     @Override
-    public Object getValue() {
-        return this.entityInstance.getProperties().get(this.propertyName).getValue();
+    public Object getValue(EntityInstance entityInstance) {
+        return entityInstance.getProperties().get(this.propertyName).getValue();
     }
 
     @Override

@@ -35,13 +35,12 @@ public class Set extends Action{
 
     @Override
     public void activateAction(Context context) {
-        setExpressionEntityInstance(value, context.getEntityInstance());
         PropertyInstance propertyInstance = context.getEntityInstance().getProperties().get(propertyName);
 
         if (propertyInstance.getType() == value.getType()) {
-            propertyInstance.setValue(value.getValue());
+            propertyInstance.setValue(value.getValue(context.getEntityInstance()));
         } else if(propertyInstance.getType() == PropertyType.FLOAT && value.getType() == PropertyType.DECIMAL){
-            Float floatExpression = ParseFunctions.parseNumericTypeToFloat(value.getValue());
+            Float floatExpression = ParseFunctions.parseNumericTypeToFloat(value.getValue(context.getEntityInstance()));
             propertyInstance.setValue(floatExpression);
         } else if (propertyInstance.getType() == PropertyType.DECIMAL && value.getType() == PropertyType.FLOAT) {
             throw new ParseFloatToIntException("Set action failed.\n    Entity name - " + getEntityName() +

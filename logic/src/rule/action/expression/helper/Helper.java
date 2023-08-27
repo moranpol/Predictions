@@ -1,46 +1,55 @@
 package rule.action.expression.helper;
 
+import entity.EntityDefinition;
+import entity.EntityInstance;
 import enums.PropertyType;
+import exceptions.ParseFailedException;
+import factory.FactoryExpression;
 import property.PropertyDefinition;
 import rule.action.expression.Expression;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
 
 public class Helper implements Expression, Serializable {
     private final String funcName;
     private final ArrayList<String> variables;
     private final HelperFunction helperFunction;
+    private final Map<String, EntityDefinition> entities;
 
-    public Helper(HelperFunction helperFunction, String... strings) {
+    public Helper(HelperFunction helperFunction, Map<String, EntityDefinition> entities, String... strings) {
         this.funcName = strings[0];
         variables = new ArrayList<>();
         variables.addAll(Arrays.asList(strings).subList(1, strings.length));
         this.helperFunction = helperFunction;
+        this.entities = entities;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Helper helper = (Helper) o;
-        return Objects.equals(funcName, helper.funcName) && Objects.equals(variables, helper.variables) && Objects.equals(helperFunction, helper.helperFunction);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(funcName, variables, helperFunction);
-    }
-
-    @Override
-    public Object getValue() {
+    public Object getValue(EntityInstance entityInstance) {
+        helperFunction.setEntityInstance(entityInstance);
         switch (this.funcName){
             case "environment":
-                return helperFunction.environment(this.variables.get(0));
+                return helperFunction.environment(variables.get(0));
             case "random":
-                return helperFunction.random(Integer.parseInt(this.variables.get(0)));
+                try{
+                    return helperFunction.random(Integer.parseInt(variables.get(0)));
+                } catch (NumberFormatException e){
+                    throw new ParseFailedException("random helper function failed", PropertyType.DECIMAL);
+                }
+            case "evaluate":
+                return helperFunction.evaluate(variables.get(0));
+            case "percent":
+                Expression expression1 = FactoryExpression.createExpression(variables.get(0), helperFunction.getEnvironmentDefinition(),
+                        entities.get(entityInstance.getName()).getPropertiesOfAllPopulation(), entities);
+                Expression expression2 = FactoryExpression.createExpression(variables.get(1), helperFunction.getEnvironmentDefinition(),
+                        entities.get(entityInstance.getName()).getPropertiesOfAllPopulation(), entities);
+                return helperFunction.percent(expression1, expression2);
+            case "ticks":
+                return helperFunction.ticks(variables.get(0));
         }
         return null;
     }
@@ -49,10 +58,16 @@ public class Helper implements Expression, Serializable {
     public PropertyType getType() {
         switch (this.funcName){
             case "environment":
-                PropertyDefinition prop = helperFunction.getEnvironmentDefinition().getProperties().get(this.variables.get(0));
+                PropertyDefinition prop = helperFunction.getEnvironmentDefinition().getProperties().get(variables.get(0));
                 return prop.getType();
             case "random":
+            case "ticks":
                 return PropertyType.DECIMAL;
+            case "evaluate":
+                String[] parts = variables.get(0).split("\\.");
+                return entities.get(parts[0]).getPropertiesOfAllPopulation().get(parts[1]).getType();
+            case "percent":
+                return PropertyType.FLOAT;
         }
         return null;
     }

@@ -44,6 +44,6 @@ public abstract class FactoryInstance {
     }
 
     private static EntityInstance createEntityInstance(EntityDefinition entityDefinition){
-        return new EntityInstance(FactoryPropertyInstance.createPropertyInstanceMap(entityDefinition.getPropertiesOfAllPopulation()));
+        return new EntityInstance(entityDefinition.getName(), FactoryPropertyInstance.createPropertyInstanceMap(entityDefinition.getPropertiesOfAllPopulation()));
     }
 }
