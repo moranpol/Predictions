@@ -20,7 +20,7 @@ import java.util.*;
 public abstract class FactoryDefinition {
 
     public static WorldDefinition createWorldDefinition(PRDWorld prdWorld){
-        EnvironmentDefinition environment = createEnvironmentDefinition(prdWorld.getPRDEvironment());
+        EnvironmentDefinition environment = createEnvironmentDefinition(prdWorld.getPRDEnvironment());
         Map<String, EntityDefinition> entities = new HashMap<>();
         List<Rule> rules = new ArrayList<>();
 
@@ -35,9 +35,9 @@ public abstract class FactoryDefinition {
         return new WorldDefinition(environment, entities, rules, createTermination(prdWorld.getPRDTermination()));
     }
 
-    private static EnvironmentDefinition createEnvironmentDefinition(PRDEvironment prdEvironment){
+    private static EnvironmentDefinition createEnvironmentDefinition(PRDEnvironment prdEnvironment){
         Map<String, PropertyDefinition> environmentVariables = new HashMap<>();
-        for (PRDEnvProperty prop : prdEvironment.getPRDEnvProperty()) {
+        for (PRDEnvProperty prop : prdEnvironment.getPRDEnvProperty()) {
             if(!environmentVariables.containsKey(prop.getPRDName())){
                 environmentVariables.put(prop.getPRDName(), createEnvironmentPropertyDefinition(prop));
             }
@@ -79,7 +79,7 @@ public abstract class FactoryDefinition {
             }
         }
 
-        return new EntityDefinition(prdEntity.getName(), prdEntity.getPRDPopulation(), properties);
+        return new EntityDefinition(prdEntity.getName(), 0, properties);
     }
 
     private static PropertyDefinition createEntityPropertyDefinition(PRDProperty prdProperty){
@@ -126,11 +126,11 @@ public abstract class FactoryDefinition {
         Integer seconds = null;
         Integer ticks = null;
 
-        for (Object termination : prdTermination.getPRDByTicksOrPRDBySecond()) {
+        for (Object termination : prdTermination.getPRDBySecondOrPRDByTicks()) {
             if (CheckFunctions.isPRDTerminationBySeconds(termination)) {
                 PRDBySecond prdBySecond = (PRDBySecond)termination;
                 seconds = prdBySecond.getCount();
-            } else if (CheckFunctions.isPRDTerminationByTicks(prdTermination.getPRDByTicksOrPRDBySecond().get(0))) {
+            } else if (CheckFunctions.isPRDTerminationByTicks(prdTermination.getPRDBySecondOrPRDByTicks().get(0))) {
                 PRDByTicks prdByTicks = (PRDByTicks)termination;
                 ticks = prdByTicks.getCount();
             }

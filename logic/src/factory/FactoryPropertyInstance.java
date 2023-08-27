@@ -15,7 +15,7 @@ public abstract class FactoryPropertyInstance {
         return propertiesInstance;
     }
 
-    private static PropertyInstance createPropertyInstance(PropertyDefinition property) {
+    public static PropertyInstance createPropertyInstance(PropertyDefinition property) {
         PropertyInstance newProperty = null;
         switch (property.getType()) {
             case DECIMAL:

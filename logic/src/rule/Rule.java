@@ -4,6 +4,8 @@ import entity.EntityInstance;
 import entity.EntityManager;
 import rule.action.Action;
 import rule.action.Context;
+import world.WorldDefinition;
+import world.WorldInstance;
 
 import java.io.Serializable;
 import java.util.List;
@@ -46,20 +48,27 @@ public class Rule implements Serializable {
         return activation;
     }
 
-    public void activeRule(Map<String, EntityManager> entities, Integer currentTick){
+    public void activeRule(Map<String, EntityManager> entities, Integer currentTick, WorldDefinition worldDefinition){
         if (activation.checkIfActivate(currentTick)){
             for (Action action : actionList) {
                 try {
-                    Context context = new Context();
+                    Context context = new Context(entities, worldDefinition);
                     for (EntityInstance entityInstance : entities.get(action.getEntityName()).getEntityInstance()){
                         context.setEntityInstance(entityInstance);
                         action.activateAction(context);
                     }
                     entities.get(action.getEntityName()).killInstances();
+                    updateNewEntityInstances(context);
                 }catch (Exception e){
                     throw new RuntimeException("Rule name: " + name + "\n    " + e.getMessage());
                 }
             }
+        }
+    }
+
+    private void updateNewEntityInstances(Context context){
+        for (EntityInstance entityInstance : context.getNewEntityInstances()) {
+            context.getEntities().get(entityInstance.getName()).addInstances(entityInstance);
         }
     }
 }
