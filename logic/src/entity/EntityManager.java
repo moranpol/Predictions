@@ -41,4 +41,8 @@ public class EntityManager implements Serializable {
             }
         }
     }
+
+    public void addInstance(EntityInstance entityInstance){
+        this.entityInstance.add(entityInstance);
+    }
 }

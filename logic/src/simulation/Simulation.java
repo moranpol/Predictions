@@ -1,39 +1,28 @@
 package simulation;
 
 import enums.TerminationType;
+import world.WorldDefinition;
 import world.WorldInstance;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 public class Simulation implements Serializable {
     private final String startDateFormat;
     private final Integer id;
     private final WorldInstance worldInstance;
     private TerminationType terminationReason;
+    private final WorldDefinition worldDefinition;
 
-    public Simulation(Integer id, WorldInstance worldInstance) {
+    public Simulation(Integer id, WorldInstance worldInstance, WorldDefinition worldDefinition) {
         this.id = id;
         this.worldInstance = worldInstance;
+        this.worldDefinition = worldDefinition;
 
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH:mm:ss");
         startDateFormat = now.format(format);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Simulation that = (Simulation) o;
-        return Objects.equals(startDateFormat, that.startDateFormat) && Objects.equals(id, that.id) && Objects.equals(worldInstance, that.worldInstance) && terminationReason == that.terminationReason;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(startDateFormat, id, worldInstance, terminationReason);
     }
 
     public String getStartDateFormat() {
@@ -75,7 +64,7 @@ public class Simulation implements Serializable {
                 terminationReason = TerminationType.SECONDS;
                 break;
             }
-            worldInstance.runSimulationTick(currentTick);
+            worldInstance.runSimulationTick(currentTick, worldDefinition);
         }
     }
 
@@ -85,7 +74,7 @@ public class Simulation implements Serializable {
         terminationReason = TerminationType.SECONDS;
 
         while (System.currentTimeMillis() - startTime < maxRunTimeMilliSec){
-            worldInstance.runSimulationTick(currentTick);
+            worldInstance.runSimulationTick(currentTick, worldDefinition);
             currentTick++;
         }
     }
@@ -94,7 +83,7 @@ public class Simulation implements Serializable {
         terminationReason = TerminationType.TICKS;
 
         for (int currentTick = 1; currentTick < ticks; currentTick++){
-            worldInstance.runSimulationTick(currentTick);
+            worldInstance.runSimulationTick(currentTick, worldDefinition);
         }
     }
 }

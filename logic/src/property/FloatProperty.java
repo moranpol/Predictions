@@ -15,26 +15,20 @@ public class FloatProperty extends PropertyInstance{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FloatProperty that = (FloatProperty) o;
-        return Objects.equals(range, that.range) && Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(range, value);
-    }
-
-    @Override
     public void setValue(Object value) {
+        Float prevValue = this.value;
         if((Float)value < this.range.getFrom()){
             this.value = this.range.getFrom().floatValue();
         } else if ((Float)value  > this.range.getTo()) {
             this.value = this.range.getTo().floatValue();
         }else{
             this.value = (Float)value;
+        }
+
+        if (this.value.equals(prevValue)){
+            setCurrValueCounterByTicks(getCurrValueCounterByTicks() + 1);
+        } else{
+            setCurrValueCounterByTicks(0);
         }
     }
 

@@ -7,27 +7,24 @@ import java.util.Objects;
 
 public abstract class PropertyInstance implements Serializable {
     private final String name;
+    private Integer currValueCounterByTicks;
 
     public PropertyInstance(String name) {
         this.name = name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PropertyInstance that = (PropertyInstance) o;
-        return Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
+        currValueCounterByTicks = 0;
     }
 
     public abstract Object getValue();
 
+    public Integer getCurrValueCounterByTicks() {
+        return currValueCounterByTicks;
+    }
+
     public abstract void setValue(Object value);
+
+    public void setCurrValueCounterByTicks(Integer currValueCounterByTicks) {
+        this.currValueCounterByTicks = currValueCounterByTicks;
+    }
 
     public String getName() {
         return name;

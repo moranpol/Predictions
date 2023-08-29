@@ -13,25 +13,17 @@ public class BooleanProperty extends PropertyInstance {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BooleanProperty that = (BooleanProperty) o;
-        return value == that.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
-    @Override
     public PropertyType getType(){
         return PropertyType.BOOLEAN;
     }
 
     @Override
     public void setValue(Object value) {
+        if (this.value == (Boolean)value){
+            setCurrValueCounterByTicks(getCurrValueCounterByTicks() + 1);
+        } else{
+            setCurrValueCounterByTicks(0);
+        }
         this.value = (Boolean)value;
     }
 

@@ -61,7 +61,7 @@ public class LogicManager {
 
     private List<DtoEntity> createDtoEntityList() {
         List<DtoEntity> dtoEntity = new ArrayList<>();
-        for (EntityDefinition entity: worldDefinition.getEntities().values()) {
+        for (EntityDefinition entity : worldDefinition.getEntities().values()) {
             dtoEntity.add(createDtoEntity(entity));
         }
 
@@ -139,7 +139,7 @@ public class LogicManager {
     }
 
     public DtoSimulationDetails simulationRun(){
-        Simulation simulation = new Simulation(simulationCount, FactoryInstance.createWorldInstance(worldDefinition));
+        Simulation simulation = new Simulation(simulationCount, FactoryInstance.createWorldInstance(worldDefinition), worldDefinition);
         try {
             simulation.runSimulation();
             for (PropertyDefinition environment : worldDefinition.getEnvironmentVariables().getProperties().values()) {

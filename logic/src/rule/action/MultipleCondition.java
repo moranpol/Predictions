@@ -10,41 +10,27 @@ public class MultipleCondition extends Condition{
     private final List<Condition> conditions;
     private final Logicals logic;
 
-    public MultipleCondition(String entityName, List<Condition> conditions, Logicals logic) {
-        super(entityName);
+    public MultipleCondition(String entityName, List<Condition> conditions, Logicals logic, SecondaryEntity secondaryEntity) {
+        super(entityName, secondaryEntity);
         this.conditions = conditions;
         this.logic = logic;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        MultipleCondition that = (MultipleCondition) o;
-        return Objects.equals(conditions, that.conditions) && logic == that.logic;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), conditions, logic);
-    }
-
-    @Override
-    public Boolean invokeCondition(EntityInstance entity) {
+    public Boolean invokeCondition(Context context) {
         switch (logic){
             case OR:
-                return orCondition(entity);
+                return orCondition(context);
             case AND:
-                return andCondition(entity);
+                return andCondition(context);
         }
 
         return false;
     }
 
-    private Boolean orCondition(EntityInstance entity){
+    private Boolean orCondition(Context context){
         for (Condition condition : conditions) {
-            if(condition.invokeCondition(entity)){
+            if(condition.invokeCondition(context)){
                 return true;
             }
         }
@@ -52,9 +38,9 @@ public class MultipleCondition extends Condition{
         return false;
     }
 
-    private Boolean andCondition(EntityInstance entity){
+    private Boolean andCondition(Context context){
         for (Condition condition : conditions) {
-            if(!condition.invokeCondition(entity)){
+            if(!condition.invokeCondition(context)){
                 return false;
             }
         }

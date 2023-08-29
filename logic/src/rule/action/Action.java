@@ -1,45 +1,40 @@
 package rule.action;
 
 import entity.EntityInstance;
-import enums.PropertyType;
-import rule.action.expression.Expression;
-import rule.action.expression.property.PropertyExpression;
+import exceptions.InvalidNameException;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public abstract class Action implements Serializable {
-    private final String entityName;
+    private final String mainEntityName;
+    private SecondaryEntity secondaryEntity;
 
-    public Action(String entityName) {
-        this.entityName = entityName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Action action = (Action) o;
-        return Objects.equals(entityName, action.entityName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(entityName);
+    public Action(String entityName, SecondaryEntity secondaryEntity) {
+        this.mainEntityName = entityName;
+        this.secondaryEntity = secondaryEntity;
     }
 
     public abstract void activateAction(Context context);
 
-    public String getEntityName() {
-        return entityName;
+    public String getMainEntityName() {
+        return mainEntityName;
     }
 
-    public void setExpressionEntityInstance(Expression expression, EntityInstance entityInstance){
-        if(expression instanceof PropertyExpression){
-            PropertyExpression propertyExpression = (PropertyExpression)expression;
-            propertyExpression.setEntityInstance(entityInstance);
+    public SecondaryEntity getSecondaryEntity() {
+        return secondaryEntity;
+    }
+
+    public void setSecondaryEntity(SecondaryEntity secondaryEntity) {
+        this.secondaryEntity = secondaryEntity;
+    }
+
+    public EntityInstance getEntityInstance(Context context){
+        if(context.getMainEntityInstance().getName().equals(mainEntityName)){
+            return context.getMainEntityInstance();
+        } else if(context.getSecondEntityInstance() != null && context.getSecondEntityInstance().getName().equals(mainEntityName)){
+           return context.getSecondEntityInstance();
+        } else {
+            throw new InvalidNameException("main entity " + mainEntityName);
         }
     }
 }

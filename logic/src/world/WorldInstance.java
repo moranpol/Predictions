@@ -44,9 +44,9 @@ public class WorldInstance implements Serializable {
         return entities;
     }
 
-    public void runSimulationTick(Integer currentTick) {
+    public void runSimulationTick(Integer currentTick, WorldDefinition worldDefinition) {
         for (Rule rule : rules) {
-            rule.activeRule(entities, currentTick);
+            rule.activeRule(entities, currentTick, worldDefinition);
         }
     }
 }

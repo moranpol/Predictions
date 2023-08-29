@@ -5,6 +5,8 @@ import enums.PropertyType;
 import jaxb.schema.generated.PRDBySecond;
 import jaxb.schema.generated.PRDByTicks;
 
+import java.util.Objects;
+
 public abstract class CheckFunctions {
     public static Boolean isPRDTerminationByTicks(Object termination){
         return (termination.getClass() == PRDByTicks.class);
@@ -20,5 +22,10 @@ public abstract class CheckFunctions {
 
     public static Boolean isNumericAction(ActionType type){
         return (type == ActionType.INCREASE || type == ActionType.DECREASE || type == ActionType.CALCULATION);
+    }
+
+    public static Boolean isHelperFunction(String str){
+        return (str.equals("environment") || str.equals("random") || str.equals("evaluate") || str.equals("percent")
+                || str.equals("ticks"));
     }
 }

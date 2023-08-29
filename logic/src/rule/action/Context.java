@@ -1,30 +1,55 @@
 package rule.action;
 
 import entity.EntityInstance;
+import entity.EntityManager;
+import world.WorldDefinition;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class Context {
-    private EntityInstance entityInstance;
+    private EntityInstance MainEntityInstance;
+    private EntityInstance secondEntityInstance = null;
+    private final Map<String, EntityManager> entities;
+    private final WorldDefinition worldDefinition;
+    private final List<EntityInstance> newEntityInstances;
 
-    public EntityInstance getEntityInstance() {
-        return entityInstance;
+    public Context(Map<String, EntityManager> entities, WorldDefinition worldDefinition) {
+        this.entities = entities;
+        this.worldDefinition = worldDefinition;
+        newEntityInstances = new ArrayList<>();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Context context = (Context) o;
-        return Objects.equals(entityInstance, context.entityInstance);
+    public EntityInstance getMainEntityInstance() {
+        return MainEntityInstance;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(entityInstance);
+    public Map<String, EntityManager> getEntities() {
+        return entities;
     }
 
-    public void setEntityInstance(EntityInstance entityInstance) {
-        this.entityInstance = entityInstance;
+    public WorldDefinition getWorldDefinition() {
+        return worldDefinition;
+    }
+
+    public List<EntityInstance> getNewEntityInstances() {
+        return newEntityInstances;
+    }
+
+    public EntityInstance getSecondEntityInstance() {
+        return secondEntityInstance;
+    }
+
+    public void setNewEntityInstances(EntityInstance newEntityInstances) {
+        this.newEntityInstances.add(newEntityInstances);
+    }
+
+    public void setSecondEntityInstance(EntityInstance secondEntityInstance) {
+        this.secondEntityInstance = secondEntityInstance;
+    }
+
+    public void setMainEntityInstance(EntityInstance mainEntityInstance) {
+        this.MainEntityInstance = mainEntityInstance;
     }
 }

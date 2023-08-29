@@ -6,5 +6,6 @@ public enum ActionType {
     CALCULATION,
     CONDITION,
     KILL,
-    SET
+    SET,
+    REPLACE
 }

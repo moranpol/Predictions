@@ -16,25 +16,13 @@ public class IntProperty extends PropertyInstance{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        IntProperty that = (IntProperty) o;
-        return Objects.equals(range, that.range) && Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(range, value);
-    }
-
-    @Override
     public PropertyType getType(){
         return PropertyType.DECIMAL;
     }
 
     @Override
     public void setValue(Object value) {
+        Integer prevValue = this.value;
         value = ParseFunctions.parseNumericTypeToInt(value);
         if((Integer)value < this.range.getFrom()){
             this.value = this.range.getFrom().intValue();
@@ -42,6 +30,12 @@ public class IntProperty extends PropertyInstance{
             this.value = this.range.getTo().intValue();
         } else{
             this.value = (Integer)value;
+        }
+
+        if (this.value.equals(prevValue)){
+            setCurrValueCounterByTicks(getCurrValueCounterByTicks() + 1);
+        } else{
+            setCurrValueCounterByTicks(0);
         }
     }
 
