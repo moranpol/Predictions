@@ -1,0 +1,38 @@
+/* styles.css */
+
+/* Apply a general font and background color */
+.root {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-background-color: #F4F4F4;
+}
+
+/* Style for the title label */
+.label-title {
+    -fx-font-size: 15px;
+    -fx-padding: 10px 0;
+}
+
+
+/* Style for Show buttons */
+.button-show {
+    -fx-pref-width: 100px;
+/* -fx-background-color: #2196F3;*/
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px;
+    -fx-font-size: 14px;
+    -fx-background-color: #179c88;
+}
+
+.button-show:hover {
+ -fx-background-color: #1976D2;
+ -fx-cursor: hand;
+}
+
+/* Optional: Add more styles for other elements */
+
+/* Example style for a GridPane */
+.grid-pane {
+    -fx-hgap: 20px;
+    -fx-vgap: 15px;
+}
