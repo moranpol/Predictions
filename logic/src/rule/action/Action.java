@@ -1,18 +1,40 @@
 package rule.action;
 
+import entity.EntityInstance;
+import exceptions.InvalidNameException;
+
 import java.io.Serializable;
-import java.util.Objects;
 
 public abstract class Action implements Serializable {
-    private final String entityName;
+    private final String mainEntityName;
+    private SecondaryEntity secondaryEntity;
 
-    public Action(String entityName) {
-        this.entityName = entityName;
+    public Action(String entityName, SecondaryEntity secondaryEntity) {
+        this.mainEntityName = entityName;
+        this.secondaryEntity = secondaryEntity;
     }
 
     public abstract void activateAction(Context context);
 
-    public String getEntityName() {
-        return entityName;
+    public String getMainEntityName() {
+        return mainEntityName;
+    }
+
+    public SecondaryEntity getSecondaryEntity() {
+        return secondaryEntity;
+    }
+
+    public void setSecondaryEntity(SecondaryEntity secondaryEntity) {
+        this.secondaryEntity = secondaryEntity;
+    }
+
+    public EntityInstance getEntityInstance(Context context){
+        if(context.getMainEntityInstance().getName().equals(mainEntityName)){
+            return context.getMainEntityInstance();
+        } else if(context.getSecondEntityInstance() != null && context.getSecondEntityInstance().getName().equals(mainEntityName)){
+           return context.getSecondEntityInstance();
+        } else {
+            throw new InvalidNameException("main entity " + mainEntityName);
+        }
     }
 }

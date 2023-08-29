@@ -45,14 +45,26 @@ public abstract class FactoryAction {
                 action = createSetAction(prdAction, environmentDefinition, entities);
                 break;
             case KILL:
-                action = createKillAction(prdAction);
+                action = createKillAction(prdAction, environmentDefinition, entities);
                 break;
             case CONDITION:
                 action = createCondition(prdAction, entities, environmentDefinition);
                 break;
+            case REPLACE:
+                action = createReplace(prdAction, entities, environmentDefinition);
+                break;
         }
 
         return action;
+    }
+
+    private static Replace createReplace(PRDAction prdAction, Map<String, EntityDefinition> entities, EnvironmentDefinition environmentDefinition) {
+       return new Replace(prdAction.getKill(), prdAction.getCreate(), createReplaceMode(prdAction.getMode()),
+               createSecondaryEntity(prdAction.getPRDSecondaryEntity(), entities, environmentDefinition));
+    }
+
+    private static ReplaceMode createReplaceMode(String mode) {
+        return Enum.valueOf(ReplaceMode.class, mode.toUpperCase());
     }
 
     private static void validateAction(PRDAction prdAction, Map<String, EntityDefinition> entities, ActionType type){
@@ -84,7 +96,8 @@ public abstract class FactoryAction {
                 entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation(), entities);
         validateExpressionNumeric(expression, prdAction.getType());
 
-        return new Increase(prdAction.getEntity(), prdAction.getProperty(), expression);
+        return new Increase(prdAction.getEntity(), prdAction.getProperty(), expression,
+                createSecondaryEntity(prdAction.getPRDSecondaryEntity(), entities, environmentDefinition));
     }
 
     private static Decrease createDecreaseAction(PRDAction prdAction, EnvironmentDefinition environmentDefinition,
@@ -93,7 +106,8 @@ public abstract class FactoryAction {
                 entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation(), entities);
         validateExpressionNumeric(expression, prdAction.getType());
 
-        return new Decrease(prdAction.getEntity(), prdAction.getProperty(), expression);
+        return new Decrease(prdAction.getEntity(), prdAction.getProperty(), expression,
+                createSecondaryEntity(prdAction.getPRDSecondaryEntity(), entities, environmentDefinition));
     }
 
     private static Calculation createCalculationAction(PRDAction prdAction, EnvironmentDefinition environmentDefinition,
@@ -119,24 +133,28 @@ public abstract class FactoryAction {
         validateExpressionNumeric(arg1, prdAction.getType());
         validateExpressionNumeric(arg2, prdAction.getType());
 
-        return new Calculation(prdAction.getEntity(), prdAction.getResultProp(), arg1, arg2, arithmetics);
+        return new Calculation(prdAction.getEntity(), prdAction.getResultProp(), arg1, arg2, arithmetics,
+                createSecondaryEntity(prdAction.getPRDSecondaryEntity(), entities, environmentDefinition));
     }
 
-    private static Kill createKillAction(PRDAction prdAction){
-        return new Kill(prdAction.getEntity());
+    private static Kill createKillAction(PRDAction prdAction, EnvironmentDefinition environmentDefinition,
+                                         Map<String, EntityDefinition> entities){
+        return new Kill(prdAction.getEntity(), createSecondaryEntity(prdAction.getPRDSecondaryEntity(), entities, environmentDefinition));
     }
 
     private static Set createSetAction(PRDAction prdAction, EnvironmentDefinition environmentDefinition,
                                        Map<String, EntityDefinition> entities){
         return new Set(prdAction.getEntity(), prdAction.getProperty(),
                 FactoryExpression.createExpression(prdAction.getValue(), environmentDefinition,
-                        entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation(), entities));
+                        entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation(), entities),
+                createSecondaryEntity(prdAction.getPRDSecondaryEntity(), entities, environmentDefinition));
     }
 
     private static Condition createCondition(PRDAction prdAction, Map<String, EntityDefinition> entities,
                                              EnvironmentDefinition environmentDefinition){
         Condition condition = createConditionHelper(prdAction.getPRDCondition(), prdAction.getEntity(),
                 environmentDefinition, entities);
+        condition.setSecondaryEntity(createSecondaryEntity(prdAction.getPRDSecondaryEntity(), entities, environmentDefinition));
 
         if(prdAction.getPRDElse() != null){
             condition.setElseActions(createActionList(prdAction.getPRDElse().getPRDAction(), entities, environmentDefinition));
@@ -164,9 +182,11 @@ public abstract class FactoryAction {
     private static SingleCondition createSingleCondition(PRDCondition prdCondition, EnvironmentDefinition environmentDefinition,
                                                          Map<String, EntityDefinition> entities) {
         validateSingleCondition(prdCondition, entities);
-        return new SingleCondition(prdCondition.getEntity(), prdCondition.getProperty(),
+        return new SingleCondition(prdCondition.getEntity(),
+                FactoryExpression.createExpression(prdCondition.getProperty(), environmentDefinition, entities.get(prdCondition.getEntity()).getPropertiesOfAllPopulation(), entities),
                 FactoryExpression.createExpression(prdCondition.getValue(), environmentDefinition, entities.get(prdCondition.getEntity()).getPropertiesOfAllPopulation(), entities),
-                createOperator(prdCondition.getOperator()));
+                createOperator(prdCondition.getOperator()),
+                createSecondaryEntity(null, entities, environmentDefinition));
     }
 
     private static void validateSingleCondition(PRDCondition prdCondition, Map<String, EntityDefinition> entities){
@@ -207,7 +227,7 @@ public abstract class FactoryAction {
             conditionList.add(createConditionHelper(condition, entityName, environmentDefinition, entities));
         }
 
-        return new MultipleCondition(entityName, conditionList, createLogical(prdCondition.getLogical()));
+        return new MultipleCondition(entityName, conditionList, createLogical(prdCondition.getLogical()), null);
     }
 
     private static Logicals createLogical(String logical){
@@ -218,6 +238,21 @@ public abstract class FactoryAction {
         if(!CheckFunctions.isNumericValue(expression.getType())){
             throw new MissMatchValuesException("action " + actionName +
                     " is numeric action but expression type isn't numeric.");
+        }
+    }
+
+    private static SecondaryEntity createSecondaryEntity(PRDAction.PRDSecondaryEntity prdSecondaryEntity, Map<String, EntityDefinition> entities,
+                                                         EnvironmentDefinition environmentDefinition){
+        if (prdSecondaryEntity != null){
+            if(prdSecondaryEntity.getPRDSelection().getPRDCondition() != null){
+                return new SecondaryEntity(prdSecondaryEntity.getEntity(), prdSecondaryEntity.getPRDSelection().getCount(),
+                        createConditionHelper(prdSecondaryEntity.getPRDSelection().getPRDCondition(),
+                        prdSecondaryEntity.getPRDSelection().getPRDCondition().getEntity(), environmentDefinition, entities));
+            } else{
+               return new SecondaryEntity(prdSecondaryEntity.getEntity(), prdSecondaryEntity.getPRDSelection().getCount(), null) ;
+            }
+        } else{
+            return null;
         }
     }
 }

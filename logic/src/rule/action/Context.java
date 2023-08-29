@@ -9,10 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Context {
-    private EntityInstance entityInstance;
+    private EntityInstance MainEntityInstance;
+    private EntityInstance secondEntityInstance = null;
     private final Map<String, EntityManager> entities;
     private final WorldDefinition worldDefinition;
-    private List<EntityInstance> newEntityInstances;
+    private final List<EntityInstance> newEntityInstances;
 
     public Context(Map<String, EntityManager> entities, WorldDefinition worldDefinition) {
         this.entities = entities;
@@ -20,8 +21,8 @@ public class Context {
         newEntityInstances = new ArrayList<>();
     }
 
-    public EntityInstance getEntityInstance() {
-        return entityInstance;
+    public EntityInstance getMainEntityInstance() {
+        return MainEntityInstance;
     }
 
     public Map<String, EntityManager> getEntities() {
@@ -36,11 +37,19 @@ public class Context {
         return newEntityInstances;
     }
 
+    public EntityInstance getSecondEntityInstance() {
+        return secondEntityInstance;
+    }
+
     public void setNewEntityInstances(EntityInstance newEntityInstances) {
         this.newEntityInstances.add(newEntityInstances);
     }
 
-    public void setEntityInstance(EntityInstance entityInstance) {
-        this.entityInstance = entityInstance;
+    public void setSecondEntityInstance(EntityInstance secondEntityInstance) {
+        this.secondEntityInstance = secondEntityInstance;
+    }
+
+    public void setMainEntityInstance(EntityInstance mainEntityInstance) {
+        this.MainEntityInstance = mainEntityInstance;
     }
 }

@@ -21,7 +21,7 @@ public class StringProperty extends PropertyInstance{
         if (this.value.equals((String)value)){
             setCurrValueCounterByTicks(getCurrValueCounterByTicks() + 1);
         } else{
-            setCurrValueCounterByTicks(1);
+            setCurrValueCounterByTicks(0);
         }
 
         this.value = (String)value;

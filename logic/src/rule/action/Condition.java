@@ -9,22 +9,8 @@ public abstract class Condition extends Action{
     private List<Action> thenActions = null;
     private List<Action> elseActions = null;
 
-    public Condition(String entityName) {
-        super(entityName);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Condition condition = (Condition) o;
-        return Objects.equals(thenActions, condition.thenActions) && Objects.equals(elseActions, condition.elseActions);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), thenActions, elseActions);
+    public Condition(String entityName, SecondaryEntity secondaryEntity) {
+        super(entityName, secondaryEntity);
     }
 
     public void setThenActions(List<Action> thenActions) {
@@ -35,11 +21,11 @@ public abstract class Condition extends Action{
         this.elseActions = elseActions;
     }
 
-    public abstract Boolean invokeCondition(EntityInstance entity);
+    public abstract Boolean invokeCondition(Context context);
 
     @Override
     public void activateAction(Context context) {
-        if (invokeCondition(context.getEntityInstance())){
+        if (invokeCondition(context)){
             invokeListActions(thenActions, context);
         } else if (elseActions != null) {
             invokeListActions(elseActions, context);

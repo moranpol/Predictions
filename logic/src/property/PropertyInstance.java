@@ -11,7 +11,7 @@ public abstract class PropertyInstance implements Serializable {
 
     public PropertyInstance(String name) {
         this.name = name;
-        currValueCounterByTicks = 1;
+        currValueCounterByTicks = 0;
     }
 
     public abstract Object getValue();

@@ -35,7 +35,7 @@ public class IntProperty extends PropertyInstance{
         if (this.value.equals(prevValue)){
             setCurrValueCounterByTicks(getCurrValueCounterByTicks() + 1);
         } else{
-            setCurrValueCounterByTicks(1);
+            setCurrValueCounterByTicks(0);
         }
     }
 

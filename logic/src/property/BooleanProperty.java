@@ -22,7 +22,7 @@ public class BooleanProperty extends PropertyInstance {
         if (this.value == (Boolean)value){
             setCurrValueCounterByTicks(getCurrValueCounterByTicks() + 1);
         } else{
-            setCurrValueCounterByTicks(1);
+            setCurrValueCounterByTicks(0);
         }
         this.value = (Boolean)value;
     }
