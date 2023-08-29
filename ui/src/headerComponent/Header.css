@@ -1,0 +1,38 @@
+
+.HeaderButtons {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.HeaderButtons:hover{
+    -fx-background-color: #297520;
+}
+
+#LoadFileButton {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+#LoadFileButton:hover{
+    -fx-background-color:#084891;
+}
+
+#textLoadedFile {
+    -fx-font-size: 14px;
+}
+
+#queueManagement {
+    -fx-background-color: #3498db;
+}
+
+.label{
+    -fx-text-fill: #2196F3;
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+    -fx-font-family: "Arial";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
