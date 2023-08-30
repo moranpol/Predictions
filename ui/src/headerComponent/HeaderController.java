@@ -1,6 +1,6 @@
 package headerComponent;
 
-import bodyComponent.BodyController;
+import pageComponent.PageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,18 +9,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import manager.LogicManager;
 import menuChoice1.DtoXmlPath;
 
 import java.io.File;
 
 public class HeaderController {
 
-    private LogicManager logicManager;
-    private BodyController bodyController;
+    private PageController pageController;
 
-    public void setBodyController(BodyController bodyController) {
-        this.bodyController = bodyController;
+    public void setPageController(PageController pageController) {
+        this.pageController = pageController;
     }
 
     @FXML
@@ -44,7 +42,7 @@ public class HeaderController {
 
     @FXML
     void detailsButtonClicked(ActionEvent event) {
-        bodyController.loadDetailsComponent();
+        pageController.loadDetailsComponent();
     }
 
 
@@ -59,9 +57,8 @@ public class HeaderController {
 
         DtoXmlPath xmlFullPathDTO = new DtoXmlPath(selectedFile.getAbsolutePath());
         try {
-            logicManager.ReadXmlFile(xmlFullPathDTO);
+            pageController.getLogicManager().ReadXmlFile(xmlFullPathDTO);
             textLoadedFile.setText(selectedFile.getAbsolutePath());
-            //setButtonsDisabled(false);
         }catch (Exception ignore) {}
 
         detailsButton.setDisable(false);

@@ -20,6 +20,9 @@ public class Set extends Action{
         this.value = value;
     }
 
+    public String getExpressionString(){
+        return value.getString();
+    }
     @Override
     public void activateAction(Context context) {
         EntityInstance entityInstance;

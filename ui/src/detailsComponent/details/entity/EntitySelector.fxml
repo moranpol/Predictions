@@ -15,18 +15,15 @@
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="93.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="234.0" minHeight="10.0" prefHeight="92.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="234.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="234.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="315.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Label styleClass="label-title" text="Name:" />
-      <Label styleClass="label-title" text="Population:" GridPane.rowIndex="1" />
-      <ComboBox fx:id="propertyCbox" onAction="#propertyCboxChoice" prefWidth="150.0" promptText="Select Property" GridPane.rowIndex="3" />
+      <ComboBox fx:id="propertyCbox" onAction="#propertyCboxChoice" prefWidth="150.0" promptText="Select Property" GridPane.rowIndex="2" />
       <Text fx:id="nameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" GridPane.columnIndex="1" />
-      <Text fx:id="populationVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2">
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2">
          <children>
             <fx:include source="../propertyDetails/propertyDetails.fxml" />
          </children>

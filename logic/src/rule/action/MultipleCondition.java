@@ -10,6 +10,14 @@ public class MultipleCondition extends Condition{
     private final List<Condition> conditions;
     private final Logicals logic;
 
+    public int getConditionsAmount(){
+        return conditions.size();
+    }
+
+    public String getLogicString() {
+        return logic.toString();
+    }
+
     public MultipleCondition(String entityName, List<Condition> conditions, Logicals logic, SecondaryEntity secondaryEntity) {
         super(entityName, secondaryEntity);
         this.conditions = conditions;

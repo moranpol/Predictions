@@ -1,5 +1,12 @@
 package manager;
 
+import details.DtoEntityInfo;
+import details.DtoRuleInfo;
+import details.dtoAction.DtoAction;
+import details.dtoAction.DtoCalculation;
+import details.dtoAction.DtoMultipleCondition;
+import details.dtoAction.DtoSimpleCondition;
+import menuChoice2.DtoRange;
 import entity.EntityDefinition;
 import entity.EntityInstance;
 import entity.EntityManager;
@@ -8,7 +15,7 @@ import exceptions.SimulationFailedException;
 import factory.FactoryInstance;
 import jaxb.LoadXml;
 import menuChoice2.*;
-import menuChoice3.DtoEnvironmentDetails;
+import details.DtoEnvironmentInfo;
 import menuChoice3.DtoSimulationDetails;
 import menuChoice3.DtoEnvironmentInitialize;
 import menuChoice4.*;
@@ -17,7 +24,7 @@ import property.PropertyDefinition;
 import property.Range;
 import rule.Activation;
 import rule.Rule;
-import rule.action.Action;
+import rule.action.*;
 import simulation.Simulation;
 import world.WorldDefinition;
 import menuChoice1.DtoXmlPath;
@@ -48,19 +55,19 @@ public class LogicManager {
     }
 
     //choice 2
-    public DtoWorldInfo displayWorld(){
-        List<DtoEntity> dtoEntity = createDtoEntityList();
-        List<DtoRule> dtoRules = new ArrayList<>();
+    public DtoWorldInfo1 displayWorld(){
+        List<DtoEntityInfo> dtoEntity = createDtoEntityList();
+        List<DtoRuleInfo> dtoRules = new ArrayList<>();
 
         for (Rule rule : worldDefinition.getRules()) {
             dtoRules.add(createDtoRule(rule));
         }
 
-        return new DtoWorldInfo(dtoEntity, dtoRules, createDtoTermination());
+        return new DtoWorldInfo1(dtoEntity, dtoRules, createDtoTermination());
     }
 
-    private List<DtoEntity> createDtoEntityList() {
-        List<DtoEntity> dtoEntity = new ArrayList<>();
+    private List<DtoEntityInfo> createDtoEntityList() {
+        List<DtoEntityInfo> dtoEntity = new ArrayList<>();
         for (EntityDefinition entity : worldDefinition.getEntities().values()) {
             dtoEntity.add(createDtoEntity(entity));
         }
@@ -68,21 +75,19 @@ public class LogicManager {
         return dtoEntity;
     }
 
-    private DtoEntity createDtoEntity(EntityDefinition entityDefinition) {
-        return new DtoEntity(entityDefinition.getName(), entityDefinition.getPopulation(),
-                createDtoEntityPropertyList(entityDefinition.getPropertiesOfAllPopulation()));
+    private DtoEntityInfo createDtoEntity(EntityDefinition entityDefinition) {
+        return new DtoEntityInfo(entityDefinition.getName(), createDtoEntityPropertyMap(entityDefinition.getPropertiesOfAllPopulation()));
     }
 
-    private List<DtoProperty> createDtoEntityPropertyList(Map<String, PropertyDefinition> propertyDefinitionMap) {
-        List<DtoProperty> dtoEntity = new ArrayList<>();
+    private Map<String,DtoProperty> createDtoEntityPropertyMap(Map<String, PropertyDefinition> propertyDefinitionMap) {
+        Map<String,DtoProperty> dtoEntity = new HashMap<>();
         for (PropertyDefinition prop: propertyDefinitionMap.values()) {
-            dtoEntity.add(createEntityProperty(prop));
+            dtoEntity.put(prop.getName(),createEntityPropertyDto(prop) );
         }
-
         return dtoEntity;
     }
 
-    private DtoProperty createEntityProperty(PropertyDefinition prop) {
+    private DtoProperty createEntityPropertyDto(PropertyDefinition prop) {
         if(prop.getRange() == null){
             return new DtoProperty(prop.getName(), prop.getType().toString().toLowerCase(), null, prop.isRandomInit());
         } else {
@@ -95,15 +100,57 @@ public class LogicManager {
         return new DtoRange(range.getFrom(), range.getTo());
     }
 
-    private DtoRule createDtoRule(Rule rule){
-        List<String> actionNames = new ArrayList<>();
+    private DtoRuleInfo createDtoRule(Rule rule){
+        List<DtoAction> dtoAction = new ArrayList<>();
 
         for (Action action : rule.getActionList()) {
-            actionNames.add(action.getClass().getSimpleName());
+            dtoAction.add(createDtoAction(action));
         }
 
-        return new DtoRule(rule.getName(), createDtoActivation(rule.getActivation()), rule.getActionList().size(),
-                actionNames);
+        return new DtoRuleInfo(rule.getName(), createDtoActivation(rule.getActivation()), dtoAction);
+    }
+
+    private DtoAction createDtoAction(Action action){
+        switch (action.getClass().getSimpleName()) {
+            case "Calculation":
+                Calculation calculation = (Calculation) action;
+                DtoCalculation dtoCalculation = new DtoCalculation(calculation.getArg1String(),calculation.getArg2String(), calculation.getArithmeticString());
+                return new DtoAction("Calculation", action.getMainEntityName(), action.getSecondaryEntityName(),null,
+                        dtoCalculation, null, null, null);
+            case "SingleCondition":
+                SingleCondition singleCondition = (SingleCondition) action;
+                DtoSimpleCondition dtoSimpleCondition = new DtoSimpleCondition(singleCondition.getPropertyString(),
+                        singleCondition.getValueString(), singleCondition.getOperatorString());
+                return new DtoAction("Single Condition", action.getMainEntityName(), action.getSecondaryEntityName(),null,
+                        null,dtoSimpleCondition, null, null);
+            case "MultipleCondition":
+                MultipleCondition multipleCondition = (MultipleCondition) action;
+                DtoMultipleCondition dtoMultipleCondition = new DtoMultipleCondition(multipleCondition.getLogicString(), multipleCondition.getConditionsAmount());
+                return new DtoAction("Multiple Condition", action.getMainEntityName(), action.getSecondaryEntityName(),null,
+                        null, null, dtoMultipleCondition, null);
+            case "Proximity":
+                //todo
+                break;
+            case "Kill":
+                return new DtoAction("Kill",action.getMainEntityName(), action.getSecondaryEntityName(),"Not Exist",
+                        null, null, null, null);
+            case "Replace":
+                return new DtoAction("Replace",action.getMainEntityName(), action.getSecondaryEntityName(),"Not Exist",
+                        null, null, null, null);
+            case "Decrease":
+                Decrease decrease = (Decrease) action;
+                return new DtoAction("Decrease",action.getMainEntityName(), action.getSecondaryEntityName(),decrease.getExpressionString(),
+                        null, null, null, null);
+            case "Increase":
+                Increase increase = (Increase) action;
+                return new DtoAction("Increase",action.getMainEntityName(), action.getSecondaryEntityName(),increase.getExpressionString(),
+                        null, null, null, null);
+            case "Set":
+                Set set = (Set) action;
+                return new DtoAction("Set",action.getMainEntityName(), action.getSecondaryEntityName(),set.getExpressionString(),
+                        null, null, null, null);
+        }
+        return null;
     }
 
     private DtoActivation createDtoActivation(Activation activation){
@@ -115,15 +162,15 @@ public class LogicManager {
     }
 
     //choice 3
-    public List<DtoEnvironmentDetails> displayEnvironment(){
-        List<DtoEnvironmentDetails> environmentDetails = new ArrayList<>();
+    public List<DtoEnvironmentInfo> displayEnvironment(){
+        List<DtoEnvironmentInfo> environmentDetails = new ArrayList<>();
 
         for (PropertyDefinition environment : worldDefinition.getEnvironmentVariables().getProperties().values()) {
             if(environment.getRange() != null){
-                environmentDetails.add(new DtoEnvironmentDetails(environment.getName(), environment.getType().toString().toLowerCase(),
+                environmentDetails.add(new DtoEnvironmentInfo(environment.getName(), environment.getType().toString().toLowerCase(),
                         createDtoRange(environment.getRange())));
             } else{
-                environmentDetails.add(new DtoEnvironmentDetails(environment.getName(), environment.getType().toString().toLowerCase(),
+                environmentDetails.add(new DtoEnvironmentInfo(environment.getName(), environment.getType().toString().toLowerCase(),
                         null));
             }
         }
@@ -249,4 +296,10 @@ public class LogicManager {
             throw new InvalidNameException("file path not found. ");
         }
     }
+
+    //----------------------------------------------------------------------------------------
+
+
+
+
 }

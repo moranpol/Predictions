@@ -12,15 +12,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Objects;
 
 public class Helper implements Expression, Serializable {
     private final String funcName;
     private final ArrayList<String> variables;
     private final HelperFunction helperFunction;
     private final Map<String, EntityDefinition> entities;
+    private final String expressionString;
 
-    public Helper(HelperFunction helperFunction, Map<String, EntityDefinition> entities, String... strings) {
+    public Helper(HelperFunction helperFunction, Map<String, EntityDefinition> entities, String expressionString, String... strings) {
+        this.expressionString = expressionString;
         this.funcName = strings[0];
         variables = new ArrayList<>();
         variables.addAll(Arrays.asList(strings).subList(1, strings.length));
@@ -70,5 +71,10 @@ public class Helper implements Expression, Serializable {
                 return PropertyType.FLOAT;
         }
         return null;
+    }
+
+    @Override
+    public String getString() {
+        return expressionString;
     }
 }

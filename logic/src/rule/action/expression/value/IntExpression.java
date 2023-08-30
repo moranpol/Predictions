@@ -10,9 +10,11 @@ import java.util.Objects;
 public class IntExpression implements Expression, Serializable {
 
     private Integer value;
+    private final String expressionString;
 
-    public IntExpression(Integer value) {
+    public IntExpression(Integer value, String expressionString) {
         this.value = value;
+        this.expressionString = expressionString;
     }
 
     @Override
@@ -36,5 +38,10 @@ public class IntExpression implements Expression, Serializable {
     @Override
     public PropertyType getType() {
         return PropertyType.DECIMAL;
+    }
+
+    @Override
+    public String getString() {
+        return expressionString;
     }
 }

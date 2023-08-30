@@ -1,14 +1,15 @@
-package bodyComponent;
+package pageComponent;
 import headerComponent.HeaderController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import manager.LogicManager;
 
 import java.io.IOException;
 
-public class BodyController {
+public class PageController {
 
     @FXML
     private GridPane header;
@@ -18,10 +19,16 @@ public class BodyController {
     @FXML
     private Pane paneBody;
 
+    private LogicManager logicManager;
 
     @FXML
     public void initialize(){
-        headerController.setBodyController(this);
+        headerController.setPageController(this);
+        logicManager = new LogicManager();
+    }
+
+    public LogicManager getLogicManager() {
+        return logicManager;
     }
 
     public void loadDetailsComponent(){

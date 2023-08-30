@@ -21,30 +21,30 @@ public abstract class FactoryExpression {
                                               Map<String, EntityDefinition> entityDefinitionMap){
         String[] parts = stringExpression.split("[(),]");
         if(CheckFunctions.isHelperFunction(parts[0])){
-            return new Helper(createHelperFunction(environmentDefinition), entityDefinitionMap, parts);
+            return new Helper(createHelperFunction(environmentDefinition), entityDefinitionMap, stringExpression, parts);
         }
 
         PropertyDefinition property = propertyDefinitionMap.get(parts[0]);
         if(property != null){
-            return new PropertyExpression(parts[0], property);
+            return new PropertyExpression(parts[0], property, stringExpression);
         }
         else {
             try {
                 int num = Integer.parseInt(stringExpression);
-                return new IntExpression(num);
+                return new IntExpression(num, stringExpression);
             } catch (NumberFormatException ignore) {
             }
             try {
                 Float num = Float.parseFloat(stringExpression);
-                return new FloatExpression(num);
+                return new FloatExpression(num, stringExpression);
             } catch (NumberFormatException ignore) {
             }
             if (stringExpression.equals("true")) {
-                return new BooleanExpression(true);
+                return new BooleanExpression(true, stringExpression);
             } else if (stringExpression.equals("false")) {
-                return new BooleanExpression(false);
+                return new BooleanExpression(false, stringExpression);
             } else {
-                return new StringExpression(stringExpression);
+                return new StringExpression(stringExpression, stringExpression);
             }
         }
     }
