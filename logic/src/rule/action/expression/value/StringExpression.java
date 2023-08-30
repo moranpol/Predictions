@@ -10,9 +10,11 @@ import java.util.Objects;
 public class StringExpression implements Expression, Serializable {
 
     private String value;
+    private final String expressionString;
 
-    public StringExpression(String value) {
+    public StringExpression(String value, String expressionString) {
         this.value = value;
+        this.expressionString = expressionString;
     }
 
     @Override
@@ -36,5 +38,10 @@ public class StringExpression implements Expression, Serializable {
     @Override
     public PropertyType getType() {
         return PropertyType.STRING;
+    }
+
+    @Override
+    public String getString() {
+        return expressionString;
     }
 }

@@ -20,6 +20,10 @@ public class Increase extends Action{
         this.by = by;
     }
 
+    public String getExpressionString() {
+        return by.getString();
+    }
+
     @Override
     public void activateAction(Context context) {
         EntityInstance entityInstance;

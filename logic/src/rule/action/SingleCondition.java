@@ -22,6 +22,18 @@ public class SingleCondition extends Condition{
         this.operator = operator;
     }
 
+    public String getPropertyString() {
+        return property.getString();
+    }
+
+    public String getValueString() {
+        return value.getString();
+    }
+
+    public String getOperatorString() {
+        return operator.toString();
+    }
+
     @Override
     public Boolean invokeCondition(Context context) {
         EntityInstance entityInstance;

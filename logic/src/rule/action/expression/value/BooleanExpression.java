@@ -10,9 +10,11 @@ import java.util.Objects;
 public class BooleanExpression implements Expression, Serializable {
 
     private Boolean value;
+    private final String expressionString;
 
-    public BooleanExpression(Boolean value) {
+    public BooleanExpression(Boolean value, String expressionString) {
         this.value = value;
+        this.expressionString = expressionString;
     }
 
     @Override
@@ -36,5 +38,10 @@ public class BooleanExpression implements Expression, Serializable {
     @Override
     public PropertyType getType() {
         return PropertyType.BOOLEAN;
+    }
+
+    @Override
+    public String getString() {
+        return expressionString;
     }
 }

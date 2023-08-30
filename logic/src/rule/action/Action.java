@@ -19,6 +19,9 @@ public abstract class Action implements Serializable {
     public String getMainEntityName() {
         return mainEntityName;
     }
+    public String getSecondaryEntityName() {
+        return secondaryEntity.getSecondEntityName();
+    }
 
     public SecondaryEntity getSecondaryEntity() {
         return secondaryEntity;

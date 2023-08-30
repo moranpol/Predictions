@@ -1,13 +1,13 @@
-package menuChoice3;
+package details;
 
 import menuChoice2.DtoRange;
 
-public class DtoEnvironmentDetails {
+public class DtoEnvironmentInfo {
     private final String name;
     private final String type;
     private final DtoRange range;
 
-    public DtoEnvironmentDetails(String name, String type, DtoRange range) {
+    public DtoEnvironmentInfo(String name, String type, DtoRange range) {
         this.name = name;
         this.type = type;
         this.range = range;
