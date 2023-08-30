@@ -1,7 +1,6 @@
 package rule.action;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class SecondaryEntity implements Serializable {
     private final String secondEntityName;

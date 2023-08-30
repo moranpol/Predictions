@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class BooleanExpression implements Expression, Serializable {
 
-    private Boolean value;
+    private final Boolean value;
     private final String expressionString;
 
     public BooleanExpression(Boolean value, String expressionString) {

@@ -2,8 +2,6 @@ package property;
 
 import enums.PropertyType;
 
-import java.util.Objects;
-
 public class StringProperty extends PropertyInstance{
     private String value;
 

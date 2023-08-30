@@ -76,7 +76,7 @@ public class Helper implements Expression, Serializable {
         return null;
     }
   
-  private EntityInstance getEntityInstance(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String stringExpression){
+    private EntityInstance getEntityInstance(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String stringExpression){
         String[] parts = stringExpression.split("[()]");
         if(parts[0].equals("ticks") || parts[0].equals("evaluate")){
             String[] partsByDot = parts[1].split("\\.");

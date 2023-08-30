@@ -11,12 +11,10 @@ import java.util.Objects;
 public class PropertyExpression implements Expression, Serializable {
     private final PropertyDefinition propertyDefinition;
     private final String propertyName;
-    private final String expressionString;
 
-    public PropertyExpression(String propertyName, PropertyDefinition propertyDefinition, String expressionString) {
+    public PropertyExpression(String propertyName, PropertyDefinition propertyDefinition) {
         this.propertyName = propertyName;
         this.propertyDefinition = propertyDefinition;
-        this.expressionString = expressionString;
     }
 
 
@@ -45,6 +43,6 @@ public class PropertyExpression implements Expression, Serializable {
 
     @Override
     public String getString() {
-        return expressionString;
+        return propertyName;
     }
 }

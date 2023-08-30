@@ -2,8 +2,6 @@ package property;
 
 import enums.PropertyType;
 
-import java.util.Objects;
-
 public class BooleanProperty extends PropertyInstance {
     boolean value;
 

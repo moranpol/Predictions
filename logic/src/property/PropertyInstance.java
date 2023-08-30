@@ -3,7 +3,6 @@ package property;
 import enums.PropertyType;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public abstract class PropertyInstance implements Serializable {
     private final String name;
