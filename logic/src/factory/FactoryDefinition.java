@@ -4,6 +4,8 @@ import entity.EntityDefinition;
 import enums.PropertyType;
 import environment.EnvironmentDefinition;
 import exceptions.InvalidNameException;
+import exceptions.MissMatchValuesException;
+import grid.Grid;
 import helpers.CheckFunctions;
 import jaxb.schema.generated.*;
 import helpers.ParseFunctions;
@@ -32,7 +34,18 @@ public abstract class FactoryDefinition {
             rules.add(createRule(entities, rule, environment));
         }
 
-        return new WorldDefinition(environment, entities, rules, createTermination(prdWorld.getPRDTermination()));
+        return new WorldDefinition(environment, entities, rules, createTermination(prdWorld.getPRDTermination()),
+                createGrid(prdWorld.getPRDGrid()));
+    }
+
+    private static Grid createGrid(PRDWorld.PRDGrid prdGrid){
+        if(prdGrid.getRows() < 10 || prdGrid.getRows() > 100){
+            throw new MissMatchValuesException("Grid rows must be between 10-100");
+        }
+        if(prdGrid.getColumns() < 10 || prdGrid.getColumns() > 100){
+            throw new MissMatchValuesException("Grid cols must be between 10-100");
+        }
+        return new Grid(prdGrid.getRows(), prdGrid.getColumns());
     }
 
     private static EnvironmentDefinition createEnvironmentDefinition(PRDEnvironment prdEnvironment){

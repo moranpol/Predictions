@@ -2,6 +2,7 @@ package rule.action;
 
 import entity.EntityInstance;
 import entity.EntityManager;
+import grid.Grid;
 import world.WorldDefinition;
 
 import java.util.ArrayList;
@@ -14,10 +15,12 @@ public class Context {
     private final Map<String, EntityManager> entities;
     private final WorldDefinition worldDefinition;
     private final List<EntityInstance> newEntityInstances;
+    private final Grid grid;
 
-    public Context(Map<String, EntityManager> entities, WorldDefinition worldDefinition) {
+    public Context(Map<String, EntityManager> entities, WorldDefinition worldDefinition, Grid grid) {
         this.entities = entities;
         this.worldDefinition = worldDefinition;
+        this.grid = grid;
         newEntityInstances = new ArrayList<>();
     }
 
@@ -39,6 +42,10 @@ public class Context {
 
     public EntityInstance getSecondEntityInstance() {
         return secondEntityInstance;
+    }
+
+    public Grid getGrid() {
+        return grid;
     }
 
     public void setNewEntityInstances(EntityInstance newEntityInstances) {

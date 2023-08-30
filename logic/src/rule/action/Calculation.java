@@ -32,8 +32,8 @@ public class Calculation extends Action{
                     "    Calculation action failed.");
         }
 
-        Float floatArg1 = ParseFunctions.parseNumericTypeToFloat(arg1.getValue(entityInstance));
-        Float floatArg2 = ParseFunctions.parseNumericTypeToFloat(arg2.getValue(entityInstance));
+        Float floatArg1 = ParseFunctions.parseNumericTypeToFloat(arg1.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance()));
+        Float floatArg2 = ParseFunctions.parseNumericTypeToFloat(arg2.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance()));
         switch (arithmetic){
             case DIVIDE:
                 if(floatArg2 != 0){

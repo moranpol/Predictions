@@ -2,7 +2,6 @@ package factory;
 
 import entity.EntityDefinition;
 import environment.EnvironmentDefinition;
-import helpers.CheckFunctions;
 import property.PropertyDefinition;
 import rule.action.expression.Expression;
 import rule.action.expression.helper.Helper;
@@ -19,14 +18,14 @@ public abstract class FactoryExpression {
     public static Expression createExpression(String stringExpression, EnvironmentDefinition environmentDefinition,
                                               Map<String, PropertyDefinition> propertyDefinitionMap,
                                               Map<String, EntityDefinition> entityDefinitionMap){
-        String[] parts = stringExpression.split("[(),]");
-        if(CheckFunctions.isHelperFunction(parts[0])){
-            return new Helper(createHelperFunction(environmentDefinition), entityDefinitionMap, parts);
+        int indexOfBracket = stringExpression.indexOf("(");
+        if (indexOfBracket != -1) {
+            return createHelper(stringExpression, environmentDefinition, entityDefinitionMap, indexOfBracket);
         }
 
-        PropertyDefinition property = propertyDefinitionMap.get(parts[0]);
+        PropertyDefinition property = propertyDefinitionMap.get(stringExpression);
         if(property != null){
-            return new PropertyExpression(parts[0], property);
+            return new PropertyExpression(stringExpression, property);
         }
         else {
             try {
@@ -51,6 +50,22 @@ public abstract class FactoryExpression {
 
     private static HelperFunction createHelperFunction(EnvironmentDefinition environmentDefinition) {
         return new HelperFunction(environmentDefinition);
+    }
+
+    private static Helper createHelper(String stringExpression, EnvironmentDefinition environmentDefinition,
+                                       Map<String, EntityDefinition> entityDefinitionMap, int indexOfBracket){
+        String[] parts = new String[3];
+        String funcName = stringExpression.substring(0, indexOfBracket);
+        String arguments = stringExpression.substring(indexOfBracket + 1, stringExpression.length() - 1);
+        parts[0] = funcName;
+        parts[1] = arguments;
+
+        if(funcName.equals("percent")){
+            String[] argumentParts = arguments.split(",");
+            parts[1] = argumentParts[0];
+            parts[2] = argumentParts[1];
+        }
+        return new Helper(createHelperFunction(environmentDefinition), entityDefinitionMap, parts);
     }
 }
 

@@ -4,6 +4,6 @@ import entity.EntityInstance;
 import enums.PropertyType;
 
 public interface Expression{
-    public Object getValue(EntityInstance entityInstance);
+    public Object getValue(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance);
     public PropertyType getType();
 }

@@ -1,15 +1,16 @@
 package entity;
 
+import grid.Location;
 import property.PropertyInstance;
 
 import java.io.Serializable;
 import java.util.Map;
-import java.util.Objects;
 
 public class EntityInstance implements Serializable {
     private final String name;
     private Boolean isDead;
     private final Map<String, PropertyInstance> properties;
+    private Location location;
 
     public EntityInstance(String name, Map<String, PropertyInstance> properties) {
         this.name = name;
@@ -27,6 +28,19 @@ public class EntityInstance implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void updateLocation(Integer row, Integer col) {
+        location.setRow(row);
+        location.setCol(col);
     }
 
     public void killInstance(){

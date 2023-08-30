@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Objects;
 
 public class Helper implements Expression, Serializable {
     private final String funcName;
@@ -29,8 +28,9 @@ public class Helper implements Expression, Serializable {
     }
 
     @Override
-    public Object getValue(EntityInstance entityInstance) {
-        helperFunction.setEntityInstance(entityInstance);
+    public Object getValue(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance) {
+        helperFunction.setMainEntityInstance(mainEntityInstance);
+        helperFunction.setSecondEntityInstance(secondEntityInstance);
         switch (this.funcName){
             case "environment":
                 return helperFunction.environment(variables.get(0));
@@ -43,10 +43,12 @@ public class Helper implements Expression, Serializable {
             case "evaluate":
                 return helperFunction.evaluate(variables.get(0));
             case "percent":
+                EntityInstance entity = getEntityInstance(mainEntityInstance, secondEntityInstance, variables.get(0));
                 Expression expression1 = FactoryExpression.createExpression(variables.get(0), helperFunction.getEnvironmentDefinition(),
-                        entities.get(entityInstance.getName()).getPropertiesOfAllPopulation(), entities);
+                        entities.get(entity.getName()).getPropertiesOfAllPopulation(), entities);
+                entity = getEntityInstance(mainEntityInstance, secondEntityInstance, variables.get(1));
                 Expression expression2 = FactoryExpression.createExpression(variables.get(1), helperFunction.getEnvironmentDefinition(),
-                        entities.get(entityInstance.getName()).getPropertiesOfAllPopulation(), entities);
+                        entities.get(entity.getName()).getPropertiesOfAllPopulation(), entities);
                 return helperFunction.percent(expression1, expression2);
             case "ticks":
                 return helperFunction.ticks(variables.get(0));
@@ -70,5 +72,18 @@ public class Helper implements Expression, Serializable {
                 return PropertyType.FLOAT;
         }
         return null;
+    }
+
+    private EntityInstance getEntityInstance(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String stringExpression){
+        String[] parts = stringExpression.split("[()]");
+        if(parts[0].equals("ticks") || parts[0].equals("evaluate")){
+            String[] partsByDot = parts[1].split("\\.");
+            if(partsByDot[0].equals(mainEntityInstance.getName())){
+                return mainEntityInstance;
+            } else if (secondEntityInstance != null && partsByDot[0].equals(secondEntityInstance.getName())) {
+                return secondEntityInstance;
+            }
+        }
+        return mainEntityInstance;
     }
 }

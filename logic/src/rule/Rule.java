@@ -2,6 +2,7 @@ package rule;
 
 import entity.EntityInstance;
 import entity.EntityManager;
+import grid.Grid;
 import rule.action.Action;
 import rule.action.Context;
 import rule.action.SecondaryEntity;
@@ -11,7 +12,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -38,9 +38,9 @@ public class Rule implements Serializable {
         return activation;
     }
 
-    public void activeRule(Map<String, EntityManager> entities, Integer currentTick, WorldDefinition worldDefinition){
+    public void activeRule(Map<String, EntityManager> entities, Integer currentTick, WorldDefinition worldDefinition, Grid grid){
         if(activation.checkIfActivate(currentTick)){
-            Context context = new Context(entities, worldDefinition);
+            Context context = new Context(entities, worldDefinition, grid);
             for(EntityManager entityManager : entities.values()){
                 for(EntityInstance mainEntityInstance : entityManager.getEntityInstance()){
                     for (Action action : actionList){
@@ -48,7 +48,7 @@ public class Rule implements Serializable {
                             if(action.getMainEntityName().equals(mainEntityInstance.getName())){
                                 context.setMainEntityInstance(mainEntityInstance);
                                 if(action.getSecondaryEntity() != null){
-                                    List<EntityInstance> secondEntityList = secondaryEntityInstances(entities, action.getSecondaryEntity(), worldDefinition);
+                                    List<EntityInstance> secondEntityList = secondaryEntityInstances(entities, action.getSecondaryEntity(), worldDefinition, grid);
                                     for (EntityInstance secondEntityInstance : secondEntityList){
                                         context.setSecondEntityInstance(secondEntityInstance);
                                         action.activateAction(context);
@@ -62,7 +62,7 @@ public class Rule implements Serializable {
                         }
                     }
                 }
-                killEntityInstances(entities);
+                killEntityInstances(entities, grid);
                 updateNewEntityInstances(context);
             }
         }
@@ -70,20 +70,26 @@ public class Rule implements Serializable {
 
     private void updateNewEntityInstances(Context context){
         for (EntityInstance entityInstance : context.getNewEntityInstances()) {
+            context.getWorldDefinition().getGrid().updateNewInstanceInRandomLocation(entityInstance);
             context.getEntities().get(entityInstance.getName()).addInstance(entityInstance);
         }
     }
 
-    private void killEntityInstances(Map<String, EntityManager> entities){
+    private void killEntityInstances(Map<String, EntityManager> entities, Grid grid){
         for (EntityManager entity : entities.values()) {
-            entity.killInstances();
+            for(int i = 0; i < entity.getEntityInstance().size(); i++){
+                if(entity.getEntityInstance().get(i).getDead()){
+                    grid.removeInstance(entity.getEntityInstance().get(i).getLocation());
+                    entity.getEntityInstance().remove(i);
+                }
+            }
         }
     }
 
-    private List<EntityInstance> secondaryEntityInstances(Map<String, EntityManager> entities, SecondaryEntity secondaryEntity, WorldDefinition worldDefinition){
+    private List<EntityInstance> secondaryEntityInstances(Map<String, EntityManager> entities, SecondaryEntity secondaryEntity, WorldDefinition worldDefinition, Grid grid){
         List<EntityInstance> secondaryEntityInstances = new ArrayList<>();
         List<EntityInstance> filteredByCondition = entities.get(secondaryEntity.getSecondEntityName()).getEntityInstance();
-        Context context = new Context(entities, worldDefinition);
+        Context context = new Context(entities, worldDefinition, grid);
         if(secondaryEntity.getCondition() != null){
             filteredByCondition = entities.get(secondaryEntity.getSecondEntityName()).getEntityInstance().stream()
                     .filter(entityInstance -> {
