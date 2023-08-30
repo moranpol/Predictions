@@ -10,9 +10,11 @@ import java.util.Objects;
 public class FloatExpression implements Expression, Serializable {
 
     private Float value;
+    private final String expressionString;
 
-    public FloatExpression(Float value) {
+    public FloatExpression(Float value, String expressionString) {
         this.value = value;
+        this.expressionString = expressionString;
     }
 
     @Override
@@ -36,5 +38,10 @@ public class FloatExpression implements Expression, Serializable {
     @Override
     public PropertyType getType() {
         return PropertyType.FLOAT;
+    }
+
+    @Override
+    public String getString() {
+        return expressionString;
     }
 }

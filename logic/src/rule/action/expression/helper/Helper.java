@@ -18,8 +18,10 @@ public class Helper implements Expression, Serializable {
     private final ArrayList<String> variables;
     private final HelperFunction helperFunction;
     private final Map<String, EntityDefinition> entities;
+    private final String expressionString;
 
-    public Helper(HelperFunction helperFunction, Map<String, EntityDefinition> entities, String... strings) {
+    public Helper(HelperFunction helperFunction, Map<String, EntityDefinition> entities, String expressionString, String... strings) {
+        this.expressionString = expressionString;
         this.funcName = strings[0];
         variables = new ArrayList<>();
         variables.addAll(Arrays.asList(strings).subList(1, strings.length));
@@ -73,8 +75,8 @@ public class Helper implements Expression, Serializable {
         }
         return null;
     }
-
-    private EntityInstance getEntityInstance(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String stringExpression){
+  
+  private EntityInstance getEntityInstance(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String stringExpression){
         String[] parts = stringExpression.split("[()]");
         if(parts[0].equals("ticks") || parts[0].equals("evaluate")){
             String[] partsByDot = parts[1].split("\\.");
@@ -85,5 +87,10 @@ public class Helper implements Expression, Serializable {
             }
         }
         return mainEntityInstance;
+  }
+  
+    @Override
+    public String getString() {
+        return expressionString;
     }
 }

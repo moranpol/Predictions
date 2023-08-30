@@ -30,20 +30,20 @@ public abstract class FactoryExpression {
         else {
             try {
                 int num = Integer.parseInt(stringExpression);
-                return new IntExpression(num);
+                return new IntExpression(num, stringExpression);
             } catch (NumberFormatException ignore) {
             }
             try {
                 Float num = Float.parseFloat(stringExpression);
-                return new FloatExpression(num);
+                return new FloatExpression(num, stringExpression);
             } catch (NumberFormatException ignore) {
             }
             if (stringExpression.equals("true")) {
-                return new BooleanExpression(true);
+                return new BooleanExpression(true, stringExpression);
             } else if (stringExpression.equals("false")) {
-                return new BooleanExpression(false);
+                return new BooleanExpression(false, stringExpression);
             } else {
-                return new StringExpression(stringExpression);
+                return new StringExpression(stringExpression, stringExpression);
             }
         }
     }
@@ -65,7 +65,7 @@ public abstract class FactoryExpression {
             parts[1] = argumentParts[0];
             parts[2] = argumentParts[1];
         }
-        return new Helper(createHelperFunction(environmentDefinition), entityDefinitionMap, parts);
+        return new Helper(createHelperFunction(environmentDefinition), entityDefinitionMap, stringExpression, parts);
     }
 }
 

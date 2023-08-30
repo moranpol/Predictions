@@ -14,6 +14,19 @@ public class Calculation extends Action{
     private final Expression arg2;
     private final Arithmetics arithmetic;
 
+
+    public String getArg1String() {
+        return arg1.getString();
+    }
+
+    public String getArg2String() {
+        return arg2.getString();
+    }
+
+    public String getArithmeticString() {
+        return arithmetic.toString();
+    }
+
     public Calculation(String entityName, String propertyName, Expression arg1, Expression arg2, Arithmetics arithmetic, SecondaryEntity secondaryEntity) {
         super(entityName, secondaryEntity);
         this.propertyName = propertyName;

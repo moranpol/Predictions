@@ -36,6 +36,11 @@ public class DetailsSelectorController {
 
     private DetailsFullComponentController detailsFullComponentController;
 
+    @FXML
+    public void initialize(){
+
+    }
+
     public void setDetailsFullComponentController(DetailsFullComponentController detailsFullComponentController) {
         this.detailsFullComponentController = detailsFullComponentController;
     }
