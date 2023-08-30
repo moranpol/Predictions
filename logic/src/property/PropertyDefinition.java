@@ -1,10 +1,8 @@
 package property;
 
 import enums.PropertyType;
-import helpers.ParseFunctions;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class PropertyDefinition implements Serializable {
     private final PropertyType type;

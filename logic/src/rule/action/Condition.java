@@ -1,9 +1,6 @@
 package rule.action;
 
-import entity.EntityInstance;
-
 import java.util.List;
-import java.util.Objects;
 
 public abstract class Condition extends Action{
     private List<Action> thenActions = null;

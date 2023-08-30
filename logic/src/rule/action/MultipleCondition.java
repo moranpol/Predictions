@@ -1,10 +1,8 @@
 package rule.action;
 
-import entity.EntityInstance;
 import enums.Logicals;
 
 import java.util.List;
-import java.util.Objects;
 
 public class MultipleCondition extends Condition{
     private final List<Condition> conditions;

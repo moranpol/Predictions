@@ -2,8 +2,6 @@ package property;
 
 import enums.PropertyType;
 
-import java.util.Objects;
-
 public class FloatProperty extends PropertyInstance{
     private final Range range;
     private Float value;

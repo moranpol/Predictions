@@ -6,8 +6,6 @@ import exceptions.MissMatchValuesException;
 import helpers.ParseFunctions;
 import rule.action.expression.Expression;
 
-import java.util.Objects;
-
 public class Calculation extends Action{
     private final String propertyName;
     private final Expression arg1;

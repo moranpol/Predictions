@@ -3,8 +3,6 @@ package property;
 import enums.PropertyType;
 import helpers.ParseFunctions;
 
-import java.util.Objects;
-
 public class IntProperty extends PropertyInstance{
     private final Range range;
     private Integer value;

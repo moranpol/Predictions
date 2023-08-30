@@ -1,6 +1,5 @@
 package rule.action;
 
-import entity.EntityInstance;
 import enums.Operators;
 import enums.PropertyType;
 import exceptions.MissMatchValuesException;

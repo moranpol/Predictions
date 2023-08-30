@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class IntExpression implements Expression, Serializable {
 
-    private Integer value;
+    private final Integer value;
     private final String expressionString;
 
     public IntExpression(Integer value, String expressionString) {

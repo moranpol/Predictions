@@ -8,8 +8,6 @@ import helpers.ParseFunctions;
 import property.PropertyInstance;
 import rule.action.expression.Expression;
 
-import java.util.Objects;
-
 public class Decrease extends Action{
     private final String propertyName;
     private final Expression by;

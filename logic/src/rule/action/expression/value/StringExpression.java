@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class StringExpression implements Expression, Serializable {
 
-    private String value;
+    private final String value;
     private final String expressionString;
 
     public StringExpression(String value, String expressionString) {

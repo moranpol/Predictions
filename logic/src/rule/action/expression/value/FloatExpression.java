@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class FloatExpression implements Expression, Serializable {
 
-    private Float value;
+    private final Float value;
     private final String expressionString;
 
     public FloatExpression(Float value, String expressionString) {
