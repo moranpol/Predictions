@@ -29,7 +29,9 @@ public abstract class FactoryAction {
 
     private static Action createAction(PRDAction prdAction, Map<String, EntityDefinition> entities, EnvironmentDefinition environmentDefinition){
         ActionType type = createActionType(prdAction.getType());
-        validateAction(prdAction, entities, type);
+        if(type != ActionType.PROXIMITY && type != ActionType.REPLACE){
+            validateAction(prdAction, entities, type);
+        }
         Action action = null;
         switch (type){
             case INCREASE:
@@ -53,12 +55,38 @@ public abstract class FactoryAction {
             case REPLACE:
                 action = createReplace(prdAction, entities, environmentDefinition);
                 break;
+            case  PROXIMITY:
+                action = createProximity(prdAction, entities, environmentDefinition);
+                break;
         }
 
         return action;
     }
 
+    private static Proximity createProximity(PRDAction prdAction, Map<String, EntityDefinition> entities, EnvironmentDefinition environmentDefinition) {
+        if(!entities.containsKey(prdAction.getPRDBetween().getSourceEntity())) {
+            throw new InvalidNameException(prdAction.getPRDBetween().getSourceEntity() + " source entity name not exist.\n" +
+                    "    Action name: Proximity");
+        }
+        if(!entities.containsKey(prdAction.getPRDBetween().getTargetEntity())) {
+            throw new InvalidNameException(prdAction.getPRDBetween().getTargetEntity() + " target entity name not exist.\n" +
+                    "    Action name: Proximity");
+        }
+        return new Proximity(prdAction.getPRDBetween().getSourceEntity(), createSecondaryEntity(prdAction.getPRDSecondaryEntity(), entities, environmentDefinition),
+                prdAction.getPRDBetween().getTargetEntity(),FactoryExpression.createExpression(prdAction.getPRDEnvDepth().getOf(), environmentDefinition,
+                entities.get(prdAction.getPRDBetween().getSourceEntity()).getPropertiesOfAllPopulation(), entities),
+                createActionList(prdAction.getPRDActions().getPRDAction(), entities, environmentDefinition));
+    }
+
     private static Replace createReplace(PRDAction prdAction, Map<String, EntityDefinition> entities, EnvironmentDefinition environmentDefinition) {
+        if(!entities.containsKey(prdAction.getKill())) {
+            throw new InvalidNameException(prdAction.getKill() + " kill entity name not exist.\n" +
+                    "    Action name: Replace");
+        }
+        if(!entities.containsKey(prdAction.getCreate())) {
+            throw new InvalidNameException(prdAction.getCreate() + " create entity name not exist.\n" +
+                    "    Action name: Replace");
+        }
        return new Replace(prdAction.getKill(), prdAction.getCreate(), createReplaceMode(prdAction.getMode()),
                createSecondaryEntity(prdAction.getPRDSecondaryEntity(), entities, environmentDefinition));
     }
@@ -193,10 +221,6 @@ public abstract class FactoryAction {
         if(!entities.containsKey(prdCondition.getEntity())) {
             throw new InvalidNameException(prdCondition.getEntity() + " entity name not exist.\n" +
                     "    Action name: Condition");
-        }
-        if (!entities.get(prdCondition.getEntity()).getPropertiesOfAllPopulation().containsKey(prdCondition.getProperty())) {
-            throw new InvalidNameException(prdCondition.getProperty() + " property name not exist in " +
-                    prdCondition.getEntity() + " entity name.\n    Action name: Condition");
         }
     }
 

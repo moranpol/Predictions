@@ -1,7 +1,9 @@
 package world;
 
+import entity.EntityInstance;
 import entity.EntityManager;
 import environment.EnvironmentInstance;
+import grid.Grid;
 import rule.Rule;
 import termination.Termination;
 
@@ -15,12 +17,14 @@ public class WorldInstance implements Serializable {
     private final EnvironmentInstance environmentVariables;
     private final List<Rule> rules;
     private final Termination termination;
+    private final Grid grid;
 
-    public WorldInstance(Map<String, EntityManager> entities, EnvironmentInstance environmentVariables, List<Rule> rules, Termination termination) {
+    public WorldInstance(Map<String, EntityManager> entities, EnvironmentInstance environmentVariables, List<Rule> rules, Termination termination, Grid grid) {
         this.entities = entities;
         this.environmentVariables = environmentVariables;
         this.rules = rules;
         this.termination = termination;
+        this.grid = grid;
     }
 
     @Override
@@ -44,9 +48,19 @@ public class WorldInstance implements Serializable {
         return entities;
     }
 
+    public Grid getGrid() {
+        return grid;
+    }
+
     public void runSimulationTick(Integer currentTick, WorldDefinition worldDefinition) {
+        for (EntityManager entityManager : entities.values()){
+            for (EntityInstance entityInstance : entityManager.getEntityInstance()){
+                grid.moveInstance(entityInstance);
+            }
+        }
+
         for (Rule rule : rules) {
-            rule.activeRule(entities, currentTick, worldDefinition);
+            rule.activeRule(entities, currentTick, worldDefinition, grid);
         }
     }
 }

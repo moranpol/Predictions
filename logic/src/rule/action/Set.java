@@ -35,9 +35,9 @@ public class Set extends Action{
         PropertyInstance propertyInstance = entityInstance.getProperties().get(propertyName);
 
         if (propertyInstance.getType() == value.getType()) {
-            propertyInstance.setValue(value.getValue(entityInstance));
+            propertyInstance.setValue(value.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance()));
         } else if(propertyInstance.getType() == PropertyType.FLOAT && value.getType() == PropertyType.DECIMAL){
-            Float floatExpression = ParseFunctions.parseNumericTypeToFloat(value.getValue(entityInstance));
+            Float floatExpression = ParseFunctions.parseNumericTypeToFloat(value.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance()));
             propertyInstance.setValue(floatExpression);
         } else if (propertyInstance.getType() == PropertyType.DECIMAL && value.getType() == PropertyType.FLOAT) {
             throw new ParseFloatToIntException("Set action failed.\n    Entity name - " + entityInstance.getName() +

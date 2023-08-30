@@ -2,6 +2,7 @@ package world;
 
 import entity.EntityDefinition;
 import environment.EnvironmentDefinition;
+import grid.Grid;
 import rule.Rule;
 import termination.Termination;
 
@@ -15,12 +16,14 @@ public class WorldDefinition implements Serializable {
     private final Map<String, EntityDefinition> entities;
     private final List<Rule> rules;
     private final Termination termination;
+    private final Grid grid;
 
-    public WorldDefinition(EnvironmentDefinition environmentVariables, Map<String, EntityDefinition> entities, List<Rule> rules, Termination termination) {
+    public WorldDefinition(EnvironmentDefinition environmentVariables, Map<String, EntityDefinition> entities, List<Rule> rules, Termination termination, Grid grid) {
         this.environmentVariables = environmentVariables;
         this.entities = entities;
         this.rules = rules;
         this.termination = termination;
+        this.grid = grid;
     }
 
     @Override
@@ -50,5 +53,9 @@ public class WorldDefinition implements Serializable {
 
     public Termination getTermination() {
         return termination;
+    }
+
+    public Grid getGrid() {
+        return grid;
     }
 }

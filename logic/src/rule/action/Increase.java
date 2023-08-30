@@ -42,10 +42,10 @@ public class Increase extends Action{
 
         switch (propertyInstance.getType()){
             case DECIMAL:
-                propertyInstance.setValue((Integer)propertyInstance.getValue() + (Integer)by.getValue(entityInstance));
+                propertyInstance.setValue((Integer)propertyInstance.getValue() + (Integer)by.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance()));
                 break;
             case FLOAT:
-                Float floatExpression = ParseFunctions.parseNumericTypeToFloat(by.getValue(entityInstance));
+                Float floatExpression = ParseFunctions.parseNumericTypeToFloat(by.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance()));
                 propertyInstance.setValue((Float)propertyInstance.getValue() + floatExpression);
                 break;
         }

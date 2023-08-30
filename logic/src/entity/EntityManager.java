@@ -34,14 +34,6 @@ public class EntityManager implements Serializable {
         return entityInstance;
     }
 
-    public void killInstances(){
-        for(int i = 0; i < entityInstance.size(); i++){
-            if(entityInstance.get(i).getDead()){
-                entityInstance.remove(i);
-            }
-        }
-    }
-
     public void addInstance(EntityInstance entityInstance){
         this.entityInstance.add(entityInstance);
     }

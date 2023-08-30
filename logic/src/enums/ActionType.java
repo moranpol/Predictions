@@ -7,5 +7,6 @@ public enum ActionType {
     CONDITION,
     KILL,
     SET,
-    REPLACE
+    REPLACE,
+    PROXIMITY
 }

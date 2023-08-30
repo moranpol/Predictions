@@ -34,8 +34,8 @@ public class PropertyExpression implements Expression, Serializable {
     }
 
     @Override
-    public Object getValue(EntityInstance entityInstance) {
-        return entityInstance.getProperties().get(this.propertyName).getValue();
+    public Object getValue(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance) {
+        return mainEntityInstance.getProperties().get(this.propertyName).getValue();
     }
 
     @Override
