@@ -36,7 +36,7 @@ public abstract class FactoryPropertyInstance {
     }
 
     private static IntProperty createIntProperty(PropertyDefinition property){
-        Integer value = null;
+        Integer value;
         if(property.isRandomInit()){
             value = ThreadLocalRandom.current().nextInt(property.getRange().getFrom().intValue(),
                     (property.getRange().getTo().intValue()) + 1);
@@ -49,7 +49,7 @@ public abstract class FactoryPropertyInstance {
     }
 
     private static FloatProperty createFloatProperty(PropertyDefinition property){
-        Float value = null;
+        Float value;
         if(property.isRandomInit()){
             Random random = new Random();
             value = property.getRange().getFrom().floatValue() + random.nextFloat() *
@@ -63,7 +63,7 @@ public abstract class FactoryPropertyInstance {
     }
 
     private static StringProperty createStringProperty(PropertyDefinition property){
-        String value = null;
+        String value;
         if(property.isRandomInit()){
             value = getRandomString();
         }
@@ -75,7 +75,7 @@ public abstract class FactoryPropertyInstance {
     }
 
     private static BooleanProperty createBooleanProperty(PropertyDefinition property){
-        Boolean value = null;
+        Boolean value;
         if(property.isRandomInit()){
             Random random = new Random();
             value = random.nextBoolean();
