@@ -1,4 +1,6 @@
-package menuChoice2;
+package details;
+
+import details.DtoRange;
 
 public class DtoProperty {
     private final String name;

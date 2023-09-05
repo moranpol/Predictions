@@ -1,4 +1,5 @@
 package pageComponent;
+import detailsComponent.DetailsFullComponentController;
 import headerComponent.HeaderController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,9 +22,12 @@ public class PageController {
 
     private LogicManager logicManager;
 
+    private DetailsFullComponentController detailsFullComponentController;
+
     @FXML
     public void initialize(){
         headerController.setPageController(this);
+
         logicManager = new LogicManager();
     }
 
@@ -38,10 +42,13 @@ public class PageController {
             paneBody.getChildren().add(details);
 
 
-            //DetailsSelectorController detailsSelectorController = loader.getController();
+            detailsFullComponentController = loader.getController();
+            detailsFullComponentController.setPageController(this);
 
         }
-        catch (IOException e) {}
+        catch (IOException e) {
+
+        }
     }
 
 

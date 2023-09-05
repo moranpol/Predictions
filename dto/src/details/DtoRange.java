@@ -1,4 +1,4 @@
-package menuChoice2;
+package details;
 
 public class DtoRange {
     private final Double from;

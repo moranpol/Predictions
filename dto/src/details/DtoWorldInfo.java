@@ -1,7 +1,5 @@
 package details;
 
-import menuChoice2.DtoTermination;
-
 import java.util.Map;
 
 public class DtoWorldInfo {

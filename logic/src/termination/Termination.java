@@ -6,10 +6,12 @@ import java.util.Objects;
 public class Termination implements Serializable {
     private final Integer ticks;
     private final Integer seconds;
+    private final Boolean human;
 
-    public Termination(Integer ticks, Integer seconds) {
+    public Termination(Integer ticks, Integer seconds, Boolean human) {
         this.ticks = ticks;
         this.seconds = seconds;
+        this.human = human;
     }
 
     @Override
@@ -31,5 +33,9 @@ public class Termination implements Serializable {
 
     public Integer getSeconds() {
         return seconds;
+    }
+
+    public Boolean getHuman() {
+        return human;
     }
 }

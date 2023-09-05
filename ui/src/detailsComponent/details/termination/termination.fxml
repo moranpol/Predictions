@@ -19,9 +19,9 @@
    <children>
       <Label styleClass="label-title" text="Ticks:" />
       <Label styleClass="label-title" text="Seconds:" GridPane.rowIndex="1" />
-      <Label fx:id="humanVariableText" styleClass="label-title" text="human:" GridPane.rowIndex="2" />
       <Text fx:id="ticksVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" GridPane.columnIndex="1" />
       <Text fx:id="secondsVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Text fx:id="humanVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label styleClass="label-title" text="Human:" GridPane.rowIndex="2" />
    </children>
 </GridPane>

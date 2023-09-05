@@ -2,6 +2,7 @@ package menuChoice2;
 
 import details.DtoEntityInfo;
 import details.DtoRuleInfo;
+import details.DtoTermination;
 
 import java.util.List;
 

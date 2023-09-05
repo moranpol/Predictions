@@ -20,7 +20,11 @@ public abstract class Action implements Serializable {
         return mainEntityName;
     }
     public String getSecondaryEntityName() {
-        return secondaryEntity.getSecondEntityName();
+        if(secondaryEntity != null) {
+            return secondaryEntity.getSecondEntityName();
+        }
+
+        return null;
     }
 
     public SecondaryEntity getSecondaryEntity() {

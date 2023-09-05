@@ -18,6 +18,10 @@ public class Set extends Action{
         this.value = value;
     }
 
+    public String getPropertyName() {
+        return propertyName;
+    }
+
     public String getExpressionString(){
         return value.getString();
     }
