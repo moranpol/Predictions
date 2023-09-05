@@ -149,6 +149,8 @@ public abstract class FactoryDefinition {
             }
         }
 
-        return new Termination(ticks, seconds);
+        Boolean human = false; // todo - change by data
+
+        return new Termination(ticks, seconds, human);  // todo - Human = if Human can end simu. = true/false
     }
 }

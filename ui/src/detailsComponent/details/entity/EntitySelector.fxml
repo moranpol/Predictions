@@ -23,9 +23,9 @@
       <Label styleClass="label-title" text="Name:" />
       <ComboBox fx:id="propertyCbox" onAction="#propertyCboxChoice" prefWidth="150.0" promptText="Select Property" GridPane.rowIndex="2" />
       <Text fx:id="nameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" GridPane.columnIndex="1" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2">
+      <Pane fx:id="PaneProperty" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2">
          <children>
-            <fx:include source="../propertyDetails/propertyDetails.fxml" />
+            <fx:include fx:id="propertyDetails" source="propertyDetails/propertyDetails.fxml" />
          </children>
       </Pane>
    </children>

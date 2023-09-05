@@ -1,8 +1,5 @@
 package details;
 
-import menuChoice2.DtoProperty;
-
-import java.util.List;
 import java.util.Map;
 
 public class DtoEntityInfo {

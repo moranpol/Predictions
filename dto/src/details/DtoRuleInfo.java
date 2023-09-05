@@ -1,20 +1,19 @@
 package details;
 
-import details.dtoAction.DtoAction;
-import menuChoice2.DtoActivation;
+import details.DtoAction.DtoAction;
 
-import java.util.List;
+import java.util.Map;
 
 public class DtoRuleInfo {
 
     private final String name;
     private final DtoActivation dtoActivation;
-    private final List<DtoAction> dtoAction;
+    private final Map<String,DtoAction> dtoActionMap;
 
-    public DtoRuleInfo(String name, DtoActivation dtoActivation, List<DtoAction> dtoAction) {
+    public DtoRuleInfo(String name, DtoActivation dtoActivation, Map<String,DtoAction> dtoActionMap) {
         this.name = name;
         this.dtoActivation = dtoActivation;
-        this.dtoAction = dtoAction;
+        this.dtoActionMap = dtoActionMap;
     }
 
     public String getName() {
@@ -25,7 +24,7 @@ public class DtoRuleInfo {
         return dtoActivation;
     }
 
-    public List<DtoAction> getDtoActionMap() {
-        return dtoAction;
+    public Map<String,DtoAction> getDtoActionMap() {
+        return dtoActionMap;
     }
 }

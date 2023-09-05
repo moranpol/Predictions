@@ -1,7 +1,5 @@
 package details;
 
-import menuChoice2.DtoRange;
-
 public class DtoEnvironmentInfo {
     private final String name;
     private final String type;

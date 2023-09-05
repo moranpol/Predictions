@@ -18,6 +18,10 @@ public class Increase extends Action{
         this.by = by;
     }
 
+    public String getPropertyName() {
+        return propertyName;
+    }
+
     public String getExpressionString() {
         return by.getString();
     }

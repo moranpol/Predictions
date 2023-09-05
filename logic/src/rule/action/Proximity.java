@@ -21,6 +21,14 @@ public class Proximity extends Action{
         this.actionList = actionList;
     }
 
+    public String getDepth(){
+        return of.getString();
+    }
+
+    public int getActionAmount(){
+        return actionList.size();
+    }
+
     @Override
     public void activateAction(Context context) {
         EntityInstance entityInstance;
