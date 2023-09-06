@@ -31,7 +31,7 @@ public class FloatExpression implements Expression, Serializable {
     }
 
     @Override
-    public Object getValue(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance) {
+    public Object getValue(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName) {
         return this.value;
     }
 

@@ -28,25 +28,23 @@ public class Decrease extends Action{
 
     @Override
     public void activateAction(Context context) {
-        EntityInstance entityInstance;
-        try{
-            entityInstance = getEntityInstance(context);
-        } catch (Exception e){
-            throw new MissMatchValuesException(e.getMessage() + " is not one of the main or second instances.\n" +
-                    "    Decrease action failed.");
-        }
-        PropertyInstance propertyInstance = entityInstance.getProperties().get(propertyName);
+        PropertyInstance propertyInstance = context.getMainEntityInstance().getProperties().get(propertyName);
         if(propertyInstance.getType() == PropertyType.DECIMAL && by.getType() == PropertyType.FLOAT){
-            throw new ParseFloatToIntException("Decrease action failed.\n    Entity name - " + entityInstance.getName() +
+            throw new ParseFloatToIntException("Decrease action failed.\n    Entity name - " + context.getMainEntityInstance().getName() +
                     "\n    Property name - " + propertyName);
+        }
+
+        Object expressionValue = by.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance(), context.getSecondEntityName());
+        if(expressionValue == null){
+            return;
         }
 
         switch (propertyInstance.getType()){
             case DECIMAL:
-                propertyInstance.setValue((Integer)propertyInstance.getValue() - (Integer)by.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance()));
+                propertyInstance.setValue((Integer)propertyInstance.getValue() - (Integer) expressionValue);
                 break;
             case FLOAT:
-                Float floatExpression = ParseFunctions.parseNumericTypeToFloat(by.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance()));
+                Float floatExpression = ParseFunctions.parseNumericTypeToFloat(expressionValue);
                 propertyInstance.setValue((Float)propertyInstance.getValue() - floatExpression);
                 break;
         }

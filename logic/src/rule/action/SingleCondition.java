@@ -38,73 +38,89 @@ public class SingleCondition extends Condition{
     public Boolean invokeCondition(Context context) {
         EntityInstance mainEntityInstance;
         EntityInstance secondEntityInstance;
+        String secondEntityName;
+        increaseTotalCountBy1();
         try{
-            mainEntityInstance = getEntityInstance(context);
+            mainEntityInstance = checkAndGetMainEntityInstance(context);
         } catch (Exception e){
             throw new MissMatchValuesException(e.getMessage() + " is not one of the main or second instances.\n" +
                     "    condition action failed.");
         }
-        if(!mainEntityInstance.getName().equals(context.getMainEntityInstance().getName())){
-            secondEntityInstance = context.getMainEntityInstance();
-        }else {
-            secondEntityInstance = context.getSecondEntityInstance();
+
+        if(mainEntityInstance == null){
+            return null;
         }
 
+        secondEntityInstance = checkAndGetSecondEntityInstance(context, mainEntityInstance);
+        secondEntityName = checkAndGetSecondEntityName(context, mainEntityInstance);
         switch (operator){
             case EQUAL:
-                return equalCondition(mainEntityInstance, secondEntityInstance);
+                return equalCondition(mainEntityInstance, secondEntityInstance, secondEntityName);
             case NOTEQUAL:
-                return notEqualCondition(mainEntityInstance, secondEntityInstance);
+                return notEqualCondition(mainEntityInstance, secondEntityInstance, secondEntityName);
             case BT:
-                return btCondition(mainEntityInstance, secondEntityInstance);
+                return btCondition(mainEntityInstance, secondEntityInstance, secondEntityName);
             case LT:
-                return ltCondition(mainEntityInstance, secondEntityInstance);
+                return ltCondition(mainEntityInstance, secondEntityInstance, secondEntityName);
         }
 
         return false;
     }
 
-    private Boolean equalCondition(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance){
+    private Boolean equalCondition(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName){
+        Object propertyExpression = property.getValue(mainEntityInstance, secondEntityInstance, secondEntityName);
+        Object valueExpression = value.getValue(mainEntityInstance, secondEntityInstance, secondEntityName);
+        if(propertyExpression == null || valueExpression == null){
+            return null;
+        }
+
         if(CheckFunctions.isNumericValue(property.getType()) && CheckFunctions.isNumericValue(value.getType())){
-            return Objects.equals(ParseFunctions.parseNumericTypeToFloat(property.getValue(mainEntityInstance, secondEntityInstance)),
-                    ParseFunctions.parseNumericTypeToFloat(value.getValue(mainEntityInstance, secondEntityInstance)));
+            return Objects.equals(ParseFunctions.parseNumericTypeToFloat(propertyExpression), ParseFunctions.parseNumericTypeToFloat(valueExpression));
         } else if (property.getType() == PropertyType.BOOLEAN && value.getType() == PropertyType.BOOLEAN) {
-            return ((Boolean)property.getValue(mainEntityInstance, secondEntityInstance) == (Boolean)value.getValue(mainEntityInstance, secondEntityInstance));
+            return (propertyExpression == valueExpression);
         } else if (property.getType() == PropertyType.STRING && value.getType() == PropertyType.STRING) {
-            String propValue = (String)property.getValue(mainEntityInstance, secondEntityInstance);
-            return (propValue.equals(value.getValue(mainEntityInstance, secondEntityInstance).toString()));
+            String propValue = propertyExpression.toString();
+            return (propValue.equals(valueExpression.toString()));
         } else{
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type equals to " + value.getType() + " type.\n" +
-                    "    Entity name - " + getMainEntityName() + "\n    Expression - " + property.getValue(mainEntityInstance, secondEntityInstance));
+                    "    Entity name - " + getMainEntityName() + "\n    Expression - " + valueExpression);
         }
     }
 
-    private Boolean notEqualCondition(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance){
-        return !equalCondition(mainEntityInstance, secondEntityInstance);
+    private Boolean notEqualCondition(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName){
+        return !equalCondition(mainEntityInstance, secondEntityInstance, secondEntityName);
     }
 
-    private Boolean btCondition(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance){
+    private Boolean btCondition(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName){
+        Object propertyExpression = property.getValue(mainEntityInstance, secondEntityInstance, secondEntityName);
+        Object valueExpression = value.getValue(mainEntityInstance, secondEntityInstance, secondEntityName);
+        if(propertyExpression == null || valueExpression == null){
+            return null;
+        }
+
         if(!CheckFunctions.isNumericValue(property.getType()) || !CheckFunctions.isNumericValue(value.getType())){
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type bigger than " + value.getType() + " type.\n" +
-                    "    Entity name - " + getMainEntityName() + "\n    Expression - " + property.getValue(mainEntityInstance, secondEntityInstance));
+                    "    Entity name - " + getMainEntityName() + "\n    Expression - " + valueExpression);
         }
-        Float floatPropertyVal = ParseFunctions.parseNumericTypeToFloat(property.getValue(mainEntityInstance, secondEntityInstance));
-        Float floatExpressionVal = ParseFunctions.parseNumericTypeToFloat(value.getValue(mainEntityInstance, secondEntityInstance));
 
-        return floatPropertyVal > floatExpressionVal;
+        return ParseFunctions.parseNumericTypeToFloat(propertyExpression) > ParseFunctions.parseNumericTypeToFloat(valueExpression);
     }
 
-    private Boolean ltCondition(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance){
+    private Boolean ltCondition(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName){
+        Object propertyExpression = property.getValue(mainEntityInstance, secondEntityInstance, secondEntityName);
+        Object valueExpression = value.getValue(mainEntityInstance, secondEntityInstance, secondEntityName);
+        if(propertyExpression == null || valueExpression == null){
+            return null;
+        }
+
         if(!CheckFunctions.isNumericValue(property.getType()) || !CheckFunctions.isNumericValue(value.getType())){
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type smaller than " + value.getType() + " type.\n" +
-                    "    Entity name - " + getMainEntityName() + "\n    Expression - " + property.getValue(mainEntityInstance, secondEntityInstance));
+                    "    Entity name - " + getMainEntityName() + "\n    Expression - " + valueExpression);
         }
-        Float floatPropertyVal = ParseFunctions.parseNumericTypeToFloat(property.getValue(mainEntityInstance, secondEntityInstance));
-        Float floatExpressionVal = ParseFunctions.parseNumericTypeToFloat(value.getValue(mainEntityInstance, secondEntityInstance));
 
-        return floatPropertyVal < floatExpressionVal;
+        return ParseFunctions.parseNumericTypeToFloat(propertyExpression) < ParseFunctions.parseNumericTypeToFloat(valueExpression);
     }
 }

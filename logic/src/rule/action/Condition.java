@@ -1,13 +1,25 @@
 package rule.action;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.List;
 
 public abstract class Condition extends Action{
     private List<Action> thenActions = null;
     private List<Action> elseActions = null;
+    private Integer totalCount = 0;
+
 
     public Condition(String entityName, SecondaryEntity secondaryEntity) {
         super(entityName, secondaryEntity);
+    }
+
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void increaseTotalCountBy1(){
+        totalCount++;
     }
 
     public void setThenActions(List<Action> thenActions) {
@@ -22,16 +34,15 @@ public abstract class Condition extends Action{
 
     @Override
     public void activateAction(Context context) {
-        if (invokeCondition(context)){
+        Boolean result = invokeCondition(context);
+        if(result == null){
+            return;
+        }
+
+        if (result){
             invokeListActions(thenActions, context);
         } else if (elseActions != null) {
             invokeListActions(elseActions, context);
-        }
-    }
-
-    private void invokeListActions(List<Action> actionList, Context context){
-        for (Action action : actionList) {
-            action.activateAction(context);
         }
     }
 }

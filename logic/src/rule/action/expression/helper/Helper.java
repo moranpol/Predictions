@@ -30,9 +30,10 @@ public class Helper implements Expression, Serializable {
     }
 
     @Override
-    public Object getValue(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance) {
+    public Object getValue(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName) {
         helperFunction.setMainEntityInstance(mainEntityInstance);
         helperFunction.setSecondEntityInstance(secondEntityInstance);
+        helperFunction.setSecondEntityName(secondEntityName);
         switch (this.funcName){
             case "environment":
                 return helperFunction.environment(variables.get(0));

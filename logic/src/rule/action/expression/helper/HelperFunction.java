@@ -16,6 +16,7 @@ public class HelperFunction implements Serializable {
     private final EnvironmentDefinition environmentDefinition;
     private EntityInstance mainEntityInstance;
     private EntityInstance secondEntityInstance;
+    private String secondEntityName;
 
     public HelperFunction(EnvironmentDefinition environmentDefinitionVariables) {
         environmentDefinition = environmentDefinitionVariables;
@@ -27,6 +28,10 @@ public class HelperFunction implements Serializable {
 
     public void setSecondEntityInstance(EntityInstance secondEntityInstance) {
         this.secondEntityInstance = secondEntityInstance;
+    }
+
+    public void setSecondEntityName(String secondEntityName) {
+        this.secondEntityName = secondEntityName;
     }
 
     public EnvironmentDefinition getEnvironmentDefinition() {
@@ -50,6 +55,9 @@ public class HelperFunction implements Serializable {
     public Object evaluate(String propertyOfEntity){
         String[] parts = propertyOfEntity.split("\\.");
         EntityInstance entityInstance = getEntityInstance(parts[0]);
+        if(entityInstance == null){
+            return null;
+        }
         if(entityInstance.getProperties().containsKey(parts[1])){
             return entityInstance.getProperties().get(parts[1]).getValue();
         } else {
@@ -63,13 +71,16 @@ public class HelperFunction implements Serializable {
             throw new MissMatchValuesException("Percent helper function failed - expression is not a number");
         }
 
-        return (ParseFunctions.parseNumericTypeToFloat(number.getValue(mainEntityInstance, secondEntityInstance))
-                * ParseFunctions.parseNumericTypeToFloat(percentage.getValue(mainEntityInstance, secondEntityInstance))) / 100;
+        return (ParseFunctions.parseNumericTypeToFloat(number.getValue(mainEntityInstance, secondEntityInstance, secondEntityName))
+                * ParseFunctions.parseNumericTypeToFloat(percentage.getValue(mainEntityInstance, secondEntityInstance, secondEntityName))) / 100;
     }
 
     public Integer ticks(String propertyOfEntity){
         String[] parts = propertyOfEntity.split("\\.");
         EntityInstance entityInstance = getEntityInstance(parts[0]);
+        if(entityInstance == null){
+            return null;
+        }
         if(entityInstance.getProperties().containsKey(parts[1])){
             return entityInstance.getProperties().get(parts[1]).getCurrValueCounterByTicks();
         } else {
@@ -81,7 +92,7 @@ public class HelperFunction implements Serializable {
     private EntityInstance getEntityInstance(String entityName){
         if (entityName.equals(mainEntityInstance.getName())) {
             return mainEntityInstance;
-        } else if (secondEntityInstance != null && entityName.equals(secondEntityInstance.getName())) {
+        } else if (entityName.equals(secondEntityName)) {
             return secondEntityInstance;
         } else{
             throw new InvalidNameException(entityName  + " entity name does not refer to the entity in the context .\n" +

@@ -76,30 +76,71 @@ public class Grid {
         return freeSpaces;
     }
 
-    public void removeInstance(Location location) {
-        grid[location.getRow()][location.getCol()] = null;
-        freeSpaces++;
+    public void replaceInstancesLocation(EntityInstance remove, EntityInstance replace) {
+        replace.setLocation(remove.getLocation());
+        grid[remove.getLocation().getRow()][remove.getLocation().getCol()] = replace;
     }
 
-    public void moveInstance(EntityInstance entityInstance){
+    public void moveInstance(EntityInstance entityInstance) {
+        ArrayList<String> directions = new ArrayList<>();
+        directions.add("North");
+        directions.add("South");
+        directions.add("East");
+        directions.add("West");
+
+        Random random = new Random();
+        while (!directions.isEmpty()) {
+            int randomIndex = random.nextInt(directions.size());
+            String selectedDirection = directions.get(randomIndex);
+            if(checkDirectionAvailable(entityInstance, selectedDirection)){
+                return;
+            }
+            directions.remove(randomIndex);
+        }
+    }
+
+    private Boolean checkDirectionAvailable(EntityInstance entityInstance, String direction){
         Integer entityRow = entityInstance.getLocation().getRow();
         Integer entityCol = entityInstance.getLocation().getCol();
-        if(grid[(entityRow - 1 + rows) % rows][entityCol % cols] == null){
-            entityInstance.updateLocation((entityRow - 1 + rows) % rows, entityCol % cols);
-            grid[entityRow][entityCol] = null;
-            grid[(entityRow - 1 + rows) % rows][entityCol % cols] = entityInstance;
-        } else if (grid[(entityRow) % rows][(entityCol - 1 + cols) % cols] == null) {
-            entityInstance.updateLocation(entityRow % rows, (entityCol - 1 + cols) % cols);
-            grid[entityRow][entityCol] = null;
-            grid[entityRow % rows][(entityCol - 1 + cols) % cols] = entityInstance;
-        } else if (grid[(entityRow) % rows][(entityCol + 1) % cols] == null) {
-            entityInstance.updateLocation(entityRow % rows, (entityCol + 1) % cols);
-            grid[entityRow][entityCol] = null;
-            grid[entityRow % rows][(entityCol + 1) % cols] = entityInstance;
-        } else if (grid[(entityRow + 1) % rows][entityCol % cols] == null){
-            entityInstance.updateLocation((entityRow + 1) % rows, entityCol % cols);
-            grid[entityRow][entityCol] = null;
-            grid[(entityRow + 1) % rows][entityCol % cols] = entityInstance;
+        switch (direction){
+            case "North":
+                if(grid[(entityRow - 1 + rows) % rows][entityCol % cols] == null) {
+                    entityInstance.updateLocation((entityRow - 1 + rows) % rows, entityCol % cols);
+                    grid[entityRow][entityCol] = null;
+                    grid[(entityRow - 1 + rows) % rows][entityCol % cols] = entityInstance;
+                    return true;
+                }else {
+                    return false;
+                }
+            case "South":
+                 if (grid[(entityRow) % rows][(entityCol - 1 + cols) % cols] == null) {
+                    entityInstance.updateLocation(entityRow % rows, (entityCol - 1 + cols) % cols);
+                    grid[entityRow][entityCol] = null;
+                    grid[entityRow % rows][(entityCol - 1 + cols) % cols] = entityInstance;
+                     return true;
+                 }else {
+                     return false;
+                 }
+            case "East":
+                if (grid[(entityRow) % rows][(entityCol + 1) % cols] == null) {
+                    entityInstance.updateLocation(entityRow % rows, (entityCol + 1) % cols);
+                    grid[entityRow][entityCol] = null;
+                    grid[entityRow % rows][(entityCol + 1) % cols] = entityInstance;
+                    return true;
+                }else {
+                    return false;
+                }
+            default:
+                if (grid[(entityRow + 1) % rows][entityCol % cols] == null){
+                    entityInstance.updateLocation((entityRow + 1) % rows, entityCol % cols);
+                    grid[entityRow][entityCol] = null;
+                    grid[(entityRow + 1) % rows][entityCol % cols] = entityInstance;
+                    return true;
+                }else {
+                    return false;
+                }
         }
+
+
     }
 }

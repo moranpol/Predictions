@@ -49,9 +49,14 @@ public class Rule implements Serializable {
                                 context.setMainEntityInstance(mainEntityInstance);
                                 if(action.getSecondaryEntity() != null){
                                     List<EntityInstance> secondEntityList = secondaryEntityInstances(entities, action.getSecondaryEntity(), worldDefinition, grid);
-                                    for (EntityInstance secondEntityInstance : secondEntityList){
-                                        context.setSecondEntityInstance(secondEntityInstance);
+                                    context.setSecondEntityName(action.getSecondaryEntityName());
+                                    if(secondEntityList.isEmpty()){
                                         action.activateAction(context);
+                                    } else{
+                                        for (EntityInstance secondEntityInstance : secondEntityList){
+                                            context.setSecondEntityInstance(secondEntityInstance);
+                                            action.activateAction(context);
+                                        }
                                     }
                                 } else {
                                     action.activateAction(context);
@@ -62,7 +67,7 @@ public class Rule implements Serializable {
                         }
                     }
                 }
-                killEntityInstances(entities, grid);
+                killEntityInstances(entities);
                 updateNewEntityInstances(context);
             }
         }
@@ -75,11 +80,10 @@ public class Rule implements Serializable {
         }
     }
 
-    private void killEntityInstances(Map<String, EntityManager> entities, Grid grid){
+    private void killEntityInstances(Map<String, EntityManager> entities){
         for (EntityManager entity : entities.values()) {
             for(int i = 0; i < entity.getEntityInstance().size(); i++){
-                if(entity.getEntityInstance().get(i).getDead()){
-                    grid.removeInstance(entity.getEntityInstance().get(i).getLocation());
+                if(entity.getEntityInstance().get(i).isDead()){
                     entity.getEntityInstance().remove(i);
                 }
             }

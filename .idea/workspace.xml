@@ -12,11 +12,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/grid/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/grid/Grid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/Rule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Calculation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Condition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Context.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Context.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Decrease.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Decrease.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Increase.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Increase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Kill.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Kill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/MultipleCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Proximity.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Proximity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Replace.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Replace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Set.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Set.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/SingleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/SingleCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/world/WorldInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/world/WorldInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/Expression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/Helper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/HelperFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/HelperFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/property/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/property/PropertyExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/value/BooleanExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/BooleanExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/value/FloatExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/FloatExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/value/IntExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/IntExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/value/StringExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/StringExpression.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +46,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -55,7 +75,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -75,7 +95,7 @@
     "git-widget-placeholder": "ofirko",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "C:/Users/moran/Documents/Education/Second year/Java/Predictions/ui",
+    "last_opened_file_path": "C:/Users/moran/Downloads/Ex1-submission (4) (1)/Ex1-submission",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -152,6 +172,7 @@
       <workItem from="1692473449242" duration="1652000" />
       <workItem from="1692863846243" duration="2416000" />
       <workItem from="1692869267947" duration="1400000" />
+      <workItem from="1693909971262" duration="15966000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />
@@ -304,8 +325,18 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="9d9fcbed-8b15-446c-9295-f55b1ada9759" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
+        <entry key="9d9fcbed-8b15-446c-9295-f55b1ada9759">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -319,6 +350,11 @@
                     </value>
                   </entry>
                 </map>
+              </option>
+              <option name="TEXT_FILTER_SETTINGS">
+                <TextFilterSettings>
+                  <option name="REGEX" value="true" />
+                </TextFilterSettings>
               </option>
             </State>
           </value>
@@ -341,14 +377,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NullPointerException" package="java.lang" />
-          <option name="timeStamp" value="7" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="rule.action.Proximity" memberName="of" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="((HashMap.Node)((HashMap)entities).entrySet().toArray()[0]).getValue()" custom="java.util.HashMap.Node,java.util.HashMap" />

@@ -1,6 +1,5 @@
 package rule.action;
 
-import entity.EntityInstance;
 import enums.PropertyType;
 import exceptions.MissMatchValuesException;
 import exceptions.ParseFloatToIntException;
@@ -27,28 +26,24 @@ public class Set extends Action{
     }
     @Override
     public void activateAction(Context context) {
-        EntityInstance entityInstance;
-        try{
-            entityInstance = getEntityInstance(context);
-        } catch (Exception e){
-            throw new MissMatchValuesException(e.getMessage() + " is not one of the main or second instances.\n" +
-                    "    Set action failed.");
+        PropertyInstance propertyInstance = context.getMainEntityInstance().getProperties().get(propertyName);
+        Object expressionValue = value.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance(), context.getSecondEntityName());
+        if (expressionValue == null){
+            return;
         }
-        PropertyInstance propertyInstance = entityInstance.getProperties().get(propertyName);
 
         if (propertyInstance.getType() == value.getType()) {
-            propertyInstance.setValue(value.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance()));
+            propertyInstance.setValue(expressionValue);
         } else if(propertyInstance.getType() == PropertyType.FLOAT && value.getType() == PropertyType.DECIMAL){
-            Float floatExpression = ParseFunctions.parseNumericTypeToFloat(value.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance()));
+            Float floatExpression = ParseFunctions.parseNumericTypeToFloat(expressionValue);
             propertyInstance.setValue(floatExpression);
         } else if (propertyInstance.getType() == PropertyType.DECIMAL && value.getType() == PropertyType.FLOAT) {
-            throw new ParseFloatToIntException("Set action failed.\n    Entity name - " + entityInstance.getName() +
+            throw new ParseFloatToIntException("Set action failed.\n    Entity name - " + context.getMainEntityInstance().getName() +
                     "\n    Property name - " + propertyName);
         } else{
             throw new MissMatchValuesException("Expression value type is " + value.getType() + " and property type is "
-                    + propertyInstance.getType() + ".\n    Set action failed.\n    Entity name - " + entityInstance.getName() +
+                    + propertyInstance.getType() + ".\n    Set action failed.\n    Entity name - " + context.getMainEntityInstance().getName() +
                     "\n    Property name - " + propertyName);
         }
-
     }
 }

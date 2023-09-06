@@ -4,10 +4,12 @@ import entity.EntityInstance;
 import exceptions.InvalidNameException;
 
 import java.io.Serializable;
+import java.util.List;
 
 public abstract class Action implements Serializable {
     private final String mainEntityName;
     private SecondaryEntity secondaryEntity;
+
 
     public Action(String entityName, SecondaryEntity secondaryEntity) {
         this.mainEntityName = entityName;
@@ -19,6 +21,7 @@ public abstract class Action implements Serializable {
     public String getMainEntityName() {
         return mainEntityName;
     }
+
     public String getSecondaryEntityName() {
         if(secondaryEntity != null) {
             return secondaryEntity.getSecondEntityName();
@@ -35,13 +38,42 @@ public abstract class Action implements Serializable {
         this.secondaryEntity = secondaryEntity;
     }
 
-    public EntityInstance getEntityInstance(Context context){
+    public EntityInstance checkAndGetMainEntityInstance(Context context){
         if(context.getMainEntityInstance().getName().equals(mainEntityName)){
             return context.getMainEntityInstance();
-        } else if(context.getSecondEntityInstance() != null && context.getSecondEntityInstance().getName().equals(mainEntityName)){
+        } else if(context.getSecondEntityName().equals(mainEntityName)){
            return context.getSecondEntityInstance();
         } else {
             throw new InvalidNameException("main entity " + mainEntityName);
+        }
+    }
+
+    public EntityInstance checkAndGetSecondEntityInstance(Context context, EntityInstance mainEntity){
+        if(!mainEntity.getName().equals(context.getMainEntityInstance().getName())){
+            return context.getMainEntityInstance();
+        }else {
+            return context.getSecondEntityInstance();
+        }
+    }
+
+    public String checkAndGetSecondEntityName(Context context, EntityInstance mainEntity){
+        if(!mainEntity.getName().equals(context.getMainEntityInstance().getName())){
+            return context.getMainEntityInstance().getName();
+        }else {
+            return context.getSecondEntityName();
+        }
+    }
+
+    public void invokeListActions(List<Action> actionList, Context context){
+        Context actionContext = new Context(context.getEntities(), context.getWorldDefinition(), context.getGrid());
+        for (Action action : actionList) {
+            EntityInstance mainEntityInstance = action.checkAndGetMainEntityInstance(context);
+            if(mainEntityInstance != null) {
+                actionContext.setMainEntityInstance(mainEntityInstance);
+                actionContext.setSecondEntityInstance(checkAndGetSecondEntityInstance(context, mainEntityInstance));
+                actionContext.setSecondEntityName(checkAndGetSecondEntityName(context, mainEntityInstance));
+                action.activateAction(actionContext);
+            }
         }
     }
 }
