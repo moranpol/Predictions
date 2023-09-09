@@ -1,0 +1,23 @@
+/* Set the background color for the entire scene */
+#simulationEntitiesPopulation {
+    -fx-background-color: #f0f0f0;
+}
+
+#simulationEnvironmentInputs {
+    -fx-background-color: #f0f0f0;
+}
+
+/* Style the buttons */
+.button {
+    -fx-background-color: #007bff; /* Blue color for buttons */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 14px;
+    -fx-pref-width: 100px; /* Set preferred width for buttons */
+    -fx-pref-height: 30px; /* Set preferred height for buttons */
+    -fx-border-radius: 5px; /* Rounded corners for buttons */
+}
+
+.button:hover {
+    -fx-background-color: #0056b3; /* Darker blue color on hover */
+}
+

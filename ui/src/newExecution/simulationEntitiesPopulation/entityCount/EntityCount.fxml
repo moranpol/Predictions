@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="390.0" stylesheets="@entityCount.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecution.simulationEntitiesPopulation.entityCount.EntityCountController">
+   <children>
+      <Label fx:id="entityName" text="Label" />
+      <Spinner fx:id="entityCount" prefWidth="80.0">
+         <HBox.margin>
+            <Insets left="150.0" />
+         </HBox.margin>
+      </Spinner>
+   </children>
+   <padding>
+      <Insets left="40.0" />
+   </padding>
+</HBox>

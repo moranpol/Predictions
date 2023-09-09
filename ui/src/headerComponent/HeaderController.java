@@ -73,6 +73,7 @@ public class HeaderController {
 
     @FXML
     void newExectionButtonClicked(ActionEvent event) {
+        pageController.loadNewExecutionComponent();
 
     }
 

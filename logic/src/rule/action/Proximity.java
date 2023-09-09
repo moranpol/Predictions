@@ -52,7 +52,8 @@ public class Proximity extends Action{
             positiveRow = (row + grid.getRows()) % grid.getRows();
             for (int col = entityCol - circle; col < entityCol + circle; col++){
                 positiveCol = (col + grid.getCols()) % grid.getCols();
-                if(grid.getGrid()[positiveRow][positiveCol].getName().equals(targetEntityName)){
+                if(grid.getGrid()[positiveRow][positiveCol]!= null &&
+                        grid.getGrid()[positiveRow][positiveCol].getName().equals(targetEntityName)){
                     return grid.getGrid()[positiveRow][positiveCol];
                 }
             }

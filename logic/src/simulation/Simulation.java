@@ -1,6 +1,8 @@
 package simulation;
 
 import enums.TerminationType;
+import factory.FactoryInstance;
+import jaxb.LoadXml;
 import world.WorldDefinition;
 import world.WorldInstance;
 
@@ -85,5 +87,14 @@ public class Simulation implements Serializable {
         for (int currentTick = 1; currentTick < ticks; currentTick++){
             worldInstance.runSimulationTick(currentTick, worldDefinition);
         }
+    }
+
+    public static void main(String[] args) {
+        LoadXml xml = new LoadXml();
+        WorldDefinition worldDefinition = xml.loadAndValidateXml("C:\\Users\\moran\\Documents\\Education\\Second year\\Java\\tests\\master-ex2.xml");
+        WorldInstance worldInstance = FactoryInstance.createWorldInstance(worldDefinition);
+        Simulation simulation = new Simulation(0, worldInstance, worldDefinition);
+        simulation.runSimulation();
+        System.out.println("finished");
     }
 }

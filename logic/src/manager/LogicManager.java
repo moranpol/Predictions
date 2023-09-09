@@ -14,6 +14,8 @@ import menuChoice3.DtoSimulationDetails;
 import menuChoice3.DtoEnvironmentInitialize;
 import menuChoice4.*;
 import menuChoice5or6.DtoFilePath;
+import newExecution.EntityNamesDto;
+import newExecution.GridDto;
 import property.PropertyDefinition;
 import property.Range;
 import rule.Activation;
@@ -55,7 +57,7 @@ public class LogicManager {
     //choice 1
     public void ReadXmlFile(DtoXmlPath dtoXmlPath){
         LoadXml loadXml = new LoadXml();
-        worldDefinition = loadXml.loadAndValidateXml(dtoXmlPath.getPath()); // return null!!
+        worldDefinition = loadXml.loadAndValidateXml(dtoXmlPath.getPath());
         simulationCount = 0;
         simulations.clear();
     }
@@ -362,4 +364,22 @@ public class LogicManager {
 
         return dtoEnvironmentInfoMap;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public EntityNamesDto createEntityNameDto(){
+        List<String> entityNames = new ArrayList<>();
+
+        for(EntityDefinition entityDefinition : worldDefinition.getEntities().values()){
+            entityNames.add(entityDefinition.getName());
+        }
+
+        return new EntityNamesDto(entityNames);
+    }
+
+    public GridDto createGridDto(){
+        return new GridDto(worldDefinition.getGrid().getRows(), worldDefinition.getGrid().getCols());
+    }
 }
+
+

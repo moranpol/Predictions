@@ -12,31 +12,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/newExecution/EntitiesPopulationDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/newExecution/EntityNamesDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/newExecution/GridDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/NewExecutionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/StartButtonListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/newExecution.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/SimulationEntitiesPopulationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/entityCount/EntityCountController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/entityCount/entityCount.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/simulationEntitiesPopulation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/SimulationEnvironmentInputsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/simulationEnvironmentInputs.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/grid/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/grid/Grid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/Rule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Calculation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/manager/LogicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/manager/LogicManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Context.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Context.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Decrease.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Decrease.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Increase.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Increase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Kill.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Kill.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/MultipleCondition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Proximity.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Proximity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Replace.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Replace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Set.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Set.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/SingleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/SingleCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/Expression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/Helper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/HelperFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/HelperFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/property/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/property/PropertyExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/value/BooleanExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/BooleanExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/value/FloatExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/FloatExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/value/IntExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/IntExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/value/StringExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/StringExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/simulation/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/simulation/Simulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/headerComponent/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/headerComponent/HeaderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pageComponent/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pageComponent/PageController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,9 +41,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -95,7 +91,8 @@
     "git-widget-placeholder": "ofirko",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "C:/Users/moran/Downloads/Ex1-submission (4) (1)/Ex1-submission",
+    "last_opened_file_path": "C:/Users/moran/Documents/Education/Second year/Java/Predictions",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -105,6 +102,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "configurable.group.editor",
     "vue.rearranger.settings.migration": "true"
   }
@@ -119,7 +117,7 @@
       <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main (2)">
+  <component name="RunManager" selected="Application.PredictionApplication">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="logic" />
@@ -147,8 +145,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PredictionApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="application.PredictionApplication" />
+      <module name="ui" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Simulation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="simulation.Simulation" />
+      <module name="logic" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="simulation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.PredictionApplication" />
+        <item itemvalue="Application.Simulation" />
         <item itemvalue="Application.Main (2)" />
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
@@ -173,6 +199,7 @@
       <workItem from="1692863846243" duration="2416000" />
       <workItem from="1692869267947" duration="1400000" />
       <workItem from="1693909971262" duration="15966000" />
+      <workItem from="1693999377196" duration="34185000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />

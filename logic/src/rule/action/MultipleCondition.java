@@ -7,8 +7,6 @@ import java.util.List;
 public class MultipleCondition extends Condition{
     private final List<Condition> conditions;
     private final Logicals logic;
-    private Integer orCount = 0;
-    private Integer andCount = 0;
 
     public int getConditionsAmount(){
         return conditions.size();
@@ -26,6 +24,7 @@ public class MultipleCondition extends Condition{
 
     @Override
     public Boolean invokeCondition(Context context) {
+        Boolean result;
         switch (logic){
             case OR:
                 return orCondition(context);
@@ -33,38 +32,38 @@ public class MultipleCondition extends Condition{
                 return andCondition(context);
         }
 
-        if(orCount + andCount == getTotalCount()){
-            return null;
-        }
-
         return false;
     }
 
     private Boolean orCondition(Context context){
+        int count = 0;
         Boolean result;
         for (Condition condition : conditions) {
             result = condition.invokeCondition(context);
             if(result == null){
-                orCount++;
+                increaseOrCountBy1();
+                count++;
             } else if (result) {
                 return true;
             }
         }
 
-        return orCount == conditions.size();
+        return count == conditions.size();
     }
 
     private Boolean andCondition(Context context){
+        int count = 0;
         Boolean result;
         for (Condition condition : conditions) {
             result = condition.invokeCondition(context);
             if(result == null){
-                andCount++;
+                increaseAndCountBy1();
+                count++;
             } else if (!result) {
                 return false;
             }
         }
 
-        return andCount != conditions.size();
+        return count != conditions.size();
     }
 }

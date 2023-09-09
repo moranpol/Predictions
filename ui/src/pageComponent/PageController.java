@@ -7,6 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import manager.LogicManager;
+import newExecution.EntityNamesDto;
+import newExecution.GridDto;
+import newExecution.NewExecutionController;
 
 import java.io.IOException;
 
@@ -14,6 +17,7 @@ public class PageController {
 
     @FXML
     private GridPane header;
+
     @FXML
     private HeaderController headerController;
 
@@ -23,6 +27,8 @@ public class PageController {
     private LogicManager logicManager;
 
     private DetailsFullComponentController detailsFullComponentController;
+
+    private NewExecutionController newExecutionController;
 
     @FXML
     public void initialize(){
@@ -39,19 +45,38 @@ public class PageController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/detailsFullComponent.fxml"));
             Parent details = loader.load();
+            paneBody.getChildren().clear();
             paneBody.getChildren().add(details);
-
 
             detailsFullComponentController = loader.getController();
             detailsFullComponentController.setPageController(this);
-
         }
         catch (IOException e) {
 
         }
     }
 
+    public void loadNewExecutionComponent(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/newExecution/NewExecution.fxml"));
+            Parent newExecution = loader.load();
+            paneBody.getChildren().clear();
+            paneBody.getChildren().add(newExecution);
 
+            newExecutionController = loader.getController();
+            newExecutionController.setPageController(this);
+        } catch (IOException e) {
 
+        }
+    }
+
+    public EntityNamesDto getEntityNamesDto(){
+        return logicManager.createEntityNameDto();
+    }
+
+    public Integer getMaxPopulationSize(){
+        GridDto gridDto = logicManager.createGridDto();
+        return gridDto.getRows() * gridDto.getCols();
+    }
 }
 
