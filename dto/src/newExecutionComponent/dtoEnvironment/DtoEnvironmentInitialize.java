@@ -1,4 +1,4 @@
-package menuChoice3;
+package newExecutionComponent.dtoEnvironment;
 
 public class DtoEnvironmentInitialize {
     private final String name;

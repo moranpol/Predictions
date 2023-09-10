@@ -22,7 +22,7 @@ public class EntityInstance implements Serializable {
         return properties;
     }
 
-    public Boolean getDead() {
+    public Boolean isDead() {
         return isDead;
     }
 

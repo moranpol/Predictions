@@ -35,16 +35,15 @@ public class Calculation extends Action{
 
     @Override
     public void activateAction(Context context) {
-        EntityInstance entityInstance;
-        try{
-            entityInstance = getEntityInstance(context);
-        } catch (Exception e){
-            throw new MissMatchValuesException(e.getMessage() + " is not one of the main or second instances.\n" +
-                    "    Calculation action failed.");
+        Object valueArg1 = arg1.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance(), context.getSecondEntityName());
+        Object valueArg2 = arg2.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance(), context.getSecondEntityName());
+
+        if(valueArg1 == null || valueArg2 == null){
+            return;
         }
 
-        Float floatArg1 = ParseFunctions.parseNumericTypeToFloat(arg1.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance()));
-        Float floatArg2 = ParseFunctions.parseNumericTypeToFloat(arg2.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance()));
+        Float floatArg1 = ParseFunctions.parseNumericTypeToFloat(valueArg1);
+        Float floatArg2 = ParseFunctions.parseNumericTypeToFloat(valueArg2);
         switch (arithmetic){
             case DIVIDE:
                 if(floatArg2 != 0){

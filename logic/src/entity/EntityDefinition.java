@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class EntityDefinition implements Serializable {
     private final String name;
-    private final Integer population;
+    private Integer population;
     private final Map<String, PropertyDefinition> propertiesOfAllPopulation;
 
     public EntityDefinition(String name, Integer population, Map<String, PropertyDefinition> propertiesOfAllPopulation) {
@@ -40,5 +40,9 @@ public class EntityDefinition implements Serializable {
 
     public int getPopulation() {
         return population;
+    }
+
+    public void setPopulation(Integer population) {
+        this.population = population;
     }
 }

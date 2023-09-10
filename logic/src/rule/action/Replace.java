@@ -2,7 +2,6 @@ package rule.action;
 
 import entity.EntityInstance;
 import enums.ReplaceMode;
-import exceptions.MissMatchValuesException;
 import factory.FactoryPropertyInstance;
 import property.PropertyDefinition;
 import property.PropertyInstance;
@@ -22,24 +21,20 @@ public class Replace extends Action{
 
     @Override
     public void activateAction(Context context) {
-        EntityInstance entityInstance;
-        try{
-            entityInstance = getEntityInstance(context);
-        } catch (Exception e){
-            throw new MissMatchValuesException(e.getMessage() + " is not one of the main or second instances.\n" +
-                    "    Replace action failed.");
+        if(context.getMainEntityInstance().isDead()){
+            return;
         }
 
-        switch (mode){
-            case DERIVED:
-                context.setNewEntityInstances(createEntityInstanceDerived(context, entityInstance));
-                break;
-            case SCRATCH:
-                context.setNewEntityInstances(createEntityInstanceScratch(context));
-                break;
+        EntityInstance newEntity;
+        if (mode == ReplaceMode.DERIVED) {
+            newEntity = createEntityInstanceDerived(context);
+        } else {
+            newEntity = createEntityInstanceScratch(context);
         }
 
-        entityInstance.killInstance();
+        context.getGrid().replaceInstancesLocation(context.getMainEntityInstance(), newEntity);
+        context.setNewEntityInstances(newEntity);
+        context.getMainEntityInstance().killInstance();
     }
 
     private EntityInstance createEntityInstanceScratch(Context context) {
@@ -47,9 +42,10 @@ public class Replace extends Action{
                 FactoryPropertyInstance.createPropertyInstanceMap(context.getWorldDefinition().getEntities().get(entityNameToCreate).getPropertiesOfAllPopulation()));
     }
 
-    private EntityInstance createEntityInstanceDerived(Context context, EntityInstance entityInstance) {
+    private EntityInstance createEntityInstanceDerived(Context context) {
+        EntityInstance deriveEntity = context.getMainEntityInstance();
         Map<String, PropertyInstance> propertyInstanceMap = new HashMap<>();
-        for (PropertyInstance prop : entityInstance.getProperties().values()) {
+        for (PropertyInstance prop : deriveEntity.getProperties().values()) {
             PropertyDefinition propertyToCreate =
                     context.getWorldDefinition().getEntities().get(entityNameToCreate).getPropertiesOfAllPopulation().get(prop.getName());
             if (propertyToCreate != null && propertyToCreate.getType() == prop.getType()) {

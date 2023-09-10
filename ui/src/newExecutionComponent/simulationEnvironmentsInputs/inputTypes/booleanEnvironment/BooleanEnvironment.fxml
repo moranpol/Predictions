@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="550.0" stylesheets="@booleanEnvironment.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.simulationEnvironmentsInputs.inputTypes.booleanEnvironment.BooleanEnvironmentController">
+   <children>
+      <Label fx:id="valueName" prefHeight="25.0" prefWidth="399.0" text="Label">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></Label>
+      <ComboBox fx:id="valueCBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="115.0" promptText="Choose value">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="True" />
+               <String fx:value="False" />
+            </FXCollections>
+         </items>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </ComboBox>
+   </children>
+   <padding>
+      <Insets left="50.0" />
+   </padding>
+</HBox>

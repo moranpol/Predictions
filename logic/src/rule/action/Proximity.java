@@ -2,7 +2,6 @@ package rule.action;
 
 import entity.EntityInstance;
 import enums.PropertyType;
-import exceptions.MissMatchValuesException;
 import exceptions.ParseFailedException;
 import grid.Grid;
 import rule.action.expression.Expression;
@@ -31,47 +30,50 @@ public class Proximity extends Action{
 
     @Override
     public void activateAction(Context context) {
-        EntityInstance entityInstance;
-        try{
-            entityInstance = getEntityInstance(context);
-        } catch (Exception e){
-            throw new MissMatchValuesException(e.getMessage() + " is not one of the main or second instances.\n" +
-                    "    Proximity action failed.");
+        Integer circle = getCircle(context.getMainEntityInstance(), context.getSecondEntityInstance(), context.getSecondEntityName());
+        if(circle == null){
+            return;
         }
-        Context newContext = new Context(context.getEntities(), context.getWorldDefinition(), context.getGrid());
-        newContext.setMainEntityInstance(entityInstance);
-        for (EntityInstance targetEntity : context.getEntities().get(targetEntityName).getEntityInstance()){
-            Integer circle = getCircle(entityInstance, targetEntity);
-            if(checkProximity(entityInstance, context.getGrid(), targetEntity, circle)){
-                newContext.setSecondEntityInstance(targetEntity);
-                for (Action action : actionList){
-                    action.activateAction(newContext);
-                }
-            }
+
+        EntityInstance targetEntity = getEntityInProximity(context.getMainEntityInstance(), context.getGrid(), circle);
+        if(targetEntity != null) {
+            Context newContext = new Context(context.getEntities(), context.getWorldDefinition(), context.getGrid());
+            newContext.setMainEntityInstance(context.getMainEntityInstance());
+            newContext.setSecondEntityInstance(targetEntity);
+            newContext.setSecondEntityName(targetEntityName);
+            invokeListActions(actionList, newContext);
         }
     }
 
-    private boolean checkProximity(EntityInstance entityInstance, Grid grid, EntityInstance targetEntity, Integer circle) {
+    private EntityInstance getEntityInProximity(EntityInstance entityInstance, Grid grid, Integer circle) {
         Integer entityRow = entityInstance.getLocation().getRow();
         Integer entityCol = entityInstance.getLocation().getCol();
-        Integer targetRow = targetEntity.getLocation().getRow();
-        Integer targetCol = targetEntity.getLocation().getCol();
+        int positiveRow, positiveCol;
         for (int row = entityRow - circle; row < entityRow + circle; row++){
+            positiveRow = (row + grid.getRows()) % grid.getRows();
             for (int col = entityCol - circle; col < entityCol + circle; col++){
-                if(((row + grid.getRows()) % grid.getRows()) == targetRow && ((col + grid.getCols()) % grid.getCols()) == targetCol){
-                    return true;
+                positiveCol = (col + grid.getCols()) % grid.getCols();
+                if(grid.getGrid()[positiveRow][positiveCol]!= null &&
+                        grid.getGrid()[positiveRow][positiveCol].getName().equals(targetEntityName)){
+                    return grid.getGrid()[positiveRow][positiveCol];
                 }
             }
         }
-        return false;
+
+        return null;
     }
 
-    private Integer getCircle(EntityInstance entityInstance, EntityInstance targetEntity){
+    private Integer getCircle(EntityInstance entityInstance, EntityInstance targetEntity, String secondEntityName){
+        Object circle = of.getValue(entityInstance, targetEntity, secondEntityName);
+        if(circle == null){
+            return null;
+        }
+
         if(of.getType() == PropertyType.DECIMAL){
-            return (Integer) of.getValue(entityInstance, targetEntity);
+            return (Integer)circle ;
         } else if (of.getType() == PropertyType.FLOAT) {
-            Float circle = (Float)of.getValue(entityInstance, targetEntity);
-            return circle.intValue();
+            Float floatCircle = (Float)circle;
+            return floatCircle.intValue();
         } else {
             throw new ParseFailedException("Proximity action failed, Expression of", PropertyType.FLOAT);
         }

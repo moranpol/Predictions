@@ -45,8 +45,6 @@ public class HeaderController {
         pageController.loadDetailsComponent();
     }
 
-
-
     @FXML
     void loadFileButtonClicked(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -67,18 +65,16 @@ public class HeaderController {
 
         String fileName = selectedFile.getName();
         textLoadedFile.setText(fileName);
-
-
     }
 
     @FXML
-    void newExectionButtonClicked(ActionEvent event) {
-
+    void newExecutionButtonClicked(ActionEvent event) {
+        pageController.loadNewExecutionComponent();
     }
 
     @FXML
     void resultsButtonClicked(ActionEvent event) {
-
+        pageController.loadResultComponent();
     }
 
 }

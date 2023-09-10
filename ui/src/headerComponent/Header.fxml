@@ -26,7 +26,7 @@
    <children>
       <Label text="Predictions" GridPane.columnIndex="3" />
       <Button id="detailsButton" fx:id="detailsButton" disable="true" mnemonicParsing="false" onAction="#detailsButtonClicked" prefHeight="30.0" prefWidth="128.0" styleClass="HeaderButtons" text="Details" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <Button id="newExecutionButton" fx:id="newExecutionButton" disable="true" mnemonicParsing="false" onAction="#newExectionButtonClicked" prefHeight="30.0" prefWidth="128.0" styleClass="HeaderButtons" text="New Execution" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <Button id="newExecutionButton" fx:id="newExecutionButton" disable="true" mnemonicParsing="false" onAction="#newExecutionButtonClicked" prefHeight="30.0" prefWidth="128.0" styleClass="HeaderButtons" text="New Execution" GridPane.columnIndex="3" GridPane.rowIndex="2" />
       <Button id="resultsButton" fx:id="resultsButton" disable="true" mnemonicParsing="false" onAction="#resultsButtonClicked" prefHeight="30.0" prefWidth="128.0" styleClass="HeaderButtons" text="Results" GridPane.columnIndex="4" GridPane.rowIndex="2" />
       <Button id="LoadFileButton" fx:id="LoadFileButton" mnemonicParsing="false" onAction="#loadFileButtonClicked" prefHeight="37.0" prefWidth="124.0" text="Load File" GridPane.rowIndex="1" />
       <TextField fx:id="textLoadedFile" editable="false" prefHeight="25.0" prefWidth="362.0" text="Loaded file path..." GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1" />

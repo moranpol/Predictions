@@ -24,6 +24,7 @@ public class MultipleCondition extends Condition{
 
     @Override
     public Boolean invokeCondition(Context context) {
+        Boolean result;
         switch (logic){
             case OR:
                 return orCondition(context);
@@ -35,22 +36,34 @@ public class MultipleCondition extends Condition{
     }
 
     private Boolean orCondition(Context context){
+        int count = 0;
+        Boolean result;
         for (Condition condition : conditions) {
-            if(condition.invokeCondition(context)){
+            result = condition.invokeCondition(context);
+            if(result == null){
+                increaseOrCountBy1();
+                count++;
+            } else if (result) {
                 return true;
             }
         }
 
-        return false;
+        return count == conditions.size();
     }
 
     private Boolean andCondition(Context context){
+        int count = 0;
+        Boolean result;
         for (Condition condition : conditions) {
-            if(!condition.invokeCondition(context)){
+            result = condition.invokeCondition(context);
+            if(result == null){
+                increaseAndCountBy1();
+                count++;
+            } else if (!result) {
                 return false;
             }
         }
 
-        return true;
+        return count != conditions.size();
     }
 }

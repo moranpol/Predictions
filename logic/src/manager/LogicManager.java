@@ -8,12 +8,17 @@ import entity.EntityManager;
 import exceptions.InvalidNameException;
 import exceptions.SimulationFailedException;
 import factory.FactoryInstance;
+import helpers.CheckFunctions;
 import jaxb.LoadXml;
 import menuChoice2.*;
 import menuChoice3.DtoSimulationDetails;
-import menuChoice3.DtoEnvironmentInitialize;
+import newExecutionComponent.dtoEntities.DtoEntitiesPopulation;
+import newExecutionComponent.dtoEnvironment.DtoEnvironmentInitialize;
 import menuChoice4.*;
 import menuChoice5or6.DtoFilePath;
+import newExecutionComponent.dtoEntities.DtoEntityNames;
+import newExecutionComponent.dtoEntities.DtoGrid;
+import newExecutionComponent.dtoEnvironment.DtoEnvironment;
 import property.PropertyDefinition;
 import property.Range;
 import rule.Activation;
@@ -55,7 +60,7 @@ public class LogicManager {
     //choice 1
     public void ReadXmlFile(DtoXmlPath dtoXmlPath){
         LoadXml loadXml = new LoadXml();
-        worldDefinition = loadXml.loadAndValidateXml(dtoXmlPath.getPath()); // return null!!
+        worldDefinition = loadXml.loadAndValidateXml(dtoXmlPath.getPath());
         simulationCount = 0;
         simulations.clear();
     }
@@ -173,13 +178,6 @@ public class LogicManager {
         }
 
         return environmentDetails;
-    }
-
-    public void updateEnvironment(List<DtoEnvironmentInitialize> environments){
-        for (DtoEnvironmentInitialize environment : environments) {
-            worldDefinition.getEnvironmentVariables().getProperties().get(environment.getName()).setInit(environment.getValue());
-            worldDefinition.getEnvironmentVariables().getProperties().get(environment.getName()).setRandomInit(false);
-        }
     }
 
     public DtoSimulationDetails simulationRun(){
@@ -362,4 +360,58 @@ public class LogicManager {
 
         return dtoEnvironmentInfoMap;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public DtoEntityNames createEntityNameDto(){
+        List<String> entityNames = new ArrayList<>();
+
+        for(EntityDefinition entityDefinition : worldDefinition.getEntities().values()){
+            entityNames.add(entityDefinition.getName());
+        }
+
+        return new DtoEntityNames(entityNames);
+    }
+
+    public DtoGrid createGridDto(){
+        return new DtoGrid(worldDefinition.getGrid().getRows(), worldDefinition.getGrid().getCols());
+    }
+
+    public List<DtoEnvironment> createDtoEnvironment(){
+        List<DtoEnvironment> environmentInfos= new ArrayList<>();
+
+        for (PropertyDefinition environment : worldDefinition.getEnvironmentVariables().getProperties().values()){
+            if(CheckFunctions.isNumericValue(environment.getType())){
+                environmentInfos.add(new DtoEnvironment(environment.getName(), environment.getType().toString().toLowerCase(),
+                        environment.getRange().getFrom(), environment.getRange().getTo()));
+            } else {
+                environmentInfos.add(new DtoEnvironment(environment.getName(), environment.getType().toString().toLowerCase(),null, null));
+            }
+        }
+
+        return environmentInfos;
+    }
+
+    public void startSimulation(List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList, List<DtoEntitiesPopulation> dtoEntitiesPopulationList) {
+        updateEnvironment(dtoEnvironmentInitializeList);
+        updateEntitiesPopulation(dtoEntitiesPopulationList);
+        DtoSimulationDetails dtoSimulationDetails = simulationRun();
+        //todo
+    }
+
+
+    private void updateEnvironment(List<DtoEnvironmentInitialize> environments){
+        for (DtoEnvironmentInitialize environment : environments) {
+            worldDefinition.getEnvironmentVariables().getProperties().get(environment.getName()).setInit(environment.getValue());
+            worldDefinition.getEnvironmentVariables().getProperties().get(environment.getName()).setRandomInit(false);
+        }
+    }
+
+    private void updateEntitiesPopulation(List<DtoEntitiesPopulation> entitiesPopulation){
+        for (DtoEntitiesPopulation entityPopulation : entitiesPopulation){
+            worldDefinition.getEntities().get(entityPopulation.getName()).setPopulation(entityPopulation.getPopulation());
+        }
+    }
 }
+
+

@@ -1,0 +1,10 @@
+/* Style the Pane components */
+#executionListPane,
+#executionDetailsPane,
+#executionResultPane {
+    -fx-background-color: white; /* Set the background color for the Panes */
+    -fx-border-color: #dcdcdc; /* Add a border to the Panes */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px; /* Rounded corners for Panes */
+    -fx-padding: 10px; /* Add padding to the Panes */
+}

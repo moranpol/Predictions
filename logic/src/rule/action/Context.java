@@ -16,6 +16,7 @@ public class Context {
     private final WorldDefinition worldDefinition;
     private final List<EntityInstance> newEntityInstances;
     private final Grid grid;
+    private String secondEntityName = null;
 
     public Context(Map<String, EntityManager> entities, WorldDefinition worldDefinition, Grid grid) {
         this.entities = entities;
@@ -48,6 +49,10 @@ public class Context {
         return grid;
     }
 
+    public String getSecondEntityName() {
+        return secondEntityName;
+    }
+
     public void setNewEntityInstances(EntityInstance newEntityInstances) {
         this.newEntityInstances.add(newEntityInstances);
     }
@@ -58,5 +63,9 @@ public class Context {
 
     public void setMainEntityInstance(EntityInstance mainEntityInstance) {
         this.MainEntityInstance = mainEntityInstance;
+    }
+
+    public void setSecondEntityName(String secondEntityName) {
+        this.secondEntityName = secondEntityName;
     }
 }
