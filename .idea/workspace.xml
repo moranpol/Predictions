@@ -12,26 +12,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/dto/src/newExecution/EntitiesPopulationDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dto/src/newExecution/EntityNamesDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dto/src/newExecution/GridDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/NewExecutionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/StartButtonListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/newExecution.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/SimulationEntitiesPopulationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/entityCount/EntityCountController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/entityCount/entityCount.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/simulationEntitiesPopulation.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/SimulationEnvironmentInputsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/simulationEnvironmentInputs.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEnvironment/DtoEnvironment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/booleanEnvironment/booleanEnvironment.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/numberEnvironment/NumberEnvironmentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/numberEnvironment/numberEnvironment.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/stringEnvironment/StringEnvironmentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/stringEnvironment/stringEnvironment.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/ResultsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionList/ExecutionListController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionList/executionList.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/results.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/menuChoice3/DtoEnvironmentInitialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEnvironment/DtoEnvironmentInitialize.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/newExecution/EntitiesPopulationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEntities/DtoEntitiesPopulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/newExecution/EntityNamesDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEntities/DtoEntityNames.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/newExecution/GridDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEntities/DtoGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/manager/LogicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/manager/LogicManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/MultipleCondition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Proximity.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Proximity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/simulation/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/simulation/Simulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/HelperFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/HelperFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/headerComponent/Header.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/headerComponent/Header.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/headerComponent/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/headerComponent/HeaderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/NewExecution.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/NewExecution.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/NewExecutionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/NewExecutionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/StartButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/StartButtonListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/newExecution.css" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/newExecution.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/SimulationEntitiesPopulation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/SimulationEntitiesPopulation.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/SimulationEntitiesPopulationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/SimulationEntitiesPopulationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/entityCount/EntityCount.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/entityCount/EntityCount.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/entityCount/EntityCountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/entityCount/EntityCountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/entityCount/entityCount.css" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/entityCount/entityCount.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/simulationEntitiesPopulation.css" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/simulationEntitiesPopulation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/SimulationEnvironmentInputs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/SimulationEnvironmentInputs.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/SimulationEnvironmentInputsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/SimulationEnvironmentInputsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/inputTypes/booleanEnvironment/BooleanEnvironment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/booleanEnvironment/BooleanEnvironment.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/inputTypes/booleanEnvironment/BooleanEnvironmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/booleanEnvironment/BooleanEnvironmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/simulationEnvironmentInputs.css" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/simulationEnvironmentInputs.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pageComponent/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pageComponent/PageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pageComponent/page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pageComponent/page.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +218,7 @@
       <workItem from="1692863846243" duration="2416000" />
       <workItem from="1692869267947" duration="1400000" />
       <workItem from="1693909971262" duration="15966000" />
-      <workItem from="1693999377196" duration="34185000" />
+      <workItem from="1693999377196" duration="62915000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />

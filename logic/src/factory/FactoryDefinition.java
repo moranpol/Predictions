@@ -91,8 +91,7 @@ public abstract class FactoryDefinition {
                         " entity already exist");
             }
         }
-        //todo - population by the user
-        return new EntityDefinition(prdEntity.getName(), 3, properties);
+        return new EntityDefinition(prdEntity.getName(), 0, properties);
     }
 
     private static PropertyDefinition createEntityPropertyDefinition(PRDProperty prdProperty){

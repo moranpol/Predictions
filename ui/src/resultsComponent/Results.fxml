@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<HBox stylesheets="@results.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.ResultsController">
+   <children>
+      <Pane fx:id="executionListPane" prefHeight="500.0" prefWidth="200.0" />
+      <VBox prefHeight="500.0" prefWidth="800.0">
+         <children>
+            <Pane fx:id="executionDetailsPane" prefHeight="200.0" prefWidth="800.0" />
+            <Pane fx:id="executionResultPane" prefHeight="300.0" prefWidth="800.0" />
+         </children>
+      </VBox>
+   </children>
+</HBox>

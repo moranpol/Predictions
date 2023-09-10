@@ -1,0 +1,21 @@
+/* Style the GridPane */
+GridPane {
+    -fx-background-color: #ffffff; /* White background color */
+    -fx-border-color: #cccccc; /* Light gray border color */
+    -fx-border-width: 1px; /* 1-pixel border width */
+    -fx-border-radius: 5px; /* Rounded corners for the GridPane */
+    -fx-padding: 10px; /* Add padding around the GridPane */
+}
+
+/* Style the Labels inside the GridPane */
+Label {
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Style the Spinner with fx:id "rangeCount" inside the GridPane */
+Spinner#rangeCount {
+    -fx-pref-width: 80px;
+    -fx-padding: 5px; /* Add padding around the Spinner */
+}

@@ -95,8 +95,7 @@ public class HelperFunction implements Serializable {
         } else if (entityName.equals(secondEntityName)) {
             return secondEntityInstance;
         } else{
-            throw new InvalidNameException(entityName  + " entity name does not refer to the entity in the context .\n" +
-                    "    Helper function name - evaluate");
+            throw new InvalidNameException(entityName  + " entity name does not refer to the entity in the context.\n");
         }
     }
 }
