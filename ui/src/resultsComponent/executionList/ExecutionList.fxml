@@ -10,7 +10,7 @@
       <Label prefHeight="40.0" text="Execution List" />
       <ScrollPane prefWidth="163.0">
          <content>
-            <ListView fx:id="executionListView" prefHeight="445.0" prefWidth="194.0" />
+            <ListView fx:id="executionListView" prefHeight="447.0" prefWidth="194.0" />
          </content>
       </ScrollPane>
    </children>

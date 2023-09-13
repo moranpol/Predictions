@@ -5,9 +5,13 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<HBox stylesheets="@results.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.ResultsController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@results.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.ResultsController">
    <children>
-      <Pane fx:id="executionListPane" prefHeight="500.0" prefWidth="200.0" />
+      <Pane fx:id="executionListPane" prefHeight="500.0" prefWidth="200.0">
+         <children>
+            <fx:include fx:id="executionList" source="executionList/ExecutionList.fxml" />
+         </children>
+      </Pane>
       <VBox prefHeight="500.0" prefWidth="800.0">
          <children>
             <Pane fx:id="executionDetailsPane" prefHeight="200.0" prefWidth="800.0" />

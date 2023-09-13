@@ -5,26 +5,32 @@ import details.DtoAction.*;
 import entity.EntityDefinition;
 import entity.EntityInstance;
 import entity.EntityManager;
+import enums.SimulationMode;
 import exceptions.InvalidNameException;
 import exceptions.SimulationFailedException;
 import factory.FactoryInstance;
 import helpers.CheckFunctions;
+import helpers.ParseFunctions;
 import jaxb.LoadXml;
 import menuChoice2.*;
-import menuChoice3.DtoSimulationDetails;
-import newExecutionComponent.dtoEntities.DtoEntitiesPopulation;
-import newExecutionComponent.dtoEnvironment.DtoEnvironmentInitialize;
+import newExecution.dtoEntities.DtoEntitiesPopulation;
+import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
 import menuChoice4.*;
 import menuChoice5or6.DtoFilePath;
-import newExecutionComponent.dtoEntities.DtoEntityNames;
-import newExecutionComponent.dtoEntities.DtoGrid;
-import newExecutionComponent.dtoEnvironment.DtoEnvironment;
+import newExecution.dtoEntities.DtoEntityNames;
+import newExecution.dtoEntities.DtoGrid;
+import newExecution.dtoEnvironment.DtoEnvironment;
 import property.PropertyDefinition;
 import property.Range;
+import results.*;
+import results.simulationEnded.*;
+import results.simulations.DtoSimulationInfo;
+import results.simulations.DtoSimulationEntity;
 import rule.Activation;
 import rule.Rule;
 import rule.action.*;
 import simulation.Simulation;
+import world.EntityCountGraph;
 import world.WorldDefinition;
 import menuChoice1.DtoXmlPath;
 
@@ -35,11 +41,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class LogicManager {
     private WorldDefinition worldDefinition;
     private List<Simulation> simulations;
     private Integer simulationCount = 0;
+    private ExecutorService executorService;
+
+    public LogicManager() {
+        simulations = new ArrayList<>();
+    }
 
     public WorldDefinition getWorldDefinition() {
         return worldDefinition;
@@ -53,16 +66,13 @@ public class LogicManager {
         return simulationCount;
     }
 
-    public LogicManager() {
-        simulations = new ArrayList<>();
-    }
-
     //choice 1
     public void ReadXmlFile(DtoXmlPath dtoXmlPath){
         LoadXml loadXml = new LoadXml();
         worldDefinition = loadXml.loadAndValidateXml(dtoXmlPath.getPath());
         simulationCount = 0;
         simulations.clear();
+        executorService = Executors.newFixedThreadPool(worldDefinition.getNumOfThreads());
     }
 
     //choice 2
@@ -78,13 +88,11 @@ public class LogicManager {
     private List<DtoEntityInfo> createDtoEntityList() {
         List<DtoEntityInfo> dtoEntity = new ArrayList<>();
         for (EntityDefinition entity : worldDefinition.getEntities().values()) {
-            dtoEntity.add(createDtoEntity(entity));
+            dtoEntity.add(createDtoEntityMap(entity));
         }
 
         return dtoEntity;
     }
-
-
 
     private Map<String,DtoProperty> createDtoEntityPropertyMap(Map<String, PropertyDefinition> propertyDefinitionMap) {
         Map<String,DtoProperty> dtoEntity = new HashMap<>();
@@ -106,8 +114,6 @@ public class LogicManager {
     public DtoRange createDtoRange(Range range){
         return new DtoRange(range.getFrom(), range.getTo());
     }
-
-
 
     // todo change,do func inside each dto
     public DtoAction createDtoAction(Action action){
@@ -161,8 +167,6 @@ public class LogicManager {
         return new DtoActivation(activation.getTicks(), activation.getProbability());
     }
 
-
-
     //choice 3
     public List<DtoEnvironmentInfo> displayEnvironment(){
         List<DtoEnvironmentInfo> environmentDetails = new ArrayList<>();
@@ -180,38 +184,8 @@ public class LogicManager {
         return environmentDetails;
     }
 
-    public DtoSimulationDetails simulationRun(){
-        Simulation simulation = new Simulation(simulationCount, FactoryInstance.createWorldInstance(worldDefinition), worldDefinition);
-        try {
-            simulation.runSimulation();
-            for (PropertyDefinition environment : worldDefinition.getEnvironmentVariables().getProperties().values()) {
-                environment.setRandomInit(true);
-            }
-        } catch (Exception e){
-            throw new SimulationFailedException(e.getMessage(), simulationCount);
-        }
-        simulations.add(simulationCount, simulation);
-        DtoSimulationDetails simulationDetails = creteSimulationDetails();
-        simulationCount++;
-        return simulationDetails;
-    }
-
-    private DtoSimulationDetails creteSimulationDetails() {
-        return new DtoSimulationDetails(simulationCount, simulations.get(simulationCount).getTerminationReason().toString().toLowerCase());
-    }
-
     //choice 4
-    public List<DtoPastSimulationDetails> createPastSimulationDetails(){
-        List<DtoPastSimulationDetails> pastSimulationDetails = new ArrayList<>();
-
-        for (Simulation simulation : simulations) {
-            pastSimulationDetails.add(new DtoPastSimulationDetails(simulation.getStartDateFormat(), simulation.getId()));
-        }
-
-        return pastSimulationDetails;
-    }
-
-    public List<DtoAmountOfEntity> createAmountOfEntitiesDetails(DtoSimulationIdChoice simulationId){
+    public List<DtoAmountOfEntity> createAmountOfEntitiesDetails(DtoSimulationChoice simulationId){
         List<DtoAmountOfEntity> amountOfEntities = new ArrayList<>();
 
         for (EntityManager entity : simulations.get(simulationId.getId()).getWorldInstance().getEntities().values()) {
@@ -242,25 +216,7 @@ public class LogicManager {
         return propertyNames;
     }
 
-    public Map<String, DtoPropertyHistogram> createPropertyHistogram(DtoEntityName entityName, DtoPropertyName propertyName,
-                                                        DtoSimulationIdChoice simulationId){
-        Map<String, DtoPropertyHistogram> amountOfValues = new HashMap<>();
-        DtoPropertyHistogram propertyValueDetails;
 
-        for (EntityInstance entity :
-                simulations.get(simulationId.getId()).getWorldInstance().getEntities().get(entityName.getName()).getEntityInstance()) {
-            String propertyValueName = entity.getProperties().get(propertyName.getName()).getValue().toString();
-            if(!amountOfValues.containsKey(propertyValueName)){
-                propertyValueDetails = new DtoPropertyHistogram(propertyValueName, 1);
-            } else{
-                propertyValueDetails = new DtoPropertyHistogram(propertyValueName,
-                        amountOfValues.get(propertyValueName).getAmount() + 1);
-            }
-            amountOfValues.put(propertyValueName, propertyValueDetails);
-        }
-
-        return amountOfValues;
-    }
 
     //choice 5
     public void saveSimulationsToFile(DtoFilePath filePath){
@@ -314,11 +270,11 @@ public class LogicManager {
     private Map<String, DtoEntityInfo> createDtoEntityMap() {
         Map<String, DtoEntityInfo> dtoEntityInfoMap = new HashMap<>();
         for (EntityDefinition entity : worldDefinition.getEntities().values()) { // null !
-            dtoEntityInfoMap.put(entity.getName() ,createDtoEntity(entity));
+            dtoEntityInfoMap.put(entity.getName() , createDtoEntityMap(entity));
         }
         return dtoEntityInfoMap;
     }
-    public DtoEntityInfo createDtoEntity(EntityDefinition entityDefinition) {
+    public DtoEntityInfo createDtoEntityMap(EntityDefinition entityDefinition) {
         return new DtoEntityInfo(entityDefinition.getName(), createDtoEntityPropertyMap(entityDefinition.getPropertiesOfAllPopulation()));
     }
 
@@ -393,25 +349,159 @@ public class LogicManager {
     }
 
     public void startSimulation(List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList, List<DtoEntitiesPopulation> dtoEntitiesPopulationList) {
-        updateEnvironment(dtoEnvironmentInitializeList);
-        updateEntitiesPopulation(dtoEntitiesPopulationList);
-        DtoSimulationDetails dtoSimulationDetails = simulationRun();
-        //todo
+        WorldDefinition newWorldDefinition = new WorldDefinition(worldDefinition);
+        updateEnvironment(dtoEnvironmentInitializeList, newWorldDefinition);
+        updateEntitiesPopulation(dtoEntitiesPopulationList, newWorldDefinition);
+        Simulation simulation = new Simulation(simulationCount, FactoryInstance.createWorldInstance(newWorldDefinition), newWorldDefinition);
+        simulations.add(simulationCount, simulation);
+        simulationCount++;
+        simulationRun(simulation);
     }
 
+    public void simulationRun(Simulation simulation){
+        try {
+            executorService.submit(simulation);
+        } catch (Exception e) {
+            simulation.setSimulationMode(SimulationMode.FAILED);
+            simulation.setFailedReason(e.getMessage());
+            throw new SimulationFailedException(e.getMessage(), simulationCount);
+        }
+    }
 
-    private void updateEnvironment(List<DtoEnvironmentInitialize> environments){
+    private void updateEnvironment(List<DtoEnvironmentInitialize> environments, WorldDefinition worldDefinition){
         for (DtoEnvironmentInitialize environment : environments) {
             worldDefinition.getEnvironmentVariables().getProperties().get(environment.getName()).setInit(environment.getValue());
             worldDefinition.getEnvironmentVariables().getProperties().get(environment.getName()).setRandomInit(false);
         }
     }
 
-    private void updateEntitiesPopulation(List<DtoEntitiesPopulation> entitiesPopulation){
+    private void updateEntitiesPopulation(List<DtoEntitiesPopulation> entitiesPopulation, WorldDefinition worldDefinition){
         for (DtoEntitiesPopulation entityPopulation : entitiesPopulation){
             worldDefinition.getEntities().get(entityPopulation.getName()).setPopulation(entityPopulation.getPopulation());
         }
     }
+
+    public DtoSimulationEndedDetails createDtoSimulationEndedDetails(DtoSimulationChoice simulationId){
+        Simulation simulation = simulations.get(simulationId.getId());
+        return new DtoSimulationEndedDetails(simulation.getId(), simulation.getStartDateFormat(), createDtoEntityMap(simulation));
+    }
+
+    private Map<String, DtoSimulationEndedEntity> createDtoEntityMap(Simulation simulation){
+        Map<String, DtoSimulationEndedEntity> entityMap = new HashMap<>();
+
+        for (EntityManager entity : simulation.getWorldInstance().getEntities().values()){
+            entityMap.put(entity.getName(), new DtoSimulationEndedEntity(entity.getName(),
+                    createDtoPropertyMap(worldDefinition.getEntities().get(entity.getName()).getPropertiesOfAllPopulation(), entity.getName(), simulation),
+                    createEntityQuantityGraph(simulation.getWorldInstance().getEntityCountGraphMap().get(entity.getName()))));
+        }
+
+        return entityMap;
+    }
+
+    private List<DtoEntityQuantityGraph> createEntityQuantityGraph(EntityCountGraph entityCountGraph) {
+        List<DtoEntityQuantityGraph> dtoEntityQuantityGraph = new ArrayList<>();
+        dtoEntityQuantityGraph.add(new DtoEntityQuantityGraph(1, entityCountGraph.getEntityQuantity().get(0)));
+
+        for(int i = 1; i < entityCountGraph.getEntityQuantity().size(); i++){
+            dtoEntityQuantityGraph.add(new DtoEntityQuantityGraph(i * 10000, entityCountGraph.getEntityQuantity().get(i)));
+        }
+
+        return dtoEntityQuantityGraph;
+    }
+
+    private Map<String, DtoPropertyResults> createDtoPropertyMap(Map<String, PropertyDefinition> properties, String entityName, Simulation simulation) {
+        Map<String, DtoPropertyResults> propertyResultsMap = new HashMap<>();
+        for (PropertyDefinition property : properties.values()){
+            if(CheckFunctions.isNumericValue(property.getType())){
+                propertyResultsMap.put(property.getName(), new DtoPropertyResults(property.getName(),
+                        property.getType().toString().toLowerCase(), property.getValue(),
+                        createPropertyHistogram(entityName, property.getName(), simulation),
+                        getConsistency(simulation, entityName, property.getName()),
+                        getAverageOfPropertyInPopulation(simulation, entityName, property.getName())));
+            } else {
+                propertyResultsMap.put(property.getName(), new DtoPropertyResults(property.getName(),
+                        property.getType().toString().toLowerCase(), property.getValue(),
+                        createPropertyHistogram(entityName, property.getName(), simulation),
+                        getConsistency(simulation, entityName, property.getName()),null));
+            }
+        }
+
+        return propertyResultsMap;
+    }
+
+    public Map<String, DtoPropertyHistogram> createPropertyHistogram(String entityName, String propertyName, Simulation simulation){
+        Map<String, DtoPropertyHistogram> amountOfValues = new HashMap<>();
+        DtoPropertyHistogram propertyValueDetails;
+        for (EntityInstance entity :
+                simulation.getWorldInstance().getEntities().get(entityName).getEntityInstance()) {
+            String propertyValueName = entity.getProperties().get(propertyName).getCurrValue().toString();
+            if(!amountOfValues.containsKey(propertyValueName)){
+                propertyValueDetails = new DtoPropertyHistogram(propertyValueName, 1);
+            } else{
+                propertyValueDetails = new DtoPropertyHistogram(propertyValueName,
+                        amountOfValues.get(propertyValueName).getAmount() + 1);
+            }
+            amountOfValues.put(propertyValueName, propertyValueDetails);
+        }
+
+        return amountOfValues;
+    }
+
+    public List<DtoSimulationInfo> createDtoSimulationInfoList(){
+        List<DtoSimulationInfo> simulationDetails = new ArrayList<>();
+        for (Simulation simulation : simulations) {
+            simulationDetails.add(new DtoSimulationInfo(simulation.getId(), simulation.getSimulationMode().toString().toLowerCase(),
+                    simulation.getFailedReason(), simulation.getTicks(), simulation.getSeconds(), createDtoSimulationEntityList(simulation)));
+        }
+
+        return simulationDetails;
+    }
+
+    public DtoSimulationInfo createDtoSimulationInfo(DtoSimulationChoice simulationId){
+        Simulation simulation = simulations.get(simulationId.getId());
+        return new DtoSimulationInfo(simulation.getId(), simulation.getSimulationMode().toString().toLowerCase(),
+                simulation.getFailedReason(), simulation.getTicks(), simulation.getSeconds(), createDtoSimulationEntityList(simulation));
+    }
+
+    private List<DtoSimulationEntity> createDtoSimulationEntityList(Simulation simulation) {
+        List<DtoSimulationEntity> simulationEntities = new ArrayList<>();
+        for(EntityManager entity : simulation.getWorldInstance().getEntities().values()){
+            simulationEntities.add(new DtoSimulationEntity(entity.getName(), entity.getEntityInstance().size()));
+        }
+
+        return simulationEntities;
+    }
+
+    private Float getConsistency(Simulation simulation, String entityName, String propertyName){
+        float consistency = 0;
+        for(EntityInstance entityInstance : simulation.getWorldInstance().getEntities().get(entityName).getEntityInstance()){
+            consistency += entityInstance.getProperties().get(propertyName).getAverageValueCounterByTicks();
+        }
+
+        int population = simulation.getWorldInstance().getEntities().get(entityName).getEntityInstance().size();
+        if(population == 0){
+            return 0f;
+        }
+        return consistency / population;
+    }
+
+    private Float getAverageOfPropertyInPopulation(Simulation simulation, String entityName, String propertyName){
+        float average = 0;
+        for(EntityInstance entityInstance : simulation.getWorldInstance().getEntities().get(entityName).getEntityInstance()){
+            average += ParseFunctions.parseNumericTypeToFloat(entityInstance.getProperties().get(propertyName).getCurrValue());
+        }
+
+        int population = simulation.getWorldInstance().getEntities().get(entityName).getEntityInstance().size();
+        if(population == 0){
+            return 0f;
+        }
+        return average / population;
+    }
+
+    public void stopSimulation(DtoSimulationChoice simulationChoice) {
+        simulations.get(simulationChoice.getId()).setSimulationMode(SimulationMode.ENDED);
+    }
 }
+
 
 

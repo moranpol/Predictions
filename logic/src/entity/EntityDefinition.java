@@ -3,6 +3,7 @@ package entity;
 import property.PropertyDefinition;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -15,6 +16,15 @@ public class EntityDefinition implements Serializable {
         this.name = name;
         this.population = population;
         this.propertiesOfAllPopulation = propertiesOfAllPopulation;
+    }
+
+    public EntityDefinition(EntityDefinition otherEntityDefinition) {
+        this.name = otherEntityDefinition.getName();
+        this.population = otherEntityDefinition.getPopulation();
+        this.propertiesOfAllPopulation = new HashMap<>();
+        for(PropertyDefinition prop : otherEntityDefinition.getPropertiesOfAllPopulation().values()){
+            this.propertiesOfAllPopulation.put(prop.getName(), new PropertyDefinition(prop));
+        }
     }
 
     @Override

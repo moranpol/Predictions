@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 import newExecutionComponent.NewExecutionController;
-import newExecutionComponent.dtoEnvironment.DtoEnvironment;
+import newExecution.dtoEnvironment.DtoEnvironment;
 import newExecutionComponent.simulationEnvironmentsInputs.inputTypes.booleanEnvironment.BooleanEnvironmentController;
 import newExecutionComponent.simulationEnvironmentsInputs.inputTypes.numberEnvironment.NumberEnvironmentController;
 import newExecutionComponent.simulationEnvironmentsInputs.inputTypes.stringEnvironment.StringEnvironmentController;

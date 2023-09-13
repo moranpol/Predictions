@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import newExecutionComponent.dtoEntities.DtoEntitiesPopulation;
+import newExecution.dtoEntities.DtoEntitiesPopulation;
 import newExecutionComponent.NewExecutionController;
 import newExecutionComponent.StartButtonListener;
 import newExecutionComponent.simulationEntitiesPopulation.SimulationEntitiesPopulationController;

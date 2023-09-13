@@ -1,10 +1,10 @@
 package rule.action.expression;
 
-import entity.EntityInstance;
 import enums.PropertyType;
+import rule.action.Context;
 
 public interface Expression{
-    Object getValue(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName);
+    Object getValue(Context context);
     PropertyType getType();
     String getString();
 }

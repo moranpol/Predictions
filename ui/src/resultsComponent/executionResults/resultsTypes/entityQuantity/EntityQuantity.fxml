@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane prefHeight="275.0" prefWidth="475.0" stylesheets="@entityQuantity.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionResults.resultsTypes.entityQuantity.EntityQuantityController">
+   <children>
+      <LineChart fx:id="chart" prefHeight="275.0" prefWidth="475.0">
+        <xAxis>
+          <NumberAxis fx:id="ticks" label="tick" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="quantity" label="quantity" side="LEFT" />
+        </yAxis>
+      </LineChart>
+   </children>
+</Pane>

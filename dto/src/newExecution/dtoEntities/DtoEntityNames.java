@@ -1,4 +1,4 @@
-package newExecutionComponent.dtoEntities;
+package newExecution.dtoEntities;
 
 import java.util.List;
 

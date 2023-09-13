@@ -27,16 +27,16 @@ public class Set extends Action{
     @Override
     public void activateAction(Context context) {
         PropertyInstance propertyInstance = context.getMainEntityInstance().getProperties().get(propertyName);
-        Object expressionValue = value.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance(), context.getSecondEntityName());
+        Object expressionValue = value.getValue(context);
         if (expressionValue == null){
             return;
         }
 
         if (propertyInstance.getType() == value.getType()) {
-            propertyInstance.setValue(expressionValue);
+            propertyInstance.setCurrValue(expressionValue);
         } else if(propertyInstance.getType() == PropertyType.FLOAT && value.getType() == PropertyType.DECIMAL){
             Float floatExpression = ParseFunctions.parseNumericTypeToFloat(expressionValue);
-            propertyInstance.setValue(floatExpression);
+            propertyInstance.setCurrValue(floatExpression);
         } else if (propertyInstance.getType() == PropertyType.DECIMAL && value.getType() == PropertyType.FLOAT) {
             throw new ParseFloatToIntException("Set action failed.\n    Entity name - " + context.getMainEntityInstance().getName() +
                     "\n    Property name - " + propertyName);

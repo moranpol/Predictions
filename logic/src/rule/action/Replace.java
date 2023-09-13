@@ -50,7 +50,7 @@ public class Replace extends Action{
                     context.getWorldDefinition().getEntities().get(entityNameToCreate).getPropertiesOfAllPopulation().get(prop.getName());
             if (propertyToCreate != null && propertyToCreate.getType() == prop.getType()) {
                 PropertyDefinition propertyDefinition = new PropertyDefinition(prop.getType(), prop.getName(),
-                        false, propertyToCreate.getRange(), prop.getValue());
+                        false, propertyToCreate.getRange(), prop.getCurrValue());
                 propertyInstanceMap.put(propertyToCreate.getName(), FactoryPropertyInstance.createPropertyInstance(propertyDefinition));
             }
         }

@@ -2,6 +2,7 @@ package rule;
 
 import entity.EntityInstance;
 import entity.EntityManager;
+import environment.EnvironmentInstance;
 import grid.Grid;
 import rule.action.Action;
 import rule.action.Context;
@@ -38,9 +39,9 @@ public class Rule implements Serializable {
         return activation;
     }
 
-    public void activeRule(Map<String, EntityManager> entities, Integer currentTick, WorldDefinition worldDefinition, Grid grid){
+    public void activeRule(Map<String, EntityManager> entities, Integer currentTick, WorldDefinition worldDefinition, Grid grid, EnvironmentInstance environmentInstance){
         if(activation.checkIfActivate(currentTick)){
-            Context context = new Context(entities, worldDefinition, grid);
+            Context context = new Context(entities, worldDefinition, environmentInstance, grid);
             for(EntityManager entityManager : entities.values()){
                 for(EntityInstance mainEntityInstance : entityManager.getEntityInstance()){
                     for (Action action : actionList){
@@ -48,7 +49,7 @@ public class Rule implements Serializable {
                             if(action.getMainEntityName().equals(mainEntityInstance.getName())){
                                 context.setMainEntityInstance(mainEntityInstance);
                                 if(action.getSecondaryEntity() != null){
-                                    List<EntityInstance> secondEntityList = secondaryEntityInstances(entities, action.getSecondaryEntity(), worldDefinition, grid);
+                                    List<EntityInstance> secondEntityList = secondaryEntityInstances(entities, action.getSecondaryEntity(), worldDefinition, grid, environmentInstance);
                                     context.setSecondEntityName(action.getSecondaryEntityName());
                                     if(secondEntityList.isEmpty()){
                                         action.activateAction(context);
@@ -90,10 +91,10 @@ public class Rule implements Serializable {
         }
     }
 
-    private List<EntityInstance> secondaryEntityInstances(Map<String, EntityManager> entities, SecondaryEntity secondaryEntity, WorldDefinition worldDefinition, Grid grid){
+    private List<EntityInstance> secondaryEntityInstances(Map<String, EntityManager> entities, SecondaryEntity secondaryEntity, WorldDefinition worldDefinition, Grid grid, EnvironmentInstance environmentInstance){
         List<EntityInstance> secondaryEntityInstances = new ArrayList<>();
         List<EntityInstance> filteredByCondition = entities.get(secondaryEntity.getSecondEntityName()).getEntityInstance();
-        Context context = new Context(entities, worldDefinition, grid);
+        Context context = new Context(entities, worldDefinition, environmentInstance, grid);
         if(secondaryEntity.getCondition() != null){
             filteredByCondition = entities.get(secondaryEntity.getSecondEntityName()).getEntityInstance().stream()
                     .filter(entityInstance -> {

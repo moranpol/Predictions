@@ -1,4 +1,4 @@
-package newExecutionComponent.dtoEnvironment;
+package newExecution.dtoEnvironment;
 
 public class DtoEnvironment {
     private final String name;

@@ -3,6 +3,7 @@ package environment;
 import property.PropertyDefinition;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -11,6 +12,13 @@ public class EnvironmentDefinition implements Serializable {
 
     public EnvironmentDefinition(Map<String, PropertyDefinition> properties) {
         this.properties = properties;
+    }
+
+    public EnvironmentDefinition(EnvironmentDefinition otherEnvironmentDefinition) {
+        this.properties = new HashMap<>();
+        for (PropertyDefinition prop : otherEnvironmentDefinition.getProperties().values()){
+            this.properties.put(prop.getName(), new PropertyDefinition(prop));
+        }
     }
 
     @Override

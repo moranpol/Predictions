@@ -12,45 +12,96 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEnvironment/DtoEnvironment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/booleanEnvironment/booleanEnvironment.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/numberEnvironment/NumberEnvironmentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/numberEnvironment/numberEnvironment.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/stringEnvironment/StringEnvironmentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/stringEnvironment/stringEnvironment.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/ResultsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionList/ExecutionListController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionList/executionList.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/results.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/results/DtoSimulationChoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/results/simulationEnded/DtoEntityQuantityGraph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/results/simulationEnded/DtoPropertyResults.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/results/simulationEnded/DtoSimulationEndedDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/results/simulationEnded/DtoSimulationEndedEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/results/simulations/DtoSimulationEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/src/results/simulations/DtoSimulationInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logic/src/enums/SimulationMode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logic/src/world/EntityCountGraph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionDetails/ExecutionDetailsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionDetails/buttons/RerunController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionDetails/buttons/RunningController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionDetails/buttons/buttons.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionDetails/executionDetails.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionResults/ExecutionResultsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionResults/executionResults.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionResults/resultsTypes/consistency/ConsistencyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionResults/resultsTypes/consistency/consistency.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionResults/resultsTypes/entityQuantity/EntityQuantityController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionResults/resultsTypes/entityQuantity/entityQuantity.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionResults/resultsTypes/histogram/HistogramController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionResults/resultsTypes/histogram/histogram.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dto/src/menuChoice3/DtoEnvironmentInitialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEnvironment/DtoEnvironmentInitialize.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dto/src/newExecution/EntitiesPopulationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEntities/DtoEntitiesPopulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dto/src/newExecution/EntityNamesDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEntities/DtoEntityNames.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dto/src/newExecution/GridDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEntities/DtoGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/menuChoice4/DtoPastSimulationDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/menuChoice4/DtoPropertyHistogram.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/results/simulationEnded/DtoPropertyHistogram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/menuChoice4/DtoSimulationIdChoice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEntities/DtoEntitiesPopulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecution/dtoEntities/DtoEntitiesPopulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEntities/DtoEntityNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecution/dtoEntities/DtoEntityNames.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEntities/DtoGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecution/dtoEntities/DtoGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEnvironment/DtoEnvironment.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecution/dtoEnvironment/DtoEnvironment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dto/src/newExecutionComponent/dtoEnvironment/DtoEnvironmentInitialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/dto/src/newExecution/dtoEnvironment/DtoEnvironmentInitialize.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/entity/EntityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/entity/EntityManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/enums/TerminationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/enums/TerminationType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/environment/EnvironmentDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/environment/EnvironmentDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/environment/EnvironmentInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/environment/EnvironmentInstance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/factory/FactoryDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/factory/FactoryInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/factory/FactoryInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/factory/FactoryPropertyInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/factory/FactoryPropertyInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/helpers/CheckFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/helpers/CheckFunctions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/helpers/ParseFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/helpers/ParseFunctions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/manager/LogicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/manager/LogicManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/property/BooleanProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/BooleanProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/property/FloatProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/FloatProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/property/IntProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/IntProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/property/PropertyDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/PropertyDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/property/PropertyInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/PropertyInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/property/StringProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/property/StringProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/Rule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Calculation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Condition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Context.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Context.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Decrease.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Decrease.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Increase.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Increase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/MultipleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/MultipleCondition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Proximity.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Proximity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Replace.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Replace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Set.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Set.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/SingleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/SingleCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/Expression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/Helper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/HelperFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/helper/HelperFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/headerComponent/Header.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/headerComponent/Header.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/property/PropertyExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/property/PropertyExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/value/BooleanExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/BooleanExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/value/FloatExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/FloatExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/value/IntExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/IntExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/expression/value/StringExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/expression/value/StringExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/simulation/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/simulation/Simulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/termination/Termination.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/termination/Termination.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/world/WorldDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/world/WorldDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/world/WorldInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/world/WorldInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/headerComponent/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/headerComponent/Header.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/headerComponent/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/headerComponent/HeaderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/NewExecution.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/NewExecution.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/NewExecutionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/NewExecutionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/StartButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/StartButtonListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/newExecution.css" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/newExecution.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/SimulationEntitiesPopulation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/SimulationEntitiesPopulation.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/SimulationEntitiesPopulationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/SimulationEntitiesPopulationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/entityCount/EntityCount.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/entityCount/EntityCount.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/entityCount/EntityCountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/entityCount/EntityCountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/entityCount/entityCount.css" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/entityCount/entityCount.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEntitiesPopulation/simulationEntitiesPopulation.css" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/simulationEntitiesPopulation.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/SimulationEnvironmentInputs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/SimulationEnvironmentInputs.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/SimulationEnvironmentInputsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/SimulationEnvironmentInputsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/inputTypes/booleanEnvironment/BooleanEnvironment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/booleanEnvironment/BooleanEnvironment.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/inputTypes/booleanEnvironment/BooleanEnvironmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/booleanEnvironment/BooleanEnvironmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/src/newExecution/simulationEnvironmentsInputs/simulationEnvironmentInputs.css" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/simulationEnvironmentInputs.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecutionComponent/NewExecutionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/NewExecutionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/SimulationEntitiesPopulationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/SimulationEntitiesPopulationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/entityCount/EntityCountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/entityCount/EntityCountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/simulationEntitiesPopulation.css" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEntitiesPopulation/simulationEntitiesPopulation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/SimulationEnvironmentInputsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/SimulationEnvironmentInputsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/booleanEnvironment/BooleanEnvironmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/booleanEnvironment/BooleanEnvironmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/numberEnvironment/NumberEnvironmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/numberEnvironment/NumberEnvironmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/stringEnvironment/StringEnvironmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/simulationEnvironmentsInputs/inputTypes/stringEnvironment/StringEnvironmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pageComponent/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pageComponent/PageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/src/pageComponent/page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pageComponent/page.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/resultsComponent/Results.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/resultsComponent/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/resultsComponent/ResultsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/resultsComponent/executionList/ExecutionList.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionList/ExecutionList.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/resultsComponent/executionList/ExecutionListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/resultsComponent/executionList/ExecutionListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/resultsComponent/results.css" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/resultsComponent/results.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,10 +111,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -101,37 +152,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "ofirko",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "C:/Users/moran/Documents/Education/Second year/Java/Predictions",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/moran/Documents/Education/Second year/Java/Predictions/ui/src/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "configurable.group.editor",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ofirko&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/moran/Documents/Education/Second year/Java/Predictions&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/moran/Documents/Education/Second year/Java/Predictions/ui/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="rule" />
       <recent name="entity" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\ui\src\resultsComponent\executionResults\resultsTypes\entityQuantity" />
       <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\src\resources" />
       <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\src" />
     </key>
@@ -219,6 +271,8 @@
       <workItem from="1692869267947" duration="1400000" />
       <workItem from="1693909971262" duration="15966000" />
       <workItem from="1693999377196" duration="62915000" />
+      <workItem from="1694349662083" duration="1213000" />
+      <workItem from="1694352975749" duration="104054000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />

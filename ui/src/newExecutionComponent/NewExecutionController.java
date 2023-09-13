@@ -5,8 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import newExecutionComponent.dtoEntities.DtoEntitiesPopulation;
-import newExecutionComponent.dtoEnvironment.DtoEnvironmentInitialize;
+import newExecution.dtoEntities.DtoEntitiesPopulation;
+import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
 import newExecutionComponent.simulationEntitiesPopulation.SimulationEntitiesPopulationController;
 import newExecutionComponent.simulationEnvironmentsInputs.SimulationEnvironmentInputsController;
 import pageComponent.PageController;
@@ -64,7 +64,7 @@ public class NewExecutionController {
         entitiesPopulationController.setNewExecutionController(this);
         environmentInputsController.setNewExecutionController(this);
         entitiesPopulationController.setMaxPopulationCount(pageController.getMaxPopulationSize());
-        entitiesPopulationController.setEntitiesCount(pageController.getEntityNamesDto());
+        entitiesPopulationController.setEntitiesCount(pageController.getDtoEntityNames());
         environmentInputsController.setEnvironmentInputs(pageController.getDtoEnvironment());
     }
 

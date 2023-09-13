@@ -6,7 +6,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import newExecutionComponent.NewExecutionController;
 import newExecutionComponent.StartButtonListener;
-import newExecutionComponent.dtoEnvironment.DtoEnvironmentInitialize;
+import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
 
 public class NumberEnvironmentController implements StartButtonListener {
 

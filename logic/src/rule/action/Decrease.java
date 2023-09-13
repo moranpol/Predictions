@@ -1,8 +1,6 @@
 package rule.action;
 
-import entity.EntityInstance;
 import enums.PropertyType;
-import exceptions.MissMatchValuesException;
 import exceptions.ParseFloatToIntException;
 import helpers.ParseFunctions;
 import property.PropertyInstance;
@@ -34,18 +32,18 @@ public class Decrease extends Action{
                     "\n    Property name - " + propertyName);
         }
 
-        Object expressionValue = by.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance(), context.getSecondEntityName());
+        Object expressionValue = by.getValue(context);
         if(expressionValue == null){
             return;
         }
 
         switch (propertyInstance.getType()){
             case DECIMAL:
-                propertyInstance.setValue((Integer)propertyInstance.getValue() - (Integer) expressionValue);
+                propertyInstance.setCurrValue((Integer)propertyInstance.getCurrValue() - (Integer) expressionValue);
                 break;
             case FLOAT:
                 Float floatExpression = ParseFunctions.parseNumericTypeToFloat(expressionValue);
-                propertyInstance.setValue((Float)propertyInstance.getValue() - floatExpression);
+                propertyInstance.setCurrValue((Float)propertyInstance.getCurrValue() - floatExpression);
                 break;
         }
     }

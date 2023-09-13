@@ -4,25 +4,31 @@ import enums.PropertyType;
 import exceptions.ParseFailedException;
 
 public abstract class ParseFunctions {
-    public static Integer parseNumericTypeToInt(Object value){
+    public synchronized static Integer parseNumericTypeToInt(Object value){
         if(value instanceof Float){
             Float floatObj = (Float)value;
             return floatObj.intValue();
-        }else{
+        } else if(value instanceof Double){
+            Double doubleValue = (Double) value;
+            return doubleValue.intValue();
+        } else{
             return (Integer)value;
         }
     }
 
-    public static Float parseNumericTypeToFloat(Object value){
+    public synchronized static Float parseNumericTypeToFloat(Object value){
         if (value instanceof Integer){
             Integer intValue = (Integer)value;
             return intValue.floatValue();
+        } else if(value instanceof Double){
+            Double doubleValue = (Double) value;
+            return doubleValue.floatValue();
         } else{
             return (Float)value;
         }
     }
 
-    public static Object parseInitByType(PropertyType type, String value) {
+    public synchronized static Object parseInitByType(PropertyType type, String value) {
         Object init = new Object();
         switch (type) {
             case DECIMAL:

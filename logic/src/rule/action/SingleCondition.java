@@ -37,39 +37,36 @@ public class SingleCondition extends Condition{
     @Override
     public Boolean invokeCondition(Context context) {
         EntityInstance mainEntityInstance;
-        EntityInstance secondEntityInstance;
-        String secondEntityName;
-        increaseTotalCountBy1();
         try{
             mainEntityInstance = checkAndGetMainEntityInstance(context);
         } catch (Exception e){
             throw new MissMatchValuesException(e.getMessage() + " is not one of the main or second instances.\n" +
                     "    condition action failed.");
         }
-
         if(mainEntityInstance == null){
             return null;
         }
 
-        secondEntityInstance = checkAndGetSecondEntityInstance(context, mainEntityInstance);
-        secondEntityName = checkAndGetSecondEntityName(context, mainEntityInstance);
+        Context newContext = new Context(context.getEntities(), context.getWorldDefinition(), context.getEnvironmentInstance(), context.getGrid());
+        newContext.setMainEntityInstance(mainEntityInstance);
+        newContext.setSecondEntityInstance(checkAndGetSecondEntityInstance(context, mainEntityInstance));
+        newContext.setSecondEntityName(checkAndGetSecondEntityName(context, mainEntityInstance));
         switch (operator){
             case EQUAL:
-                return equalCondition(mainEntityInstance, secondEntityInstance, secondEntityName);
+                return equalCondition(newContext);
             case NOTEQUAL:
-                return notEqualCondition(mainEntityInstance, secondEntityInstance, secondEntityName);
+                return notEqualCondition(newContext);
             case BT:
-                return btCondition(mainEntityInstance, secondEntityInstance, secondEntityName);
+                return btCondition(newContext);
             case LT:
-                return ltCondition(mainEntityInstance, secondEntityInstance, secondEntityName);
+                return ltCondition(newContext);
         }
-
         return false;
     }
 
-    private Boolean equalCondition(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName){
-        Object propertyExpression = property.getValue(mainEntityInstance, secondEntityInstance, secondEntityName);
-        Object valueExpression = value.getValue(mainEntityInstance, secondEntityInstance, secondEntityName);
+    private Boolean equalCondition(Context context){
+        Object propertyExpression = property.getValue(context);
+        Object valueExpression = value.getValue(context);
         if(propertyExpression == null || valueExpression == null){
             return null;
         }
@@ -88,13 +85,19 @@ public class SingleCondition extends Condition{
         }
     }
 
-    private Boolean notEqualCondition(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName){
-        return !equalCondition(mainEntityInstance, secondEntityInstance, secondEntityName);
+    private Boolean notEqualCondition(Context context){
+        Boolean result = equalCondition(context);
+
+        if(result == null){
+            return null;
+        }
+
+        return !result;
     }
 
-    private Boolean btCondition(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName){
-        Object propertyExpression = property.getValue(mainEntityInstance, secondEntityInstance, secondEntityName);
-        Object valueExpression = value.getValue(mainEntityInstance, secondEntityInstance, secondEntityName);
+    private Boolean btCondition(Context context){
+        Object propertyExpression = property.getValue(context);
+        Object valueExpression = value.getValue(context);
         if(propertyExpression == null || valueExpression == null){
             return null;
         }
@@ -108,9 +111,9 @@ public class SingleCondition extends Condition{
         return ParseFunctions.parseNumericTypeToFloat(propertyExpression) > ParseFunctions.parseNumericTypeToFloat(valueExpression);
     }
 
-    private Boolean ltCondition(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName){
-        Object propertyExpression = property.getValue(mainEntityInstance, secondEntityInstance, secondEntityName);
-        Object valueExpression = value.getValue(mainEntityInstance, secondEntityInstance, secondEntityName);
+    private Boolean ltCondition(Context context){
+        Object propertyExpression = property.getValue(context);
+        Object valueExpression = value.getValue(context);
         if(propertyExpression == null || valueExpression == null){
             return null;
         }

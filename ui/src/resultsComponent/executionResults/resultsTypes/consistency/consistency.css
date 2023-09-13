@@ -1,0 +1,16 @@
+/* Apply styles to the HBox */
+VBox {
+    -fx-background-color: #f0f0f0; /* Light gray background color */
+    -fx-border-color: #cccccc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the HBox */
+    -fx-spacing: 20px; /* Spacing between children */
+    -fx-padding: 10px; /* Add padding around the HBox */
+    -fx-alignment: CENTER; /* Center-align children */
+}
+
+/* Apply styles to the Label components */
+Label {
+    -fx-font-size: 16px; /* Font size */
+    -fx-padding: 10px; /* Add padding to the Labels */
+}

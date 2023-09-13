@@ -1,4 +1,4 @@
-package newExecutionComponent.dtoEntities;
+package newExecution.dtoEntities;
 
 public class DtoGrid {
     private final Integer rows;

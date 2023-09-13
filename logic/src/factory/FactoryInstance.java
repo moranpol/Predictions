@@ -32,12 +32,7 @@ public abstract class FactoryInstance {
     }
 
     private static EnvironmentInstance createEnvironmentInstance(EnvironmentDefinition environmentDefinition){
-        EnvironmentInstance environmentInstance = new EnvironmentInstance(FactoryPropertyInstance.createPropertyInstanceMap(environmentDefinition.getProperties()));
-        for (PropertyDefinition prop : environmentDefinition.getProperties().values()) {
-            prop.setInit(environmentInstance.getProperties().get(prop.getName()).getValue());
-        }
-
-        return environmentInstance;
+        return new EnvironmentInstance(FactoryPropertyInstance.createPropertyInstanceMap(environmentDefinition.getProperties()));
     }
 
     private static EntityManager createEntityManager(EntityDefinition entityDefinition, Grid grid){

@@ -74,7 +74,7 @@ public class HeaderController {
 
     @FXML
     void resultsButtonClicked(ActionEvent event) {
-        pageController.loadResultComponent();
+        pageController.loadResultsComponent();
     }
 
 }

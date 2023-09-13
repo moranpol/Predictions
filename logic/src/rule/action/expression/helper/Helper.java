@@ -6,6 +6,7 @@ import enums.PropertyType;
 import exceptions.ParseFailedException;
 import factory.FactoryExpression;
 import property.PropertyDefinition;
+import rule.action.Context;
 import rule.action.expression.Expression;
 
 import java.io.Serializable;
@@ -30,13 +31,10 @@ public class Helper implements Expression, Serializable {
     }
 
     @Override
-    public Object getValue(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName) {
-        helperFunction.setMainEntityInstance(mainEntityInstance);
-        helperFunction.setSecondEntityInstance(secondEntityInstance);
-        helperFunction.setSecondEntityName(secondEntityName);
+    public Object getValue(Context context) {
         switch (this.funcName){
             case "environment":
-                return helperFunction.environment(variables.get(0));
+                return helperFunction.environment(variables.get(0), context.getEnvironmentInstance());
             case "random":
                 try{
                     return helperFunction.random(Integer.parseInt(variables.get(0)));
@@ -44,17 +42,17 @@ public class Helper implements Expression, Serializable {
                     throw new ParseFailedException("random helper function failed", PropertyType.DECIMAL);
                 }
             case "evaluate":
-                return helperFunction.evaluate(variables.get(0));
+                return helperFunction.evaluate(variables.get(0), context.getMainEntityInstance(), context.getSecondEntityInstance(), context.getSecondEntityName());
             case "percent":
-                EntityInstance entity = getEntityInstance(mainEntityInstance, secondEntityInstance, variables.get(0));
+                EntityInstance entity = getEntityInstance(context.getMainEntityInstance(), context.getSecondEntityInstance(), variables.get(0));
                 Expression expression1 = FactoryExpression.createExpression(variables.get(0), helperFunction.getEnvironmentDefinition(),
                         entities.get(entity.getName()).getPropertiesOfAllPopulation(), entities);
-                entity = getEntityInstance(mainEntityInstance, secondEntityInstance, variables.get(1));
+                entity = getEntityInstance(context.getMainEntityInstance(), context.getSecondEntityInstance(), variables.get(1));
                 Expression expression2 = FactoryExpression.createExpression(variables.get(1), helperFunction.getEnvironmentDefinition(),
                         entities.get(entity.getName()).getPropertiesOfAllPopulation(), entities);
-                return helperFunction.percent(expression1, expression2);
+                return helperFunction.percent(expression1, expression2, context);
             case "ticks":
-                return helperFunction.ticks(variables.get(0));
+                return helperFunction.ticks(variables.get(0), context.getMainEntityInstance(), context.getSecondEntityInstance(), context.getSecondEntityName());
         }
         return null;
     }

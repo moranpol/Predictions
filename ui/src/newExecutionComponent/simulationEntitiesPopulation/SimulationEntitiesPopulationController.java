@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import newExecutionComponent.dtoEntities.DtoEntityNames;
+import newExecution.dtoEntities.DtoEntityNames;
 import newExecutionComponent.NewExecutionController;
 import newExecutionComponent.simulationEntitiesPopulation.entityCount.EntityCountController;
 

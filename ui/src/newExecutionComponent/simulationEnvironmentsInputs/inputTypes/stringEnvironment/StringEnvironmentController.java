@@ -1,12 +1,11 @@
 package newExecutionComponent.simulationEnvironmentsInputs.inputTypes.stringEnvironment;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import newExecutionComponent.NewExecutionController;
 import newExecutionComponent.StartButtonListener;
-import newExecutionComponent.dtoEnvironment.DtoEnvironmentInitialize;
+import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
 
 public class StringEnvironmentController implements StartButtonListener {
 

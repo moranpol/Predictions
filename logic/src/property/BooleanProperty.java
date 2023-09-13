@@ -3,11 +3,14 @@ package property;
 import enums.PropertyType;
 
 public class BooleanProperty extends PropertyInstance {
-    boolean value;
+    private Boolean currValue;
+    private Boolean pastValue;
+
 
     public BooleanProperty(String name, boolean value) {
         super(name);
-        this.value = value;
+        currValue = value;
+        pastValue = value;
     }
 
     @Override
@@ -16,17 +19,18 @@ public class BooleanProperty extends PropertyInstance {
     }
 
     @Override
-    public void setValue(Object value) {
-        if (this.value == (Boolean)value){
-            setCurrValueCounterByTicks(getCurrValueCounterByTicks() + 1);
-        } else{
-            setCurrValueCounterByTicks(0);
-        }
-        this.value = (Boolean)value;
+    public void setCurrValue(Object currValue) {
+        pastValue = this.currValue;
+        this.currValue = (Boolean) currValue;
     }
 
     @Override
-    public Object getValue() {
-        return value;
+    public Object getCurrValue() {
+        return currValue;
+    }
+
+    @Override
+    public Object getPastValue() {
+        return pastValue;
     }
 }

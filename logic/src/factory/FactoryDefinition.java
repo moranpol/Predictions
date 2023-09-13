@@ -35,7 +35,7 @@ public abstract class FactoryDefinition {
         }
 
         return new WorldDefinition(environment, entities, rules, createTermination(prdWorld.getPRDTermination()),
-                createGrid(prdWorld.getPRDGrid()));
+                createGrid(prdWorld.getPRDGrid()), prdWorld.getPRDThreadCount());
     }
 
     private static Grid createGrid(PRDWorld.PRDGrid prdGrid){
@@ -137,19 +137,22 @@ public abstract class FactoryDefinition {
     private static Termination createTermination(PRDTermination prdTermination){
         Integer seconds = null;
         Integer ticks = null;
+        boolean human = false;
 
-        for (Object termination : prdTermination.getPRDBySecondOrPRDByTicks()) {
-            if (CheckFunctions.isPRDTerminationBySeconds(termination)) {
-                PRDBySecond prdBySecond = (PRDBySecond)termination;
-                seconds = prdBySecond.getCount();
-            } else if (CheckFunctions.isPRDTerminationByTicks(prdTermination.getPRDBySecondOrPRDByTicks().get(0))) {
-                PRDByTicks prdByTicks = (PRDByTicks)termination;
-                ticks = prdByTicks.getCount();
+        if(prdTermination.getPRDByUser() != null){
+            human = true;
+        } else {
+            for (Object termination : prdTermination.getPRDBySecondOrPRDByTicks()) {
+                if (CheckFunctions.isPRDTerminationBySeconds(termination)) {
+                    PRDBySecond prdBySecond = (PRDBySecond) termination;
+                    seconds = prdBySecond.getCount();
+                } else if (CheckFunctions.isPRDTerminationByTicks(prdTermination.getPRDBySecondOrPRDByTicks().get(0))) {
+                    PRDByTicks prdByTicks = (PRDByTicks) termination;
+                    ticks = prdByTicks.getCount();
+                }
             }
         }
 
-        Boolean human = false; // todo - change by data
-
-        return new Termination(ticks, seconds, human);  // todo - Human = if Human can end simu. = true/false
+        return new Termination(ticks, seconds, human);
     }
 }

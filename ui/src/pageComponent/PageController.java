@@ -8,12 +8,15 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import manager.LogicManager;
-import newExecutionComponent.dtoEntities.DtoEntitiesPopulation;
-import newExecutionComponent.dtoEntities.DtoEntityNames;
-import newExecutionComponent.dtoEntities.DtoGrid;
+import newExecution.dtoEntities.DtoEntitiesPopulation;
+import newExecution.dtoEntities.DtoEntityNames;
+import newExecution.dtoEntities.DtoGrid;
 import newExecutionComponent.NewExecutionController;
-import newExecutionComponent.dtoEnvironment.DtoEnvironment;
-import newExecutionComponent.dtoEnvironment.DtoEnvironmentInitialize;
+import newExecution.dtoEnvironment.DtoEnvironment;
+import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
+import results.simulationEnded.DtoSimulationEndedDetails;
+import results.simulations.DtoSimulationInfo;
+import results.DtoSimulationChoice;
 import resultsComponent.ResultsController;
 
 import java.io.IOException;
@@ -47,7 +50,7 @@ public class PageController {
     public void initialize(){
         headerController.setPageController(this);
         logicManager = new LogicManager();
-        originalDividerPosition = 0.2908; // Store your original value here
+        originalDividerPosition = 0.2908;
         setDivider();
     }
 
@@ -90,7 +93,7 @@ public class PageController {
         }
     }
 
-    public void loadResultComponent() {
+    public void loadResultsComponent() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultsComponent/Results.fxml"));
             Parent results = loader.load();
@@ -99,11 +102,12 @@ public class PageController {
 
             resultsController = loader.getController();
             resultsController.setPageController(this);
+            resultsController.setExecutionListController();
         } catch (IOException ignored) {
         }
     }
 
-    public DtoEntityNames getEntityNamesDto(){
+    public DtoEntityNames getDtoEntityNames(){
         return logicManager.createEntityNameDto();
     }
 
@@ -117,8 +121,24 @@ public class PageController {
     }
 
     public void startSimulation(List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList, List<DtoEntitiesPopulation> dtoEntitiesPopulationList){
-        loadResultComponent();
+        loadResultsComponent();
         logicManager.startSimulation(dtoEnvironmentInitializeList, dtoEntitiesPopulationList);
+    }
+
+    public DtoSimulationEndedDetails getDtoSimulationEndedDetails(DtoSimulationChoice simulationChoice){
+        return logicManager.createDtoSimulationEndedDetails(simulationChoice);
+    }
+
+    public List<DtoSimulationInfo> getDtoSimulationInfoList(){
+        return logicManager.createDtoSimulationInfoList();
+    }
+
+    public DtoSimulationInfo getDtoSimulationInfo(DtoSimulationChoice simulationChoice){
+        return logicManager.createDtoSimulationInfo(simulationChoice);
+    }
+
+    public void stopSimulation(DtoSimulationChoice simulationChoice) {
+        logicManager.stopSimulation(simulationChoice);
     }
 }
 
