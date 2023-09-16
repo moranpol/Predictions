@@ -14,7 +14,7 @@ public class DtoProximity extends DtoAction {
         return depth;
     }
 
-    public int getActionAmount() {
+    public Integer getActionAmount() {
         return actionAmount;
     }
 }

@@ -24,11 +24,7 @@
       <Label styleClass="label-title" text="Activation:" GridPane.rowIndex="1" />
       <Text fx:id="nameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" GridPane.columnIndex="1" />
       <Text fx:id="activationVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <ComboBox fx:id="actioncBoxChoice" prefWidth="150.0" promptText="Select Action" GridPane.rowIndex="2" />
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2">
-         <children>
-            <fx:include source="../action/action.fxml" />
-         </children>
-      </Pane>
+      <ComboBox fx:id="actioncBox" onAction="#actioncBoxChoice" prefWidth="150.0" promptText="Select Action" GridPane.rowIndex="2" />
+      <Pane fx:id="paneAction" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2" />
    </children>
 </GridPane>

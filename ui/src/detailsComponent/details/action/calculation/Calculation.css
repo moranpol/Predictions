@@ -7,7 +7,7 @@
 
 /* Style for the title labels */
 .label-title {
-    -fx-font-size: 13px;
+    -fx-font-size: 11px;
     -fx-text-fill: #333333;
     -fx-font-weight: bold;
 }
