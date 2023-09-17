@@ -19,6 +19,14 @@ public class PropertyDefinition implements Serializable {
         this.init = init;
     }
 
+    public PropertyDefinition(PropertyDefinition otherPropertyDefinition) {
+        this.type = otherPropertyDefinition.getType();
+        this.name = otherPropertyDefinition.getName();
+        this.range = otherPropertyDefinition.getRange();
+        this.isRandomInit = otherPropertyDefinition.isRandomInit();
+        this.init = otherPropertyDefinition.getValue();
+    }
+
     public String getName() {
         return name;
     }

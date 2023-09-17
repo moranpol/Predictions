@@ -1,6 +1,4 @@
-package menuChoice4;
-
-import java.util.Map;
+package results.simulationEnded;
 
 public class DtoPropertyHistogram {
     private final String valueOfProperty;

@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Main-Class: Main
+Main-Class: application.PredictionApplication
 Class-Path: logic.jar dto.jar
 

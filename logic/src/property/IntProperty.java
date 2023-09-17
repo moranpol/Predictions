@@ -5,12 +5,14 @@ import helpers.ParseFunctions;
 
 public class IntProperty extends PropertyInstance{
     private final Range range;
-    private Integer value;
+    private Integer currValue;
+    private Integer pastValue;
 
     public IntProperty(String name, Range range, Integer value) {
         super(name);
         this.range = range;
-        this.value = value;
+        currValue = value;
+        pastValue = value;
     }
 
     @Override
@@ -19,25 +21,24 @@ public class IntProperty extends PropertyInstance{
     }
 
     @Override
-    public void setValue(Object value) {
-        Integer prevValue = this.value;
-        value = ParseFunctions.parseNumericTypeToInt(value);
-        if((Integer)value < this.range.getFrom()){
-            this.value = this.range.getFrom().intValue();
-        } else if ((Integer)value > this.range.getTo()) {
-            this.value = this.range.getTo().intValue();
+    public void setCurrValue(Object currValue) {
+        pastValue = this.currValue;
+        currValue = ParseFunctions.parseNumericTypeToInt(currValue);
+        if((Integer) currValue < this.range.getFrom()){
+            this.currValue = this.range.getFrom().intValue();
+        } else if ((Integer) currValue > this.range.getTo()) {
+            this.currValue = this.range.getTo().intValue();
         } else{
-            this.value = (Integer)value;
-        }
-
-        if (this.value.equals(prevValue)){
-            setCurrValueCounterByTicks(getCurrValueCounterByTicks() + 1);
-        } else{
-            setCurrValueCounterByTicks(0);
+            this.currValue = (Integer) currValue;
         }
     }
 
-    public Integer getValue() {
-        return value;
+    public Integer getCurrValue() {
+        return currValue;
+    }
+
+    @Override
+    public Object getPastValue() {
+        return pastValue;
     }
 }

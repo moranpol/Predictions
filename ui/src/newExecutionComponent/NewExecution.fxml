@@ -2,37 +2,42 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@newExecution.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.NewExecutionController">
-   <center>
-      <HBox prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Pane fx:id="simulationEntitiesPopulation" prefHeight="450.0" prefWidth="400.0">
+<AnchorPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.NewExecutionController">
+   <children>
+      <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@newExecution.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <fx:include fx:id="entitiesPopulation" source="simulationEntitiesPopulation/SimulationEntitiesPopulation.fxml" />
+                  <Pane fx:id="simulationEntitiesPopulation" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <fx:include fx:id="entitiesPopulation" source="simulationEntitiesPopulation/SimulationEntitiesPopulation.fxml" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="simulationEnvironmentInputs" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <fx:include fx:id="environmentInputs" source="simulationEnvironmentsInputs/SimulationEnvironmentInputs.fxml" />
+                     </children>
+                  </Pane>
                </children>
-            </Pane>
-            <Pane fx:id="simulationEnvironmentInputs" prefHeight="450.0" prefWidth="600.0">
+            </HBox>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="780.0" BorderPane.alignment="CENTER">
                <children>
-                  <fx:include fx:id="environmentInputs" source="simulationEnvironmentsInputs/SimulationEnvironmentInputs.fxml" />
+                  <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearButtonClick" prefHeight="30.0" prefWidth="100.0" text="Clear" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="startButton" mnemonicParsing="false" onAction="#startButtonClick" prefHeight="30.0" prefWidth="100.0" text="Start" HBox.hgrow="ALWAYS" />
                </children>
-            </Pane>
-         </children>
-      </HBox>
-   </center>
-   <bottom>
-      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="780.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearButtonClick" prefHeight="30.0" prefWidth="100.0" text="Clear" />
-            <Button fx:id="startButton" mnemonicParsing="false" onAction="#startButtonClick" prefHeight="30.0" prefWidth="100.0" text="Start" />
-         </children>
-         <padding>
-            <Insets left="20.0" right="20.0" />
-         </padding>
-      </HBox>
-   </bottom>
-</BorderPane>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

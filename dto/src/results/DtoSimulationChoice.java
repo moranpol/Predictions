@@ -1,9 +1,9 @@
-package menuChoice4;
+package results;
 
-public class DtoSimulationIdChoice {
+public class DtoSimulationChoice {
     private final Integer id;
 
-    public DtoSimulationIdChoice(Integer id) {
+    public DtoSimulationChoice(Integer id) {
         this.id = id;
     }
 

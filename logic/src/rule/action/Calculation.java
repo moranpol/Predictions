@@ -1,6 +1,5 @@
 package rule.action;
 
-import entity.EntityInstance;
 import enums.Arithmetics;
 import exceptions.MissMatchValuesException;
 import helpers.ParseFunctions;
@@ -11,7 +10,6 @@ public class Calculation extends Action{
     private final Expression arg1;
     private final Expression arg2;
     private final Arithmetics arithmetic;
-
 
     public String getArg1String() {
         return arg1.getString();
@@ -35,8 +33,8 @@ public class Calculation extends Action{
 
     @Override
     public void activateAction(Context context) {
-        Object valueArg1 = arg1.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance(), context.getSecondEntityName());
-        Object valueArg2 = arg2.getValue(context.getMainEntityInstance(), context.getSecondEntityInstance(), context.getSecondEntityName());
+        Object valueArg1 = arg1.getValue(context);
+        Object valueArg2 = arg2.getValue(context);
 
         if(valueArg1 == null || valueArg2 == null){
             return;
@@ -47,15 +45,15 @@ public class Calculation extends Action{
         switch (arithmetic){
             case DIVIDE:
                 if(floatArg2 != 0){
-                    context.getMainEntityInstance().getProperties().get(propertyName).setValue(floatArg1 / floatArg2);
+                    context.getMainEntityInstance().getProperties().get(propertyName).setCurrValue(floatArg1 / floatArg2);
                 }
                 else {
-                    throw new MissMatchValuesException("Calculation divide action failed - expression arg2 is 0.\n " +
-                            "    Entity name - " + getMainEntityName() + "\n    Property name - " + propertyName);
+                    throw new MissMatchValuesException("Calculation divide action failed - expression arg2 is 0.\n" +
+                            "Entity name - " + getMainEntityName() + "\nProperty name - " + propertyName);
                 }
                 break;
             case MULTIPLY:
-                context.getMainEntityInstance().getProperties().get(propertyName).setValue(floatArg1 * floatArg2);
+                context.getMainEntityInstance().getProperties().get(propertyName).setCurrValue(floatArg1 * floatArg2);
                 break;
         }
     }

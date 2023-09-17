@@ -1,0 +1,14 @@
+/* Style the buttons inside buttonsVBox */
+.button {
+    -fx-background-color: #007bff; /* Blue color for buttons */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-pref-width: 100px; /* Preferred width for buttons */
+    -fx-pref-height: 30px; /* Preferred height for buttons */
+    -fx-border-radius: 5px; /* Rounded corners for buttons */
+}
+
+/* Hover style for buttons */
+.button:hover {
+    -fx-background-color: #0056b3; /* Darker blue color on hover */
+}

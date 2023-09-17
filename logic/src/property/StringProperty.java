@@ -3,26 +3,28 @@ package property;
 import enums.PropertyType;
 
 public class StringProperty extends PropertyInstance{
-    private String value;
+    private String currValue;
+    private String pastValue;
 
     public StringProperty(String name, String value) {
         super(name);
-        this.value = value;
+        currValue = value;
+        pastValue = value;
     }
 
-    public String getValue() {
-        return value;
+    public String getCurrValue() {
+        return currValue;
     }
 
     @Override
-    public void setValue(Object value) {
-        if (this.value.equals((String)value)){
-            setCurrValueCounterByTicks(getCurrValueCounterByTicks() + 1);
-        } else{
-            setCurrValueCounterByTicks(0);
-        }
+    public Object getPastValue() {
+        return pastValue;
+    }
 
-        this.value = (String)value;
+    @Override
+    public void setCurrValue(Object currValue) {
+        pastValue = this.currValue;
+        this.currValue = (String) currValue;
     }
 
     @Override

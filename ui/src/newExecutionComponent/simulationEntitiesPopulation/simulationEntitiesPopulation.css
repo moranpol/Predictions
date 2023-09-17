@@ -34,11 +34,6 @@ Label {
     -fx-alignment: TOP_CENTER;
 }
 
-/* Style the HBox in the bottom */
-HBox {
-    -fx-alignment: left;
-}
-
 /* Apply styles to the labels in the bottom HBox */
 .countersLabel {
     -fx-font-size: 12px;

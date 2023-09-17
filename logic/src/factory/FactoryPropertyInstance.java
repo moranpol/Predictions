@@ -1,5 +1,6 @@
 package factory;
 
+import helpers.ParseFunctions;
 import property.*;
 
 import java.util.*;
@@ -42,7 +43,7 @@ public abstract class FactoryPropertyInstance {
                     (property.getRange().getTo().intValue()) + 1);
         }
         else{
-            value = (Integer)property.getValue() ;
+            value = ParseFunctions.parseNumericTypeToInt(property.getValue());
         }
 
         return new IntProperty(property.getName(), property.getRange(), value);
@@ -56,7 +57,7 @@ public abstract class FactoryPropertyInstance {
                     (property.getRange().getTo().floatValue() - property.getRange().getFrom().floatValue());
         }
         else{
-            value = (Float)property.getValue() ;
+            value = ParseFunctions.parseNumericTypeToFloat(property.getValue());
         }
 
         return new FloatProperty(property.getName(), property.getRange(), value);

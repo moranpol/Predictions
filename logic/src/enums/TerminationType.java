@@ -2,5 +2,6 @@ package enums;
 
 public enum TerminationType {
     TICKS,
-    SECONDS
+    SECONDS,
+    User
 }

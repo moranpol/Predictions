@@ -2,6 +2,7 @@ package rule.action;
 
 import entity.EntityInstance;
 import entity.EntityManager;
+import environment.EnvironmentInstance;
 import grid.Grid;
 import world.WorldDefinition;
 
@@ -12,17 +13,31 @@ import java.util.Map;
 public class Context {
     private EntityInstance MainEntityInstance;
     private EntityInstance secondEntityInstance = null;
+    private String secondEntityName = null;
     private final Map<String, EntityManager> entities;
     private final WorldDefinition worldDefinition;
     private final List<EntityInstance> newEntityInstances;
+    private final EnvironmentInstance environmentInstance;
     private final Grid grid;
-    private String secondEntityName = null;
 
-    public Context(Map<String, EntityManager> entities, WorldDefinition worldDefinition, Grid grid) {
+    public Context(Map<String, EntityManager> entities, WorldDefinition worldDefinition, EnvironmentInstance environmentInstance, Grid grid) {
         this.entities = entities;
         this.worldDefinition = worldDefinition;
+        this.environmentInstance = environmentInstance;
         this.grid = grid;
         newEntityInstances = new ArrayList<>();
+    }
+
+    public Context(Map<String, EntityManager> entities, WorldDefinition worldDefinition, EnvironmentInstance environmentInstance, Grid grid, List<EntityInstance> newEntityInstances) {
+        this.entities = entities;
+        this.worldDefinition = worldDefinition;
+        this.environmentInstance = environmentInstance;
+        this.grid = grid;
+        this.newEntityInstances = newEntityInstances;
+    }
+
+    public EnvironmentInstance getEnvironmentInstance() {
+        return environmentInstance;
     }
 
     public EntityInstance getMainEntityInstance() {

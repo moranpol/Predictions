@@ -1,4 +1,4 @@
-package menuChoice1;
+package header;
 
 public class DtoXmlPath {
     private final String path;

@@ -1,14 +1,15 @@
 package newExecutionComponent.simulationEnvironmentsInputs.inputTypes.stringEnvironment;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import newExecution.dtoEnvironment.DtoEnvironment;
 import newExecutionComponent.NewExecutionController;
 import newExecutionComponent.StartButtonListener;
-import newExecutionComponent.dtoEnvironment.DtoEnvironmentInitialize;
+import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
+import newExecutionComponent.simulationEnvironmentsInputs.inputTypes.EnvironmentInputs;
 
-public class StringEnvironmentController implements StartButtonListener {
+public class StringEnvironmentController implements StartButtonListener, EnvironmentInputs {
 
     @FXML
     private Label valueName;
@@ -28,11 +29,16 @@ public class StringEnvironmentController implements StartButtonListener {
         });
     }
 
-    public void setNewExecutionController(NewExecutionController newExecutionController) {
+    public void setter(NewExecutionController newExecutionController, DtoEnvironment environment){
+        setNewExecutionController(newExecutionController);
+        setValueName(environment.getName());
+    }
+
+    private void setNewExecutionController(NewExecutionController newExecutionController) {
         this.newExecutionController = newExecutionController;
     }
 
-    public void setValueName(String valueName) {
+    private void setValueName(String valueName) {
         this.valueName.setText(valueName);
     }
 
@@ -41,5 +47,10 @@ public class StringEnvironmentController implements StartButtonListener {
         if(isValueSet){
             newExecutionController.addToDtoEnvironmentInitializeList(new DtoEnvironmentInitialize(valueName.getText(), valueTextFiled.getText()));
         }
+    }
+
+    @Override
+    public void rerunExecution(DtoEnvironmentInitialize dtoEnvironmentInitialize) {
+        valueTextFiled.setText(dtoEnvironmentInitialize.getValue().toString());
     }
 }

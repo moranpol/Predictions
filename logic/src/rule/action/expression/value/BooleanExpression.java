@@ -1,14 +1,12 @@
 package rule.action.expression.value;
 
-import entity.EntityInstance;
 import enums.PropertyType;
+import rule.action.Context;
 import rule.action.expression.Expression;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class BooleanExpression implements Expression, Serializable {
-
     private final Boolean value;
     private final String expressionString;
 
@@ -18,20 +16,7 @@ public class BooleanExpression implements Expression, Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BooleanExpression that = (BooleanExpression) o;
-        return Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
-    @Override
-    public Object getValue(EntityInstance mainEntityInstance, EntityInstance secondEntityInstance, String secondEntityName) {
+    public Object getValue(Context context) {
         return this.value;
     }
 

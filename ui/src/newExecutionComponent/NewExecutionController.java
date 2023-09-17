@@ -5,14 +5,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import newExecutionComponent.dtoEntities.DtoEntitiesPopulation;
-import newExecutionComponent.dtoEnvironment.DtoEnvironmentInitialize;
+import newExecution.DtoRerunExecution;
+import newExecution.dtoEntities.DtoEntitiesPopulation;
+import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
 import newExecutionComponent.simulationEntitiesPopulation.SimulationEntitiesPopulationController;
 import newExecutionComponent.simulationEnvironmentsInputs.SimulationEnvironmentInputsController;
 import pageComponent.PageController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class NewExecutionController {
 
@@ -64,7 +66,7 @@ public class NewExecutionController {
         entitiesPopulationController.setNewExecutionController(this);
         environmentInputsController.setNewExecutionController(this);
         entitiesPopulationController.setMaxPopulationCount(pageController.getMaxPopulationSize());
-        entitiesPopulationController.setEntitiesCount(pageController.getEntityNamesDto());
+        entitiesPopulationController.setEntitiesCount(pageController.getDtoEntityNames());
         environmentInputsController.setEnvironmentInputs(pageController.getDtoEnvironment());
     }
 
@@ -82,6 +84,7 @@ public class NewExecutionController {
         for (StartButtonListener listener : startNewExecutionListeners){
             listener.startOnClicked();
         }
+        pageController.getHeaderController().setResultsButtonDisable();
         pageController.startSimulation(dtoEnvironmentInitializeList, dtoEntitiesPopulationList);
     }
 
@@ -95,6 +98,11 @@ public class NewExecutionController {
 
     public void addToDtoEnvironmentInitializeList(DtoEnvironmentInitialize dtoEnvironmentInitialize){
         dtoEnvironmentInitializeList.add(dtoEnvironmentInitialize);
+    }
+
+    public void rerunExecution(DtoRerunExecution dtoRerunExecution) {
+        entitiesPopulationController.rerunExecutionEntities(dtoRerunExecution.getDtoEntitiesPopulationList());
+        environmentInputsController.rerunExecutionEnvironments(dtoRerunExecution.getDtoEnvironmentInitializeList());
     }
 }
 

@@ -10,7 +10,6 @@ public abstract class Action implements Serializable {
     private final String mainEntityName;
     private SecondaryEntity secondaryEntity;
 
-
     public Action(String entityName, SecondaryEntity secondaryEntity) {
         this.mainEntityName = entityName;
         this.secondaryEntity = secondaryEntity;
@@ -65,7 +64,7 @@ public abstract class Action implements Serializable {
     }
 
     public void invokeListActions(List<Action> actionList, Context context){
-        Context actionContext = new Context(context.getEntities(), context.getWorldDefinition(), context.getGrid());
+        Context actionContext = new Context(context.getEntities(), context.getWorldDefinition(), context.getEnvironmentInstance(), context.getGrid(), context.getNewEntityInstances());
         for (Action action : actionList) {
             EntityInstance mainEntityInstance = action.checkAndGetMainEntityInstance(context);
             if(mainEntityInstance != null) {

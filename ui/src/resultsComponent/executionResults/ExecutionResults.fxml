@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="800.0" stylesheets="@executionResults.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionResults.ExecutionResultsController">
+   <children>
+      <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" spacing="20.0">
+         <children>
+            <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="289.0">
+               <children>
+                  <Label fx:id="simulationDetails" layoutX="14.0" layoutY="-12.0" text="Label" />
+               </children>
+            </Pane>
+            <ComboBox fx:id="analyseTypeCBox" layoutX="20.0" layoutY="55.0" onAction="#analyseTypeCBoxClick" prefWidth="150.0" promptText="Choose analyse type">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="Entity's quantity change graph" />
+                     <String fx:value="Property's statistical info" />
+                  </FXCollections>
+               </items>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </ComboBox>
+            <ComboBox fx:id="entityCBox" onAction="#entityCBoxClick" prefWidth="150.0" promptText="Choose entity">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </ComboBox>
+            <ComboBox fx:id="propertyCBox" onAction="#propertyCBoxClick" prefWidth="150.0" promptText="Choose property">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </ComboBox>
+            <ComboBox fx:id="informationCBox" onAction="#informationCBoxClick" prefWidth="150.0" promptText="Choose Information">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </ComboBox>
+         </children>
+      </VBox>
+      <Pane fx:id="resultsPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="475.0" />
+   </children>
+</HBox>

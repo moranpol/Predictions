@@ -4,29 +4,25 @@ import enums.PropertyType;
 
 public class FloatProperty extends PropertyInstance{
     private final Range range;
-    private Float value;
+    private Float currValue;
+    private Float pastValue;
 
     public FloatProperty(String name, Range range, Float value) {
         super(name);
         this.range = range;
-        this.value = value;
+        currValue = value;
+        pastValue = value;
     }
 
     @Override
-    public void setValue(Object value) {
-        Float prevValue = this.value;
-        if((Float)value < this.range.getFrom()){
-            this.value = this.range.getFrom().floatValue();
-        } else if ((Float)value  > this.range.getTo()) {
-            this.value = this.range.getTo().floatValue();
+    public void setCurrValue(Object currValue) {
+        pastValue = this.currValue;
+        if((Float) currValue < this.range.getFrom()){
+            this.currValue = this.range.getFrom().floatValue();
+        } else if ((Float) currValue > this.range.getTo()) {
+            this.currValue = this.range.getTo().floatValue();
         }else{
-            this.value = (Float)value;
-        }
-
-        if (this.value.equals(prevValue)){
-            setCurrValueCounterByTicks(getCurrValueCounterByTicks() + 1);
-        } else{
-            setCurrValueCounterByTicks(0);
+            this.currValue = (Float) currValue;
         }
     }
 
@@ -35,7 +31,13 @@ public class FloatProperty extends PropertyInstance{
         return PropertyType.FLOAT;
     }
 
-    public Float getValue() {
-        return value;
+    @Override
+    public Float getCurrValue() {
+        return currValue;
+    }
+
+    @Override
+    public Object getPastValue() {
+        return pastValue;
     }
 }

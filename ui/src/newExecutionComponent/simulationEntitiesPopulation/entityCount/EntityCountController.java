@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import newExecutionComponent.dtoEntities.DtoEntitiesPopulation;
+import newExecution.dtoEntities.DtoEntitiesPopulation;
 import newExecutionComponent.NewExecutionController;
 import newExecutionComponent.StartButtonListener;
 import newExecutionComponent.simulationEntitiesPopulation.SimulationEntitiesPopulationController;
@@ -32,6 +32,11 @@ public class EntityCountController implements StartButtonListener {
     public void initialize(){
         entityCount.setEditable(true);
         isMyControllerChanged = false;
+    }
+
+    public void setEntityCount(Integer entityCount) {
+        spinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxPopulationSize, entityCount);
+        this.entityCount.setValueFactory(spinnerValueFactory);
     }
 
     public void setNewExecutionController(NewExecutionController newExecutionController) {

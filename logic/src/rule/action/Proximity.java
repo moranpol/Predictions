@@ -30,14 +30,14 @@ public class Proximity extends Action{
 
     @Override
     public void activateAction(Context context) {
-        Integer circle = getCircle(context.getMainEntityInstance(), context.getSecondEntityInstance(), context.getSecondEntityName());
+        Integer circle = getCircle(context);
         if(circle == null){
             return;
         }
 
         EntityInstance targetEntity = getEntityInProximity(context.getMainEntityInstance(), context.getGrid(), circle);
         if(targetEntity != null) {
-            Context newContext = new Context(context.getEntities(), context.getWorldDefinition(), context.getGrid());
+            Context newContext = new Context(context.getEntities(), context.getWorldDefinition(), context.getEnvironmentInstance(), context.getGrid(), context.getNewEntityInstances());
             newContext.setMainEntityInstance(context.getMainEntityInstance());
             newContext.setSecondEntityInstance(targetEntity);
             newContext.setSecondEntityName(targetEntityName);
@@ -63,8 +63,8 @@ public class Proximity extends Action{
         return null;
     }
 
-    private Integer getCircle(EntityInstance entityInstance, EntityInstance targetEntity, String secondEntityName){
-        Object circle = of.getValue(entityInstance, targetEntity, secondEntityName);
+    private Integer getCircle(Context context){
+        Object circle = of.getValue(context);
         if(circle == null){
             return null;
         }

@@ -1,0 +1,46 @@
+/* Apply styles to the HBox */
+HBox {
+    -fx-background-color: #f0f0f0; /* Light gray background color */
+    -fx-border-color: #cccccc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the HBox */
+    -fx-padding: 15px; /* Add padding around the HBox */
+}
+
+/* Apply styles to the VBox */
+VBox {
+    -fx-spacing: 10px; /* Spacing between children */
+}
+
+#simulationDetails{
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 5px; /* Padding around the Labels */
+    -fx-font-weight: bold;/* Bold text */
+}
+
+/* Apply styles to the Label inside the Pane */
+Label {
+    -fx-text-fill: black; /* black text color */
+    -fx-font-size: 10px; /* Font size */
+}
+
+/* Apply styles to the ComboBoxes */
+ComboBox {
+    -fx-font-size: 12px; /* Font size */
+    -fx-pref-width: 200px; /* Preferred width for ComboBoxes */
+    -fx-prompt-text-fill: #999999; /* Prompt text color */
+    -fx-background-color: white; /* Background color */
+    -fx-border-color: #dcdcdc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for ComboBoxes */
+    -fx-padding: 5px; /* Add padding to ComboBoxes */
+}
+
+/* Apply styles to the Pane containing results */
+#resultsPane {
+    -fx-background-color: white; /* White background color */
+    -fx-border-color: #dcdcdc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the Pane */
+    -fx-padding: 10px; /* Add padding around the Pane */
+}
