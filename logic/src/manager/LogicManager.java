@@ -6,13 +6,13 @@ import entity.EntityDefinition;
 import entity.EntityInstance;
 import entity.EntityManager;
 import enums.SimulationMode;
-import exceptions.InvalidNameException;
-import exceptions.SimulationFailedException;
 import factory.FactoryInstance;
+import header.DtoSimulationQueue;
 import helpers.CheckFunctions;
 import helpers.ParseFunctions;
 import jaxb.LoadXml;
 import menuChoice2.*;
+import newExecution.DtoRerunExecution;
 import newExecution.dtoEntities.DtoEntitiesPopulation;
 import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
 import menuChoice4.*;
@@ -32,7 +32,7 @@ import rule.action.*;
 import simulation.Simulation;
 import world.EntityCountGraph;
 import world.WorldDefinition;
-import menuChoice1.DtoXmlPath;
+import header.DtoXmlPath;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -41,14 +41,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class LogicManager {
     private WorldDefinition worldDefinition;
     private List<Simulation> simulations;
     private Integer simulationCount = 0;
-    private ExecutorService executorService;
+    private ThreadPoolExecutor executorService;
 
     public LogicManager() {
         simulations = new ArrayList<>();
@@ -72,7 +72,7 @@ public class LogicManager {
         worldDefinition = loadXml.loadAndValidateXml(dtoXmlPath.getPath());
         simulationCount = 0;
         simulations.clear();
-        executorService = Executors.newFixedThreadPool(worldDefinition.getNumOfThreads());
+        executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(worldDefinition.getNumOfThreads());
     }
 
     //choice 2
@@ -216,38 +216,6 @@ public class LogicManager {
         return propertyNames;
     }
 
-
-
-    //choice 5
-    public void saveSimulationsToFile(DtoFilePath filePath){
-        try (ObjectOutputStream out =
-                     new ObjectOutputStream(
-                             Files.newOutputStream(Paths.get(filePath.getFilePath() + ".txt")))) {
-            out.writeObject(worldDefinition);
-            out.writeObject(simulations);
-            out.writeObject(simulationCount);
-            out.flush();
-        } catch (Exception e) {
-            throw new InvalidNameException("file path not found. ");
-        }
-    }
-
-    //choice 6
-    public void loadSimulationsFromFile(DtoFilePath filePath){
-        if(!filePath.getFilePath().endsWith(".txt")){
-            throw new InvalidNameException("file name must end with .txt");
-        }
-        try (ObjectInputStream in =
-                     new ObjectInputStream(
-                             Files.newInputStream(Paths.get(filePath.getFilePath())))) {
-            worldDefinition = (WorldDefinition) in.readObject();
-            simulations = (List<Simulation>) in.readObject();
-            simulationCount = (Integer) in.readObject();
-        } catch (Exception e) {
-            throw new InvalidNameException("file path not found. ");
-        }
-    }
-
     //----------------------------------------------------------------------------------------
 
     public DtoEnvironmentInfo getDtoEnvironmentInfo(String name){
@@ -348,6 +316,32 @@ public class LogicManager {
         return environmentInfos;
     }
 
+    public DtoRerunExecution createDtoRerunExecution(DtoSimulationChoice simulationId){
+        return new DtoRerunExecution(createDtoEntitiesPopulationList(simulationId), createDtoEnvironmentInitializeList(simulationId));
+    }
+
+    private List<DtoEnvironmentInitialize> createDtoEnvironmentInitializeList(DtoSimulationChoice simulationId) {
+        List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList = new ArrayList<>();
+
+        for(PropertyDefinition environment : simulations.get(simulationId.getId()).getWorldDefinition().getEnvironmentVariables().getProperties().values()){
+            if(!environment.isRandomInit()){
+                dtoEnvironmentInitializeList.add(new DtoEnvironmentInitialize(environment.getName(), environment.getValue()));
+            }
+        }
+
+        return dtoEnvironmentInitializeList;
+    }
+
+    private List<DtoEntitiesPopulation> createDtoEntitiesPopulationList(DtoSimulationChoice simulationId) {
+        List<DtoEntitiesPopulation> dtoEntitiesPopulationList = new ArrayList<>();
+
+        for(EntityDefinition entityDefinition : simulations.get(simulationId.getId()).getWorldDefinition().getEntities().values()){
+            dtoEntitiesPopulationList.add(new DtoEntitiesPopulation(entityDefinition.getName(), entityDefinition.getPopulation()));
+        }
+
+        return dtoEntitiesPopulationList;
+    }
+
     public void startSimulation(List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList, List<DtoEntitiesPopulation> dtoEntitiesPopulationList) {
         WorldDefinition newWorldDefinition = new WorldDefinition(worldDefinition);
         updateEnvironment(dtoEnvironmentInitializeList, newWorldDefinition);
@@ -359,13 +353,7 @@ public class LogicManager {
     }
 
     public void simulationRun(Simulation simulation){
-        try {
-            executorService.submit(simulation);
-        } catch (Exception e) {
-            simulation.setSimulationMode(SimulationMode.FAILED);
-            simulation.setFailedReason(e.getMessage());
-            throw new SimulationFailedException(e.getMessage(), simulationCount);
-        }
+        executorService.submit(simulation);
     }
 
     private void updateEnvironment(List<DtoEnvironmentInitialize> environments, WorldDefinition worldDefinition){
@@ -451,7 +439,7 @@ public class LogicManager {
         List<DtoSimulationInfo> simulationDetails = new ArrayList<>();
         for (Simulation simulation : simulations) {
             simulationDetails.add(new DtoSimulationInfo(simulation.getId(), simulation.getSimulationMode().toString().toLowerCase(),
-                    simulation.getFailedReason(), simulation.getTicks(), simulation.getSeconds(), createDtoSimulationEntityList(simulation)));
+                    simulation.getFailedReason(), simulation.getStartDateFormat(), simulation.getTicks(), simulation.getSeconds(), null));
         }
 
         return simulationDetails;
@@ -460,7 +448,7 @@ public class LogicManager {
     public DtoSimulationInfo createDtoSimulationInfo(DtoSimulationChoice simulationId){
         Simulation simulation = simulations.get(simulationId.getId());
         return new DtoSimulationInfo(simulation.getId(), simulation.getSimulationMode().toString().toLowerCase(),
-                simulation.getFailedReason(), simulation.getTicks(), simulation.getSeconds(), createDtoSimulationEntityList(simulation));
+                simulation.getFailedReason(), simulation.getStartDateFormat(), simulation.getTicks(), simulation.getSeconds(), createDtoSimulationEntityList(simulation));
     }
 
     private List<DtoSimulationEntity> createDtoSimulationEntityList(Simulation simulation) {
@@ -480,7 +468,7 @@ public class LogicManager {
 
         int population = simulation.getWorldInstance().getEntities().get(entityName).getEntityInstance().size();
         if(population == 0){
-            return 0f;
+            return null;
         }
         return consistency / population;
     }
@@ -493,13 +481,36 @@ public class LogicManager {
 
         int population = simulation.getWorldInstance().getEntities().get(entityName).getEntityInstance().size();
         if(population == 0){
-            return 0f;
+            return null;
         }
         return average / population;
     }
 
     public void stopSimulation(DtoSimulationChoice simulationChoice) {
         simulations.get(simulationChoice.getId()).setSimulationMode(SimulationMode.ENDED);
+    }
+
+    public void pauseSimulation(DtoSimulationChoice simulationChoice){
+        simulations.get(simulationChoice.getId()).setSimulationMode(SimulationMode.PAUSE);
+    }
+
+    public void resumeSimulation(DtoSimulationChoice simulationChoice){
+        Simulation simulation = simulations.get(simulationChoice.getId());
+        simulation.setSimulationMode(SimulationMode.RUNNING);
+        synchronized (simulation){
+            simulation.notify();
+        }
+    }
+
+    public DtoSimulationQueue createDtoSimulationQueue(){
+        int countEnded = 0;
+        for(Simulation simulation : simulations){
+            if(simulation.getSimulationMode() == SimulationMode.ENDED || simulation.getSimulationMode() == SimulationMode.FAILED){
+                countEnded++;
+            }
+        }
+
+        return new DtoSimulationQueue(countEnded, executorService.getQueue().size(), executorService.getActiveCount());
     }
 }
 

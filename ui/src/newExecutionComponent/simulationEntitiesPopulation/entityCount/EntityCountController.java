@@ -34,6 +34,11 @@ public class EntityCountController implements StartButtonListener {
         isMyControllerChanged = false;
     }
 
+    public void setEntityCount(Integer entityCount) {
+        spinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxPopulationSize, entityCount);
+        this.entityCount.setValueFactory(spinnerValueFactory);
+    }
+
     public void setNewExecutionController(NewExecutionController newExecutionController) {
         this.newExecutionController = newExecutionController;
     }

@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="800.0" stylesheets="@executionResults.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionResults.ExecutionResultsController">
+<HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="800.0" stylesheets="@executionResults.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionResults.ExecutionResultsController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="300.0" spacing="20.0">
+      <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" spacing="20.0">
          <children>
-            <Pane prefHeight="35.0" prefWidth="289.0">
+            <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="289.0">
                <children>
                   <Label fx:id="simulationDetails" layoutX="14.0" layoutY="-12.0" text="Label" />
                </children>
@@ -46,6 +46,6 @@
             </ComboBox>
          </children>
       </VBox>
-      <Pane fx:id="resultsPane" prefHeight="275.0" prefWidth="475.0" />
+      <Pane fx:id="resultsPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="475.0" />
    </children>
 </HBox>

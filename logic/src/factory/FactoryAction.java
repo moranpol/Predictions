@@ -66,11 +66,11 @@ public abstract class FactoryAction {
     private static Proximity createProximity(PRDAction prdAction, Map<String, EntityDefinition> entities, EnvironmentDefinition environmentDefinition) {
         if(!entities.containsKey(prdAction.getPRDBetween().getSourceEntity())) {
             throw new InvalidNameException(prdAction.getPRDBetween().getSourceEntity() + " source entity name not exist.\n" +
-                    "    Action name: Proximity");
+                    "Action name: Proximity");
         }
         if(!entities.containsKey(prdAction.getPRDBetween().getTargetEntity())) {
             throw new InvalidNameException(prdAction.getPRDBetween().getTargetEntity() + " target entity name not exist.\n" +
-                    "    Action name: Proximity");
+                    "Action name: Proximity");
         }
         return new Proximity(prdAction.getPRDBetween().getSourceEntity(), createSecondaryEntity(prdAction.getPRDSecondaryEntity(), entities, environmentDefinition),
                 prdAction.getPRDBetween().getTargetEntity(),FactoryExpression.createExpression(prdAction.getPRDEnvDepth().getOf(), environmentDefinition,
@@ -81,11 +81,11 @@ public abstract class FactoryAction {
     private static Replace createReplace(PRDAction prdAction, Map<String, EntityDefinition> entities, EnvironmentDefinition environmentDefinition) {
         if(!entities.containsKey(prdAction.getKill())) {
             throw new InvalidNameException(prdAction.getKill() + " kill entity name not exist.\n" +
-                    "    Action name: Replace");
+                    "Action name: Replace");
         }
         if(!entities.containsKey(prdAction.getCreate())) {
             throw new InvalidNameException(prdAction.getCreate() + " create entity name not exist.\n" +
-                    "    Action name: Replace");
+                    "Action name: Replace");
         }
        return new Replace(prdAction.getKill(), prdAction.getCreate(), createReplaceMode(prdAction.getMode()),
                createSecondaryEntity(prdAction.getPRDSecondaryEntity(), entities, environmentDefinition));
@@ -98,12 +98,12 @@ public abstract class FactoryAction {
     private static void validateAction(PRDAction prdAction, Map<String, EntityDefinition> entities, ActionType type){
         if(!entities.containsKey(prdAction.getEntity())) {
             throw new InvalidNameException(prdAction.getEntity() + " entity name not exist.\n" +
-                    "    Action name: " + prdAction.getType());
+                    "Action name: " + prdAction.getType());
         }
         if(prdAction.getProperty() != null) {
             if (!entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation().containsKey(prdAction.getProperty())) {
                 throw new InvalidNameException(prdAction.getProperty() + " property name not exist in " +
-                        prdAction.getEntity() + " entity name.\n    Action name: " + prdAction.getType());
+                        prdAction.getEntity() + " entity name.\nAction name: " + prdAction.getType());
             }
             if(CheckFunctions.isNumericAction(type) &&
                     !CheckFunctions.isNumericValue(entities.get(prdAction.getEntity()).getPropertiesOfAllPopulation().get(prdAction.getProperty()).getType())){
@@ -220,7 +220,7 @@ public abstract class FactoryAction {
     private static void validateSingleCondition(PRDCondition prdCondition, Map<String, EntityDefinition> entities){
         if(!entities.containsKey(prdCondition.getEntity())) {
             throw new InvalidNameException(prdCondition.getEntity() + " entity name not exist.\n" +
-                    "    Action name: Condition");
+                    "Action name: Condition");
         }
     }
 

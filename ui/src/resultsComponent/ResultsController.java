@@ -7,11 +7,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import pageComponent.PageController;
 import results.simulationEnded.DtoSimulationEndedDetails;
-import results.simulations.DtoSimulationInfo;
 import results.DtoSimulationChoice;
+import results.simulations.DtoSimulationInfo;
 import resultsComponent.executionDetails.ExecutionDetailsController;
 import resultsComponent.executionList.ExecutionListController;
 import resultsComponent.executionResults.ExecutionResultsController;
+import resultsComponent.executionResults.simulationFailed.SimulationFailedController;
 
 import java.io.IOException;
 
@@ -35,27 +36,57 @@ public class ResultsController {
     private ExecutionResultsController executionResultsController;
 
     private ExecutionDetailsController executionDetailsController;
+    
+    private SimulationFailedController simulationFailedController;
 
     private PageController pageController;
 
-    public void initialize(){
-        executionListController.setResultsController(this);
+    public void setter(PageController pageController){
+        setPageController(pageController);
+        setExecutionListController();
     }
 
-    public void setPageController(PageController pageController) {
+    public ExecutionListController getExecutionListController() {
+        return executionListController;
+    }
+
+    private void setPageController(PageController pageController) {
         this.pageController = pageController;
     }
 
-    public void setExecutionListController() {
-        executionListController.setExecutionListView(pageController.getDtoSimulationInfoList());
+    private void setExecutionListController() {
+        executionListController.setter(this, pageController);
+    }
+
+    public ExecutionDetailsController getExecutionDetailsController() {
+        return executionDetailsController;
     }
 
     public void updateScreenBySimulationChoice(Integer id, boolean isRunning){
         DtoSimulationChoice simulationChoice = new DtoSimulationChoice(id);
+        executionResultPane.getChildren().clear();
         loadExecutionDetailsController(simulationChoice);
         if(!isRunning){
-            DtoSimulationEndedDetails simulation = pageController.getDtoSimulationEndedDetails(simulationChoice);
-            loadExecutionResultController(simulation);
+            DtoSimulationInfo dtoSimulationInfo = pageController.getDtoSimulationInfo(simulationChoice);
+            if(dtoSimulationInfo.getSimulationMode().equals("failed")){
+                loadSimulationFailedController(dtoSimulationInfo);
+            } else {
+                DtoSimulationEndedDetails dtoSimulationEndedDetails = pageController.getDtoSimulationEndedDetails(simulationChoice);
+                loadExecutionResultController(dtoSimulationEndedDetails);
+            }
+        }
+    }
+
+    private void loadSimulationFailedController(DtoSimulationInfo dtoSimulationInfo) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultsComponent/executionResults/simulationFailed/SimulationFailed.fxml"));
+            Parent executionFailed = loader.load();
+            executionResultPane.getChildren().clear();
+            executionResultPane.getChildren().add(executionFailed);
+
+            simulationFailedController = loader.getController();
+            simulationFailedController.setter(dtoSimulationInfo);
+        } catch (IOException ignored) {
         }
     }
 
@@ -67,12 +98,12 @@ public class ResultsController {
             executionDetailsPane.getChildren().add(executionDetails);
 
             executionDetailsController = loader.getController();
-            executionDetailsController.setter(simulationChoice, pageController);
+            executionDetailsController.setter(simulationChoice, pageController, executionListController, this);
         } catch (IOException ignored) {
         }
     }
 
-    private void loadExecutionResultController(DtoSimulationEndedDetails simulationEndedDetails) {
+    public void loadExecutionResultController(DtoSimulationEndedDetails simulationEndedDetails) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultsComponent/executionResults/ExecutionResults.fxml"));
             Parent executionResults = loader.load();

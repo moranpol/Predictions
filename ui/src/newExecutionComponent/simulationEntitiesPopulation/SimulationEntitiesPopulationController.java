@@ -5,13 +5,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import newExecution.dtoEntities.DtoEntitiesPopulation;
 import newExecution.dtoEntities.DtoEntityNames;
 import newExecutionComponent.NewExecutionController;
 import newExecutionComponent.simulationEntitiesPopulation.entityCount.EntityCountController;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class SimulationEntitiesPopulationController {
 
@@ -27,6 +30,8 @@ public class SimulationEntitiesPopulationController {
     private NewExecutionController newExecutionController;
 
     private List<EntityCountController> populationCountListeners;
+
+    private final Map<String, EntityCountController> entitiesCounterMap = new HashMap<>();
 
     public void initialize(){
         currentPopulationCountLabel.setText("0");
@@ -52,8 +57,8 @@ public class SimulationEntitiesPopulationController {
                 entityCountController.setEntitiesPopulationController(this);
                 populationCountListeners.add(entityCountController);
                 newExecutionController.addListenerToStartButton(entityCountController);
+                entitiesCounterMap.put(name, entityCountController);
             } catch (IOException ignored) {
-
             }
         }
     }
@@ -70,6 +75,12 @@ public class SimulationEntitiesPopulationController {
 
         for(EntityCountController populationCountListener : populationCountListeners) {
             populationCountListener.onChange(oldCurrValue, temp);
+        }
+    }
+
+    public void rerunExecutionEntities(List<DtoEntitiesPopulation> dtoEntitiesPopulationList) {
+        for(DtoEntitiesPopulation dtoEntityPopulation: dtoEntitiesPopulationList){
+            entitiesCounterMap.get(dtoEntityPopulation.getName()).setEntityCount(dtoEntityPopulation.getPopulation());
         }
     }
 }

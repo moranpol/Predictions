@@ -38,12 +38,12 @@ public class Set extends Action{
             Float floatExpression = ParseFunctions.parseNumericTypeToFloat(expressionValue);
             propertyInstance.setCurrValue(floatExpression);
         } else if (propertyInstance.getType() == PropertyType.DECIMAL && value.getType() == PropertyType.FLOAT) {
-            throw new ParseFloatToIntException("Set action failed.\n    Entity name - " + context.getMainEntityInstance().getName() +
-                    "\n    Property name - " + propertyName);
+            throw new ParseFloatToIntException("Set action failed.\nEntity name - " + context.getMainEntityInstance().getName() +
+                    "\nProperty name - " + propertyName);
         } else{
             throw new MissMatchValuesException("Expression value type is " + value.getType() + " and property type is "
-                    + propertyInstance.getType() + ".\n    Set action failed.\n    Entity name - " + context.getMainEntityInstance().getName() +
-                    "\n    Property name - " + propertyName);
+                    + propertyInstance.getType() + ".\nSet action failed.\nEntity name - " + context.getMainEntityInstance().getName() +
+                    "\nProperty name - " + propertyName);
         }
     }
 }

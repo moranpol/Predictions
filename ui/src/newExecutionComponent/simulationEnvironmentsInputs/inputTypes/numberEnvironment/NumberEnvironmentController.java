@@ -4,11 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import newExecution.dtoEnvironment.DtoEnvironment;
 import newExecutionComponent.NewExecutionController;
 import newExecutionComponent.StartButtonListener;
 import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
+import newExecutionComponent.simulationEnvironmentsInputs.inputTypes.EnvironmentInputs;
 
-public class NumberEnvironmentController implements StartButtonListener {
+public class NumberEnvironmentController implements StartButtonListener, EnvironmentInputs {
 
     @FXML
     private Label range;
@@ -23,6 +25,10 @@ public class NumberEnvironmentController implements StartButtonListener {
 
     private Boolean isValueSet = false;
 
+    private Double from;
+
+    private Double to;
+
     public void initialize(){
         rangeCount.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue != null) {
@@ -31,19 +37,24 @@ public class NumberEnvironmentController implements StartButtonListener {
         });
     }
 
-    public void setValueName(String valueName) {
+    public void setter(NewExecutionController newExecutionController, DtoEnvironment environment){
+        setNewExecutionController(newExecutionController);
+        setValueName(environment.getName());
+        setRange(environment.getFrom(), environment.getTo());
+    }
+
+    private void setValueName(String valueName) {
         this.valueName.setText(valueName);
     }
 
-    public void setNewExecutionController(NewExecutionController newExecutionController) {
+    private void setNewExecutionController(NewExecutionController newExecutionController) {
         this.newExecutionController = newExecutionController;
     }
 
-    public void setRange(Double from, Double to) {
+    private void setRange(Double from, Double to) {
+        this.from = from;
+        this.to = to;
         range.setText("Range: " + from + " - " + to);
-    }
-
-    public void setRangeCount(Double from, Double to){
         SpinnerValueFactory<Double> spinnerValueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(from, to, 0);
         rangeCount.setValueFactory(spinnerValueFactory);
     }
@@ -53,5 +64,10 @@ public class NumberEnvironmentController implements StartButtonListener {
         if(isValueSet){
             newExecutionController.addToDtoEnvironmentInitializeList(new DtoEnvironmentInitialize(valueName.getText(), rangeCount.getValue()));
         }
+    }
+
+    @Override
+    public void rerunExecution(DtoEnvironmentInitialize dtoEnvironmentInitialize) {
+        rangeCount.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(from, to, (Double) dtoEnvironmentInitialize.getValue()));
     }
 }

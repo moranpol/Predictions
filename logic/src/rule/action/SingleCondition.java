@@ -41,13 +41,13 @@ public class SingleCondition extends Condition{
             mainEntityInstance = checkAndGetMainEntityInstance(context);
         } catch (Exception e){
             throw new MissMatchValuesException(e.getMessage() + " is not one of the main or second instances.\n" +
-                    "    condition action failed.");
+                    "Condition action failed.");
         }
         if(mainEntityInstance == null){
             return null;
         }
 
-        Context newContext = new Context(context.getEntities(), context.getWorldDefinition(), context.getEnvironmentInstance(), context.getGrid());
+        Context newContext = new Context(context.getEntities(), context.getWorldDefinition(), context.getEnvironmentInstance(), context.getGrid(), context.getNewEntityInstances());
         newContext.setMainEntityInstance(mainEntityInstance);
         newContext.setSecondEntityInstance(checkAndGetSecondEntityInstance(context, mainEntityInstance));
         newContext.setSecondEntityName(checkAndGetSecondEntityName(context, mainEntityInstance));
@@ -81,7 +81,7 @@ public class SingleCondition extends Condition{
         } else{
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type equals to " + value.getType() + " type.\n" +
-                    "    Entity name - " + getMainEntityName() + "\n    Expression - " + valueExpression);
+                    "Entity name - " + getMainEntityName() + "\nExpression - " + valueExpression);
         }
     }
 
@@ -105,7 +105,7 @@ public class SingleCondition extends Condition{
         if(!CheckFunctions.isNumericValue(property.getType()) || !CheckFunctions.isNumericValue(value.getType())){
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type bigger than " + value.getType() + " type.\n" +
-                    "    Entity name - " + getMainEntityName() + "\n    Expression - " + valueExpression);
+                    "Entity name - " + getMainEntityName() + "\nExpression - " + valueExpression);
         }
 
         return ParseFunctions.parseNumericTypeToFloat(propertyExpression) > ParseFunctions.parseNumericTypeToFloat(valueExpression);
@@ -121,7 +121,7 @@ public class SingleCondition extends Condition{
         if(!CheckFunctions.isNumericValue(property.getType()) || !CheckFunctions.isNumericValue(value.getType())){
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type smaller than " + value.getType() + " type.\n" +
-                    "    Entity name - " + getMainEntityName() + "\n    Expression - " + valueExpression);
+                    "Entity name - " + getMainEntityName() + "\nExpression - " + valueExpression);
         }
 
         return ParseFunctions.parseNumericTypeToFloat(propertyExpression) < ParseFunctions.parseNumericTypeToFloat(valueExpression);

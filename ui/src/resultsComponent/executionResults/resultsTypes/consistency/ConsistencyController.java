@@ -13,10 +13,14 @@ public class ConsistencyController {
 
     public void setter(String info, Float value){
         setInfoLabel(info);
-        setAverageValue(value);
+        if(value == null){
+            setAverageValue("All entities are dead :(");
+        } else {
+            setAverageValue(value.toString());
+        }
     }
 
-    private void setAverageValue(Float value) {
+    private void setAverageValue(String value) {
         averageValue.setText(value.toString());
     }
 

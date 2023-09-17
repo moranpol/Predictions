@@ -8,13 +8,13 @@
     -fx-background-color: #297520;
 }
 
-#LoadFileButton {
+#loadFileButton {
     -fx-background-color: #2196F3;
     -fx-text-fill: white;
     -fx-font-size: 16px;
 }
 
-#LoadFileButton:hover{
+#loadFileButton:hover{
     -fx-background-color:#084891;
 }
 
@@ -22,11 +22,22 @@
     -fx-font-size: 14px;
 }
 
-#queueManagement {
-    -fx-background-color: #3498db;
+HBox, VBox{
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the HBox */
 }
 
-.label{
+Label{
+    -fx-text-fill: black; /* black text color */
+    -fx-font-size: 13px; /* Font size */
+}
+
+#errorLabel{
+    -fx-text-fill: red; /* White text color */
+    -fx-font-size: 13px; /* Font size */
+}
+
+#predictionsTitle{
     -fx-text-fill: #2196F3;
     -fx-font-weight: bold;
     -fx-font-size: 30px;

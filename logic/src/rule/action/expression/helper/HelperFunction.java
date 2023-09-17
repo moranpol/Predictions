@@ -28,7 +28,7 @@ public class HelperFunction implements Serializable {
     public Object environment(String environmentName, EnvironmentInstance environment) {
         PropertyInstance prop = environment.getProperties().get(environmentName);
         if(prop == null){
-            throw new InvalidNameException("environment helper function failed.\n    " +
+            throw new InvalidNameException("environment helper function failed.\n" +
                     "There isn't environment variable: " + environmentName);
         }
         return prop.getCurrValue();
@@ -49,7 +49,7 @@ public class HelperFunction implements Serializable {
             return entityInstance.getProperties().get(parts[1]).getCurrValue();
         } else {
             throw new InvalidNameException(parts[1] + " property name not exist in " + parts[0]
-                    + " entity name.\n    Helper function name - evaluate");
+                    + " entity name.\nHelper function name - evaluate");
         }
     }
 
@@ -77,7 +77,7 @@ public class HelperFunction implements Serializable {
             return entityInstance.getProperties().get(parts[1]).getCurrValueCounterByTicks();
         } else {
            throw new InvalidNameException(parts[1] + " property name not exist in " + parts[0]
-                   + " entity name.\n    Helper function name - ticks");
+                   + " entity name.\nHelper function name - ticks");
         }
     }
 

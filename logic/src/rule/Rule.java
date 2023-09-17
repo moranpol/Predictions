@@ -68,15 +68,14 @@ public class Rule implements Serializable {
                         }
                     }
                 }
-                killEntityInstances(entities);
-                updateNewEntityInstances(context);
             }
+            killEntityInstances(entities);
+            updateNewEntityInstances(context);
         }
     }
 
     private void updateNewEntityInstances(Context context){
         for (EntityInstance entityInstance : context.getNewEntityInstances()) {
-            context.getWorldDefinition().getGrid().updateNewInstanceInRandomLocation(entityInstance);
             context.getEntities().get(entityInstance.getName()).addInstance(entityInstance);
         }
     }

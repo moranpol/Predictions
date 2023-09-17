@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" stylesheets="@simulationEntitiesPopulation.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.simulationEntitiesPopulation.SimulationEntitiesPopulationController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" stylesheets="@simulationEntitiesPopulation.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.simulationEntitiesPopulation.SimulationEntitiesPopulationController">
    <top>
       <Label prefHeight="50.0" text="Simulation Entities Population" BorderPane.alignment="CENTER">
          <opaqueInsets>
@@ -19,7 +19,7 @@
       </Label>
    </top>
    <center>
-      <ScrollPane BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="entitiesCount" alignment="TOP_CENTER" prefHeight="338.0" prefWidth="395.0" />
          </content>

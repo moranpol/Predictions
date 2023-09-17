@@ -115,7 +115,7 @@ public abstract class FactoryDefinition {
                     environmentDefinition);
             return new Rule(prdRule.getName(), actions, createActivation(prdRule.getPRDActivation()));
         } catch (Exception e){
-            throw new RuntimeException(e.getMessage() + "\n    Rule name: " + prdRule.getName());
+            throw new RuntimeException(e.getMessage() + "\nRule name: " + prdRule.getName());
         }
     }
 

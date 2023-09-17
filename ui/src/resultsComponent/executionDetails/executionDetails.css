@@ -1,5 +1,5 @@
 /* Style the VBox */
-VBox {
+Grid, VBox {
     -fx-background-color: #f0f0f0; /* Light gray background color */
     -fx-border-color: #cccccc; /* Border color */
     -fx-border-width: 1px; /* Border width */

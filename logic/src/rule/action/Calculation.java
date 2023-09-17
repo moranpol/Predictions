@@ -48,8 +48,8 @@ public class Calculation extends Action{
                     context.getMainEntityInstance().getProperties().get(propertyName).setCurrValue(floatArg1 / floatArg2);
                 }
                 else {
-                    throw new MissMatchValuesException("Calculation divide action failed - expression arg2 is 0.\n " +
-                            "    Entity name - " + getMainEntityName() + "\n    Property name - " + propertyName);
+                    throw new MissMatchValuesException("Calculation divide action failed - expression arg2 is 0.\n" +
+                            "Entity name - " + getMainEntityName() + "\nProperty name - " + propertyName);
                 }
                 break;
             case MULTIPLY:

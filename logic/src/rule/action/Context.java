@@ -28,6 +28,14 @@ public class Context {
         newEntityInstances = new ArrayList<>();
     }
 
+    public Context(Map<String, EntityManager> entities, WorldDefinition worldDefinition, EnvironmentInstance environmentInstance, Grid grid, List<EntityInstance> newEntityInstances) {
+        this.entities = entities;
+        this.worldDefinition = worldDefinition;
+        this.environmentInstance = environmentInstance;
+        this.grid = grid;
+        this.newEntityInstances = newEntityInstances;
+    }
+
     public EnvironmentInstance getEnvironmentInstance() {
         return environmentInstance;
     }

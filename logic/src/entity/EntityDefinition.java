@@ -27,19 +27,6 @@ public class EntityDefinition implements Serializable {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EntityDefinition that = (EntityDefinition) o;
-        return Objects.equals(name, that.name) && Objects.equals(population, that.population) && Objects.equals(propertiesOfAllPopulation, that.propertiesOfAllPopulation);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, population, propertiesOfAllPopulation);
-    }
-
     public String getName() {
         return name;
     }

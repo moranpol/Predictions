@@ -1,9 +1,11 @@
 package resultsComponent.executionList;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import pageComponent.PageController;
 import results.simulations.DtoSimulationInfo;
 import resultsComponent.ResultsController;
 
@@ -16,11 +18,41 @@ public class ExecutionListController {
 
     private ResultsController resultsController;
 
-    public void initialize(){
-        executionListViewChoice();
+    private Thread thread;
+
+    private PageController pageController;
+
+    public void setter(ResultsController resultsController, PageController pageController){
+        setPageController(pageController);
+        setResultsController(resultsController);
+
+        thread = new Thread(() -> {
+            boolean stop = false;
+            while (!stop) {
+                try {
+                    List<DtoSimulationInfo> simulationInfo = pageController.getDtoSimulationInfoList();
+                    Platform.runLater(() -> setExecutionListView(simulationInfo));
+
+                    Thread.sleep(200);
+                } catch (InterruptedException ignore) {
+                    stop = true;
+                }
+            }
+        });
+
+        thread.start();
     }
 
-    public void setResultsController(ResultsController resultsController) {
+    private void setPageController(PageController pageController) {
+        this.pageController = pageController;
+    }
+
+    public void stopThread(){
+        pageController.setResultsController(null);
+        thread.interrupt();
+    }
+
+    private void setResultsController(ResultsController resultsController) {
         this.resultsController = resultsController;
     }
 
@@ -31,6 +63,8 @@ public class ExecutionListController {
                 executionList.add("(Running) simulation id: " + simulation.getId());
             } else if(simulation.getSimulationMode().equals("failed")){
                 executionList.add("(Failed) simulation id: " + simulation.getId());
+            } else if(simulation.getSimulationMode().equals("pause")){
+            executionList.add("(Paused) simulation id: " + simulation.getId());
             } else{
                 executionList.add("(Ended) simulation id: " + simulation.getId());
             }
@@ -39,17 +73,15 @@ public class ExecutionListController {
         executionListView.setItems(executionList);
     }
 
+    @FXML
     public void executionListViewChoice(){
-        executionListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                String[] parts = newValue.split(" ");
-                Integer id = Integer.parseInt(parts[parts.length - 1]);
-                if(newValue.contains("Running")){
-                    resultsController.updateScreenBySimulationChoice(id, true);
-                } else{
-                    resultsController.updateScreenBySimulationChoice(id, false);
-                }
-            }
-        });
+        if(resultsController.getExecutionDetailsController() != null){
+            resultsController.getExecutionDetailsController().stopThread();
+        }
+        if (executionListView != null && executionListView.getSelectionModel().getSelectedItems() != null) {
+            String[] parts = executionListView.getSelectionModel().getSelectedItems().get(0).split(" ");
+            Integer id = Integer.parseInt(parts[parts.length - 1]);
+            resultsController.updateScreenBySimulationChoice(id, executionListView.getSelectionModel().getSelectedItems().get(0).contains("Running"));
+        }
     }
 }

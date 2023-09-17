@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import results.simulationEnded.DtoPropertyHistogram;
@@ -45,6 +46,11 @@ public class HistogramController {
 
     public void setTable(){
         ObservableList<DtoPropertyHistogram> data = FXCollections.observableArrayList(dtoPropertyHistogram.values());
-        tableView.setItems(data);
+        if(data.isEmpty()){
+            Label emptyLabel = new Label("All of the entities are dead :(");
+            tableView.setPlaceholder(emptyLabel);
+        } else {
+            tableView.setItems(data);
+        }
     }
 }

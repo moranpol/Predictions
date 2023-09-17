@@ -37,7 +37,7 @@ public class Proximity extends Action{
 
         EntityInstance targetEntity = getEntityInProximity(context.getMainEntityInstance(), context.getGrid(), circle);
         if(targetEntity != null) {
-            Context newContext = new Context(context.getEntities(), context.getWorldDefinition(), context.getEnvironmentInstance(), context.getGrid());
+            Context newContext = new Context(context.getEntities(), context.getWorldDefinition(), context.getEnvironmentInstance(), context.getGrid(), context.getNewEntityInstances());
             newContext.setMainEntityInstance(context.getMainEntityInstance());
             newContext.setSecondEntityInstance(targetEntity);
             newContext.setSecondEntityName(targetEntityName);

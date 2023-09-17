@@ -20,7 +20,7 @@ VBox {
 
 /* Apply styles to the Label inside the Pane */
 Label {
-    -fx-text-fill: black; /* White text color */
+    -fx-text-fill: black; /* black text color */
     -fx-font-size: 10px; /* Font size */
 }
 

@@ -2,16 +2,12 @@ package simulation;
 
 import enums.SimulationMode;
 import enums.TerminationType;
-import factory.FactoryInstance;
-import jaxb.LoadXml;
-import jdk.nashorn.internal.ir.WhileNode;
 import world.WorldDefinition;
 import world.WorldInstance;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.concurrent.ExecutorService;
 
 public class Simulation implements Serializable, Runnable {
     private final String startDateFormat;
@@ -23,6 +19,8 @@ public class Simulation implements Serializable, Runnable {
     private Integer ticks;
     private Integer seconds;
     private String failedReason;
+    private Integer pauseTime;
+    private long startTime;
 
     public Simulation(Integer id, WorldInstance worldInstance, WorldDefinition worldDefinition) {
         this.id = id;
@@ -32,6 +30,7 @@ public class Simulation implements Serializable, Runnable {
         ticks = 1;
         seconds = 0;
         failedReason = null;
+        pauseTime = 0;
 
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH:mm:ss");
@@ -76,92 +75,104 @@ public class Simulation implements Serializable, Runnable {
         this.simulationMode = simulationMode;
     }
 
-    public void setFailedReason(String failedReason) {
-        this.failedReason = failedReason;
-    }
-
     @Override
     public void run(){
-        long startTime = System.currentTimeMillis();
+        startTime = System.currentTimeMillis();
         Integer maxSeconds = worldInstance.getTermination().getSeconds();
         Integer maxTicks = worldInstance.getTermination().getTicks();
+        try {
+            if (maxTicks != null && maxSeconds != null) {
+                runSimulationByTicksAndSeconds(maxTicks, maxSeconds);
+            } else if (maxTicks == null && maxSeconds != null) {
+                runSimulationBySeconds(maxSeconds);
+            } else if (maxTicks != null) {
+                runSimulationByTicks(maxTicks);
+            } else {
+                runSimulationByUser();
+            }
 
-        if(maxTicks != null && maxSeconds != null){
-            runSimulationByTicksAndSeconds(maxTicks, maxSeconds, startTime);
-        } else if (maxTicks == null && maxSeconds != null) {
-            runSimulationBySeconds(maxSeconds, startTime);
-        }else if (maxTicks != null){
-            runSimulationByTicks(maxTicks, startTime);
-        } else{
-            runSimulationByUser(startTime);
+            simulationMode = SimulationMode.ENDED;
+        } catch (Exception e){
+            simulationMode = SimulationMode.FAILED;
+            failedReason = "simulation id " + id + " failed.\n    " + e.getMessage();
         }
-
-        simulationMode = SimulationMode.ENDED;
     }
 
-    private void runSimulationByTicksAndSeconds(Integer maxTicks, Integer maxSeconds, long startTime){
+    private void runSimulationByTicksAndSeconds(Integer maxTicks, Integer maxSeconds){
         long maxRunTimeMilliSec = maxSeconds * 1000;
         terminationReason = TerminationType.TICKS;
 
         for (ticks = 1; ticks < maxTicks; ticks++){
-            seconds = (int)((System.currentTimeMillis() - startTime) / 1000);
-
-            if(checkAndUpdateSimulationEnded(startTime)){
+            setSeconds();
+            if(simulationMode == SimulationMode.ENDED){
+                terminationReason = TerminationType.User;
                 break;
-            } else if (System.currentTimeMillis() - startTime >= maxRunTimeMilliSec){
-                seconds = (int)((System.currentTimeMillis() - startTime) / 1000);
+            } else if (System.currentTimeMillis() - startTime - (pauseTime * 1000) >= maxRunTimeMilliSec){
                 terminationReason = TerminationType.SECONDS;
                 break;
             }
 
             worldInstance.runSimulationTick(ticks, worldDefinition);
+            checkPause();
         }
     }
 
-    private void runSimulationBySeconds(Integer maxSeconds, long startTime){
+    private void runSimulationBySeconds(Integer maxSeconds){
         long maxRunTimeMilliSec = maxSeconds * 1000;
         terminationReason = TerminationType.SECONDS;
 
-        while (System.currentTimeMillis() - startTime < maxRunTimeMilliSec){
-            seconds = (int)((System.currentTimeMillis() - startTime) / 1000);
-            if(checkAndUpdateSimulationEnded(startTime)){
+        while (System.currentTimeMillis() - startTime - (pauseTime * 1000) < maxRunTimeMilliSec){
+            setSeconds();
+            if(simulationMode == SimulationMode.ENDED){
+                terminationReason = TerminationType.User;
                 break;
             }
 
             worldInstance.runSimulationTick(ticks, worldDefinition);
+            checkPause();
             ticks++;
         }
     }
 
-    private void runSimulationByTicks(Integer maxTicks, long startTime){
+    private void runSimulationByTicks(Integer maxTicks){
         terminationReason = TerminationType.TICKS;
 
         for (ticks = 1; ticks < maxTicks; ticks++){
-            seconds = (int)((System.currentTimeMillis() - startTime) / 1000);
-            if(checkAndUpdateSimulationEnded(startTime)){
+            setSeconds();
+            if(simulationMode != SimulationMode.ENDED){
+                terminationReason = TerminationType.User;
                 break;
             }
 
             worldInstance.runSimulationTick(ticks, worldDefinition);
+            checkPause();
         }
     }
 
-    private void runSimulationByUser(long startTime){
-        while (simulationMode != SimulationMode.ENDED){
-            seconds = (int)((System.currentTimeMillis() - startTime) / 1000);
+    private void runSimulationByUser(){
+        while (simulationMode != SimulationMode.ENDED) {
+            setSeconds();
             worldInstance.runSimulationTick(ticks, worldDefinition);
+            checkPause();
             ticks++;
         }
 
         terminationReason = TerminationType.User;
     }
 
-    private Boolean checkAndUpdateSimulationEnded(long startTime){
-        if(simulationMode == SimulationMode.ENDED){
-            seconds = (int)((System.currentTimeMillis() - startTime) / 1000);
-            terminationReason = TerminationType.User;
-            return true;
+    private void checkPause(){
+        if(simulationMode == SimulationMode.PAUSE){
+            long pauseStartTime = System.currentTimeMillis();
+            synchronized (this){
+                try{
+                    this.wait();
+                } catch (Exception ignore){}
+            }
+            pauseTime += (int)((System.currentTimeMillis() - pauseStartTime) / 1000);
         }
-        return false;
+    }
+
+    private void setSeconds(){
+        seconds = (int)((System.currentTimeMillis() - startTime) / 1000) - pauseTime;
     }
 }

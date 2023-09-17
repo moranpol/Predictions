@@ -5,12 +5,12 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="200.0" stylesheets="@executionList.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionList.ExecutionListController">
+<VBox alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="200.0" stylesheets="@executionList.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionList.ExecutionListController">
    <children>
       <Label prefHeight="40.0" text="Execution List" />
-      <ScrollPane prefWidth="163.0">
+      <ScrollPane fitToHeight="true" fitToWidth="true">
          <content>
-            <ListView fx:id="executionListView" prefHeight="447.0" prefWidth="194.0" />
+            <ListView fx:id="executionListView" onMouseClicked="#executionListViewChoice" prefHeight="450.0" prefWidth="200.0" />
          </content>
       </ScrollPane>
    </children>

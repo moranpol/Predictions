@@ -15,9 +15,9 @@
       </Label>
    </top>
    <center>
-      <ScrollPane BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="environmentInputsVBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="394.0" prefWidth="594.0" />
+            <VBox fx:id="environmentInputsVBox" alignment="CENTER_LEFT" prefHeight="394.0" prefWidth="594.0" />
          </content>
       </ScrollPane>
    </center>

@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="800.0" stylesheets="@executionDetails.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionDetails.ExecutionDetailsController">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="800.0" stylesheets="@executionDetails.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionDetails.ExecutionDetailsController">
    <children>
-      <GridPane prefHeight="200.0" prefWidth="250.0">
+      <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="250.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -47,16 +47,16 @@
             <Label fx:id="simulationLabel" alignment="CENTER" prefHeight="17.0" prefWidth="348.0" text="Label" GridPane.columnSpan="2" />
          </children>
       </GridPane>
-      <ScrollPane>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="350.0">
          <content>
-            <TableView fx:id="tableView" prefHeight="195.0" prefWidth="343.0">
+            <TableView fx:id="tableView" prefHeight="200.0" prefWidth="346.0">
               <columns>
-                <TableColumn fx:id="entityNameCol" prefWidth="170.0" text="Entity Name" />
-                <TableColumn fx:id="entityAmountCol" prefWidth="170.0" text="Entity Amount" />
+                <TableColumn fx:id="entityNameCol" prefWidth="173.0" text="Entity Name" />
+                <TableColumn fx:id="entityAmountCol" prefWidth="173.0" text="Entity Amount" />
               </columns>
             </TableView>
          </content>
       </ScrollPane>
-      <VBox fx:id="buttonsVBox" alignment="CENTER" prefHeight="200.0" prefWidth="200.0" />
+      <VBox fx:id="buttonsVBox" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </HBox>
