@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" stylesheets="@simulationFailed.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionResults.simulationFailed.SimulationFailedController">
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionResults.simulationFailed.SimulationFailedController">
    <content>
-      <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="800.0" spacing="5.0">
+      <VBox id="failedVBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="800.0" spacing="5.0">
          <children>
-            <Label fx:id="simulationId" text="Label" />
-            <Label fx:id="simulationStartTime" text="Label" />
+            <Label fx:id="simulationId" styleClass="simulationIdLabels" text="Label" />
+            <Label fx:id="simulationStartTime" styleClass="simulationIdLabels" text="Label" />
             <HBox>
                <children>
                   <Label alignment="TOP_LEFT" styleClass="errorLabels" text="Error - " />

@@ -1,6 +1,5 @@
 package detailsComponent.details.entity;
 import details.DtoEntityInfo;
-import details.DtoWorldInfo;
 import detailsComponent.details.entity.propertyDetails.PropertyDetailsController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,19 +7,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class EntitySelectorController {
     @FXML
-    private GridPane propertyDetails;  //
+    public Pane PaneProperty;
+
     @FXML
-    private PropertyDetailsController propertyDetailsController;//
+    private GridPane propertyDetails;
+
+    @FXML
+    private PropertyDetailsController propertyDetailsController;
 
     @FXML
     private Text nameVariableText;
 
     @FXML
-    private ComboBox<String> propertyCbox;
+    private ComboBox<String> propertyCBox;
 
     private DtoEntityInfo dtoEntityInfo;
 
@@ -29,14 +33,14 @@ public class EntitySelectorController {
     }
 
     @FXML
-    void propertyCboxChoice(ActionEvent event) {
-        propertyDetailsController.updateProperty(dtoEntityInfo.getPropertyDefinitions().get(propertyCbox.getValue()));
+    void propertyCBoxChoice(ActionEvent event) {
+        propertyDetailsController.updateProperty(dtoEntityInfo.getPropertyDefinitions().get(propertyCBox.getValue()));
     }
 
     public void updateData(){
         nameVariableText.setText(dtoEntityInfo.getName());
         ObservableList<String> propertyNames = FXCollections.observableArrayList(dtoEntityInfo.getPropertyDefinitions().keySet());
-        propertyCbox.setItems(propertyNames);
+        propertyCBox.setItems(propertyNames);
     }
 
 }

@@ -19,6 +19,11 @@ public class BooleanProperty extends PropertyInstance {
     }
 
     @Override
+    public void setPastValue() {
+        pastValue = this.currValue;
+    }
+
+    @Override
     public void setCurrValue(Object currValue) {
         pastValue = this.currValue;
         this.currValue = (Boolean) currValue;

@@ -26,8 +26,7 @@ public abstract class FactoryExpression {
         PropertyDefinition property = propertyDefinitionMap.get(stringExpression);
         if(property != null){
             return new PropertyExpression(stringExpression, property);
-        }
-        else {
+        } else {
             try {
                 int num = Integer.parseInt(stringExpression);
                 return new IntExpression(num, stringExpression);

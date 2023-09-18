@@ -123,7 +123,7 @@ public class ExecutionResultsController {
     @FXML
     void informationCBoxClick(ActionEvent event) {
         resultsPane.getChildren().clear();
-        if(informationCBox.getValue() != null) {
+        if(propertyCBox.getValue() != null && informationCBox.getValue() != null) {
             if (informationCBox.getValue().equals("Histogram on the population")) {
                 loadHistogramController(simulationEndedDetails.getDtoEntityMap().get(entityCBox.getValue()).getProperties().get(propertyCBox.getValue()).getDtoPropertyHistogram());
             } else if (informationCBox.getValue().equals("Consistency - Average steps the value did not change")) {

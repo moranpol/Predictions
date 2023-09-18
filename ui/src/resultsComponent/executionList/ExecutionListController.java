@@ -79,9 +79,11 @@ public class ExecutionListController {
             resultsController.getExecutionDetailsController().stopThread();
         }
         if (executionListView != null && executionListView.getSelectionModel().getSelectedItems() != null) {
-            String[] parts = executionListView.getSelectionModel().getSelectedItems().get(0).split(" ");
-            Integer id = Integer.parseInt(parts[parts.length - 1]);
-            resultsController.updateScreenBySimulationChoice(id, executionListView.getSelectionModel().getSelectedItems().get(0).contains("Running"));
+            if(executionListView.getSelectionModel().getSelectedItems().get(0) != null) {
+                String[] parts = executionListView.getSelectionModel().getSelectedItems().get(0).split(" ");
+                Integer id = Integer.parseInt(parts[parts.length - 1]);
+                resultsController.updateScreenBySimulationChoice(id, executionListView.getSelectionModel().getSelectedItems().get(0).contains("Running"));
+            }
         }
     }
 }

@@ -2,18 +2,18 @@ package details;
 
 import details.DtoAction.DtoAction;
 
-import java.util.Map;
+import java.util.List;
 
 public class DtoRuleInfo {
 
     private final String name;
     private final DtoActivation dtoActivation;
-    private final Map<String,DtoAction> dtoActionMap;
+    private final List<DtoAction> dtoActions;
 
-    public DtoRuleInfo(String name, DtoActivation dtoActivation, Map<String,DtoAction> dtoActionMap) {
+    public DtoRuleInfo(String name, DtoActivation dtoActivation, List<DtoAction> dtoActions) {
         this.name = name;
         this.dtoActivation = dtoActivation;
-        this.dtoActionMap = dtoActionMap;
+        this.dtoActions = dtoActions;
     }
 
     public String getName() {
@@ -24,7 +24,7 @@ public class DtoRuleInfo {
         return dtoActivation;
     }
 
-    public Map<String,DtoAction> getDtoActionMap() {
-        return dtoActionMap;
+    public List<DtoAction> getDtoActions() {
+        return dtoActions;
     }
 }

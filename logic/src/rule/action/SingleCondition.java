@@ -81,7 +81,7 @@ public class SingleCondition extends Condition{
         } else{
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type equals to " + value.getType() + " type.\n" +
-                    "Entity name - " + getMainEntityName() + "\nExpression - " + valueExpression);
+                    "Entity name - " + getMainEntityName() + ".\nExpression - " + valueExpression);
         }
     }
 
@@ -105,7 +105,7 @@ public class SingleCondition extends Condition{
         if(!CheckFunctions.isNumericValue(property.getType()) || !CheckFunctions.isNumericValue(value.getType())){
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type bigger than " + value.getType() + " type.\n" +
-                    "Entity name - " + getMainEntityName() + "\nExpression - " + valueExpression);
+                    "Entity name - " + getMainEntityName() + ".\nExpression - " + valueExpression);
         }
 
         return ParseFunctions.parseNumericTypeToFloat(propertyExpression) > ParseFunctions.parseNumericTypeToFloat(valueExpression);
@@ -121,7 +121,7 @@ public class SingleCondition extends Condition{
         if(!CheckFunctions.isNumericValue(property.getType()) || !CheckFunctions.isNumericValue(value.getType())){
             throw new MissMatchValuesException("Condition failed - cannot check if " + property.getType() +
                     " type smaller than " + value.getType() + " type.\n" +
-                    "Entity name - " + getMainEntityName() + "\nExpression - " + valueExpression);
+                    "Entity name - " + getMainEntityName() + ".\nExpression - " + valueExpression);
         }
 
         return ParseFunctions.parseNumericTypeToFloat(propertyExpression) < ParseFunctions.parseNumericTypeToFloat(valueExpression);

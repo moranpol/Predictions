@@ -2,7 +2,9 @@ package headerComponent;
 
 import header.DtoSimulationQueue;
 import javafx.application.Platform;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import pageComponent.PageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,6 +54,9 @@ public class HeaderController {
 
     @FXML
     private Label errorLabel;
+
+    @FXML
+    private ColorPicker skinButton;
 
     public void setter(PageController pageController){
         setPageController(pageController);
@@ -143,5 +148,11 @@ public class HeaderController {
     @FXML
     void resultsButtonClicked(ActionEvent event) {
         pageController.loadResultsComponent();
+    }
+
+    @FXML
+    void skinButtonClicked(ActionEvent event) {
+        Color selectedColor = skinButton.getValue();
+        pageController.setPageColor(selectedColor);
     }
 }

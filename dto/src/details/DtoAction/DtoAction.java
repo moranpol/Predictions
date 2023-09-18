@@ -5,7 +5,6 @@ public abstract class DtoAction {
     private final String mainEntityName;
     private final String secondaryEntityName;
 
-
     public DtoAction(String name, String mainEntityName, String secondaryEntityName) {
         this.name = name;
         this.mainEntityName = mainEntityName;
@@ -19,8 +18,8 @@ public abstract class DtoAction {
     public String getMainEntityName() {
         return mainEntityName;
     }
+
     public String getSecondaryEntityName() {
         return secondaryEntityName;
     }
-
 }

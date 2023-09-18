@@ -1,43 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.NewExecutionController">
-   <children>
-      <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@newExecution.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <center>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+<BorderPane fx:id="newExecutionBorderPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.NewExecutionController">
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Pane fx:id="simulationEntitiesPopulation" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Pane fx:id="simulationEntitiesPopulation" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <fx:include fx:id="entitiesPopulation" source="simulationEntitiesPopulation/SimulationEntitiesPopulation.fxml" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="simulationEnvironmentInputs" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <fx:include fx:id="environmentInputs" source="simulationEnvironmentsInputs/SimulationEnvironmentInputs.fxml" />
-                     </children>
-                  </Pane>
+                  <fx:include fx:id="entitiesPopulation" source="simulationEntitiesPopulation/SimulationEntitiesPopulation.fxml" />
                </children>
-            </HBox>
-         </center>
-         <bottom>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="780.0" BorderPane.alignment="CENTER">
+            </Pane>
+            <Pane fx:id="simulationEnvironmentInputs" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearButtonClick" prefHeight="30.0" prefWidth="100.0" text="Clear" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="startButton" mnemonicParsing="false" onAction="#startButtonClick" prefHeight="30.0" prefWidth="100.0" text="Start" HBox.hgrow="ALWAYS" />
+                  <fx:include fx:id="environmentInputs" source="simulationEnvironmentsInputs/SimulationEnvironmentInputs.fxml" />
                </children>
-               <padding>
-                  <Insets left="20.0" right="20.0" />
-               </padding>
-            </HBox>
-         </bottom>
-      </BorderPane>
-   </children>
-</AnchorPane>
+            </Pane>
+         </children>
+      </HBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="780.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearButtonClick" prefHeight="30.0" prefWidth="100.0" styleClass="button-show" text="Clear" HBox.hgrow="ALWAYS" />
+            <Button fx:id="startButton" mnemonicParsing="false" onAction="#startButtonClick" prefHeight="30.0" prefWidth="100.0" styleClass="button-show" text="Start" HBox.hgrow="ALWAYS" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="350.0" prefWidth="350.0" styleClass="detailsPane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="detailsComponent.details.action.set.SetController">
+   <children>
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-label-title" text="Name:" />
+            <Text fx:id="nameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="267.0" />
+         </children>
+      </HBox>
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-label-title" text="Main Entity Name:" />
+            <Text fx:id="mainEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="184.0" />
+         </children>
+      </HBox>
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-label-title" text="Secondary Entity Name:" />
+            <Text fx:id="secondaryEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="156.0" />
+         </children>
+      </HBox>
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-label-title" text="Property:" />
+            <Text fx:id="propertyVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="237.0" />
+         </children>
+      </HBox>
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-label-title" text="Value:" />
+            <Text fx:id="valueVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="270.0" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets left="20.0" right="10.0" />
+   </padding>
+</VBox>

@@ -3,32 +3,32 @@ package pageComponent;
 import detailsComponent.DetailsFullComponentController;
 import header.DtoSimulationQueue;
 import headerComponent.HeaderController;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import manager.LogicManager;
-import newExecution.DtoRerunExecution;
 import newExecution.dtoEntities.DtoEntitiesPopulation;
 import newExecution.dtoEntities.DtoEntityNames;
 import newExecution.dtoEntities.DtoGrid;
 import newExecutionComponent.NewExecutionController;
 import newExecution.dtoEnvironment.DtoEnvironment;
 import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
+import property.StringProperty;
 import results.simulationEnded.DtoSimulationEndedDetails;
 import results.simulations.DtoSimulationInfo;
 import results.DtoSimulationChoice;
 import resultsComponent.ResultsController;
 import resultsComponent.executionDetails.ExecutionDetailsController;
-import resultsComponent.executionList.ExecutionListController;
 
 import java.io.IOException;
 import java.util.List;
-
-import static javafx.geometry.Pos.CENTER;
 
 public class PageController {
 
@@ -59,12 +59,24 @@ public class PageController {
 
     private ExecutionDetailsController executionDetailsController;
 
+    private SimpleStringProperty pageColor = new SimpleStringProperty(toHexColor(Color.web("#f0f0f0")));;
+
     @FXML
     public void initialize(){
         logicManager = new LogicManager();
         headerController.setter(this);
         originalDividerPosition = 0.2908;
         setDivider();
+        pageColor.addListener((observable, oldValue, newValue) -> {
+            splitPane.setStyle("-fx-background-color: " + newValue + ";");
+            if(detailsFullComponentController != null){
+                detailsFullComponentController.setColor(newValue);
+            } else if (newExecutionController != null) {
+                newExecutionController.setColor(newValue);
+            } else if (resultsController != null) {
+                resultsController.setColor(newValue);
+            }
+        });
     }
 
     private void setDivider(){
@@ -99,14 +111,17 @@ public class PageController {
         if(executionDetailsController != null){
             executionDetailsController.stopThread();
         }
+        newExecutionController = null;
+        resultsController = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/detailsFullComponent.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/DetailsFullComponent.fxml"));
             Parent details = loader.load();
             paneBody.getChildren().clear();
             paneBody.getChildren().add(details);
 
             detailsFullComponentController = loader.getController();
             detailsFullComponentController.setPageController(this);
+            detailsFullComponentController.setColor(pageColor.getValue());
             stopExecutionListThread();
         }
         catch (IOException ignored) {
@@ -117,6 +132,8 @@ public class PageController {
         if(executionDetailsController != null){
             executionDetailsController.stopThread();
         }
+        detailsFullComponentController = null;
+        resultsController = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/newExecutionComponent/NewExecution.fxml"));
             Parent newExecution = loader.load();
@@ -125,6 +142,7 @@ public class PageController {
 
             newExecutionController = loader.getController();
             newExecutionController.setPageController(this);
+            newExecutionController.setColor(pageColor.getValue());
             stopExecutionListThread();
         } catch (IOException ignored) {
         }
@@ -140,6 +158,8 @@ public class PageController {
         if(executionDetailsController != null){
             executionDetailsController.stopThread();
         }
+        newExecutionController = null;
+        detailsFullComponentController = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultsComponent/Results.fxml"));
             Parent results = loader.load();
@@ -148,6 +168,7 @@ public class PageController {
 
             resultsController = loader.getController();
             resultsController.setter(this);
+            resultsController.setColor(pageColor.getValue());
         } catch (IOException ignored) {
         }
     }
@@ -200,6 +221,17 @@ public class PageController {
 
     public DtoSimulationQueue getDtoSimulationQueue(){
         return logicManager.createDtoSimulationQueue();
+    }
+
+    private String toHexColor(Color color) {
+        return String.format("#%02X%02X%02X",
+                (int) (color.getRed() * 255),
+                (int) (color.getGreen() * 255),
+                (int) (color.getBlue() * 255));
+    }
+
+    public void setPageColor(Color selectedColor) {
+        pageColor.setValue(toHexColor(selectedColor));
     }
 }
 

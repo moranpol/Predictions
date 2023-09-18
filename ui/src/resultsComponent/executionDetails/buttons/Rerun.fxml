@@ -3,8 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0" stylesheets="@buttons.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionDetails.buttons.RerunController">
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0" stylesheets="@../../../pageComponent/page.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionDetails.buttons.RerunController">
    <children>
-      <Button fx:id="rerunButton" contentDisplay="CENTER" layoutX="25.0" layoutY="60.0" mnemonicParsing="false" onAction="#rerunButtonClick" prefHeight="30.0" prefWidth="100.0" text="Rerun" />
+      <Button fx:id="rerunButton" contentDisplay="CENTER" layoutX="25.0" layoutY="60.0" mnemonicParsing="false" onAction="#rerunButtonClick" prefHeight="30.0" prefWidth="100.0" styleClass="button-show" text="Rerun" />
    </children>
 </Pane>

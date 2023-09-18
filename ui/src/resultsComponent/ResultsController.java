@@ -1,8 +1,10 @@
 package resultsComponent;
 
+import com.sun.javafx.css.StyleClassSet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import pageComponent.PageController;
@@ -17,6 +19,9 @@ import resultsComponent.executionResults.simulationFailed.SimulationFailedContro
 import java.io.IOException;
 
 public class ResultsController {
+
+    @FXML
+    private HBox resultsHBox;
 
     @FXML
     private Pane executionDetailsPane;
@@ -40,6 +45,8 @@ public class ResultsController {
     private SimulationFailedController simulationFailedController;
 
     private PageController pageController;
+
+
 
     public void setter(PageController pageController){
         setPageController(pageController);
@@ -115,5 +122,9 @@ public class ResultsController {
             executionResultsController.setSimulationDetails();
         } catch (IOException ignored) {
         }
+    }
+
+    public void setColor(String color) {
+        resultsHBox.setStyle("-fx-background-color: " + color + ";");
     }
 }

@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 public class NewExecutionController {
+    @FXML
+    private BorderPane newExecutionBorderPane;
 
     @FXML
     private Button clearButton;
@@ -103,6 +105,10 @@ public class NewExecutionController {
     public void rerunExecution(DtoRerunExecution dtoRerunExecution) {
         entitiesPopulationController.rerunExecutionEntities(dtoRerunExecution.getDtoEntitiesPopulationList());
         environmentInputsController.rerunExecutionEnvironments(dtoRerunExecution.getDtoEnvironmentInitializeList());
+    }
+
+    public void setColor(String color) {
+        newExecutionBorderPane.setStyle("-fx-background-color: " + color + ";");
     }
 }
 

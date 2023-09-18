@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -10,8 +12,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1000.0" stylesheets="@Header.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="headerComponent.HeaderController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="headerComponent.HeaderController">
   <columnConstraints>
       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
@@ -26,6 +29,11 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
+      <ColorPicker fx:id="skinButton" onAction="#skinButtonClicked" prefHeight="25.0" prefWidth="100.0">
+         <value>
+            <Color red="0.9411764740943909" green="0.9411764740943909" blue="0.9411764740943909" />
+         </value>
+      </ColorPicker>
       <Label id="predictionsTitle" text="Predictions" GridPane.columnIndex="3" />
       <StackPane GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
@@ -43,14 +51,14 @@
             <Button id="detailsButton" fx:id="okButton" mnemonicParsing="false" onAction="#okButtonClicked" prefHeight="30.0" prefWidth="128.0" styleClass="HeaderButtons" text="Ok" />
          </children>
       </StackPane>
-      <Button id="loadFileButton" fx:id="loadFileButton" mnemonicParsing="false" onAction="#loadFileButtonClicked" prefHeight="37.0" prefWidth="124.0" text="Load File" GridPane.rowIndex="1" />
+      <Button id="loadFileButton" fx:id="loadFileButton" mnemonicParsing="false" onAction="#loadFileButtonClicked" prefHeight="37.0" prefWidth="124.0" styleClass="button-show" text="Load File" GridPane.rowIndex="1" />
       <TextField fx:id="textLoadedFile" editable="false" prefHeight="30.0" prefWidth="324.0" text="Loaded file path..." GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="1" />
       <VBox fx:id="queueManagement" alignment="CENTER" prefHeight="90.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowSpan="3">
          <children>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="225.0" spacing="10.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="160.0" text="Simulation queue counter" />
-                  <Label fx:id="queueCounter" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="70.0" text="0" />
+                  <Label prefHeight="17.0" prefWidth="160.0" styleClass="simulationCounter" text="Simulations queue counter" />
+                  <Label fx:id="queueCounter" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="70.0" styleClass="simulationCounter" text="0" />
                </children>
                <padding>
                   <Insets left="15.0" right="15.0" />
@@ -58,8 +66,8 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="225.0" spacing="10.0">
                <children>
-                  <Label prefWidth="170.0" text="Simulation running counter" />
-                  <Label fx:id="runningCounter" alignment="CENTER_RIGHT" prefWidth="70.0" text="0" />
+                  <Label prefHeight="19.0" prefWidth="180.0" styleClass="simulationCounter" text="Simulations running counter" />
+                  <Label fx:id="runningCounter" alignment="CENTER_RIGHT" prefWidth="70.0" styleClass="simulationCounter" text="0" />
                </children>
                <padding>
                   <Insets left="15.0" right="15.0" />
@@ -67,8 +75,8 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="225.0" spacing="10.0">
                <children>
-                  <Label prefWidth="170.0" text="Simulation ended counter" />
-                  <Label fx:id="endedCounter" alignment="CENTER_RIGHT" prefWidth="70.0" text="0" />
+                  <Label prefWidth="170.0" styleClass="simulationCounter" text="Simulations ended counter" />
+                  <Label fx:id="endedCounter" alignment="CENTER_RIGHT" prefWidth="70.0" styleClass="simulationCounter" text="0" />
                </children>
                <padding>
                   <Insets left="15.0" right="15.0" />
@@ -76,6 +84,6 @@
             </HBox>
          </children>
       </VBox>
-      <Label fx:id="errorLabel" prefHeight="66.0" prefWidth="410.0" text="Label" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+      <Label id="headerErrorLabel" fx:id="errorLabel" prefHeight="66.0" prefWidth="410.0" text="Label" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
    </children>
 </GridPane>

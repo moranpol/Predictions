@@ -6,8 +6,10 @@ import javafx.scene.text.Text;
 public class EnvironmentDetailsControl {
     @FXML
     public Text typeVariableText;
+
     @FXML
     public Text rangeVariableText;
+
     @FXML
     private Text nameVariableText;
 

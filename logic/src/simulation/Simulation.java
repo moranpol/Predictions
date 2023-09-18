@@ -91,10 +91,11 @@ public class Simulation implements Serializable, Runnable {
                 runSimulationByUser();
             }
 
+            worldInstance.updateEntityCountGraphMap();
             simulationMode = SimulationMode.ENDED;
         } catch (Exception e){
             simulationMode = SimulationMode.FAILED;
-            failedReason = "simulation id " + id + " failed.\n    " + e.getMessage();
+            failedReason = "Simulation id " + id + " failed.\n" + e.getMessage();
         }
     }
 
@@ -102,7 +103,7 @@ public class Simulation implements Serializable, Runnable {
         long maxRunTimeMilliSec = maxSeconds * 1000;
         terminationReason = TerminationType.TICKS;
 
-        for (ticks = 1; ticks < maxTicks; ticks++){
+        for (ticks = 1; ticks <= maxTicks; ticks++){
             setSeconds();
             if(simulationMode == SimulationMode.ENDED){
                 terminationReason = TerminationType.User;

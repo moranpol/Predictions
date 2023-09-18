@@ -5,14 +5,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="475.0" stylesheets="@histogram.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionResults.resultsTypes.histogram.HistogramController">
+<VBox id="histogramVBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="475.0" spacing="10.0" stylesheets="@../../../../pageComponent/page.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionResults.resultsTypes.histogram.HistogramController">
    <children>
       <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="452.0">
          <content>
-            <TableView fx:id="tableView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="252.0" prefWidth="446.0">
+            <TableView fx:id="tableView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="252.0" prefWidth="444.0">
               <columns>
-                <TableColumn fx:id="valueCol" prefWidth="227.0" text="Value" />
-                <TableColumn fx:id="amountCol" prefWidth="223.0" text="Amount" />
+                <TableColumn fx:id="valueCol" maxWidth="227.0" minWidth="227.0" prefWidth="227.0" text="Value" />
+                <TableColumn fx:id="amountCol" maxWidth="222.0" minWidth="222.0" prefWidth="222.0" text="Amount" />
               </columns>
             </TableView>
          </content>

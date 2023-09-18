@@ -13,8 +13,9 @@ public class PredictionApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Predictions");
 
-        Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pageComponent/page.fxml")));
+        Parent load = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/pageComponent/Page.fxml")));
         Scene scene = new Scene(load, 1005, 705);
+        scene.getStylesheets().add("/pageComponent/Page.css");
         primaryStage.setMinWidth(400);
         primaryStage.setMinHeight(400);
         primaryStage.setMaxHeight(745);

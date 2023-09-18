@@ -7,13 +7,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="550.0" stylesheets="@booleanEnvironment.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.simulationEnvironmentsInputs.inputTypes.booleanEnvironment.BooleanEnvironmentController">
+<HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="550.0" styleClass="newExecution" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.simulationEnvironmentsInputs.inputTypes.booleanEnvironment.BooleanEnvironmentController">
    <children>
-      <Label fx:id="valueName" prefHeight="25.0" prefWidth="399.0" text="Label">
+      <Label fx:id="valueName" prefHeight="25.0" prefWidth="399.0" styleClass="newExecutionLabel" text="Label">
          <HBox.margin>
             <Insets />
          </HBox.margin></Label>
-      <ComboBox fx:id="valueCBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="115.0" promptText="Choose value">
+      <ComboBox id="valueCBox" fx:id="valueCBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="115.0" promptText="Choose value">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="True" />
