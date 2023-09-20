@@ -76,7 +76,7 @@ public class WorldInstance implements Serializable {
             }
         }
 
-        if(currentTick % 10000 == 0){
+        if(currentTick % 5000 == 0){
             updateEntityCountGraphMap();
         }
     }

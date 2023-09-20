@@ -17,26 +17,36 @@ public class RunningController {
     @FXML
     private Button stopButton;
 
+    @FXML
+    private Button futureButton;
+
     private ExecutionDetailsController executionDetailsController;
 
     private DtoSimulationChoice simulationChoice;
 
-    public void initialize(){
-        resumeButton.setDisable(true);
-    }
-
     @FXML
     void pauseButtonClick(ActionEvent event) {
         executionDetailsController.getPageController().pauseSimulation(simulationChoice);
+        executionDetailsController.showResults(simulationChoice);
         resumeButton.setDisable(false);
         pauseButton.setDisable(true);
+        futureButton.setDisable(false);
     }
 
     @FXML
     void resumeButtonClick(ActionEvent event) {
         executionDetailsController.getPageController().resumeSimulation(simulationChoice);
+        executionDetailsController.getResultsController().clearResultsPane();
         resumeButton.setDisable(true);
         pauseButton.setDisable(false);
+        futureButton.setDisable(true);
+    }
+
+    @FXML
+    void FutureButtonClick(ActionEvent event) {
+        executionDetailsController.getPageController().futureSimulation(simulationChoice);
+        executionDetailsController.showResults(simulationChoice);
+        pauseButton.setDisable(true);
     }
 
     @FXML
@@ -50,5 +60,11 @@ public class RunningController {
 
     public void setExecutionDetailsController(ExecutionDetailsController executionDetailsController) {
         this.executionDetailsController = executionDetailsController;
+    }
+
+    public void setter(String simulationMode) {
+        futureButton.setDisable(!simulationMode.equals("pause"));
+        resumeButton.setDisable(!simulationMode.equals("pause"));
+        pauseButton.setDisable(simulationMode.equals("pause"));
     }
 }

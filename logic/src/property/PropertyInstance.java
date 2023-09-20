@@ -23,6 +23,8 @@ public abstract class PropertyInstance implements Serializable {
 
     public abstract PropertyType getType();
 
+    public abstract void setPastValue();
+
     public abstract void setCurrValue(Object currValue);
 
     public Float getAverageValueCounterByTicks(){
@@ -47,6 +49,7 @@ public abstract class PropertyInstance implements Serializable {
         } else{
             currValueCounterByTicks = 0;
             changesCountValueByTicks++;
+            setPastValue();
         }
     }
 }

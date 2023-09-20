@@ -1,9 +1,13 @@
 package detailsComponent.details.action.replace;
+
 import details.DtoAction.DtoReplace;
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class ReplaceController {
+    @FXML
+    private VBox vBox;
 
     @FXML
     private Text mainEntityNameVariableText;

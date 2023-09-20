@@ -1,5 +1,6 @@
 package newExecutionComponent;
 
+import animations.ColorAnimationSecondPage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class NewExecutionController {
+    @FXML
+    private BorderPane newExecutionBorderPane;
 
     @FXML
     private Button clearButton;
@@ -50,11 +53,23 @@ public class NewExecutionController {
 
     private List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList;
 
+    private ColorAnimationSecondPage colorAnimationSecondPage;
+
     @FXML
     public void initialize(){
         dtoEntitiesPopulationList = new ArrayList<>();
         startNewExecutionListeners = new ArrayList<>();
         dtoEnvironmentInitializeList = new ArrayList<>();
+    }
+
+    public void setColorAnimationSecondPage() {
+        colorAnimationSecondPage = new ColorAnimationSecondPage(environmentInputsController.getTitleLabel(), entitiesPopulationController.getTitleLabel(),
+                entitiesPopulationController.getMaxPopulationLabel(), entitiesPopulationController.getMaxPopulationCountLabel(),
+                entitiesPopulationController.getCurrentPopulationLabel(), entitiesPopulationController.getCurrentPopulationCountLabel());
+    }
+
+    public ColorAnimationSecondPage getColorAnimationSecondPage() {
+        return colorAnimationSecondPage;
     }
 
     public void setPageController(PageController pageController) {

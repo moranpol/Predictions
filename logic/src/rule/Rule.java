@@ -64,7 +64,7 @@ public class Rule implements Serializable {
                                 }
                             }
                         } catch (Exception e){
-                            throw new RuntimeException("Rule name: " + name + "\n    " + e.getMessage());
+                            throw new RuntimeException("Rule name: " + name + ".\n" + e.getMessage());
                         }
                     }
                 }

@@ -5,9 +5,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="550.0" stylesheets="@stringEnvironment.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.simulationEnvironmentsInputs.inputTypes.stringEnvironment.StringEnvironmentController">
+<HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="550.0" styleClass="newExecution" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.simulationEnvironmentsInputs.inputTypes.stringEnvironment.StringEnvironmentController">
    <children>
-      <Label fx:id="valueName" prefHeight="25.0" prefWidth="369.0" text="Label">
+      <Label fx:id="valueName" prefHeight="25.0" prefWidth="369.0" styleClass="newExecutionLabel" text="Label">
          <HBox.margin>
             <Insets />
          </HBox.margin></Label>

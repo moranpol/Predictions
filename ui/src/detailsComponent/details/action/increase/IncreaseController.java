@@ -1,9 +1,12 @@
 package detailsComponent.details.action.increase;
 import details.DtoAction.DtoIncrease;
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class IncreaseController {
+    @FXML
+    private VBox vBox;
 
     @FXML
     private Text ByVariableText;
@@ -38,7 +41,5 @@ public class IncreaseController {
         else {
             secondaryEntityNameVariableText.setText(dtoIncrease.getSecondaryEntityName());
         }
-
     }
-
 }

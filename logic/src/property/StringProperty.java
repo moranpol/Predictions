@@ -31,4 +31,9 @@ public class StringProperty extends PropertyInstance{
     public PropertyType getType(){
         return PropertyType.STRING;
     }
+
+    @Override
+    public void setPastValue() {
+        pastValue = this.currValue;
+    }
 }

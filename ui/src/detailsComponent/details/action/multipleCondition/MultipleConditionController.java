@@ -1,9 +1,13 @@
 package detailsComponent.details.action.multipleCondition;
+
 import details.DtoAction.DtoMultipleCondition;
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class MultipleConditionController {
+    @FXML
+    private VBox vBox;
 
     @FXML
     private Text conditionsAmountVariableText;

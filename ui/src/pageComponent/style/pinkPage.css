@@ -1,0 +1,288 @@
+.label {
+    -fx-font-family: "Times New Roman";
+}
+
+.splitPane{
+    -fx-background-color: #FABADA; /* Updated background color */
+    -fx-border-color: #ffffff; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the BorderPane */
+}
+
+.firstPage{
+    -fx-background-color: #FABADA; /* Updated background color */
+    -fx-border-color: #ffffff; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the BorderPane */
+}
+
+.bodyPanes {
+    -fx-background-color: #FABADA; /* Updated background color */
+    -fx-border-color: #ffffff; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the BorderPane */
+}
+
+/* Style the buttons */
+.button-show {
+    -fx-background-color: #d286cf; /* Pink color for buttons */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 14px;
+    -fx-pref-width: 100px; /* Set preferred width for buttons */
+    -fx-pref-height: 30px; /* Set preferred height for buttons */
+    -fx-border-radius: 5px; /* Rounded corners for buttons */
+}
+
+.button-show:hover {
+    -fx-background-color: #861f84; /* Darker pink color on hover */
+}
+
+/* Apply styles to the ComboBoxes */
+.ComboBox {
+    -fx-font-size: 12px; /* Font size */
+    -fx-pref-width: 180px; /* Preferred width for ComboBoxes */
+    -fx-prompt-text-fill: #FABADA; /* Prompt text color */
+    -fx-background-color: white; /* Background color */
+    -fx-border-color: #fd78ba; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for ComboBoxes */
+    -fx-padding: 5px; /* Add padding to ComboBoxes */
+}
+
+.detailsPane {
+    -fx-background-color: #FABADA; /* Updated background color */
+}
+
+.HeaderButtons {
+    -fx-background-color: #af634c;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.HeaderButtons:hover {
+    -fx-background-color: #4b241c;
+}
+
+#histogramVBox {
+    -fx-background-color: #FABADA; /* Light pink background color */
+    -fx-border-color: #ffffff; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the VBox */
+    -fx-spacing: 10px; /* Spacing between children */
+    -fx-padding: 10px; /* Padding around the VBox */
+}
+
+/* Style the TableColumns */
+TableColumn {
+    -fx-font-size: 16px; /* Font size */
+    -fx-alignment: CENTER_LEFT; /* Center-align column content */
+    -fx-padding: 5px; /* Padding around the Labels */
+    -fx-font-weight: bold; /* Bold text */
+}
+
+#consistencyVBox {
+    -fx-background-color: #FABADA; /* Light pink background color */
+    -fx-border-color: #ffffff; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the HBox */
+    -fx-spacing: 20px; /* Spacing between children */
+    -fx-padding: 10px; /* Add padding around the HBox */
+    -fx-alignment: CENTER; /* Center-align children */
+}
+
+/* Apply styles to the LineChart */
+LineChart {
+    -fx-background-color: #FABADA; /* Pink background color */
+    -fx-border-color: #ffffff; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the LineChart */
+}
+
+/* Style the Axis */
+.axis {
+    -fx-font-size: 12px; /* Font size */
+}
+
+#resultsPane {
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the Pane */
+    -fx-padding: 10px; /* Add padding around the Pane */
+}
+
+#executionResultsHBox {
+    -fx-background-color: #FABADA; /* Light pink background color */
+    -fx-border-color: #ffffff; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the HBox */
+    -fx-padding: 15px; /* Add padding around the HBox */
+}
+
+.executionResults {
+    -fx-background-color: #FABADA; /* Light pink background color */
+    -fx-border-color: #ffffff; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the HBox */
+    -fx-spacing: 10px; /* Spacing between children */
+    -fx-padding: 5px; /* Add padding around the HBox */
+}
+
+.newExecution {
+    -fx-spacing: 10px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-color: white;
+    -fx-border-color: #ffaeae;
+    -fx-border-width: 1px; /* 1-pixel border width */
+    -fx-border-radius: 5px; /* Rounded corners for the HBox */
+    -fx-padding: 10px; /* Add padding around the HBox */
+}
+
+.newExecutionInputs {
+    -fx-spacing: 10px;
+    -fx-alignment: TOP_CENTER;
+    -fx-background-color: #FABADA;
+    -fx-border-color: white;
+    -fx-padding: 10px; /* Add padding around the VBox */
+}
+
+/* Style for the title labels */
+.action-label-title {
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+}
+
+/* Style for variable text */
+.action-text-variable {
+    -fx-font-size: 13px;
+    -fx-fill:  #555555;
+    -fx-font-family: "Times New Roman";
+}
+
+/* Style for the title labels */
+.label-title {
+    -fx-font-size: 16px;
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+}
+
+/* Style for variable text */
+.text-variable {
+    -fx-font-size: 16px;
+    -fx-fill: #555555;
+    -fx-font-family: "Times New Roman";
+}
+
+#textLoadedFile {
+    -fx-font-size: 14px;
+}
+
+.simulationCounter {
+    -fx-text-fill: black;
+    -fx-font-size: 13px; /* Font size */
+}
+
+#headerErrorLabel {
+    -fx-text-fill: red;
+    -fx-font-size: 13px; /* Font size */
+}
+
+#predictionsTitle {
+    -fx-text-fill: #FABADA; /* Updated Pink text color */
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+    -fx-font-family: "Arial";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+.newExecutionLabel {
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+Spinner {
+    -fx-pref-width: 80px;
+    -fx-padding: 5px;
+}
+
+#valueCBox {
+    -fx-font-size: 10px;
+}
+
+.topLabels {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+}
+
+/* Apply styles to the labels in the bottom HBox */
+.countersLabel {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* Style specific Labels */
+.detailsCountLabels {
+    -fx-font-weight: normal;
+    -fx-font-size: 14px; /* Font size */
+}
+
+.detailsLabels {
+    -fx-font-weight: bold; /* Bold text */
+    -fx-font-size: 14px; /* Font size */
+}
+
+/* Apply styles to the Label inside the Pane */
+#executionListTitle {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+}
+
+/* Apply styles to the ListView */
+ListView {
+    -fx-background-color: white; /* White background color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-border-color: #FABADA; /* Updated Pink border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the ListView */
+}
+
+/* Apply styles to the Label components */
+.consistencyLabels {
+    -fx-font-size: 16px; /* Font size */
+    -fx-padding: 10px; /* Add padding to the Labels */
+}
+
+.failedVBox {
+    -fx-background-color: #FABADA; /* Updated Light pink background color */
+    -fx-border-color: #FABADA; /* Updated Pink border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners for the HBox */
+    -fx-padding: 10px; /* Add padding around the HBox */
+}
+
+/* Apply styles to the Label components */
+.simulationIdLabels {
+    -fx-font-size: 16px; /* Font size */
+    -fx-padding: 10px; /* Add padding to the Labels */
+    -fx-font-weight: bold; /* Bold text */
+}
+
+.errorLabels {
+    -fx-font-size: 16px; /* Font size */
+    -fx-padding: 10px; /* Add padding to the Labels */
+    -fx-text-fill: red;
+}
+
+#simulationIdAndTimeDetails {
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 5px; /* Padding around the Labels */
+    -fx-font-weight: bold; /* Bold text */
+}
+
+.detailsLabels {
+    -fx-font-weight: bold; /* Bold text */
+    -fx-font-size: 14px; /* Font size */
+}

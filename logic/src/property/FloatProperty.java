@@ -32,6 +32,11 @@ public class FloatProperty extends PropertyInstance{
     }
 
     @Override
+    public void setPastValue() {
+        pastValue = this.currValue;
+    }
+
+    @Override
     public Float getCurrValue() {
         return currValue;
     }

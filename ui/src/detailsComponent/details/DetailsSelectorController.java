@@ -1,4 +1,5 @@
 package detailsComponent.details;
+import animations.RotateFirstPageButtons;
 import detailsComponent.DetailsFullComponentController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,14 +42,19 @@ public class DetailsSelectorController {
     private Button terminationShowButton;
 
     private DetailsFullComponentController detailsFullComponentController;
-    private PageController pageController;
 
+    private RotateFirstPageButtons animation;
 
-
-    public void setPageController(PageController pageController) {
-        this.pageController = pageController;
+    public void initialize(){
+        entitiesShowButton.setDisable(true);
+        environmentShowButton.setDisable(true);
+        rulesShowButton.setDisable(true);
+        animation = new RotateFirstPageButtons(gridShowButton, entitiesShowButton, environmentShowButton, rulesShowButton, terminationShowButton);
     }
 
+    public RotateFirstPageButtons getAnimation() {
+        return animation;
+    }
 
     public void setDetailsFullComponentController(DetailsFullComponentController detailsFullComponentController) {
         this.detailsFullComponentController = detailsFullComponentController;
@@ -63,53 +69,77 @@ public class DetailsSelectorController {
 
     @FXML
     void entitiesCBoxChoice(ActionEvent event) {
-
+        if(entitiesCBox.getValue() != null) {
+            entitiesShowButton.setDisable(false);
+        }
     }
 
     @FXML
     void entitiesShowButtonClicked(ActionEvent event) {
+        environmentShowButton.setDisable(true);
+        rulesShowButton.setDisable(true);
+        environmentCBox.setValue(null);
+        rulesCBox.setValue(null);
         detailsFullComponentController.clearPage();
         detailsFullComponentController.showEntity(entitiesCBox.getValue());
-
     }
 
     @FXML
     void environmentCBoxChoice(ActionEvent event) {
-
+        if(environmentCBox.getValue() != null) {
+            environmentShowButton.setDisable(false);
+        }
     }
 
     @FXML
     void environmentShowButtonClicked(ActionEvent event) {
+        entitiesShowButton.setDisable(true);
+        rulesShowButton.setDisable(true);
+        entitiesCBox.setValue(null);
+        rulesCBox.setValue(null);
         detailsFullComponentController.clearPage();
         detailsFullComponentController.showEnvironment(environmentCBox.getValue());
     }
 
     @FXML
-    void gridCBoxChoice(ActionEvent event) {
-
-    }
-
-    @FXML
     void gridShowButtonClicked(ActionEvent event) {
-
+        environmentShowButton.setDisable(true);
+        entitiesShowButton.setDisable(true);
+        rulesShowButton.setDisable(true);
+        environmentCBox.setValue(null);
+        entitiesCBox.setValue(null);
+        rulesCBox.setValue(null);
+        detailsFullComponentController.clearPage();
+        detailsFullComponentController.showGrid();
     }
 
     @FXML
     void rulesCBoxChoice(ActionEvent event) {
-
+        if(rulesCBox.getValue() != null) {
+            rulesShowButton.setDisable(false);
+        }
     }
 
     @FXML
     void rulesShowButtonClicked(ActionEvent event) {
+        environmentShowButton.setDisable(true);
+        entitiesShowButton.setDisable(true);
+        environmentCBox.setValue(null);
+        entitiesCBox.setValue(null);
         detailsFullComponentController.clearPage();
         detailsFullComponentController.showRule(rulesCBox.getValue());
     }
 
     @FXML
     void terminationShowButtonClicked(ActionEvent event) {
+        environmentShowButton.setDisable(true);
+        entitiesShowButton.setDisable(true);
+        rulesShowButton.setDisable(true);
+        environmentCBox.setValue(null);
+        entitiesCBox.setValue(null);
+        rulesCBox.setValue(null);
         detailsFullComponentController.clearPage();
         detailsFullComponentController.showTermination();
     }
-
 }
 

@@ -21,6 +21,11 @@ public class IntProperty extends PropertyInstance{
     }
 
     @Override
+    public void setPastValue() {
+        pastValue = this.currValue;
+    }
+
+    @Override
     public void setCurrValue(Object currValue) {
         pastValue = this.currValue;
         currValue = ParseFunctions.parseNumericTypeToInt(currValue);

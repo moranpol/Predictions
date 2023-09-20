@@ -78,6 +78,10 @@ public class ExecutionDetailsController {
         });
     }
 
+    public ResultsController getResultsController() {
+        return resultsController;
+    }
+
     public void stopThread() {
         pageController.setExecutionDetailsController(null);
         thread.interrupt();
@@ -142,7 +146,7 @@ public class ExecutionDetailsController {
             simulationState = pageController.getDtoSimulationInfo(simulationChoice).getSimulationMode();
             if(simulationState.equals("ended")){
                 Platform.runLater(() -> {
-                    resultsController.loadExecutionResultController(pageController.getDtoSimulationEndedDetails(simulationChoice));
+                    showResults(simulationChoice);
                     setButtonsVBox("ended", simulationChoice);
                 });
             }
@@ -151,19 +155,23 @@ public class ExecutionDetailsController {
         thread.start();
     }
 
+    public void showResults(DtoSimulationChoice simulationChoice){
+        resultsController.loadExecutionResultController(pageController.getDtoSimulationEndedDetails(simulationChoice));
+    }
+
     public void setPageController(PageController pageController) {
         this.pageController = pageController;
     }
 
     public void setButtonsVBox(String simulationMode, DtoSimulationChoice simulationChoice){
-        if(simulationMode.equals("running") || simulationMode.equals("pause")){
-            loadRunningController(simulationChoice);
+        if(simulationMode.equals("running") || simulationMode.equals("pause") || simulationMode.equals("future")){
+            loadRunningController(simulationChoice, simulationMode);
         } else{
             loadRerunController(simulationChoice);
         }
     }
 
-    private void loadRunningController(DtoSimulationChoice simulationChoice){
+    private void loadRunningController(DtoSimulationChoice simulationChoice, String simulationMode){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultsComponent/executionDetails/buttons/Running.fxml"));
             Parent running = loader.load();
@@ -171,6 +179,7 @@ public class ExecutionDetailsController {
             buttonsVBox.getChildren().add(running);
 
             runningController = loader.getController();
+            runningController.setter(simulationMode);
             runningController.setExecutionDetailsController(this);
             runningController.setSimulationChoice(simulationChoice);
         }

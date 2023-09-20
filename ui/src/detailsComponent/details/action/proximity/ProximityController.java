@@ -1,9 +1,13 @@
 package detailsComponent.details.action.proximity;
+
 import details.DtoAction.DtoProximity;
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class ProximityController {
+    @FXML
+    private VBox vBox;
 
     @FXML
     private Text actionAmountVariableText;

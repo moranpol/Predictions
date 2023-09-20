@@ -1,4 +1,5 @@
 package detailsComponent.details.rule;
+
 import details.DtoAction.*;
 import details.DtoRuleInfo;
 import detailsComponent.details.action.calculation.CalculationController;
@@ -10,19 +11,19 @@ import detailsComponent.details.action.proximity.ProximityController;
 import detailsComponent.details.action.replace.ReplaceController;
 import detailsComponent.details.action.set.SetController;
 import detailsComponent.details.action.simpleCondition.SimpleConditionController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import rule.action.MultipleCondition;
 
 import java.io.IOException;
+import java.util.List;
 
 public class RuleSelectorController {
 
@@ -30,7 +31,7 @@ public class RuleSelectorController {
     private Pane paneAction;
 
     @FXML
-    private ComboBox<String> actioncBox;
+    private TreeView<String> actionsTreeView;
 
     @FXML
     private Text activationVariableText;
@@ -40,6 +41,12 @@ public class RuleSelectorController {
 
     private DtoRuleInfo dtoRuleInfo;
 
+    @FXML
+    private Button selectActionButton;
+
+    @FXML
+    private GridPane gridPane;
+
     public void setDtoRuleInfo(DtoRuleInfo dtoRuleInfo) {
         this.dtoRuleInfo = dtoRuleInfo;
     }
@@ -47,16 +54,32 @@ public class RuleSelectorController {
     public void updateData(){
         nameVariableText.setText(dtoRuleInfo.getName());
         activationVariableText.setText(createStrActivation());
+        setActionsTreeView(dtoRuleInfo.getDtoActions());
+    }
 
-        ObservableList<String> propertyNames = FXCollections.observableArrayList(dtoRuleInfo.getDtoActionMap().keySet());
-        actioncBox.setItems(propertyNames);
+    private void setActionsTreeView(List<DtoAction> dtoActions){
+        TreeItem<String> root = new TreeItem<>("Select Action");
+        for(DtoAction dtoAction : dtoActions){
+            root.getChildren().add(new TreeItem<>(dtoAction.getName()));
+        }
+
+        actionsTreeView.setRoot(root);
     }
 
     @FXML
-    void actioncBoxChoice(ActionEvent event) {
-
-        showActionPain(dtoRuleInfo.getDtoActionMap().get(actioncBox.getValue()));
-
+    private void SelectActionClicked(ActionEvent event) {
+        TreeItem<String> selectedItem = actionsTreeView.getSelectionModel().getSelectedItem();
+        if(selectedItem != null && selectedItem.isLeaf()) {
+            int i = 0;
+            for (TreeItem<String> treeItem : actionsTreeView.getRoot().getChildren()) {
+                if (treeItem.equals(selectedItem)) {
+                    break;
+                }
+                i++;
+            }
+            DtoAction dtoAction = dtoRuleInfo.getDtoActions().get(i);
+            showActionPain(dtoAction);
+        }
     }
 
     private void showActionPain(DtoAction dtoAction) {
@@ -89,12 +112,11 @@ public class RuleSelectorController {
                 createSingleConditionActionToShow((DtoSimpleCondition)dtoAction);
                 break;
         }
-
     }
 
     private void createSingleConditionActionToShow(DtoSimpleCondition dtoAction) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/simpleCondition/simpleCondition.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/simpleCondition/SimpleCondition.fxml"));
             Parent simpleConditionInfo  = loader.load();
 
             SimpleConditionController simpleConditionController = loader.getController();
@@ -103,13 +125,12 @@ public class RuleSelectorController {
 
             paneAction.getChildren().clear();
             paneAction.getChildren().add(simpleConditionInfo);
-
-        } catch (IOException e) {}//todo
+        } catch (IOException ignore) {}
     }
 
     private void createSetActionToShow(DtoSet dtoAction) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/set/set.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/set/Set.fxml"));
             Parent setInfo  = loader.load();
 
             SetController setController = loader.getController();
@@ -118,13 +139,12 @@ public class RuleSelectorController {
 
             paneAction.getChildren().clear();
             paneAction.getChildren().add(setInfo);
-
-        } catch (IOException e) {}//todo
+        } catch (IOException ignore) {}
     }
 
     private void createReplaceActionToShow(DtoReplace dtoAction) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/replace/replace.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/replace/Replace.fxml"));
             Parent replaceInfo  = loader.load();
 
             ReplaceController replaceController = loader.getController();
@@ -133,43 +153,40 @@ public class RuleSelectorController {
 
             paneAction.getChildren().clear();
             paneAction.getChildren().add(replaceInfo);
-
-        } catch (IOException e) {}//todo
+        } catch (IOException ignore) {}
     }
 
     private void createProximityActionToShow(DtoProximity dtoAction) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/proximity/proximity.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/proximity/Proximity.fxml"));
             Parent proximityInfo  = loader.load();
 
-            ProximityController proximityController  = loader.getController();
+            ProximityController proximityController = loader.getController();
             proximityController.setDtoProximity(dtoAction);
             proximityController.updateData();
 
             paneAction.getChildren().clear();
             paneAction.getChildren().add(proximityInfo);
-
-        } catch (IOException e) {}//todo
+        } catch (IOException ignore) {}
     }
 
     private void createMultipleConditionActionToShow(DtoMultipleCondition dtoAction) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/multipleCondition/multipleCondition.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/multipleCondition/MultipleCondition.fxml"));
             Parent multipleConditionInfo  = loader.load();
 
-            MultipleConditionController multipleCondition  = loader.getController();
-            multipleCondition.setDtoMultipleCondition(dtoAction);
-            multipleCondition.updateData();
+            MultipleConditionController multipleConditionController = loader.getController();
+            multipleConditionController.setDtoMultipleCondition(dtoAction);
+            multipleConditionController.updateData();
 
             paneAction.getChildren().clear();
             paneAction.getChildren().add(multipleConditionInfo);
-
-        } catch (IOException e) {}//todo
+        } catch (IOException ignore) {}
     }
 
     private void createKillActionToShow(DtoKill dtoAction) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/kill/kill.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/kill/Kill.fxml"));
             Parent killInfo  = loader.load();
 
             KillController killController = loader.getController();
@@ -178,43 +195,40 @@ public class RuleSelectorController {
 
             paneAction.getChildren().clear();
             paneAction.getChildren().add(killInfo);
-
-        } catch (IOException e) {}//todo
+        } catch (IOException ignore) {}
     }
 
     private void createIncreaseActionToShow(DtoIncrease dtoAction) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/increase/increase.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/increase/Increase.fxml"));
             Parent increaseInfo  = loader.load();
 
-            IncreaseController increaseController   = loader.getController();
+            IncreaseController increaseController = loader.getController();
             increaseController.setDtoIncrease(dtoAction);
             increaseController.updateData();
 
             paneAction.getChildren().clear();
             paneAction.getChildren().add(increaseInfo);
-
-        } catch (IOException e) {}//todo
+        } catch (IOException ignore) {}
     }
 
     private void createDecreaseActionToShow(DtoDecrease dtoAction) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/decrease/decrease.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/decrease/Decrease.fxml"));
             Parent decreaseInfo  = loader.load();
 
-            DecreaseController decreaseController  = loader.getController();
+            DecreaseController decreaseController = loader.getController();
             decreaseController.setDtoDecrease(dtoAction);
             decreaseController.updateData();
 
             paneAction.getChildren().clear();
             paneAction.getChildren().add(decreaseInfo);
-
-        } catch (IOException e) {}//todo
+        } catch (IOException ignore) {}
     }
 
     private void createCalculationActionToShow(DtoCalculation dtoAction) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/calculation/calculation.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/calculation/Calculation.fxml"));
             Parent calculationInfo  = loader.load();
 
             CalculationController calculationController = loader.getController();
@@ -223,8 +237,7 @@ public class RuleSelectorController {
 
             paneAction.getChildren().clear();
             paneAction.getChildren().add(calculationInfo);
-
-        } catch (IOException e) {}//todo
+        } catch (IOException ignore) {}
     }
 
 

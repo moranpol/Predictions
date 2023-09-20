@@ -1,8 +1,10 @@
 package resultsComponent;
 
+import com.sun.javafx.css.StyleClassSet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import pageComponent.PageController;
@@ -19,6 +21,9 @@ import java.io.IOException;
 public class ResultsController {
 
     @FXML
+    private HBox resultsHBox;
+
+    @FXML
     private Pane executionDetailsPane;
 
     @FXML
@@ -33,11 +38,7 @@ public class ResultsController {
     @FXML
     private ExecutionListController executionListController;
 
-    private ExecutionResultsController executionResultsController;
-
     private ExecutionDetailsController executionDetailsController;
-    
-    private SimulationFailedController simulationFailedController;
 
     private PageController pageController;
 
@@ -77,6 +78,10 @@ public class ResultsController {
         }
     }
 
+    public void clearResultsPane(){
+        executionResultPane.getChildren().clear();
+    }
+
     private void loadSimulationFailedController(DtoSimulationInfo dtoSimulationInfo) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultsComponent/executionResults/simulationFailed/SimulationFailed.fxml"));
@@ -84,7 +89,7 @@ public class ResultsController {
             executionResultPane.getChildren().clear();
             executionResultPane.getChildren().add(executionFailed);
 
-            simulationFailedController = loader.getController();
+            SimulationFailedController simulationFailedController = loader.getController();
             simulationFailedController.setter(dtoSimulationInfo);
         } catch (IOException ignored) {
         }
@@ -110,7 +115,7 @@ public class ResultsController {
             executionResultPane.getChildren().clear();
             executionResultPane.getChildren().add(executionResults);
 
-            executionResultsController = loader.getController();
+            ExecutionResultsController executionResultsController = loader.getController();
             executionResultsController.setDtoSimulationEndedDetails(simulationEndedDetails);
             executionResultsController.setSimulationDetails();
         } catch (IOException ignored) {

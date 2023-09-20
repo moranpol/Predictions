@@ -6,12 +6,13 @@ import headerComponent.HeaderController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import manager.LogicManager;
-import newExecution.DtoRerunExecution;
 import newExecution.dtoEntities.DtoEntitiesPopulation;
 import newExecution.dtoEntities.DtoEntityNames;
 import newExecution.dtoEntities.DtoGrid;
@@ -23,12 +24,9 @@ import results.simulations.DtoSimulationInfo;
 import results.DtoSimulationChoice;
 import resultsComponent.ResultsController;
 import resultsComponent.executionDetails.ExecutionDetailsController;
-import resultsComponent.executionList.ExecutionListController;
 
 import java.io.IOException;
 import java.util.List;
-
-import static javafx.geometry.Pos.CENTER;
 
 public class PageController {
 
@@ -59,12 +57,39 @@ public class PageController {
 
     private ExecutionDetailsController executionDetailsController;
 
+    private Stage primaryStage;
+
+    private Boolean isAnimation = false;
+
     @FXML
     public void initialize(){
         logicManager = new LogicManager();
         headerController.setter(this);
         originalDividerPosition = 0.2908;
         setDivider();
+    }
+
+    public void setAnimation(Boolean animation) {
+        isAnimation = animation;
+        if(isAnimation){
+            if(detailsFullComponentController != null){
+                detailsFullComponentController.getAnimation().startRotationAnimation();
+            }
+            if(newExecutionController != null){
+                newExecutionController.getColorAnimationSecondPage().startColorChange();
+            }
+        } else {
+            if(detailsFullComponentController != null){
+                detailsFullComponentController.getAnimation().stopRotationAnimation();
+            }
+            if(newExecutionController != null){
+                newExecutionController.getColorAnimationSecondPage().stopColorChange();
+            }
+        }
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
     private void setDivider(){
@@ -100,13 +125,16 @@ public class PageController {
             executionDetailsController.stopThread();
         }
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/detailsFullComponent.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/DetailsFullComponent.fxml"));
             Parent details = loader.load();
             paneBody.getChildren().clear();
             paneBody.getChildren().add(details);
 
             detailsFullComponentController = loader.getController();
             detailsFullComponentController.setPageController(this);
+            if(isAnimation){
+               detailsFullComponentController.getAnimation().startRotationAnimation();
+            }
             stopExecutionListThread();
         }
         catch (IOException ignored) {
@@ -125,6 +153,10 @@ public class PageController {
 
             newExecutionController = loader.getController();
             newExecutionController.setPageController(this);
+            newExecutionController.setColorAnimationSecondPage();
+            if(isAnimation){
+                newExecutionController.getColorAnimationSecondPage().startColorChange();
+            }
             stopExecutionListThread();
         } catch (IOException ignored) {
         }
@@ -200,6 +232,26 @@ public class PageController {
 
     public DtoSimulationQueue getDtoSimulationQueue(){
         return logicManager.createDtoSimulationQueue();
+    }
+
+    public void setPageColor(String selectedColor) {
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().clear();
+        switch (selectedColor){
+            case "Light-blue":
+                scene.getStylesheets().add("/pageComponent/style/bluePage.css");
+                break;
+            case"Pink":
+                scene.getStylesheets().add("/pageComponent/style/pinkPage.css");
+                break;
+            case "Default":
+                scene.getStylesheets().add("/pageComponent/style/defaultPage.css");
+                break;
+        }
+    }
+
+    public void futureSimulation(DtoSimulationChoice simulationChoice) {
+        logicManager.futureSimulation(simulationChoice);
     }
 }
 

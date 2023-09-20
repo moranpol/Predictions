@@ -1,9 +1,13 @@
 package detailsComponent.details.action.kill;
+
 import details.DtoAction.DtoKill;
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class KillController {
+    @FXML
+    private VBox vBox;
 
     @FXML
     private Text mainEntityNameVariableText;
