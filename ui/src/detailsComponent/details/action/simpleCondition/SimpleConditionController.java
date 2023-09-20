@@ -1,9 +1,13 @@
 package detailsComponent.details.action.simpleCondition;
+
 import details.DtoAction.DtoSimpleCondition;
 import javafx.fxml.FXML;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class SimpleConditionController {
+    @FXML
+    private GridPane gridPane;
 
     @FXML
     private Text mainEntityNameVariableText;
@@ -42,6 +46,5 @@ public class SimpleConditionController {
         else {
             secondaryEntityNameVariableText.setText(dtoSimpleCondition.getSecondaryEntityName());
         }
-
     }
 }

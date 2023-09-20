@@ -63,7 +63,7 @@ public class ExecutionListController {
                 executionList.add("(Running) simulation id: " + simulation.getId());
             } else if(simulation.getSimulationMode().equals("failed")){
                 executionList.add("(Failed) simulation id: " + simulation.getId());
-            } else if(simulation.getSimulationMode().equals("pause")){
+            } else if(simulation.getSimulationMode().equals("pause") || simulation.getSimulationMode().equals("future")){
             executionList.add("(Paused) simulation id: " + simulation.getId());
             } else{
                 executionList.add("(Ended) simulation id: " + simulation.getId());

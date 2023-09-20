@@ -11,7 +11,7 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="detailsComponent.details.environment.EnvironmentDetailsControl">
    <content>
-      <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" styleClass="detailsPane">
+      <GridPane fx:id="gridPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" styleClass="detailsPane">
         <columnConstraints>
           <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="550.0" minWidth="550.0" prefWidth="550.0" />

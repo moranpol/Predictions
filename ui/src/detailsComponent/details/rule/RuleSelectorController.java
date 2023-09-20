@@ -18,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
@@ -43,6 +44,9 @@ public class RuleSelectorController {
     @FXML
     private Button selectActionButton;
 
+    @FXML
+    private GridPane gridPane;
+
     public void setDtoRuleInfo(DtoRuleInfo dtoRuleInfo) {
         this.dtoRuleInfo = dtoRuleInfo;
     }
@@ -65,7 +69,7 @@ public class RuleSelectorController {
     @FXML
     private void SelectActionClicked(ActionEvent event) {
         TreeItem<String> selectedItem = actionsTreeView.getSelectionModel().getSelectedItem();
-        if(selectedItem != null) {
+        if(selectedItem != null && selectedItem.isLeaf()) {
             int i = 0;
             for (TreeItem<String> treeItem : actionsTreeView.getRoot().getChildren()) {
                 if (treeItem.equals(selectedItem)) {
@@ -157,7 +161,7 @@ public class RuleSelectorController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/proximity/Proximity.fxml"));
             Parent proximityInfo  = loader.load();
 
-            ProximityController proximityController  = loader.getController();
+            ProximityController proximityController = loader.getController();
             proximityController.setDtoProximity(dtoAction);
             proximityController.updateData();
 
@@ -171,9 +175,9 @@ public class RuleSelectorController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/multipleCondition/MultipleCondition.fxml"));
             Parent multipleConditionInfo  = loader.load();
 
-            MultipleConditionController multipleCondition  = loader.getController();
-            multipleCondition.setDtoMultipleCondition(dtoAction);
-            multipleCondition.updateData();
+            MultipleConditionController multipleConditionController = loader.getController();
+            multipleConditionController.setDtoMultipleCondition(dtoAction);
+            multipleConditionController.updateData();
 
             paneAction.getChildren().clear();
             paneAction.getChildren().add(multipleConditionInfo);
@@ -199,7 +203,7 @@ public class RuleSelectorController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/increase/Increase.fxml"));
             Parent increaseInfo  = loader.load();
 
-            IncreaseController increaseController   = loader.getController();
+            IncreaseController increaseController = loader.getController();
             increaseController.setDtoIncrease(dtoAction);
             increaseController.updateData();
 
@@ -213,7 +217,7 @@ public class RuleSelectorController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/details/action/decrease/Decrease.fxml"));
             Parent decreaseInfo  = loader.load();
 
-            DecreaseController decreaseController  = loader.getController();
+            DecreaseController decreaseController = loader.getController();
             decreaseController.setDtoDecrease(dtoAction);
             decreaseController.updateData();
 

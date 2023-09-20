@@ -33,9 +33,38 @@ public class SimulationEntitiesPopulationController {
 
     private final Map<String, EntityCountController> entitiesCounterMap = new HashMap<>();
 
+    @FXML
+    private Label maxPopulationLabel;
+
+    @FXML
+    private Label titleLabel;
+
+    @FXML
+    private Label currentPopulationLabel;
+
     public void initialize(){
         currentPopulationCountLabel.setText("0");
         populationCountListeners = new LinkedList<>();
+    }
+
+    public Label getMaxPopulationLabel() {
+        return maxPopulationLabel;
+    }
+
+    public Label getTitleLabel() {
+        return titleLabel;
+    }
+
+    public Label getCurrentPopulationLabel() {
+        return currentPopulationLabel;
+    }
+
+    public Label getCurrentPopulationCountLabel() {
+        return currentPopulationCountLabel;
+    }
+
+    public Label getMaxPopulationCountLabel() {
+        return maxPopulationCountLabel;
     }
 
     public void setNewExecutionController(NewExecutionController newExecutionController) {

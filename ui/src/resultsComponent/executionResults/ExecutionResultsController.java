@@ -97,6 +97,8 @@ public class ExecutionResultsController {
         resultsPane.getChildren().clear();
         propertyCBox.setValue(null);
         informationCBox.setValue(null);
+        propertyCBox.setVisible(false);
+        informationCBox.setVisible(false);
         if(entityCBox.getValue() != null){
             if(analyseTypeCBox.getValue().equals("Entity's quantity change graph")){
                 loadEntityQuantityController();

@@ -1,9 +1,12 @@
 package detailsComponent.details.action.decrease;
 import details.DtoAction.DtoDecrease;
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class DecreaseController {
+    @FXML
+    private VBox vBox;
 
     @FXML
     private Text ByVariableText;
@@ -38,6 +41,5 @@ public class DecreaseController {
         else {
             secondaryEntityNameVariableText.setText(dtoDecrease.getSecondaryEntityName());
         }
-
     }
 }

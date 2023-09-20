@@ -7,7 +7,7 @@
 
 <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pageComponent.PageController">
    <content>
-      <SplitPane fx:id="splitPane" dividerPositions="0.2908" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="700.0" prefWidth="1000.0">
+      <SplitPane fx:id="splitPane" dividerPositions="0.2908" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="710.0" prefWidth="1000.0" styleClass="splitPane">
         <items>
           <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1000.0">
                <children>
@@ -16,7 +16,7 @@
             </AnchorPane>
           <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0">
                <children>
-                  <Pane fx:id="paneBody" layoutX="-1.0" layoutY="-4.0" prefHeight="500.0" prefWidth="1000.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-4.0" />
+                  <Pane fx:id="paneBody" layoutX="-1.0" layoutY="-4.0" prefHeight="505.0" prefWidth="1000.0" styleClass="detailsPane" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-4.0" />
                </children>
             </AnchorPane>
         </items>

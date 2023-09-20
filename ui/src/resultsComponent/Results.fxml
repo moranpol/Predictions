@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="resultsHBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@../pageComponent/page.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.ResultsController">
+<HBox fx:id="resultsHBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1000.0" spacing="5.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.ResultsController">
    <children>
       <Pane fx:id="executionListPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="200.0" styleClass="bodyPanes">
          <children>
             <fx:include fx:id="executionList" source="executionList/ExecutionList.fxml" />
          </children>
+         <HBox.margin>
+            <Insets top="10.0" />
+         </HBox.margin>
       </Pane>
-      <VBox prefHeight="500.0" prefWidth="800.0">
+      <VBox prefHeight="500.0" prefWidth="795.0" spacing="5.0">
          <children>
-            <Pane fx:id="executionDetailsPane" prefHeight="200.0" prefWidth="800.0" styleClass="bodyPanes" />
-            <Pane fx:id="executionResultPane" prefHeight="300.0" prefWidth="800.0" styleClass="bodyPanes" />
+            <Pane fx:id="executionDetailsPane" prefHeight="195.0" prefWidth="795.0" styleClass="bodyPanes" />
+            <Pane fx:id="executionResultPane" prefHeight="295.0" prefWidth="795.0" styleClass="bodyPanes" />
          </children>
+         <HBox.margin>
+            <Insets top="10.0" />
+         </HBox.margin>
       </VBox>
    </children>
 </HBox>

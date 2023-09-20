@@ -1,6 +1,7 @@
 package detailsComponent.details.environment;
 import details.DtoEnvironmentInfo;
 import javafx.fxml.FXML;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class EnvironmentDetailsControl {
@@ -14,6 +15,9 @@ public class EnvironmentDetailsControl {
     private Text nameVariableText;
 
     private DtoEnvironmentInfo dtoEnvironmentInfo;
+
+    @FXML
+    private GridPane gridPane;
 
     public void setDtoEnvironmentInfo(DtoEnvironmentInfo dtoEnvironmentInfo) {
         this.dtoEnvironmentInfo = dtoEnvironmentInfo;

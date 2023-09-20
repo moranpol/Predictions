@@ -49,10 +49,6 @@ public class Simulation implements Serializable, Runnable {
         return worldInstance;
     }
 
-    public TerminationType getTerminationReason() {
-        return terminationReason;
-    }
-
     public SimulationMode getSimulationMode(){return simulationMode;}
 
     public Integer getTicks() {
@@ -91,7 +87,6 @@ public class Simulation implements Serializable, Runnable {
                 runSimulationByUser();
             }
 
-            worldInstance.updateEntityCountGraphMap();
             simulationMode = SimulationMode.ENDED;
         } catch (Exception e){
             simulationMode = SimulationMode.FAILED;
@@ -114,6 +109,7 @@ public class Simulation implements Serializable, Runnable {
             }
 
             worldInstance.runSimulationTick(ticks, worldDefinition);
+            checkFuture();
             checkPause();
         }
     }
@@ -130,6 +126,7 @@ public class Simulation implements Serializable, Runnable {
             }
 
             worldInstance.runSimulationTick(ticks, worldDefinition);
+            checkFuture();
             checkPause();
             ticks++;
         }
@@ -138,14 +135,15 @@ public class Simulation implements Serializable, Runnable {
     private void runSimulationByTicks(Integer maxTicks){
         terminationReason = TerminationType.TICKS;
 
-        for (ticks = 1; ticks < maxTicks; ticks++){
+        for (ticks = 1; ticks <= maxTicks; ticks++){
             setSeconds();
-            if(simulationMode != SimulationMode.ENDED){
+            if(simulationMode == SimulationMode.ENDED){
                 terminationReason = TerminationType.User;
                 break;
             }
 
             worldInstance.runSimulationTick(ticks, worldDefinition);
+            checkFuture();
             checkPause();
         }
     }
@@ -154,11 +152,18 @@ public class Simulation implements Serializable, Runnable {
         while (simulationMode != SimulationMode.ENDED) {
             setSeconds();
             worldInstance.runSimulationTick(ticks, worldDefinition);
+            checkFuture();
             checkPause();
             ticks++;
         }
 
         terminationReason = TerminationType.User;
+    }
+
+    private void checkFuture(){
+        if(simulationMode == SimulationMode.FUTURE){
+            simulationMode = SimulationMode.PAUSE;
+        }
     }
 
     private void checkPause(){

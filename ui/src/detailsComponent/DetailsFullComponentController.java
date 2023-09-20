@@ -1,5 +1,6 @@
 package detailsComponent;
 
+import animations.RotateFirstPageButtons;
 import details.*;
 import details.DtoAction.DtoGridInfo;
 import detailsComponent.details.DetailsSelectorController;
@@ -31,18 +32,14 @@ public class DetailsFullComponentController {
 
     private DtoWorldInfo dtoWorldInfo;
 
-    private SimpleStringProperty color = new SimpleStringProperty();
-
     public void setPageController(PageController pageController) {
         dtoWorldInfo = pageController.getLogicManager().getDtoWorldInfo();
         detailsController.setDetailsFullComponentController(this);
-        color.addListener((observable, oldValue, newValue) -> {
-            details.setStyle("-fx-background-color: " + newValue + ";");
-            if (pane != null) {
-                pane.setStyle("-fx-background-color: " + newValue + ";");
-            }
-        });
-}
+    }
+
+    public RotateFirstPageButtons getAnimation(){
+        return detailsController.getAnimation();
+    }
 
     public DtoWorldInfo getDtoWorldInfo() {
         return dtoWorldInfo;
@@ -69,7 +66,7 @@ public class DetailsFullComponentController {
             pane.getChildren().add(entity);
 
             DtoEntityInfo dtoEntityInfo = dtoWorldInfo.getDtoEntityMap().get(entityName);
-            EntitySelectorController entitySelectorController= loader.getController();
+            EntitySelectorController entitySelectorController = loader.getController();
             entitySelectorController.setDtoEntityInfo(dtoEntityInfo);
             entitySelectorController.updateData();
         } catch (IOException ignore) {}
@@ -104,7 +101,6 @@ public class DetailsFullComponentController {
             TerminationController terminationController = loader.getController();
             terminationController.setDtoTermination(dtoTermination);
             terminationController.updateData();
-            pane.setStyle("-fx-background-color: " + color + ";");
         } catch (IOException ignore) {}
     }
 
@@ -117,11 +113,6 @@ public class DetailsFullComponentController {
             DtoGridInfo dtoGridInfo = dtoWorldInfo.getDtoGridInfo();
             GridController gridController = loader.getController();
             gridController.setter(dtoGridInfo);
-            pane.setStyle("-fx-background-color: " + color + ";");
         } catch (IOException ignore) {}
-    }
-
-    public void setColor(String color) {
-        this.color.setValue(color);
     }
 }

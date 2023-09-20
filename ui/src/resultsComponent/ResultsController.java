@@ -38,15 +38,9 @@ public class ResultsController {
     @FXML
     private ExecutionListController executionListController;
 
-    private ExecutionResultsController executionResultsController;
-
     private ExecutionDetailsController executionDetailsController;
-    
-    private SimulationFailedController simulationFailedController;
 
     private PageController pageController;
-
-
 
     public void setter(PageController pageController){
         setPageController(pageController);
@@ -84,6 +78,10 @@ public class ResultsController {
         }
     }
 
+    public void clearResultsPane(){
+        executionResultPane.getChildren().clear();
+    }
+
     private void loadSimulationFailedController(DtoSimulationInfo dtoSimulationInfo) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultsComponent/executionResults/simulationFailed/SimulationFailed.fxml"));
@@ -91,7 +89,7 @@ public class ResultsController {
             executionResultPane.getChildren().clear();
             executionResultPane.getChildren().add(executionFailed);
 
-            simulationFailedController = loader.getController();
+            SimulationFailedController simulationFailedController = loader.getController();
             simulationFailedController.setter(dtoSimulationInfo);
         } catch (IOException ignored) {
         }
@@ -117,14 +115,10 @@ public class ResultsController {
             executionResultPane.getChildren().clear();
             executionResultPane.getChildren().add(executionResults);
 
-            executionResultsController = loader.getController();
+            ExecutionResultsController executionResultsController = loader.getController();
             executionResultsController.setDtoSimulationEndedDetails(simulationEndedDetails);
             executionResultsController.setSimulationDetails();
         } catch (IOException ignored) {
         }
-    }
-
-    public void setColor(String color) {
-        resultsHBox.setStyle("-fx-background-color: " + color + ";");
     }
 }

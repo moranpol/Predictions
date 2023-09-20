@@ -4,5 +4,6 @@ public enum SimulationMode {
     RUNNING,
     ENDED,
     FAILED,
-    PAUSE
+    PAUSE,
+    FUTURE
 }

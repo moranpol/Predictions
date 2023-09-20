@@ -3,16 +3,15 @@ package pageComponent;
 import detailsComponent.DetailsFullComponentController;
 import header.DtoSimulationQueue;
 import headerComponent.HeaderController;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.CacheHint;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import manager.LogicManager;
 import newExecution.dtoEntities.DtoEntitiesPopulation;
 import newExecution.dtoEntities.DtoEntityNames;
@@ -20,7 +19,6 @@ import newExecution.dtoEntities.DtoGrid;
 import newExecutionComponent.NewExecutionController;
 import newExecution.dtoEnvironment.DtoEnvironment;
 import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
-import property.StringProperty;
 import results.simulationEnded.DtoSimulationEndedDetails;
 import results.simulations.DtoSimulationInfo;
 import results.DtoSimulationChoice;
@@ -59,7 +57,9 @@ public class PageController {
 
     private ExecutionDetailsController executionDetailsController;
 
-    private SimpleStringProperty pageColor = new SimpleStringProperty(toHexColor(Color.web("#f0f0f0")));;
+    private Stage primaryStage;
+
+    private Boolean isAnimation = false;
 
     @FXML
     public void initialize(){
@@ -67,16 +67,29 @@ public class PageController {
         headerController.setter(this);
         originalDividerPosition = 0.2908;
         setDivider();
-        pageColor.addListener((observable, oldValue, newValue) -> {
-            splitPane.setStyle("-fx-background-color: " + newValue + ";");
+    }
+
+    public void setAnimation(Boolean animation) {
+        isAnimation = animation;
+        if(isAnimation){
             if(detailsFullComponentController != null){
-                detailsFullComponentController.setColor(newValue);
-            } else if (newExecutionController != null) {
-                newExecutionController.setColor(newValue);
-            } else if (resultsController != null) {
-                resultsController.setColor(newValue);
+                detailsFullComponentController.getAnimation().startRotationAnimation();
             }
-        });
+            if(newExecutionController != null){
+                newExecutionController.getColorAnimationSecondPage().startColorChange();
+            }
+        } else {
+            if(detailsFullComponentController != null){
+                detailsFullComponentController.getAnimation().stopRotationAnimation();
+            }
+            if(newExecutionController != null){
+                newExecutionController.getColorAnimationSecondPage().stopColorChange();
+            }
+        }
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
     private void setDivider(){
@@ -111,8 +124,6 @@ public class PageController {
         if(executionDetailsController != null){
             executionDetailsController.stopThread();
         }
-        newExecutionController = null;
-        resultsController = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsComponent/DetailsFullComponent.fxml"));
             Parent details = loader.load();
@@ -121,7 +132,9 @@ public class PageController {
 
             detailsFullComponentController = loader.getController();
             detailsFullComponentController.setPageController(this);
-            detailsFullComponentController.setColor(pageColor.getValue());
+            if(isAnimation){
+               detailsFullComponentController.getAnimation().startRotationAnimation();
+            }
             stopExecutionListThread();
         }
         catch (IOException ignored) {
@@ -132,8 +145,6 @@ public class PageController {
         if(executionDetailsController != null){
             executionDetailsController.stopThread();
         }
-        detailsFullComponentController = null;
-        resultsController = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/newExecutionComponent/NewExecution.fxml"));
             Parent newExecution = loader.load();
@@ -142,7 +153,10 @@ public class PageController {
 
             newExecutionController = loader.getController();
             newExecutionController.setPageController(this);
-            newExecutionController.setColor(pageColor.getValue());
+            newExecutionController.setColorAnimationSecondPage();
+            if(isAnimation){
+                newExecutionController.getColorAnimationSecondPage().startColorChange();
+            }
             stopExecutionListThread();
         } catch (IOException ignored) {
         }
@@ -158,8 +172,6 @@ public class PageController {
         if(executionDetailsController != null){
             executionDetailsController.stopThread();
         }
-        newExecutionController = null;
-        detailsFullComponentController = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resultsComponent/Results.fxml"));
             Parent results = loader.load();
@@ -168,7 +180,6 @@ public class PageController {
 
             resultsController = loader.getController();
             resultsController.setter(this);
-            resultsController.setColor(pageColor.getValue());
         } catch (IOException ignored) {
         }
     }
@@ -223,15 +234,24 @@ public class PageController {
         return logicManager.createDtoSimulationQueue();
     }
 
-    private String toHexColor(Color color) {
-        return String.format("#%02X%02X%02X",
-                (int) (color.getRed() * 255),
-                (int) (color.getGreen() * 255),
-                (int) (color.getBlue() * 255));
+    public void setPageColor(String selectedColor) {
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().clear();
+        switch (selectedColor){
+            case "Light-blue":
+                scene.getStylesheets().add("/pageComponent/style/bluePage.css");
+                break;
+            case"Pink":
+                scene.getStylesheets().add("/pageComponent/style/pinkPage.css");
+                break;
+            case "Default":
+                scene.getStylesheets().add("/pageComponent/style/defaultPage.css");
+                break;
+        }
     }
 
-    public void setPageColor(Color selectedColor) {
-        pageColor.setValue(toHexColor(selectedColor));
+    public void futureSimulation(DtoSimulationChoice simulationChoice) {
+        logicManager.futureSimulation(simulationChoice);
     }
 }
 

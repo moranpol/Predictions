@@ -2,6 +2,7 @@ package detailsComponent.details.termination;
 import details.DtoTermination;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class TerminationController {
@@ -16,6 +17,9 @@ public class TerminationController {
     private Text ticksVariableText;
 
     private DtoTermination dtoTermination;
+
+    @FXML
+    private GridPane gridPane;
 
     public void setDtoTermination(DtoTermination dtoTermination) {
         this.dtoTermination = dtoTermination;
@@ -37,8 +41,6 @@ public class TerminationController {
         else{
             ticksVariableText.setText(dtoTermination.getTicks().toString());
         }
-
     }
-
 }
 

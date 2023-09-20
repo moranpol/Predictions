@@ -32,7 +32,7 @@ public class WorldInstance implements Serializable {
         updateEntityCountGraphMap();
     }
 
-    public void updateEntityCountGraphMap(){
+    private void updateEntityCountGraphMap(){
         for(EntityManager entityManager : entities.values()){
             if(!entityCountGraphMap.containsKey(entityManager.getName())) {
                 entityCountGraphMap.put(entityManager.getName(), new EntityCountGraph());

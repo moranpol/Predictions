@@ -1,9 +1,13 @@
 package detailsComponent.details.action.calculation;
 import details.DtoAction.DtoCalculation;
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class CalculationController {
+
+    @FXML
+    private VBox vBox;
 
     @FXML
     private Text arg1VariableText;
@@ -43,5 +47,4 @@ public class CalculationController {
             secondaryEntityNameVariableText.setText(dtoCalculation.getSecondaryEntityName());
         }
     }
-
 }

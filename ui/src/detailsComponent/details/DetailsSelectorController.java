@@ -1,4 +1,5 @@
 package detailsComponent.details;
+import animations.RotateFirstPageButtons;
 import detailsComponent.DetailsFullComponentController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -42,10 +43,17 @@ public class DetailsSelectorController {
 
     private DetailsFullComponentController detailsFullComponentController;
 
+    private RotateFirstPageButtons animation;
+
     public void initialize(){
         entitiesShowButton.setDisable(true);
         environmentShowButton.setDisable(true);
         rulesShowButton.setDisable(true);
+        animation = new RotateFirstPageButtons(gridShowButton, entitiesShowButton, environmentShowButton, rulesShowButton, terminationShowButton);
+    }
+
+    public RotateFirstPageButtons getAnimation() {
+        return animation;
     }
 
     public void setDetailsFullComponentController(DetailsFullComponentController detailsFullComponentController) {

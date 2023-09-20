@@ -3,6 +3,7 @@ package newExecutionComponent.simulationEnvironmentsInputs;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
 import newExecutionComponent.NewExecutionController;
@@ -24,10 +25,17 @@ public class SimulationEnvironmentInputsController {
 
     private NewExecutionController newExecutionController;
 
-    private Map<String, EnvironmentInputs> environmentInputsMap = new HashMap<>();
+    private final Map<String, EnvironmentInputs> environmentInputsMap = new HashMap<>();
+
+    @FXML
+    private Label titleLabel;
 
     public void setNewExecutionController(NewExecutionController newExecutionController) {
         this.newExecutionController = newExecutionController;
+    }
+
+    public Label getTitleLabel() {
+        return titleLabel;
     }
 
     public void setEnvironmentInputs(List<DtoEnvironment> environments){

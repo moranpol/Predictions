@@ -34,6 +34,5 @@ public class PropertyDetailsController {
         else{
             rangeVariableText.setText("Not Exist");
         }
-
     }
 }

@@ -276,20 +276,21 @@ public class LogicManager {
         for (EntityManager entity : simulation.getWorldInstance().getEntities().values()){
             entityMap.put(entity.getName(), new DtoSimulationEndedEntity(entity.getName(),
                     createDtoPropertyMap(worldDefinition.getEntities().get(entity.getName()).getPropertiesOfAllPopulation(), entity.getName(), simulation),
-                    createEntityQuantityGraph(simulation.getWorldInstance().getEntityCountGraphMap().get(entity.getName()), simulation.getTicks())));
+                    createEntityQuantityGraph(simulation, entity.getName())));
         }
 
         return entityMap;
     }
 
-    private List<DtoEntityQuantityGraph> createEntityQuantityGraph(EntityCountGraph entityCountGraph, Integer ticks) {
+    private List<DtoEntityQuantityGraph> createEntityQuantityGraph(Simulation simulation, String entityName) {
+        EntityCountGraph entityCountGraph = simulation.getWorldInstance().getEntityCountGraphMap().get(entityName);
         List<DtoEntityQuantityGraph> dtoEntityQuantityGraph = new ArrayList<>();
         dtoEntityQuantityGraph.add(new DtoEntityQuantityGraph(1, entityCountGraph.getEntityQuantity().get(0)));
 
         for(int i = 1; i < entityCountGraph.getEntityQuantity().size() - 1; i++){
             dtoEntityQuantityGraph.add(new DtoEntityQuantityGraph(i * 5000, entityCountGraph.getEntityQuantity().get(i)));
         }
-        dtoEntityQuantityGraph.add(new DtoEntityQuantityGraph(ticks, entityCountGraph.getEntityQuantity().get(entityCountGraph.getEntityQuantity().size() - 1)));
+        dtoEntityQuantityGraph.add(new DtoEntityQuantityGraph(simulation.getTicks(), simulation.getWorldInstance().getEntities().get(entityName).getEntityInstance().size()));
 
         return dtoEntityQuantityGraph;
     }
@@ -384,7 +385,15 @@ public class LogicManager {
     }
 
     public void stopSimulation(DtoSimulationChoice simulationChoice) {
-        simulations.get(simulationChoice.getId()).setSimulationMode(SimulationMode.ENDED);
+        Simulation simulation = simulations.get(simulationChoice.getId());
+        if(simulation.getSimulationMode() == SimulationMode.PAUSE){
+            simulations.get(simulationChoice.getId()).setSimulationMode(SimulationMode.ENDED);
+            synchronized (simulation){
+                simulation.notify();
+            }
+        } else{
+            simulations.get(simulationChoice.getId()).setSimulationMode(SimulationMode.ENDED);
+        }
     }
 
     public void pauseSimulation(DtoSimulationChoice simulationChoice){
@@ -394,6 +403,14 @@ public class LogicManager {
     public void resumeSimulation(DtoSimulationChoice simulationChoice){
         Simulation simulation = simulations.get(simulationChoice.getId());
         simulation.setSimulationMode(SimulationMode.RUNNING);
+        synchronized (simulation){
+            simulation.notify();
+        }
+    }
+
+    public void futureSimulation(DtoSimulationChoice simulationChoice){
+        Simulation simulation = simulations.get(simulationChoice.getId());
+        simulation.setSimulationMode(SimulationMode.FUTURE);
         synchronized (simulation){
             simulation.notify();
         }

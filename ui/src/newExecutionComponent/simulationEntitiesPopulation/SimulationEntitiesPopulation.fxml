@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" styleClass="bodyPanes" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.simulationEntitiesPopulation.SimulationEntitiesPopulationController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="395.0" styleClass="bodyPanes" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newExecutionComponent.simulationEntitiesPopulation.SimulationEntitiesPopulationController">
    <top>
-      <Label prefHeight="50.0" styleClass="topLabels" text="Simulation Entities Population" BorderPane.alignment="CENTER">
+      <Label fx:id="titleLabel" prefHeight="50.0" styleClass="topLabels" text="Simulation Entities Population" BorderPane.alignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -28,13 +28,13 @@
    <bottom>
       <HBox prefHeight="50.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="37.0" prefWidth="124.0" styleClass="countersLabel" text="Max Population">
+            <Label fx:id="maxPopulationLabel" prefHeight="37.0" prefWidth="124.0" styleClass="countersLabel" text="Max Population">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </Label>
             <Label fx:id="maxPopulationCountLabel" prefHeight="37.0" prefWidth="67.0" styleClass="countersLabel" text="Label" />
-            <Label prefHeight="37.0" prefWidth="142.0" styleClass="countersLabel" text="Current Population">
+            <Label fx:id="currentPopulationLabel" prefHeight="37.0" prefWidth="142.0" styleClass="countersLabel" text="Current Population">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>

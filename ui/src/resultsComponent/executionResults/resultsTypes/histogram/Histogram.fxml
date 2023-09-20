@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox id="histogramVBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="475.0" spacing="10.0" stylesheets="@../../../../pageComponent/page.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionResults.resultsTypes.histogram.HistogramController">
+<VBox id="histogramVBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="475.0" spacing="10.0" stylesheets="@../../../../pageComponent/style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resultsComponent.executionResults.resultsTypes.histogram.HistogramController">
    <children>
       <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="452.0">
          <content>

@@ -2,15 +2,14 @@ package headerComponent;
 
 import header.DtoSimulationQueue;
 import javafx.application.Platform;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import pageComponent.PageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -56,12 +55,21 @@ public class HeaderController {
     private Label errorLabel;
 
     @FXML
-    private ColorPicker skinButton;
+    private ComboBox<String> skinCBox;
+
+    @FXML
+    private CheckBox startAnimationCheckBox;
 
     public void setter(PageController pageController){
         setPageController(pageController);
         okButton.setVisible(false);
         errorLabel.setVisible(false);
+        setSkinButton();
+    }
+
+    public void setSkinButton() {
+        ObservableList<String> colors = FXCollections.observableArrayList("Default", "Light-blue", "Pink");
+        skinCBox.setItems(colors);
     }
 
     private void setThread(){
@@ -151,8 +159,14 @@ public class HeaderController {
     }
 
     @FXML
-    void skinButtonClicked(ActionEvent event) {
-        Color selectedColor = skinButton.getValue();
-        pageController.setPageColor(selectedColor);
+    void skinCBoxClicked(ActionEvent event) {
+        if(skinCBox.getValue() != null) {
+           pageController.setPageColor(skinCBox.getValue());
+        }
+    }
+
+    @FXML
+    void startAnimationClicked(ActionEvent event) {
+        pageController.setAnimation(startAnimationCheckBox.isSelected());
     }
 }
