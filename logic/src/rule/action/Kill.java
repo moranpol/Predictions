@@ -9,5 +9,6 @@ public class Kill extends Action{
     @Override
     public void activateAction(Context context) {
         context.getMainEntityInstance().killInstance();
+        context.getGrid().killInstance(context.getMainEntityInstance());
     }
 }

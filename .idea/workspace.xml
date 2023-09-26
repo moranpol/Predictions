@@ -13,7 +13,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/src/rule/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/Rule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/grid/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/grid/Grid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/rule/action/Kill.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/rule/action/Kill.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +191,7 @@
       <workItem from="1694679443253" duration="19848000" />
       <workItem from="1694710173073" duration="14515000" />
       <workItem from="1694775771807" duration="36447000" />
-      <workItem from="1694966527309" duration="101059000" />
+      <workItem from="1694966527309" duration="105461000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />
