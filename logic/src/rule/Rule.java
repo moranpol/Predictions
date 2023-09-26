@@ -85,6 +85,7 @@ public class Rule implements Serializable {
             for(int i = 0; i < entity.getEntityInstance().size(); i++){
                 if(entity.getEntityInstance().get(i).isDead()){
                     entity.getEntityInstance().remove(i);
+                    i--;
                 }
             }
         }

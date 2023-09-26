@@ -40,6 +40,13 @@ public class Grid {
         return grid;
     }
 
+    public void killInstance(EntityInstance entityInstance){
+        if(grid[entityInstance.getLocation().getRow()][entityInstance.getLocation().getCol()] == entityInstance){
+            grid[entityInstance.getLocation().getRow()][entityInstance.getLocation().getCol()] = null;
+            freeSpaces++;
+        }
+    }
+
     public void updateNewInstanceInRandomLocation(EntityInstance entityInstance) {
         Location randomLocation;
         boolean useList = ((double) freeSpaces / (rows * cols)) > 0.5;
