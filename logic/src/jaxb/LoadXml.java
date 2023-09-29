@@ -14,15 +14,11 @@ import java.nio.file.Files;
 public class LoadXml {
     private final static String JAXB_XML_PACKAGE_NAME = "jaxb.schema.generated";
 
-    public WorldDefinition loadAndValidateXml(String filePath){
-        if(!validateFileName(filePath)){
-            throw new InvalidNameException("file name must end with .xml");
-        }
+    public WorldDefinition loadAndValidateXml(InputStream xmlFile){
         try {
-            InputStream inputStream = Files.newInputStream(new File(filePath).toPath());
-            PRDWorld prdWorld = deserializeFrom(inputStream);
+            PRDWorld prdWorld = deserializeFrom(xmlFile);
             return FactoryDefinition.createWorldDefinition(prdWorld);
-        } catch (IOException | JAXBException e) {
+        } catch (JAXBException e) {
             throw new InvalidNameException("file path not found.");
         }
     }
@@ -32,9 +28,4 @@ public class LoadXml {
         Unmarshaller u = jc.createUnmarshaller();
         return (PRDWorld) u.unmarshal(in);
     }
-
-    private boolean validateFileName(String fileName){
-        return (fileName.endsWith(".xml"));
-    }
-
 }

@@ -12,7 +12,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import manager.LogicManager;
+import manager.WorldManager;
 import newExecution.dtoEntities.DtoEntitiesPopulation;
 import newExecution.dtoEntities.DtoEntityNames;
 import newExecution.dtoEntities.DtoGrid;
@@ -47,7 +47,7 @@ public class PageController {
 
     private Double originalDividerPosition;
 
-    private LogicManager logicManager;
+    private WorldManager worldManager;
 
     private DetailsFullComponentController detailsFullComponentController;
 
@@ -63,7 +63,7 @@ public class PageController {
 
     @FXML
     public void initialize(){
-        logicManager = new LogicManager();
+        worldManager = new WorldManager();
         headerController.setter(this);
         originalDividerPosition = 0.2908;
         setDivider();
@@ -112,8 +112,8 @@ public class PageController {
         return headerController;
     }
 
-    public LogicManager getLogicManager() {
-        return logicManager;
+    public WorldManager getLogicManager() {
+        return worldManager;
     }
 
     public void clearPaneBody() {
@@ -185,54 +185,54 @@ public class PageController {
     }
 
     public DtoEntityNames getDtoEntityNames(){
-        return logicManager.createEntityNameDto();
+        return worldManager.createEntityNameDto();
     }
 
     public Integer getMaxPopulationSize(){
-        DtoGrid dtoGrid = logicManager.createGridDto();
+        DtoGrid dtoGrid = worldManager.createGridDto();
         return dtoGrid.getRows() * dtoGrid.getCols();
     }
 
     public List<DtoEnvironment> getDtoEnvironment(){
-        return logicManager.createDtoEnvironment();
+        return worldManager.createDtoEnvironment();
     }
 
-    public void startSimulation(List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList, List<DtoEntitiesPopulation> dtoEntitiesPopulationList){
-        loadResultsComponent();
-        logicManager.startSimulation(dtoEnvironmentInitializeList, dtoEntitiesPopulationList);
-    }
+//    public void startSimulation(List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList, List<DtoEntitiesPopulation> dtoEntitiesPopulationList){
+//        loadResultsComponent();
+//        worldManager.startSimulation(dtoEnvironmentInitializeList, dtoEntitiesPopulationList);
+//    }
 
     public DtoSimulationEndedDetails getDtoSimulationEndedDetails(DtoSimulationChoice simulationChoice){
-        return logicManager.createDtoSimulationEndedDetails(simulationChoice);
+        return worldManager.createDtoSimulationEndedDetails(simulationChoice);
     }
 
     public List<DtoSimulationInfo> getDtoSimulationInfoList(){
-        return logicManager.createDtoSimulationInfoList();
+        return worldManager.createDtoSimulationInfoList();
     }
 
     public DtoSimulationInfo getDtoSimulationInfo(DtoSimulationChoice simulationChoice){
-        return logicManager.createDtoSimulationInfo(simulationChoice);
+        return worldManager.createDtoSimulationInfo(simulationChoice);
     }
 
     public void stopSimulation(DtoSimulationChoice simulationChoice) {
-        logicManager.stopSimulation(simulationChoice);
+        worldManager.stopSimulation(simulationChoice);
     }
 
     public void pauseSimulation(DtoSimulationChoice simulationChoice){
-        logicManager.pauseSimulation(simulationChoice);
+        worldManager.pauseSimulation(simulationChoice);
     }
 
     public void resumeSimulation(DtoSimulationChoice simulationChoice){
-        logicManager.resumeSimulation(simulationChoice);
+        worldManager.resumeSimulation(simulationChoice);
     }
 
     public void getDtoRerunExecution(DtoSimulationChoice simulationChoice){
-        newExecutionController.rerunExecution(logicManager.createDtoRerunExecution(simulationChoice));
+        newExecutionController.rerunExecution(worldManager.createDtoRerunExecution(simulationChoice));
     }
 
-    public DtoSimulationQueue getDtoSimulationQueue(){
-        return logicManager.createDtoSimulationQueue();
-    }
+//    public DtoSimulationQueue getDtoSimulationQueue(){
+//        return worldManager.createDtoSimulationQueue();
+//    }
 
     public void setPageColor(String selectedColor) {
         Scene scene = primaryStage.getScene();
@@ -251,7 +251,7 @@ public class PageController {
     }
 
     public void futureSimulation(DtoSimulationChoice simulationChoice) {
-        logicManager.futureSimulation(simulationChoice);
+        worldManager.futureSimulation(simulationChoice);
     }
 }
 
