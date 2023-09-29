@@ -94,14 +94,14 @@ public class NewExecutionController {
         setEnvironmentAndEntities();
     }
 
-    @FXML
-    void startButtonClick(ActionEvent event) {
-        for (StartButtonListener listener : startNewExecutionListeners){
-            listener.startOnClicked();
-        }
-        pageController.getHeaderController().setResultsButtonDisable();
-        pageController.startSimulation(dtoEnvironmentInitializeList, dtoEntitiesPopulationList);
-    }
+//    @FXML
+//    void startButtonClick(ActionEvent event) {
+//        for (StartButtonListener listener : startNewExecutionListeners){
+//            listener.startOnClicked();
+//        }
+//        pageController.getHeaderController().setResultsButtonDisable();
+//        pageController.startSimulation(dtoEnvironmentInitializeList, dtoEntitiesPopulationList);
+//    }
 
     public void addListenerToStartButton(StartButtonListener listener) {
         startNewExecutionListeners.add(listener);

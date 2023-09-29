@@ -126,7 +126,7 @@ public class HeaderController {
         if(selectedFile != null) {
             DtoXmlPath xmlFullPathDTO = new DtoXmlPath(selectedFile.getAbsolutePath());
             try {
-                pageController.getLogicManager().ReadXmlFile(xmlFullPathDTO);
+                //pageController.getLogicManager().ReadXmlFile(xmlFullPathDTO);
                 textLoadedFile.setText(selectedFile.getAbsolutePath());
                 pageController.clearPaneBody();
                 detailsButton.setDisable(false);
