@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" spacing="5.0" stylesheets="@../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="requests.RequestsController">
+   <children>
+      <HBox alignment="BOTTOM_LEFT" prefHeight="245.0" prefWidth="1000.0" styleClass="bodyPanes">
+         <children>
+            <VBox prefHeight="245.0" prefWidth="800.0" spacing="10.0">
+               <children>
+                  <Label styleClass="topLabels" stylesheets="@../style/defaultPage.css" text="New Request">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="900.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="text-variable" text="Choose world" />
+                        <ComboBox fx:id="worldComboBox" prefWidth="150.0" styleClass="ComboBox" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="900.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="text-variable" text="Choose number of simulations to run" />
+                        <Spinner fx:id="simulationCounterSpinner" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="900.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="text-variable" text="Choose termination">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <CheckBox fx:id="userTermination" mnemonicParsing="false" onAction="#userTerminationClicked" styleClass="action-text-variable" text="By user">
+                           <padding>
+                              <Insets right="20.0" />
+                           </padding>
+                        </CheckBox>
+                        <CheckBox fx:id="secondsTicksTermination" mnemonicParsing="false" onAction="#secondsTicksTerminationClicked" styleClass="action-text-variable" text="By seconds\ ticks">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="secondsTermination" mnemonicParsing="false" onAction="#secondsTerminationClicked" styleClass="action-text-variable" text="By seconds" />
+                        <Spinner fx:id="secondsSpinner" />
+                        <CheckBox fx:id="ticksTermination" mnemonicParsing="false" onAction="#ticksTerminationClicked" styleClass="action-text-variable" text="By ticks">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </CheckBox>
+                        <Spinner fx:id="ticksSpinner" layoutX="314.0" layoutY="21.0" />
+                     </children>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </HBox.margin>
+            </VBox>
+            <Button fx:id="submitButton" mnemonicParsing="false" onAction="#submitButtonClicked" styleClass="button-show" text="Submit">
+               <HBox.margin>
+                  <Insets bottom="15.0" left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="BOTTOM_LEFT" prefHeight="345.0" prefWidth="1000.0" styleClass="bodyPanes">
+         <children>
+            <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="345.0" prefWidth="800.0" spacing="10.0">
+               <children>
+                  <Label styleClass="topLabels" stylesheets="@../style/defaultPage.css" text="Requests Table" />
+                  <ScrollPane fitToHeight="true" fitToWidth="true">
+                     <content>
+                        <TableView fx:id="requestsTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="798.0">
+                          <columns>
+                            <TableColumn fx:id="serialNumberCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="Serial number" />
+                            <TableColumn fx:id="worldNameCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="World name" />
+                              <TableColumn fx:id="runsCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="runs requested" />
+                              <TableColumn fx:id="statusCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="status" />
+                              <TableColumn fx:id="runningCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="currently running" />
+                              <TableColumn fx:id="endedCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="simulations ended" />
+                          </columns>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
+               </children>
+               <HBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </HBox.margin>
+            </VBox>
+            <Button fx:id="executeButton" mnemonicParsing="false" onAction="#executeButtonClicked" styleClass="button-show" text="Execute">
+               <HBox.margin>
+                  <Insets bottom="18.0" left="10.0" />
+               </HBox.margin>
+            </Button>
+         </children></HBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>
