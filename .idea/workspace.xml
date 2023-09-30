@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="predictionsServer:Web exploded" />
-      <artifact name="predictionsServer:Web:war" />
+      <artifact name="predictions" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -11,8 +10,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f47f4c4-7fb4-4c47-b8c6-6de7cc758e47" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/predictionsServer/web/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adminClient/adminClient.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adminClient/src/body/firstPagemanagement/managementBodyControll.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adminClient/src/header/HeaderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adminClient/src/header/header.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adminClient/src/http/HttpClientUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adminClient/src/lib/annotations-13.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adminClient/src/lib/gson-2.8.8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adminClient/src/lib/kotlin-stdlib-1.4.10.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adminClient/src/lib/okhttp-4.9.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adminClient/src/lib/okio-2.8.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adminClient/src/mainPage/MainPageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adminClient/src/style/defaultPage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/predictionsServer/src/LoadXML/LoadXMLServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/predictionsServer_Web_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/predictions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/predictionsServer_Web_war.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adminClient/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/adminClient/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/logic.iml" beforeDir="false" afterPath="$PROJECT_DIR$/logic/logic.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/src/manager/LogicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/src/manager/LogicManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictionsServer/predictionsServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/predictionsServer/predictionsServer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/application/PredictionApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/application/PredictionApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/detailsComponent/DetailsFullComponentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/detailsComponent/DetailsFullComponentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/detailsComponent/details/DetailsSelectorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/detailsComponent/details/DetailsSelectorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/headerComponent/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/headerComponent/HeaderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/newExecutionComponent/NewExecutionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/newExecutionComponent/NewExecutionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/src/pageComponent/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/src/pageComponent/PageController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +50,7 @@
         <option value="Enum" />
         <option value="Interface" />
         <option value="CSS File" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -51,8 +77,18 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -63,45 +99,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ofirko&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/moran/Documents/Education/Second year/Java/Predictions&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/moran/Documents/Education/Second year/Java/Predictions/ui/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "adminClient1",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "1.8",
+    "last_opened_file_path": "C:/Users/Ofir/source/year2/java/Predictions2/adminClient/src/lib/okio-2.8.0.jar",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/moran/Documents/Education/Second year/Java/Predictions/ui/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.applicationServers",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="rule" />
       <recent name="entity" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ofir\source\year2\java\Predictions2\adminClient\src\style" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ofir\source\year2\java\Predictions2\adminClient\src\lib" />
+      <recent name="C:\Users\Ofir\source\year2\java\Predictions2\adminClient\src\body\management" />
       <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\ui\src\pageComponent\style" />
       <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\ui\src\detailsComponent" />
       <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\ui\src\resultsComponent\executionResults\resultsTypes\entityQuantity" />
-      <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\src\resources" />
-      <recent name="C:\Users\moran\Documents\Education\Second year\Java\Predictions\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Tomcat Server.Tomcat 10.0.11">
+  <component name="RunManager" selected="Application.Main (3)">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="logic" />
@@ -116,15 +155,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ui.Main" />
-      <module name="Predictions" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+    <configuration name="Main (3)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="adminClient" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -155,10 +188,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tomcat 10.0.11" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.0.11" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+    <configuration name="Predictions" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.0.11" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="predictionsServer:Web exploded">
+        <artifact name="predictions">
           <settings>
             <option name="CONTEXT_PATH" value="/predictions" />
           </settings>
@@ -238,25 +272,25 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="predictionsServer:Web exploded" />
+          <artifact name="predictions" />
         </option>
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Main (3)" />
       <item itemvalue="Application.Main (1)" />
       <item itemvalue="Application.Main (2)" />
       <item itemvalue="Application.PredictionApplication" />
       <item itemvalue="Application.Simulation" />
-      <item itemvalue="Tomcat Server.Tomcat 10.0.11" />
+      <item itemvalue="Tomcat Server.Predictions" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (3)" />
         <item itemvalue="Application.PredictionApplication" />
         <item itemvalue="Application.Simulation" />
         <item itemvalue="Application.Main (2)" />
         <item itemvalue="Application.Main (1)" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -285,6 +319,9 @@
       <workItem from="1694710173073" duration="14515000" />
       <workItem from="1694775771807" duration="36447000" />
       <workItem from="1694966527309" duration="105461000" />
+      <workItem from="1695984584425" duration="10492000" />
+      <workItem from="1695999608143" duration="4861000" />
+      <workItem from="1696081134060" duration="9217000" />
     </task>
     <task id="LOCAL‎-00001" summary="start project">
       <option name="closed" value="true" />
@@ -489,6 +526,20 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/logic/src/manager/LogicManager.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/adminClient/src/body/firstPagemanagement/managementBodyControll.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="rule.action.Proximity" memberName="of" />

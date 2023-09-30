@@ -1,19 +1,18 @@
+/*
 package headerComponent;
 
 import header.DtoSimulationQueue;
+import header.DtoXmlPath;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.*;
-import javafx.scene.paint.Color;
-import pageComponent.PageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import header.DtoXmlPath;
+import pageComponent.PageController;
 
 import java.io.File;
 
@@ -170,3 +169,4 @@ public class HeaderController {
         pageController.setAnimation(startAnimationCheckBox.isSelected());
     }
 }
+ */

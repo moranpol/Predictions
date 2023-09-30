@@ -1,5 +1,5 @@
 package newExecutionComponent;
-
+/*
 import animations.ColorAnimationSecondPage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -120,4 +120,4 @@ public class NewExecutionController {
         environmentInputsController.rerunExecutionEnvironments(dtoRerunExecution.getDtoEnvironmentInitializeList());
     }
 }
-
+*/

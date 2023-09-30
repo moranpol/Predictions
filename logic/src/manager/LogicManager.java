@@ -17,7 +17,7 @@ public class LogicManager {
     public void ReadXmlFile(InputStream xmlFile){
         WorldManager worldManager = new WorldManager();
         worldManager.ReadXmlFile(xmlFile);
-        worldManagerMap.put("world", worldManager);
+        worldManagerMap.put("world", worldManager); // todo
     }
 
     public DtoSimulationQueue createDtoSimulationQueue(){
