@@ -17,15 +17,13 @@ public class WorldDefinition implements Serializable {
     private final List<Rule> rules;
     private final Termination termination;
     private final Grid grid;
-    private final Integer numOfThreads;
 
-    public WorldDefinition(EnvironmentDefinition environmentVariables, Map<String, EntityDefinition> entities, List<Rule> rules, Termination termination, Grid grid, Integer numOfThreads) {
+    public WorldDefinition(EnvironmentDefinition environmentVariables, Map<String, EntityDefinition> entities, List<Rule> rules, Termination termination, Grid grid) {
         this.environmentVariables = environmentVariables;
         this.entities = entities;
         this.rules = rules;
         this.termination = termination;
         this.grid = grid;
-        this.numOfThreads = numOfThreads;
     }
 
     public WorldDefinition(WorldDefinition otherWorldDefinition){
@@ -37,7 +35,6 @@ public class WorldDefinition implements Serializable {
         this.rules = otherWorldDefinition.getRules();
         this.termination = otherWorldDefinition.getTermination();
         this.grid = otherWorldDefinition.getGrid();
-        this.numOfThreads = otherWorldDefinition.getNumOfThreads();
     }
 
     public EnvironmentDefinition getEnvironmentVariables() {
@@ -58,9 +55,5 @@ public class WorldDefinition implements Serializable {
 
     public Grid getGrid() {
         return grid;
-    }
-
-    public Integer getNumOfThreads() {
-        return numOfThreads;
     }
 }

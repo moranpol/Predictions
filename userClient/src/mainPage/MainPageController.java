@@ -35,6 +35,7 @@ public class MainPageController {
             bodyPane.getChildren().add(details);
 
             detailsController = loader.getController();
+            detailsController.worldListRefresher();
         } catch (IOException ignore) {
         }
     }
