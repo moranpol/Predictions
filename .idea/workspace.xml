@@ -150,7 +150,7 @@
     </configuration>
     <configuration name="Main (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="ui" />
+      <module name="userClient" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -289,7 +289,6 @@
         <item itemvalue="Application.Main (3)" />
         <item itemvalue="Application.PredictionApplication" />
         <item itemvalue="Application.Simulation" />
-        <item itemvalue="Application.Main (2)" />
         <item itemvalue="Application.Main (1)" />
       </list>
     </recent_temporary>
