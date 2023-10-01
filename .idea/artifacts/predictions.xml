@@ -8,10 +8,8 @@
           <element id="module-output" name="predictionsServer" />
           <element id="module-output" name="logic" />
           <element id="module-output" name="dto" />
-        </element>
         <element id="directory" name="lib">
           <element id="file-copy" path="$PROJECT_DIR$/predictionsServer/web/WEB-INF/lib/gson-2.8.8.jar" />
-        </element>
       </element>
     </root>
   </artifact>

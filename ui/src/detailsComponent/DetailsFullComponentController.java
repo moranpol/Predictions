@@ -1,5 +1,5 @@
 package detailsComponent;
-
+/*
 import animations.RotateFirstPageButtons;
 import details.*;
 import details.DtoAction.DtoGridInfo;
@@ -116,3 +116,4 @@ public class DetailsFullComponentController {
         } catch (IOException ignore) {}
     }
 }
+*/

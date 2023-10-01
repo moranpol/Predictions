@@ -1,5 +1,5 @@
 package pageComponent;
-
+/*
 import detailsComponent.DetailsFullComponentController;
 import header.DtoSimulationQueue;
 import headerComponent.HeaderController;
@@ -254,4 +254,4 @@ public class PageController {
         worldManager.futureSimulation(simulationChoice);
     }
 }
-
+*/
