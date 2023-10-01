@@ -1,11 +1,12 @@
 package manager;
 
-import enums.SimulationMode;
+import details.DtoWorldsList;
 import header.DtoSimulationQueue;
-import simulation.Simulation;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -17,7 +18,12 @@ public class LogicManager {
     public void ReadXmlFile(InputStream xmlFile){
         WorldManager worldManager = new WorldManager();
         worldManager.ReadXmlFile(xmlFile);
-        worldManagerMap.put("world", worldManager); // todo
+        worldManagerMap.put(worldManager.getWorldName(), worldManager); // todo
+    }
+
+    public DtoWorldsList getDtoWorldsList(){
+        List<String> worldsList = new ArrayList<>(worldManagerMap.keySet());
+        return new DtoWorldsList(worldsList);
     }
 
     public DtoSimulationQueue createDtoSimulationQueue(){

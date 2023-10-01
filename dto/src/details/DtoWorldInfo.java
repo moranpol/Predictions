@@ -10,13 +10,15 @@ public class DtoWorldInfo {
     private final DtoTermination dtoTermination;
     private final Map<String, DtoEnvironmentInfo> dtoEnvironmentMap;
     private final DtoGridInfo dtoGridInfo;
+    private final String worldName;
 
-    public DtoWorldInfo(Map<String, DtoEntityInfo> dtoEntityMap, Map<String, DtoRuleInfo> dtoRuleMap, DtoTermination dtoTermination, Map<String, DtoEnvironmentInfo> dtoEnvironmentMap, DtoGridInfo dtoGridInfo) {
+    public DtoWorldInfo(String worldName, Map<String, DtoEntityInfo> dtoEntityMap, Map<String, DtoRuleInfo> dtoRuleMap, DtoTermination dtoTermination, Map<String, DtoEnvironmentInfo> dtoEnvironmentMap, DtoGridInfo dtoGridInfo) {
         this.dtoEntityMap = dtoEntityMap;
         this.dtoRuleMap = dtoRuleMap;
         this.dtoTermination = dtoTermination;
         this.dtoEnvironmentMap = dtoEnvironmentMap;
         this.dtoGridInfo = dtoGridInfo;
+        this.worldName = worldName;
     }
 
     public Map<String, DtoEntityInfo> getDtoEntityMap() {
@@ -37,5 +39,9 @@ public class DtoWorldInfo {
 
     public DtoGridInfo getDtoGridInfo() {
         return dtoGridInfo;
+    }
+
+    public String getWorldName() {
+        return worldName;
     }
 }

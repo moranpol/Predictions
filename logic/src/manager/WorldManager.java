@@ -40,6 +40,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class WorldManager {
+    private String worldName;
     private WorldDefinition worldDefinition;
     private final List<Simulation> simulations;
     private Integer simulationCount = 0;
@@ -48,9 +49,14 @@ public class WorldManager {
         simulations = new ArrayList<>();
     }
 
+    public String getWorldName() {
+        return worldName;
+    }
+
     public void ReadXmlFile(InputStream xmlFile){
         LoadXml loadXml = new LoadXml();
         worldDefinition = loadXml.loadAndValidateXml(xmlFile);
+        worldName = loadXml.getPrdWorld().getName();
         simulationCount = 0;
     }
 
@@ -123,7 +129,7 @@ public class WorldManager {
         DtoTermination dtoTermination = createDtoTermination();
         Map<String,DtoEnvironmentInfo>  dtoEnvironmentInfoMap = createDtoEnvironmentInfoMap();
         DtoGridInfo dtoGridInfo = createDtoGridInfo();
-        return new DtoWorldInfo(dtoEntityInfoMap, dtoRuleInfoMap, dtoTermination, dtoEnvironmentInfoMap, dtoGridInfo);
+        return new DtoWorldInfo(worldName, dtoEntityInfoMap, dtoRuleInfoMap, dtoTermination, dtoEnvironmentInfoMap, dtoGridInfo);
     }
 
     private DtoGridInfo createDtoGridInfo() {
