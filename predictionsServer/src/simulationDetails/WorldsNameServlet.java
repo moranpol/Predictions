@@ -1,4 +1,4 @@
-package simulationDetails.servlets;
+package simulationDetails;
 
 import com.google.gson.Gson;
 import details.DtoWorldsList;
@@ -12,9 +12,9 @@ import manager.LogicManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet (name = "world info servlet", urlPatterns = "/worldInfo")
+@WebServlet (name = "worlds name servlet", urlPatterns = "/worldsName")
 @MultipartConfig
-public class WorldInfoServlet extends HttpServlet {
+public class WorldsNameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
