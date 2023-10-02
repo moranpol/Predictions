@@ -1,7 +1,9 @@
 package manager;
 
 import details.DtoWorldsList;
+import enums.SimulationMode;
 import header.DtoSimulationQueue;
+import simulation.Simulation;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class LogicManager {
     public void ReadXmlFile(InputStream xmlFile){
         WorldManager worldManager = new WorldManager();
         worldManager.ReadXmlFile(xmlFile);
-        worldManagerMap.put(worldManager.getWorldName(), worldManager); // todo
+        worldManagerMap.put(worldManager.getWorldName(), worldManager);
     }
 
     public DtoWorldsList getDtoWorldsList(){
@@ -28,12 +30,19 @@ public class LogicManager {
 
     public DtoSimulationQueue createDtoSimulationQueue(){
         int countEnded = 0;
-//        for(Simulation simulation : simulations){
-//            if(simulation.getSimulationMode() == SimulationMode.ENDED || simulation.getSimulationMode() == SimulationMode.FAILED){
-//                countEnded++;
-//            }
-//        }
+
+        for(WorldManager worldManager: worldManagerMap.values()) {
+            for(Simulation simulation : worldManager.getSimulations()){
+                if(simulation.getSimulationMode() == SimulationMode.ENDED || simulation.getSimulationMode() == SimulationMode.FAILED){
+                    countEnded++;
+                }
+            }
+        }
 
         return new DtoSimulationQueue(countEnded, executorService.getQueue().size(), executorService.getActiveCount());
+    }
+
+    public void changeThreadPoolSize(Integer threadNum) {
+        executorService.setCorePoolSize(threadNum);
     }
 }

@@ -53,6 +53,10 @@ public class WorldManager {
         return worldName;
     }
 
+    public List<Simulation> getSimulations() {
+        return simulations;
+    }
+
     public void ReadXmlFile(InputStream xmlFile){
         LoadXml loadXml = new LoadXml();
         worldDefinition = loadXml.loadAndValidateXml(xmlFile);

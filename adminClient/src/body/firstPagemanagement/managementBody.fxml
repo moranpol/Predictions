@@ -2,31 +2,29 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPagemanagement.managementBodyControll">
+<ScrollPane fitToHeight="true" fitToWidth="true" styleClass="bodyPanes" stylesheets="@../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPagemanagement.managementBodyControll">
    <content>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1000.0" stylesheets="@../../style/defaultPage.css">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="1000.0" spacing="10.0">
                <children>
-                  <TextField fx:id="textFieldFilePath" prefHeight="25.0" prefWidth="274.0" promptText="File Path" />
+                  <TextField fx:id="textFieldFilePath" prefHeight="25.0" prefWidth="823.0" promptText="File Path" />
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="loadFileButton" mnemonicParsing="false" onAction="#loadFileButtonClicked" prefHeight="25.0" prefWidth="170.0" styleClass="HeaderButtons" text="Load File Button" />
                         <Button fx:id="ContinueButton" mnemonicParsing="false" onAction="#continueButtonClicked" prefHeight="25.0" prefWidth="170.0" text="Continue" visible="false" />
                      </children>
                   </StackPane>
-                  <Button fx:id="setThreadsCountButton" mnemonicParsing="false" onAction="#setThreadsCountButtonClicked" prefHeight="25.0" prefWidth="170.0" styleClass="HeaderButtons" text="Set threads count">
-                     <HBox.margin>
-                        <Insets left="300.0" />
-                     </HBox.margin>
-                  </Button>
                </children>
                <opaqueInsets>
                   <Insets />
@@ -37,8 +35,56 @@
             </HBox>
             <HBox prefHeight="450.0" prefWidth="1000.0">
                <children>
-                  <Pane fx:id="paneSimulationsDetails" prefHeight="450.0" prefWidth="502.0" />
-                  <Pane fx:id="paneThreadPool" prefHeight="450.0" prefWidth="499.0" />
+                  <Pane fx:id="paneSimulationsDetails" prefHeight="450.0" prefWidth="818.0" />
+                  <Pane fx:id="paneThreadPool" prefHeight="450.0" prefWidth="312.0">
+                     <children>
+                        <VBox layoutX="4.0" layoutY="9.0" prefHeight="433.0" prefWidth="235.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" text="Number of threads:" />
+                                    <Spinner fx:id="spinnerThreadsNum" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets left="5.0" />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="15.0" right="15.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" text="Simulations queue counter" />
+                                    <Label fx:id="queueCounter" styleClass="text-variable" text="0" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets left="15.0" right="15.0" />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="15.0" right="15.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" text="Simulations running counter" />
+                                    <Label fx:id="runningCounter" styleClass="text-variable" text="0" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="15.0" right="15.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" styleClass="text-variable">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" text="Simulations ended counter" />
+                                    <Label fx:id="endedCounter" text="0" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="15.0" right="15.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children></Pane>
                </children>
             </HBox>
          </children>
