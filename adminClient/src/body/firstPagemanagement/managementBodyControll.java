@@ -1,10 +1,12 @@
 package body.firstPagemanagement;
+import ThreadInfoRefresher.ThreadInfoRefresher;
+import header.DtoSimulationQueue;
 import http.HttpClientUtil;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -12,13 +14,16 @@ import okhttp3.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Timer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class managementBodyControll {
-
     @FXML
     private Button ContinueButton;
+
+    @FXML
+    private Label endedCounter;
 
     @FXML
     private Button loadFileButton;
@@ -30,10 +35,49 @@ public class managementBodyControll {
     private Pane paneThreadPool;
 
     @FXML
-    private Button setThreadsCountButton;
+    private Label queueCounter;
+
+    @FXML
+    private Label runningCounter;
+
+    @FXML
+    private Spinner<Double> spinnerThreadsNum;
 
     @FXML
     private TextField textFieldFilePath;
+
+    private Timer timer;
+
+    private ThreadInfoRefresher threadInfoRefresher;
+
+    public void initialize(){
+        setRange();
+        spinnerThreadsNum.valueProperty().addListener((observable, oldValue, newValue) -> {
+
+            //todo
+        });
+    }
+
+    public void updateThreadInfo(DtoSimulationQueue dtoSimulationQueue){
+        Platform.runLater(() -> {
+            endedCounter.setText(dtoSimulationQueue.getEndedCounter().toString());
+            queueCounter.setText(dtoSimulationQueue.getQueueCounter().toString());
+            runningCounter.setText(dtoSimulationQueue.getRunningCounter().toString());
+        });
+    }
+
+    public void ThreadInfoRefresher() {
+        threadInfoRefresher = new ThreadInfoRefresher(this::updateThreadInfo);
+
+        timer = new Timer();
+        timer.schedule(threadInfoRefresher, 2000, 2000);
+
+    }
+
+    private void setRange() {
+        SpinnerValueFactory<Double> spinnerValueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 50, 1);
+        spinnerThreadsNum.setValueFactory(spinnerValueFactory);
+    }
 
     @FXML
     void continueButtonClicked(ActionEvent event) {
