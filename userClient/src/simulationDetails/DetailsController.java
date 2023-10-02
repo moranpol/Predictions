@@ -11,9 +11,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import worldInfoRefresher.WorldInfoRefresher;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.Timer;
 
-public class DetailsController {
+public class DetailsController implements Closeable {
 
     @FXML
     private Pane detailsPane;
@@ -37,7 +39,9 @@ public class DetailsController {
 
     @FXML
     void showWorldButtonClicked(ActionEvent event) {
-
+        if(worldCBox.getValue() != null){
+            
+        }
     }
 
 
@@ -45,5 +49,11 @@ public class DetailsController {
         worldInfoRefresher = new WorldInfoRefresher(this::setWorldCBox);
         timer = new Timer();
         timer.schedule(worldInfoRefresher, 2000, 2000);
+    }
+
+    @Override
+    public void close() throws IOException {
+        timer.cancel();
+        worldInfoRefresher.cancel();
     }
 }
