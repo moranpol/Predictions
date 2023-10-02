@@ -23,7 +23,7 @@ public class WorldInfoRefresher extends TimerTask {
     @Override
     public void run() {
         String finalUrl = HttpUrl
-                .parse("http://localhost:8080/predictions/worldInfo")
+                .parse("http://localhost:8080/predictions/worldsName")
                 .newBuilder()
                 .build()
                 .toString();

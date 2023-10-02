@@ -16,9 +16,13 @@ public class LogicManager {
     private ThreadPoolExecutor executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
 
     public void ReadXmlFile(InputStream xmlFile){
-        WorldManager worldManager = new WorldManager();
-        worldManager.ReadXmlFile(xmlFile);
-        worldManagerMap.put(worldManager.getWorldName(), worldManager); // todo
+        try {
+            WorldManager worldManager = new WorldManager();
+            worldManager.ReadXmlFile(xmlFile);
+            worldManagerMap.put(worldManager.getWorldName(), worldManager);
+        } catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     public DtoWorldsList getDtoWorldsList(){
