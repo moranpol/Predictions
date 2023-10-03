@@ -1,4 +1,4 @@
-package details.DtoAction;
+package details;
 
 public class DtoGridInfo {
     private final Integer rows;

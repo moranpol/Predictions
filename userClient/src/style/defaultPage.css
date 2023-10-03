@@ -31,10 +31,6 @@
     -fx-padding: 5px; /* Add padding to ComboBoxes */
 }
 
-.detailsPane{
-    -fx-background-color: #f0f0f0; /* Light gray background color */
-}
-
 .HeaderButtons {
     -fx-background-color: #4CAF50;
     -fx-text-fill: white;

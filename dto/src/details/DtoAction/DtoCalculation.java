@@ -1,13 +1,12 @@
 package details.DtoAction;
 
-public class DtoCalculation extends DtoAction {
+public class DtoCalculation {
 
     private final String arg1;
     private final String arg2;
     private final String arithmetic;
 
-    public DtoCalculation(String name, String mainEntityName, String secondaryEntityName, String arg1, String arg2, String arithmetic) {
-        super(name, mainEntityName, secondaryEntityName);
+    public DtoCalculation(String arg1, String arg2, String arithmetic) {
         this.arg1 = arg1;
         this.arg2 = arg2;
         this.arithmetic = arithmetic;

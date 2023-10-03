@@ -6,9 +6,9 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPage.MainPageController">
    <content>
-      <VBox prefHeight="710.0" prefWidth="1010.0" spacing="5.0" stylesheets="@../style/defaultPage.css">
+      <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1010.0" spacing="5.0" stylesheets="@../style/defaultPage.css">
          <children>
-            <fx:include fx:id="header" source="../header/Header.fxml" />
+            <Pane fx:id="headerPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1000.0" />
             <Pane fx:id="bodyPane" prefHeight="600.0" prefWidth="1000.0" styleClass="bodyPanes" />
          </children>
       </VBox>

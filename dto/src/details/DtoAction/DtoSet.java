@@ -1,11 +1,10 @@
 package details.DtoAction;
 
-public class DtoSet extends DtoAction {
+public class DtoSet {
      private String value;
      private String property;
 
-    public DtoSet(String name, String mainEntityName, String secondaryEntityName, String value, String property) {
-        super(name, mainEntityName, secondaryEntityName);
+    public DtoSet(String value, String property) {
         this.value = value;
         this.property = property;
     }

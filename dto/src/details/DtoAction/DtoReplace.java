@@ -1,7 +1,13 @@
 package details.DtoAction;
 
-public class DtoReplace extends DtoAction{
-    public DtoReplace(String name, String mainEntityName, String secondaryEntityName) {
-        super(name, mainEntityName, secondaryEntityName);
+public class DtoReplace {
+    private final String mode;
+
+    public DtoReplace(String mode) {
+        this.mode = mode;
+    }
+
+    public String getMode() {
+        return mode;
     }
 }

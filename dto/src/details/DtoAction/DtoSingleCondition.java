@@ -1,18 +1,15 @@
 package details.DtoAction;
 
-public class DtoSimpleCondition extends DtoAction {
+public class DtoSingleCondition {
 
     private final String property;
     private final String value;
     private final String operator;
 
-    public DtoSimpleCondition(String name, String mainEntityName, String secondaryEntityName, String property,
-                              String value, String operator) {
-        super(name, mainEntityName, secondaryEntityName);
+    public DtoSingleCondition(String property, String value, String operator) {
         this.property = property;
         this.value = value;
         this.operator = operator;
-
     }
 
     public String getProperty() {

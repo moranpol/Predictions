@@ -1,13 +1,12 @@
 package details.DtoAction;
 
-public class DtoIncrease extends DtoAction {
+public class DtoIncrease {
 
     private String property;
     private String by;
 
 
-    public DtoIncrease(String name, String mainEntityName, String secondaryEntityName, String property, String by) {
-        super(name, mainEntityName, secondaryEntityName);
+    public DtoIncrease(String property, String by) {
         this.property = property;
         this.by = by;
     }
