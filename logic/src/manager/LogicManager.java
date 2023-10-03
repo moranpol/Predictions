@@ -4,6 +4,7 @@ import details.DtoWorldsList;
 import enums.SimulationMode;
 import header.DtoSimulationQueue;
 import simulation.Simulation;
+import userRequests.Requests;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class LogicManager {
     private final Map<String, WorldManager> worldManagerMap = new HashMap<>();
     private ThreadPoolExecutor executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
+    private final Requests simulationRequests = new Requests();
 
     public void ReadXmlFile(InputStream xmlFile){
         try {
@@ -54,4 +56,6 @@ public class LogicManager {
         executorService.setCorePoolSize(threadNum);
 
     }
+
+
 }

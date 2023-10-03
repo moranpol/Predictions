@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
@@ -26,7 +28,7 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="900.0" spacing="10.0">
                      <children>
                         <Label styleClass="text-variable" text="Choose world" />
-                        <ComboBox fx:id="worldComboBox" prefWidth="150.0" styleClass="ComboBox" />
+                        <ComboBox fx:id="worldComboBox" onAction="#worldComboBoxClicked" prefWidth="150.0" styleClass="ComboBox" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="900.0" spacing="10.0">
@@ -37,28 +39,21 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="900.0" spacing="10.0">
                      <children>
-                        <Label styleClass="text-variable" text="Choose termination">
-                           <padding>
-                              <Insets right="10.0" />
-                           </padding>
-                        </Label>
-                        <CheckBox fx:id="userTermination" mnemonicParsing="false" onAction="#userTerminationClicked" styleClass="action-text-variable" text="By user">
-                           <padding>
-                              <Insets right="20.0" />
-                           </padding>
-                        </CheckBox>
-                        <CheckBox fx:id="secondsTicksTermination" mnemonicParsing="false" onAction="#secondsTicksTerminationClicked" styleClass="action-text-variable" text="By seconds\ ticks">
+                        <Label styleClass="text-variable" text="Choose termination" />
+                        <ComboBox fx:id="terminationComboBox" onAction="#terminationComboBoxClicked" prefWidth="150.0" styleClass="ComboBox">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="By user" />
+                                 <String fx:value="By ticks/ seconds" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                        <CheckBox fx:id="secondsTermination" mnemonicParsing="false" onAction="#secondsTerminationClicked" styleClass="action-text-variable" text="By seconds">
                            <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </CheckBox>
-                        <CheckBox fx:id="secondsTermination" mnemonicParsing="false" onAction="#secondsTerminationClicked" styleClass="action-text-variable" text="By seconds" />
+                              <Insets left="10.0" />
+                           </HBox.margin></CheckBox>
                         <Spinner fx:id="secondsSpinner" />
-                        <CheckBox fx:id="ticksTermination" mnemonicParsing="false" onAction="#ticksTerminationClicked" styleClass="action-text-variable" text="By ticks">
-                           <padding>
-                              <Insets left="20.0" />
-                           </padding>
-                        </CheckBox>
+                        <CheckBox fx:id="ticksTermination" mnemonicParsing="false" onAction="#ticksTerminationClicked" styleClass="action-text-variable" text="By ticks" />
                         <Spinner fx:id="ticksSpinner" layoutX="314.0" layoutY="21.0" />
                      </children>
                   </HBox>

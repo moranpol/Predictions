@@ -27,9 +27,19 @@ public class MainPageController {
 
     private RequestsController requestsController;
 
+    private String userName;
+
     public void initialize(){
         loadLoginHeaderController();
 
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public void loadLoginHeaderController(){
@@ -45,15 +55,15 @@ public class MainPageController {
         }
     }
 
-    public void loadHeaderController(String username){
+    public void loadHeaderController(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/header/Header.fxml"));
             Parent header = loader.load();
-            bodyPane.getChildren().clear();
-            bodyPane.getChildren().add(header);
+            headerPane.getChildren().clear();
+            headerPane.getChildren().add(header);
 
             headerController = loader.getController();
-            headerController.setter(this, username);
+            headerController.setter(this, userName);
         } catch (IOException ignore) {
         }
     }
@@ -79,6 +89,7 @@ public class MainPageController {
             bodyPane.getChildren().add(details);
 
             requestsController = loader.getController();
+            requestsController.setter(this);
         } catch (IOException ignore) {
         }
     }

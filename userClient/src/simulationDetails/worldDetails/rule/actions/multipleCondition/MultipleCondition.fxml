@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="vBox" prefHeight="350.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulationDetails.worldDetails.rule.actions.multipleCondition.MultipleConditionController">
+<VBox fx:id="vBox" prefHeight="350.0" prefWidth="350.0" stylesheets="@../../../../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulationDetails.worldDetails.rule.actions.multipleCondition.MultipleConditionController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
          <children>
@@ -28,8 +28,8 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
          <children>
-            <Label styleClass="action-label-title" text="Secondary Entity Name:" />
-            <Text fx:id="secondaryEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" text="Text" wrappingWidth="153.28271484375" />
+            <Label prefHeight="19.0" prefWidth="147.0" styleClass="action-label-title" text="Secondary Entity Name:" />
+            <Text fx:id="secondaryEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" text="Text" wrappingWidth="136.28271484375" />
          </children>
          <padding>
             <Insets left="20.0" right="10.0" />
@@ -38,7 +38,7 @@
       <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
          <children>
             <Label styleClass="action-label-title" text="Conditions Amount:" />
-            <Text fx:id="conditionsAmountVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" text="Text" wrappingWidth="167.28271484375" />
+            <Text fx:id="conditionsAmountVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" text="Text" wrappingWidth="156.28271484375" />
          </children>
          <padding>
             <Insets left="20.0" right="10.0" />

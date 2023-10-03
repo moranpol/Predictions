@@ -29,7 +29,7 @@
          <children>
             <Label prefHeight="25.0" prefWidth="79.0" styleClass="text-variable" text="Username:" />
             <TextField fx:id="userNameTextField" prefHeight="25.0" prefWidth="735.0" />
-            <Button mnemonicParsing="false" onAction="#loginButtonClicked" prefHeight="30.0" prefWidth="98.0" styleClass="HeaderButtons" text="Button" />
+            <Button mnemonicParsing="false" onAction="#loginButtonClicked" prefHeight="30.0" prefWidth="98.0" styleClass="HeaderButtons" text="login" />
          </children>
       </HBox>
    </children>

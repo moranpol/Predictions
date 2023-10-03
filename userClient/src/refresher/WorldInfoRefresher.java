@@ -1,7 +1,8 @@
-package worldInfoRefresher;
+package refresher;
 
 import com.google.gson.Gson;
 import details.DtoWorldsList;
+import error.ErrorDialog;
 import http.HttpClientUtil;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -31,6 +32,7 @@ public class WorldInfoRefresher extends TimerTask {
         HttpClientUtil.runAsyncGet(finalUrl, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                ErrorDialog.showError(e.getMessage());
             }
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
@@ -39,6 +41,8 @@ public class WorldInfoRefresher extends TimerTask {
                     assert response.body() != null;
                     DtoWorldsList dtoWorldsList = gson.fromJson(response.body().charStream(), DtoWorldsList.class);
                     worldsListConsumer.accept(dtoWorldsList);
+                } else{
+                    ErrorDialog.showError(response.message());
                 }
             }
         });
