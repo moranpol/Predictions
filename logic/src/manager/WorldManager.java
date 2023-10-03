@@ -7,7 +7,6 @@ import entity.EntityInstance;
 import entity.EntityManager;
 import enums.SimulationMode;
 import factory.FactoryInstance;
-import header.DtoSimulationQueue;
 import helpers.CheckFunctions;
 import helpers.ParseFunctions;
 import jaxb.LoadXml;
@@ -29,14 +28,12 @@ import rule.action.*;
 import simulation.Simulation;
 import world.EntityCountGraph;
 import world.WorldDefinition;
-import header.DtoXmlPath;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class WorldManager {
@@ -64,63 +61,93 @@ public class WorldManager {
         simulationCount = 0;
     }
 
-    private Map<String,DtoProperty> createDtoEntityPropertyMap(Map<String, PropertyDefinition> propertyDefinitionMap) {
-        Map<String,DtoProperty> dtoEntity = new HashMap<>();
+    private List<DtoProperty> createDtoEntityPropertyList(Map<String, PropertyDefinition> propertyDefinitionMap) {
+        List<DtoProperty> dtoEntity = new ArrayList<>();
         for (PropertyDefinition prop: propertyDefinitionMap.values()) {
-            dtoEntity.put(prop.getName(),createEntityPropertyDto(prop) );
+            dtoEntity.add(createEntityPropertyDto(prop) );
         }
         return dtoEntity;
     }
 
     private DtoProperty createEntityPropertyDto(PropertyDefinition prop) {
         if(prop.getRange() == null){
-            return new DtoProperty(prop.getName(), prop.getType().toString().toLowerCase(), null, prop.isRandomInit());
+            return new DtoProperty(prop.getName(), prop.getType().toString().toLowerCase(), prop.isRandomInit(), 0.0, 0.0);
         } else {
-            return new DtoProperty(prop.getName(), prop.getType().toString().toLowerCase(), createDtoRange(prop.getRange()),
-                    prop.isRandomInit());
+            return new DtoProperty(prop.getName(), prop.getType().toString().toLowerCase(), prop.isRandomInit(), prop.getRange().getFrom(), prop.getRange().getTo());
         }
-    }
-
-    public DtoRange createDtoRange(Range range){
-        return new DtoRange(range.getFrom(), range.getTo());
     }
 
     public DtoAction createDtoAction(Action action){
         switch (action.getClass().getSimpleName()) {
             case "Calculation":
                 Calculation calculation = (Calculation) action;
-                return new DtoCalculation("Calculation", action.getMainEntityName(), action.getSecondaryEntityName(),
-                        calculation.getArg1String(),calculation.getArg2String(), calculation.getArithmeticString());
+                return new DtoAction("Calculation", action.getMainEntityName(), action.getSecondaryEntityName(), createDtoCalculation(calculation),
+                        null, null, null, null, null, null, null);
             case "SingleCondition":
                 SingleCondition singleCondition = (SingleCondition) action;
-                return new DtoSimpleCondition("Single Condition", action.getMainEntityName(), action.getSecondaryEntityName(),
-                        singleCondition.getPropertyString(), singleCondition.getValueString(), singleCondition.getOperatorString());
+                return new DtoAction("Single Condition", action.getMainEntityName(), action.getSecondaryEntityName(), null, null, null, null,
+                        null, null, null, createDtoSingleCondition(singleCondition));
             case "MultipleCondition":
                 MultipleCondition multipleCondition = (MultipleCondition) action;
-                return new DtoMultipleCondition("Multiple Condition", action.getMainEntityName(), action.getSecondaryEntityName(),
-                        multipleCondition.getLogicString(), multipleCondition.getConditionsAmount());
+                return new DtoAction("Multiple Condition", action.getMainEntityName(), action.getSecondaryEntityName(), null, null, null,
+                        createDtoMultipleCondition(multipleCondition), null, null, null, null);
             case "Proximity":
                 Proximity proximity = (Proximity) action;
-                return new DtoProximity("Proximity", action.getMainEntityName(), action.getSecondaryEntityName(),
-                        proximity.getDepth(), proximity.getActionAmount());
+                return new DtoAction("Proximity", action.getMainEntityName(), action.getSecondaryEntityName(), null, null, null,
+                        null, createDtoProximity(proximity), null, null, null);
             case "Kill":
-                return new DtoKill("Kill", action.getMainEntityName(), action.getSecondaryEntityName());
+                return new DtoAction("Kill", action.getMainEntityName(), action.getSecondaryEntityName(), null, null, null,
+                        null, null, null, null, null);
             case "Replace":
-                return new DtoReplace("Replace",action.getMainEntityName(), action.getSecondaryEntityName());
+                Replace replace = (Replace) action;
+                return new DtoAction("Replace",action.getMainEntityName(), replace.getEntityNameToCreate(), null, null, null, null,
+                        null, createDtoReplace(replace), null, null);
             case "Decrease":
                 Decrease decrease = (Decrease) action;
-                return new DtoDecrease("Decrease", action.getMainEntityName(), action.getSecondaryEntityName(),
-                        decrease.getPropertyName(), decrease.getExpressionString());
+                return new DtoAction("Decrease", action.getMainEntityName(), action.getSecondaryEntityName(), null, createDtoDecrease(decrease), null, null,
+                        null, null, null, null);
             case "Increase":
                 Increase increase = (Increase) action;
-                return new DtoIncrease("Increase", action.getMainEntityName(), action.getSecondaryEntityName(),
-                        increase.getPropertyName(),increase.getExpressionString());
+                return new DtoAction("Increase", action.getMainEntityName(), action.getSecondaryEntityName(), null, null, createDtoIncrease(increase),
+                        null, null, null, null, null);
             case "Set":
                 Set set = (Set) action;
-                return new DtoSet("Set", action.getMainEntityName(), action.getSecondaryEntityName(),
-                        set.getExpressionString(), set.getPropertyName());
+                return new DtoAction("Set", action.getMainEntityName(), action.getSecondaryEntityName(), null, null, null, null,
+                       null, null, createDtoSet(set), null);
         }
         return null;
+    }
+
+    private DtoCalculation createDtoCalculation(Calculation calculation){
+        return new DtoCalculation(calculation.getArg1String(),calculation.getArg2String(), calculation.getArithmeticString());
+    }
+
+    private DtoSingleCondition createDtoSingleCondition(SingleCondition singleCondition){
+        return new DtoSingleCondition(singleCondition.getPropertyString(), singleCondition.getValueString(), singleCondition.getOperatorString());
+    }
+
+    private DtoMultipleCondition createDtoMultipleCondition(MultipleCondition multipleCondition){
+        return new DtoMultipleCondition(multipleCondition.getLogicString(), multipleCondition.getConditionsAmount());
+    }
+
+    private DtoProximity createDtoProximity(Proximity proximity){
+        return new DtoProximity(proximity.getDepth(), proximity.getActionAmount());
+    }
+
+    private DtoReplace createDtoReplace(Replace replace){
+        return new DtoReplace(replace.getMode().toString());
+    }
+
+    private DtoDecrease createDtoDecrease(Decrease decrease){
+        return new DtoDecrease(decrease.getPropertyName(), decrease.getExpressionString());
+    }
+
+    private DtoIncrease createDtoIncrease(Increase increase){
+        return new DtoIncrease(increase.getPropertyName(),increase.getExpressionString());
+    }
+
+    private DtoSet createDtoSet(Set set){
+        return new DtoSet(set.getExpressionString(), set.getPropertyName());
     }
 
     private DtoActivation createDtoActivation(Activation activation){
@@ -130,10 +157,9 @@ public class WorldManager {
     public DtoWorldInfo getDtoWorldInfo(){
         Map<String, DtoEntityInfo> dtoEntityInfoMap = createDtoEntityMap();
         Map<String, DtoRuleInfo> dtoRuleInfoMap = createDtoRuleMap();
-        DtoTermination dtoTermination = createDtoTermination();
-        Map<String,DtoEnvironmentInfo>  dtoEnvironmentInfoMap = createDtoEnvironmentInfoMap();
+        List<DtoEnvironmentInfo>  dtoEnvironmentInfoList = createDtoEnvironmentInfoList();
         DtoGridInfo dtoGridInfo = createDtoGridInfo();
-        return new DtoWorldInfo(worldName, dtoEntityInfoMap, dtoRuleInfoMap, dtoTermination, dtoEnvironmentInfoMap, dtoGridInfo);
+        return new DtoWorldInfo(dtoEntityInfoMap, dtoRuleInfoMap, dtoEnvironmentInfoList, dtoGridInfo, worldName);
     }
 
     private DtoGridInfo createDtoGridInfo() {
@@ -148,11 +174,11 @@ public class WorldManager {
         return dtoEntityInfoMap;
     }
 
-    public DtoEntityInfo createDtoEntityMap(EntityDefinition entityDefinition) {
-        return new DtoEntityInfo(entityDefinition.getName(), createDtoEntityPropertyMap(entityDefinition.getPropertiesOfAllPopulation()));
+    private DtoEntityInfo createDtoEntityMap(EntityDefinition entityDefinition) {
+        return new DtoEntityInfo(entityDefinition.getName(), createDtoEntityPropertyList(entityDefinition.getPropertiesOfAllPopulation()));
     }
 
-    public DtoRuleInfo createDtoRule(Rule rule){
+    private DtoRuleInfo createDtoRule(Rule rule){
         List<DtoAction> dtoAction = new ArrayList<>();
 
         for (Action action : rule.getActionList()) {
@@ -162,7 +188,7 @@ public class WorldManager {
         return new DtoRuleInfo(rule.getName(), createDtoActivation(rule.getActivation()), dtoAction);
     }
 
-    public Map<String, DtoRuleInfo> createDtoRuleMap(){
+    private Map<String, DtoRuleInfo> createDtoRuleMap(){
         Map<String, DtoRuleInfo> dtoRuleInfoMap = new HashMap<>();
 
         for (Rule rule : worldDefinition.getRules()) {
@@ -171,24 +197,19 @@ public class WorldManager {
         return dtoRuleInfoMap;
     }
 
-    public DtoTermination createDtoTermination(){
-        return new DtoTermination(worldDefinition.getTermination().getTicks(), worldDefinition.getTermination().getSeconds(), worldDefinition.getTermination().getHuman());
-    }
-
-    public Map<String,DtoEnvironmentInfo> createDtoEnvironmentInfoMap(){
-        Map<String,DtoEnvironmentInfo> dtoEnvironmentInfoMap = new HashMap<>();
+    private List<DtoEnvironmentInfo> createDtoEnvironmentInfoList(){
+        List<DtoEnvironmentInfo> dtoEnvironmentInfoList = new ArrayList<>();
 
         for (PropertyDefinition environment : worldDefinition.getEnvironmentVariables().getProperties().values()) {
             if(environment.getRange() != null){
-                dtoEnvironmentInfoMap.put(environment.getName(),new DtoEnvironmentInfo(environment.getName(), environment.getType().toString().toLowerCase(),
-                        createDtoRange(environment.getRange())));
+                dtoEnvironmentInfoList.add(new DtoEnvironmentInfo(environment.getName(), environment.getType().toString().toLowerCase(),
+                        environment.getRange().getFrom(), environment.getRange().getTo()));
             } else{
-                dtoEnvironmentInfoMap.put(environment.getName(), new DtoEnvironmentInfo(environment.getName(), environment.getType().toString().toLowerCase(),
-                        null));
+                dtoEnvironmentInfoList.add(new DtoEnvironmentInfo(environment.getName(), environment.getType().toString().toLowerCase(), 0.0, 0.0));
             }
         }
 
-        return dtoEnvironmentInfoMap;
+        return dtoEnvironmentInfoList;
     }
 
     public DtoEntityNames createEntityNameDto(){

@@ -32,6 +32,10 @@ public class LogicManager {
         return new DtoWorldsList(worldsList);
     }
 
+    public WorldManager getWorldManager(String worldName){
+        return worldManagerMap.get(worldName);
+    }
+
     public DtoSimulationQueue createDtoSimulationQueue(){
         int countEnded = 0;
 

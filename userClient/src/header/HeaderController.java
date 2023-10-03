@@ -25,11 +25,16 @@ public class HeaderController {
 
     private MainPageController mainPageController;
 
-    public void setter(MainPageController mainPageController){
+    public void setter(MainPageController mainPageController, String username){
         setMainPageController(mainPageController);
+        setUserNameLabel(username);
     }
 
-    public void setMainPageController(MainPageController mainPageController) {
+    private void setUserNameLabel(String username){
+        this.userNameLabel.setText("Name: " + username);
+    }
+
+    private void setMainPageController(MainPageController mainPageController) {
         this.mainPageController = mainPageController;
     }
 
@@ -45,7 +50,7 @@ public class HeaderController {
 
     @FXML
     void requestButtonClicked(ActionEvent event) {
-
+        mainPageController.loadRequestsControllerController();
     }
 
     @FXML

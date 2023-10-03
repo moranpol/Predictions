@@ -3,12 +3,14 @@ package details;
 public class DtoEnvironmentInfo {
     private final String name;
     private final String type;
-    private final DtoRange range;
+    private final Double from;
+    private final Double to;
 
-    public DtoEnvironmentInfo(String name, String type, DtoRange range) {
+    public DtoEnvironmentInfo(String name, String type, Double from, Double to) {
         this.name = name;
         this.type = type;
-        this.range = range;
+        this.from = from;
+        this.to = to;
     }
 
     public String getName() {
@@ -19,7 +21,11 @@ public class DtoEnvironmentInfo {
         return type;
     }
 
-    public DtoRange getRange() {
-        return range;
+    public Double getFrom() {
+        return from;
+    }
+
+    public Double getTo() {
+        return to;
     }
 }

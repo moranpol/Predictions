@@ -1,17 +1,17 @@
 package details;
 
-import java.util.Map;
+import java.util.List;
 
 public class DtoEntityInfo {
     private final String name;
-    private final Map<String,DtoProperty> propertyDefinitions;
+    private final List<DtoProperty> propertyDefinitions;
 
-    public DtoEntityInfo(String name, Map<String, DtoProperty> propertyDefinitions) {
+    public DtoEntityInfo(String name, List<DtoProperty> propertyDefinitions) {
         this.name = name;
         this.propertyDefinitions = propertyDefinitions;
     }
 
-    public Map<String, DtoProperty> getPropertyDefinitions() {
+    public List<DtoProperty> getPropertyDefinitions() {
         return propertyDefinitions;
     }
 

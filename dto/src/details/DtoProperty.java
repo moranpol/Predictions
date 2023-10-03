@@ -1,18 +1,18 @@
 package details;
 
-import details.DtoRange;
-
 public class DtoProperty {
     private final String name;
     private final String type;
-    private final DtoRange range;
     private final boolean isRandomInitialized;
+    private final Double from;
+    private final Double to;
 
-    public DtoProperty(String name, String type, DtoRange range, boolean isRandomInitialized) {
+    public DtoProperty(String name, String type, boolean isRandomInitialized, Double from, Double to) {
         this.name = name;
         this.type = type;
-        this.range = range;
         this.isRandomInitialized = isRandomInitialized;
+        this.from = from;
+        this.to = to;
     }
 
     public String getName() {
@@ -23,11 +23,15 @@ public class DtoProperty {
         return type;
     }
 
-    public DtoRange getRange() {
-        return range;
-    }
-
     public boolean isRandomInitialized() {
         return isRandomInitialized;
+    }
+
+    public Double getFrom() {
+        return from;
+    }
+
+    public Double getTo() {
+        return to;
     }
 }

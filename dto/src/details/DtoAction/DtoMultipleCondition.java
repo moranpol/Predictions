@@ -1,11 +1,10 @@
 package details.DtoAction;
 
-public class DtoMultipleCondition extends DtoAction {
+public class DtoMultipleCondition {
     private final String logic;
     private final Integer conditionsAmount;
 
-    public DtoMultipleCondition(String name, String mainEntityName, String secondaryEntityName, String logic, Integer conditionsAmount) {
-        super(name, mainEntityName, secondaryEntityName);
+    public DtoMultipleCondition(String logic, Integer conditionsAmount) {
         this.logic = logic;
         this.conditionsAmount = conditionsAmount;
     }

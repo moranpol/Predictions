@@ -1,11 +1,10 @@
 package details.DtoAction;
 
-public class DtoProximity extends DtoAction {
+public class DtoProximity {
     private final String depth;
     private final int actionAmount;
 
-    public DtoProximity(String name, String mainEntityName, String secondaryEntityName,String depth, int actionAmount) {
-        super(name, mainEntityName, secondaryEntityName);
+    public DtoProximity(String depth, int actionAmount) {
         this.depth = depth;
         this.actionAmount = actionAmount;
     }

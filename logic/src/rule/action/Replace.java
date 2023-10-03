@@ -19,6 +19,14 @@ public class Replace extends Action{
         this.mode = mode;
     }
 
+    public ReplaceMode getMode() {
+        return mode;
+    }
+
+    public String getEntityNameToCreate() {
+        return entityNameToCreate;
+    }
+
     @Override
     public void activateAction(Context context) {
         if(context.getMainEntityInstance().isDead()){
