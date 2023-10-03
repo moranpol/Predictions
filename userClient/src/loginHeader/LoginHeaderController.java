@@ -59,7 +59,10 @@ public class LoginHeaderController {
                             ErrorDialog.showError("Something went wrong: " + responseBody)
                     );
                 } else {
-                    Platform.runLater(() -> mainPageController.loadHeaderController(userName));
+                    Platform.runLater(() -> {
+                        mainPageController.setUserName(userName);
+                        mainPageController.loadHeaderController();
+                    });
                 }
             }
         });

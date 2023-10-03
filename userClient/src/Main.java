@@ -20,7 +20,7 @@ public class Main extends Application {
         fxmlLoader.setLocation(url);
         assert url != null;
         ScrollPane scrollPane = fxmlLoader.load(url.openStream());
-        Scene scene = new Scene(scrollPane, 1005, 715);
+        Scene scene = new Scene(scrollPane, 1010, 720);
         primaryStage.setMinWidth(400);
         primaryStage.setMinHeight(400);
         primaryStage.setMaxHeight(755);

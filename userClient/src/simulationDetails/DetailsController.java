@@ -20,7 +20,7 @@ import okhttp3.HttpUrl;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 import simulationDetails.worldDetails.WorldDetailsController;
-import worldInfoRefresher.WorldInfoRefresher;
+import refresher.WorldInfoRefresher;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -93,7 +93,7 @@ public class DetailsController implements Closeable {
     public void worldListRefresher() {
         worldInfoRefresher = new WorldInfoRefresher(this::setWorldCBox);
         timer = new Timer();
-        timer.schedule(worldInfoRefresher, 2000, 2000);
+        timer.schedule(worldInfoRefresher, 2000, 1);
     }
 
     @Override

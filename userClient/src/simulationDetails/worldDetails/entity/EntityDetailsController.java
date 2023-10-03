@@ -81,12 +81,14 @@ public class EntityDetailsController {
     }
 
     private void setTable(List<DtoProperty> dtoEnvironmentInfoList){
-        ObservableList<DtoProperty> data = FXCollections.observableArrayList(dtoEnvironmentInfoList);
-        if(data.isEmpty()){
-            Label emptyLabel = new Label("No properties :(");
-            propertiesTableView.setPlaceholder(emptyLabel);
-        } else {
-            propertiesTableView.setItems(data);
-        }
+        Platform.runLater(() -> {
+            ObservableList<DtoProperty> data = FXCollections.observableArrayList(dtoEnvironmentInfoList);
+            if (data.isEmpty()) {
+                Label emptyLabel = new Label("No properties :(");
+                propertiesTableView.setPlaceholder(emptyLabel);
+            } else {
+                propertiesTableView.setItems(data);
+            }
+        });
     }
 }

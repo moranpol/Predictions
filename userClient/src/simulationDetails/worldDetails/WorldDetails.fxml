@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" spacing="5.0" stylesheets="@../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulationDetails.worldDetails.WorldDetailsController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1000.0" spacing="5.0" stylesheets="@../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulationDetails.worldDetails.WorldDetailsController">
    <children>
-      <VBox prefHeight="500.0" prefWidth="340.0" styleClass="bodyPanes">
+      <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="330.0" styleClass="bodyPanes">
          <children>
             <HBox alignment="CENTER" prefHeight="125.0" prefWidth="350.0" spacing="100.0">
                <children>

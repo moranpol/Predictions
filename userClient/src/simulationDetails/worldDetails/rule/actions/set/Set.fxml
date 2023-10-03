@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="vBox" prefHeight="350.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulationDetails.worldDetails.rule.actions.set.SetController">
+<VBox fx:id="vBox" prefHeight="350.0" prefWidth="350.0" stylesheets="@../../../../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulationDetails.worldDetails.rule.actions.set.SetController">
    <children>
       <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
          <children>
