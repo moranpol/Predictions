@@ -12,16 +12,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" styleClass="bodyPanes" stylesheets="@../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPagemanagement.managementBodyControll">
+<ScrollPane fitToHeight="true" fitToWidth="true" styleClass="bodyPanes" stylesheets="@../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPagemanagement.ManagementBodyControll">
    <content>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1000.0" stylesheets="@../../style/defaultPage.css">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="1000.0" spacing="10.0">
                <children>
-                  <TextField fx:id="textFieldFilePath" prefHeight="25.0" prefWidth="823.0" promptText="File Path" />
+                  <TextField fx:id="textFieldFilePath" prefHeight="25.0" prefWidth="836.0" promptText="File Path" />
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="loadFileButton" mnemonicParsing="false" onAction="#loadFileButtonClicked" prefHeight="25.0" prefWidth="170.0" styleClass="HeaderButtons" text="Load File Button" />
+                        <Button fx:id="loadFileButton" mnemonicParsing="false" onAction="#loadFileButtonClicked" prefHeight="30.0" prefWidth="148.0" styleClass="button-show" text="Load File " />
                         <Button fx:id="ContinueButton" mnemonicParsing="false" onAction="#continueButtonClicked" prefHeight="25.0" prefWidth="170.0" text="Continue" visible="false" />
                      </children>
                   </StackPane>
@@ -38,7 +38,7 @@
                   <Pane fx:id="paneSimulationsDetails" prefHeight="450.0" prefWidth="818.0" />
                   <Pane fx:id="paneThreadPool" prefHeight="450.0" prefWidth="312.0">
                      <children>
-                        <VBox layoutX="4.0" layoutY="9.0" prefHeight="433.0" prefWidth="235.0">
+                        <VBox alignment="CENTER" layoutX="4.0" layoutY="9.0" prefHeight="433.0" prefWidth="235.0">
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                                  <children>
@@ -52,6 +52,7 @@
                                     <Insets left="15.0" right="15.0" />
                                  </padding>
                               </HBox>
+                              <Button fx:id="SetThreadsCountButton" mnemonicParsing="false" onAction="#SetThreadsCountButtonClicked" prefHeight="30.0" prefWidth="148.0" styleClass="button-show" text="Set Threads Count" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" text="Simulations queue counter" />

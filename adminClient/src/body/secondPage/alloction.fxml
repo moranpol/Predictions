@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1000.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Reuest id" />
+          <TableColumn prefWidth="75.0" text="User name" />
+            <TableColumn prefWidth="75.0" text="World name" />
+            <TableColumn prefWidth="87.0" text="Total amount" />
+            <TableColumn prefWidth="97.0" text="Termaination" />
+            <TableColumn prefWidth="69.0" text="Running" />
+            <TableColumn prefWidth="66.0" text="Finish" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

@@ -16,7 +16,7 @@ public class Main extends Application{
         primaryStage.setTitle("Predictions");
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        URL url = getClass().getResource("/body/firstPagemanagement/managementBody.fxml");
+        URL url = getClass().getResource("/mainPage/mainPage.fxml");
         fxmlLoader.setLocation(url);
         Parent scrollPane = fxmlLoader.load(url.openStream());
         //PageController pageController = fxmlLoader.getController();
