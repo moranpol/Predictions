@@ -38,11 +38,11 @@ public class ThreadInfoServlet  extends HttpServlet{
         LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
 
         try (PrintWriter out = response.getWriter()) {
-            Integer threadNum = Integer.parseInt(request.getParameter("threadNamber"));
+            Integer threadNum = Integer.parseInt(request.getParameter("threadNamber")); /// exception
             manager.changeThreadPoolSize(threadNum);
 
         } catch (Exception ignore) {
-
+            ignore.printStackTrace(); //
         }
     }
 }

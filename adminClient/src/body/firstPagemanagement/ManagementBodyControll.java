@@ -18,9 +18,12 @@ import java.util.Timer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class managementBodyControll {
+public class ManagementBodyControll {
     @FXML
     private Button ContinueButton;
+
+    @FXML
+    private Button SetThreadsCountButton;
 
     @FXML
     private Label endedCounter;
@@ -41,7 +44,7 @@ public class managementBodyControll {
     private Label runningCounter;
 
     @FXML
-    private Spinner<Double> spinnerThreadsNum;
+    private Spinner<Integer> spinnerThreadsNum;
 
     @FXML
     private TextField textFieldFilePath;
@@ -50,12 +53,33 @@ public class managementBodyControll {
 
     private ThreadInfoRefresher threadInfoRefresher;
 
+    @FXML
+    void SetThreadsCountButtonClicked(ActionEvent event) {
+        String baseUrl = "http://localhost:8080/predictions/threadInfo";
+        HttpUrl.Builder urlBuilder = HttpUrl
+                .parse(baseUrl).
+                newBuilder();
+        urlBuilder.addEncodedQueryParameter("threadNamber", spinnerThreadsNum.getValue().toString());
+
+        String finalUrl = urlBuilder.
+                build().
+                toString();
+
+        RequestBody body = RequestBody.create(null, new byte[0]);
+
+        HttpClientUtil.runAsyncPut(finalUrl, body, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {}
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                // todo pop window
+            }
+        });
+    }
+
     public void initialize(){
         setRange();
-        spinnerThreadsNum.valueProperty().addListener((observable, oldValue, newValue) -> {
-
-            //todo
-        });
     }
 
     public void updateThreadInfo(DtoSimulationQueue dtoSimulationQueue){
@@ -75,7 +99,7 @@ public class managementBodyControll {
     }
 
     private void setRange() {
-        SpinnerValueFactory<Double> spinnerValueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 50, 1);
+        SpinnerValueFactory<Integer> spinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
         spinnerThreadsNum.setValueFactory(spinnerValueFactory);
     }
 

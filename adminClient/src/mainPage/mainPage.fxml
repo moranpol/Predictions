@@ -15,6 +15,6 @@
   </rowConstraints>
    <children>
       <fx:include fx:id="header" source="../header/header.fxml" />
-      <AnchorPane fx:id="body" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+      <AnchorPane fx:id="body" prefHeight="550.0" prefWidth="1000.0" GridPane.rowIndex="1" />
    </children>
 </GridPane>

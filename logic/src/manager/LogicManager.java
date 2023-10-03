@@ -52,5 +52,6 @@ public class LogicManager {
 
     public void changeThreadPoolSize(Integer threadNum) {
         executorService.setCorePoolSize(threadNum);
+
     }
 }
