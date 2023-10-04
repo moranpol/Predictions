@@ -17,7 +17,6 @@ import newExecution.dtoEntities.DtoEntityNames;
 import newExecution.dtoEntities.DtoGrid;
 import newExecution.dtoEnvironment.DtoEnvironment;
 import property.PropertyDefinition;
-import property.Range;
 import results.*;
 import results.simulationEnded.*;
 import results.simulations.DtoSimulationInfo;
@@ -26,6 +25,7 @@ import rule.Activation;
 import rule.Rule;
 import rule.action.*;
 import simulation.Simulation;
+import termination.Termination;
 import world.EntityCountGraph;
 import world.WorldDefinition;
 
@@ -267,11 +267,11 @@ public class WorldManager {
         return dtoEntitiesPopulationList;
     }
 
-    public void startSimulation(ThreadPoolExecutor executorService, List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList, List<DtoEntitiesPopulation> dtoEntitiesPopulationList) {
+    public void startSimulation(ThreadPoolExecutor executorService, List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList, List<DtoEntitiesPopulation> dtoEntitiesPopulationList, Termination termination) {
         WorldDefinition newWorldDefinition = new WorldDefinition(worldDefinition);
         updateEnvironment(dtoEnvironmentInitializeList, newWorldDefinition);
         updateEntitiesPopulation(dtoEntitiesPopulationList, newWorldDefinition);
-        Simulation simulation = new Simulation(simulationCount, FactoryInstance.createWorldInstance(newWorldDefinition), newWorldDefinition);
+        Simulation simulation = new Simulation(simulationCount, FactoryInstance.createWorldInstance(newWorldDefinition), newWorldDefinition, termination);
         simulations.add(simulationCount, simulation);
         simulationCount++;
         simulationRun(executorService, simulation);

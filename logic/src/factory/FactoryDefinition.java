@@ -34,8 +34,7 @@ public abstract class FactoryDefinition {
             rules.add(createRule(entities, rule, environment));
         }
 
-        return new WorldDefinition(environment, entities, rules, createTermination(),
-                createGrid(prdWorld.getPRDGrid()));
+        return new WorldDefinition(environment, entities, rules, createGrid(prdWorld.getPRDGrid()));
     }
 
     private static Grid createGrid(PRDWorld.PRDGrid prdGrid){
@@ -132,27 +131,5 @@ public abstract class FactoryDefinition {
         }
 
         return new Activation(ticks, probability);
-    }
-
-    private static Termination createTermination(){
-//        Integer seconds = null;
-//        Integer ticks = null;
-//        boolean human = false;
-//
-//        if(prdTermination.getPRDByUser() != null){
-//            human = true;
-//        } else {
-//            for (Object termination : prdTermination.getPRDBySecondOrPRDByTicks()) {
-//                if (CheckFunctions.isPRDTerminationBySeconds(termination)) {
-//                    PRDBySecond prdBySecond = (PRDBySecond) termination;
-//                    seconds = prdBySecond.getCount();
-//                } else if (CheckFunctions.isPRDTerminationByTicks(prdTermination.getPRDBySecondOrPRDByTicks().get(0))) {
-//                    PRDByTicks prdByTicks = (PRDByTicks) termination;
-//                    ticks = prdByTicks.getCount();
-//                }
-//            }
-//        }
-//
-        return new Termination(0, 0, true);
     }
 }

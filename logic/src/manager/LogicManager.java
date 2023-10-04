@@ -1,9 +1,15 @@
 package manager;
 
 import details.DtoWorldsList;
+import enums.RequestStatus;
 import enums.SimulationMode;
+import exceptions.InvalidNameException;
 import header.DtoSimulationQueue;
+import requests.DtoNewRequest;
+import requests.DtoRequestInfo;
+import requests.DtoRequestsInfo;
 import simulation.Simulation;
+import userRequests.Request;
 import userRequests.Requests;
 
 import java.io.InputStream;
@@ -23,10 +29,44 @@ public class LogicManager {
         try {
             WorldManager worldManager = new WorldManager();
             worldManager.ReadXmlFile(xmlFile);
+            if(worldManagerMap.containsKey(worldManager.getWorldName())){
+                throw new InvalidNameException("world name " + worldManager.getWorldName() + " already exist.");
+            }
             worldManagerMap.put(worldManager.getWorldName(), worldManager);
         } catch (Exception e){
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    public void createSimulationRequest(DtoNewRequest dtoNewRequest){
+        simulationRequests.addSimulationRequest(dtoNewRequest);
+    }
+
+    public DtoRequestsInfo createDtoRequestsInfoForUser(String username){
+        List<DtoRequestInfo> requestInfoList = new ArrayList<>();
+
+        for(Request request : simulationRequests.getRequestList()){
+            if((request.getRequestStatus() == RequestStatus.APPROVED || request.getRequestStatus() == RequestStatus.REJECTED) && request.getUserName().equals(username)){
+                requestInfoList.add(createDtoRequestInfo(request));
+            }
+        }
+
+        return new DtoRequestsInfo(requestInfoList);
+    }
+
+    private DtoRequestInfo createDtoRequestInfo(Request request) {
+        String termination;
+        if (request.getTermination().getHuman()){
+            termination = "By User";
+        } else if (request.getTermination().getSeconds() != null && request.getTermination().getTicks() != null) {
+            termination = "Ticks - " + request.getTermination().getTicks() + ", seconds - " + request.getTermination().getSeconds();
+        } else if (request.getTermination().getSeconds() == null && request.getTermination().getTicks() != null) {
+            termination = "Ticks - " + request.getTermination().getTicks();
+        } else{
+            termination = "Seconds - " + request.getTermination().getSeconds();
+        }
+
+        return new DtoRequestInfo(request.getId(), request.getUserName(), request.getWorldName(), request.getNumOfWantedSimulations(), termination, request.getRequestStatus().toString().toLowerCase(), request.getRunningSimulations(), request.getEndedSimulations());
     }
 
     public DtoWorldsList getDtoWorldsList(){

@@ -15,14 +15,12 @@ public class WorldDefinition implements Serializable {
     private final EnvironmentDefinition environmentVariables;
     private final Map<String, EntityDefinition> entities;
     private final List<Rule> rules;
-    private final Termination termination;
     private final Grid grid;
 
-    public WorldDefinition(EnvironmentDefinition environmentVariables, Map<String, EntityDefinition> entities, List<Rule> rules, Termination termination, Grid grid) {
+    public WorldDefinition(EnvironmentDefinition environmentVariables, Map<String, EntityDefinition> entities, List<Rule> rules, Grid grid) {
         this.environmentVariables = environmentVariables;
         this.entities = entities;
         this.rules = rules;
-        this.termination = termination;
         this.grid = grid;
     }
 
@@ -33,7 +31,6 @@ public class WorldDefinition implements Serializable {
             this.entities.put(entity.getName(), new EntityDefinition(entity));
         }
         this.rules = otherWorldDefinition.getRules();
-        this.termination = otherWorldDefinition.getTermination();
         this.grid = otherWorldDefinition.getGrid();
     }
 
@@ -47,10 +44,6 @@ public class WorldDefinition implements Serializable {
 
     public List<Rule> getRules() {
         return rules;
-    }
-
-    public Termination getTermination() {
-        return termination;
     }
 
     public Grid getGrid() {

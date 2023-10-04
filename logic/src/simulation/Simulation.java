@@ -1,7 +1,7 @@
 package simulation;
 
 import enums.SimulationMode;
-import enums.TerminationType;
+import termination.Termination;
 import world.WorldDefinition;
 import world.WorldInstance;
 
@@ -13,8 +13,8 @@ public class Simulation implements Serializable, Runnable {
     private final String startDateFormat;
     private final Integer id;
     private final WorldInstance worldInstance;
-    private TerminationType terminationReason;
     private final WorldDefinition worldDefinition;
+    private final Termination termination;
     private SimulationMode simulationMode;
     private Integer ticks;
     private Integer seconds;
@@ -22,10 +22,11 @@ public class Simulation implements Serializable, Runnable {
     private Integer pauseTime;
     private long startTime;
 
-    public Simulation(Integer id, WorldInstance worldInstance, WorldDefinition worldDefinition) {
+    public Simulation(Integer id, WorldInstance worldInstance, WorldDefinition worldDefinition, Termination termination) {
         this.id = id;
         this.worldInstance = worldInstance;
         this.worldDefinition = worldDefinition;
+        this.termination = termination;
         simulationMode = SimulationMode.RUNNING;
         ticks = 1;
         seconds = 0;
@@ -74,8 +75,8 @@ public class Simulation implements Serializable, Runnable {
     @Override
     public void run(){
         startTime = System.currentTimeMillis();
-        Integer maxSeconds = worldInstance.getTermination().getSeconds();
-        Integer maxTicks = worldInstance.getTermination().getTicks();
+        Integer maxSeconds = termination.getSeconds();
+        Integer maxTicks = termination.getTicks();
         try {
             if (maxTicks != null && maxSeconds != null) {
                 runSimulationByTicksAndSeconds(maxTicks, maxSeconds);
@@ -96,15 +97,12 @@ public class Simulation implements Serializable, Runnable {
 
     private void runSimulationByTicksAndSeconds(Integer maxTicks, Integer maxSeconds){
         long maxRunTimeMilliSec = maxSeconds * 1000;
-        terminationReason = TerminationType.TICKS;
 
         for (ticks = 1; ticks <= maxTicks; ticks++){
             setSeconds();
             if(simulationMode == SimulationMode.ENDED){
-                terminationReason = TerminationType.User;
                 break;
             } else if (System.currentTimeMillis() - startTime - (pauseTime * 1000) >= maxRunTimeMilliSec){
-                terminationReason = TerminationType.SECONDS;
                 break;
             }
 
@@ -116,12 +114,10 @@ public class Simulation implements Serializable, Runnable {
 
     private void runSimulationBySeconds(Integer maxSeconds){
         long maxRunTimeMilliSec = maxSeconds * 1000;
-        terminationReason = TerminationType.SECONDS;
 
         while (System.currentTimeMillis() - startTime - (pauseTime * 1000) < maxRunTimeMilliSec){
             setSeconds();
             if(simulationMode == SimulationMode.ENDED){
-                terminationReason = TerminationType.User;
                 break;
             }
 
@@ -133,12 +129,10 @@ public class Simulation implements Serializable, Runnable {
     }
 
     private void runSimulationByTicks(Integer maxTicks){
-        terminationReason = TerminationType.TICKS;
 
         for (ticks = 1; ticks <= maxTicks; ticks++){
             setSeconds();
             if(simulationMode == SimulationMode.ENDED){
-                terminationReason = TerminationType.User;
                 break;
             }
 
@@ -156,8 +150,6 @@ public class Simulation implements Serializable, Runnable {
             checkPause();
             ticks++;
         }
-
-        terminationReason = TerminationType.User;
     }
 
     private void checkFuture(){

@@ -18,7 +18,6 @@ public class WorldInstance implements Serializable {
     private final Map<String, EntityManager> entities;
     private final EnvironmentInstance environmentVariables;
     private final List<Rule> rules;
-    private final Termination termination;
     private final Grid grid;
     private final Map<String, EntityCountGraph> entityCountGraphMap;
 
@@ -26,7 +25,6 @@ public class WorldInstance implements Serializable {
         this.entities = entities;
         this.environmentVariables = environmentVariables;
         this.rules = rules;
-        this.termination = termination;
         this.grid = grid;
         entityCountGraphMap = new HashMap<>();
         updateEntityCountGraphMap();
@@ -39,10 +37,6 @@ public class WorldInstance implements Serializable {
             }
             entityCountGraphMap.get(entityManager.getName()).setEntityQuantity(entityManager.getEntityInstance().size());
         }
-    }
-
-    public Termination getTermination() {
-        return termination;
     }
 
     public Map<String, EntityManager> getEntities() {

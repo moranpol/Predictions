@@ -3,6 +3,7 @@ package simulationDetails;
 import com.google.gson.Gson;
 import details.DtoWorldInfo;
 import details.DtoWorldsList;
+import error.ErrorDialog;
 import http.HttpClientUtil;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -61,6 +62,7 @@ public class DetailsController implements Closeable {
             HttpClientUtil.runAsyncGet(finalUrl, new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    ErrorDialog.showError(e.getMessage());
                 }
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
@@ -69,6 +71,8 @@ public class DetailsController implements Closeable {
                         assert response.body() != null;
                         DtoWorldInfo dtoWorldInfo = gson.fromJson(response.body().charStream(), DtoWorldInfo.class);
                         loadWorldDetailsController(dtoWorldInfo);
+                    } else{
+                        ErrorDialog.showError(response.message());
                     }
                 }
             });
