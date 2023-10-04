@@ -18,9 +18,11 @@ import java.util.function.Consumer;
 
 public class RequestsRefresher extends TimerTask {
     private final Consumer<DtoRequestsInfo> requestsConsumer;
+    private final String username;
 
-    public RequestsRefresher(Consumer<DtoRequestsInfo> requestsConsumer) {
+    public RequestsRefresher(Consumer<DtoRequestsInfo> requestsConsumer, String username) {
         this.requestsConsumer = requestsConsumer;
+        this.username = username;
     }
 
     @Override

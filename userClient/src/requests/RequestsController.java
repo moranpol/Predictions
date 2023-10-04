@@ -137,6 +137,7 @@ public class RequestsController implements Closeable {
 
     @FXML
     void submitButtonClicked(ActionEvent event) {
+        //todo
         DtoNewRequest dtoNewRequest = new DtoNewRequest(mainPageController.getUserName(), worldComboBox.getValue(), simulationCounterSpinner.getValue(), createDtoTermination());
     }
 
@@ -215,7 +216,7 @@ public class RequestsController implements Closeable {
 
     private void refresher() {
         worldInfoRefresher = new WorldInfoRefresher(this::setWorldCBox);
-        requestsRefresher = new RequestsRefresher(this::setTable);
+        requestsRefresher = new RequestsRefresher(this::setTable, mainPageController.getUserName());
         timer = new Timer();
         timer.schedule(worldInfoRefresher, 2000, 1);
         timer.schedule(requestsRefresher, 2000, 1);
@@ -224,6 +225,7 @@ public class RequestsController implements Closeable {
     @Override
     public void close() throws IOException {
         worldInfoRefresher.cancel();
+        requestsRefresher.cancel();
         timer.cancel();
     }
 }

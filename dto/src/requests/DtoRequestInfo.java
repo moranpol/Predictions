@@ -5,12 +5,12 @@ public class DtoRequestInfo {
     private final String userName;
     private final String worldName;
     private final Integer numOfWantedSimulations;
-    private final DtoTermination termination;
+    private final String termination;
     private final String requestStatus;
     private final Integer runningSimulations;
     private final Integer endedSimulations;
 
-    public DtoRequestInfo(Integer id, String userName, String worldName, Integer numOfWantedSimulations, DtoTermination termination, String requestStatus, Integer runningSimulations, Integer endedSimulations) {
+    public DtoRequestInfo(Integer id, String userName, String worldName, Integer numOfWantedSimulations, String termination, String requestStatus, Integer runningSimulations, Integer endedSimulations) {
         this.id = id;
         this.userName = userName;
         this.worldName = worldName;
@@ -33,7 +33,7 @@ public class DtoRequestInfo {
         return numOfWantedSimulations;
     }
 
-    public DtoTermination getTermination() {
+    public String getTermination() {
         return termination;
     }
 
