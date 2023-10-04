@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox fx:id="vBox" prefHeight="350.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPagemanagement.simulationDetails.worldDetails.rule.actions.proximity.ProximityController">
+   <children>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-label-title" text="Name:" />
+            <Text fx:id="nameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="251.0" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="10.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-label-title" text="Main Entity Name:" />
+            <Text fx:id="mainEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="187.0" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="10.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
+         <children>
+            <Label prefHeight="19.0" prefWidth="155.0" styleClass="action-label-title" text="Secondary Entity Name:" />
+            <Text fx:id="secondaryEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="150.0" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="10.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-label-title" text="Depth:" />
+            <Text fx:id="depthVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="250.0" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="10.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="320.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-label-title" text="Action Amount:" />
+            <Text fx:id="actionAmountVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="204.0" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="10.0" />
+         </padding>
+      </HBox>
+   </children>
+   <padding>
+      <Insets left="20.0" right="5.0" />
+   </padding>
+</VBox>

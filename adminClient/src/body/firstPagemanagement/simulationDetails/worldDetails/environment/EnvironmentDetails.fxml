@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<VBox alignment="CENTER" fillWidth="false" prefHeight="500.0" prefWidth="650.0" spacing="20.0" styleClass="bodyPanes" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPagemanagement.simulationDetails.worldDetails.environment.EnvironmentDetailsController">
+   <children>
+      <Label styleClass="label-title" text="Environments" />
+      <ScrollPane fitToHeight="true" fitToWidth="true">
+         <content>
+            <TableView fx:id="environmentTableView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+              <columns>
+                <TableColumn fx:id="nameCol" maxWidth="208.0" minWidth="208.0" prefWidth="208.0" text="Name" />
+                <TableColumn fx:id="typeCol" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" text="Type" />
+                  <TableColumn fx:id="rangeFromCol" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" text="Range - from" />
+                  <TableColumn fx:id="rangeToCol" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" text="Range - to" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>

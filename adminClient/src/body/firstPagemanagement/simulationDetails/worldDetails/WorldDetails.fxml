@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" spacing="5.0" stylesheets="@../../../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPagemanagement.simulationDetails.worldDetails.WorldDetailsController">
+   <children>
+      <VBox prefHeight="490.0" prefWidth="284.0" styleClass="bodyPanes">
+         <children>
+            <HBox alignment="CENTER" prefHeight="89.0" prefWidth="280.0" spacing="100.0">
+               <children>
+                  <Label styleClass="action-label-title" text="Environment" />
+                  <Button fx:id="environmentShowButton" mnemonicParsing="false" onAction="#environmentShowButtonClicked" prefWidth="80.0" styleClass="button-show" text="Show" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="81.0" prefWidth="280.0" spacing="145.0">
+               <children>
+                  <Label styleClass="action-label-title" text="Grid" />
+                  <Button fx:id="gridShowButton" mnemonicParsing="false" onAction="#gridShowButtonClicked" prefWidth="80.0" styleClass="button-show" text="Show" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="98.0" prefWidth="280.0" spacing="10.0">
+               <children>
+                  <ComboBox fx:id="entitiesCBox" onAction="#entitiesCBoxChoice" prefHeight="37.0" prefWidth="65.0" promptText="Select Entity" styleClass="ComboBox" />
+                  <Button fx:id="entitiesShowButton" mnemonicParsing="false" onAction="#entitiesShowButtonClicked" prefWidth="80.0" styleClass="button-show" text="Show" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="91.0" prefWidth="280.0" spacing="10.0">
+               <children>
+                  <ComboBox fx:id="rulesCBox" onAction="#rulesCBoxChoice" prefHeight="37.0" prefWidth="76.0" promptText="Select Rule" styleClass="ComboBox" />
+                  <Button fx:id="rulesShowButton" mnemonicParsing="false" onAction="#rulesShowButtonClicked" prefWidth="80.0" styleClass="button-show" text="Show" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Pane fx:id="pane" prefHeight="490.0" prefWidth="405.0" styleClass="bodyPanes" />
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</HBox>
