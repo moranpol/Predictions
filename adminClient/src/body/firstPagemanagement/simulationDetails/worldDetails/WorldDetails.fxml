@@ -8,37 +8,37 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" spacing="5.0" stylesheets="@../../../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPagemanagement.simulationDetails.worldDetails.WorldDetailsController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="700.0" spacing="5.0" stylesheets="@../../../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPagemanagement.simulationDetails.worldDetails.WorldDetailsController">
    <children>
-      <VBox prefHeight="490.0" prefWidth="284.0" styleClass="bodyPanes">
+      <VBox prefHeight="363.0" prefWidth="224.0" styleClass="bodyPanes">
          <children>
-            <HBox alignment="CENTER" prefHeight="89.0" prefWidth="280.0" spacing="100.0">
+            <HBox alignment="CENTER" prefHeight="89.0" prefWidth="280.0" spacing="60.0">
                <children>
                   <Label styleClass="action-label-title" text="Environment" />
                   <Button fx:id="environmentShowButton" mnemonicParsing="false" onAction="#environmentShowButtonClicked" prefWidth="80.0" styleClass="button-show" text="Show" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="81.0" prefWidth="280.0" spacing="145.0">
+            <HBox alignment="CENTER" prefHeight="81.0" prefWidth="249.0" spacing="110.0">
                <children>
                   <Label styleClass="action-label-title" text="Grid" />
                   <Button fx:id="gridShowButton" mnemonicParsing="false" onAction="#gridShowButtonClicked" prefWidth="80.0" styleClass="button-show" text="Show" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="98.0" prefWidth="280.0" spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="98.0" prefWidth="280.0" spacing="15.0">
                <children>
-                  <ComboBox fx:id="entitiesCBox" onAction="#entitiesCBoxChoice" prefHeight="37.0" prefWidth="65.0" promptText="Select Entity" styleClass="ComboBox" />
+                  <ComboBox fx:id="entitiesCBox" onAction="#entitiesCBoxChoice" prefHeight="37.0" prefWidth="125.0" promptText="Select Entity" styleClass="ComboBox1" />
                   <Button fx:id="entitiesShowButton" mnemonicParsing="false" onAction="#entitiesShowButtonClicked" prefWidth="80.0" styleClass="button-show" text="Show" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="91.0" prefWidth="280.0" spacing="10.0">
                <children>
-                  <ComboBox fx:id="rulesCBox" onAction="#rulesCBoxChoice" prefHeight="37.0" prefWidth="76.0" promptText="Select Rule" styleClass="ComboBox" />
+                  <ComboBox fx:id="rulesCBox" onAction="#rulesCBoxChoice" prefHeight="37.0" prefWidth="129.0" promptText="Select Rule" styleClass="ComboBox1" />
                   <Button fx:id="rulesShowButton" mnemonicParsing="false" onAction="#rulesShowButtonClicked" prefWidth="80.0" styleClass="button-show" text="Show" />
                </children>
             </HBox>
          </children>
       </VBox>
-      <Pane fx:id="pane" prefHeight="490.0" prefWidth="405.0" styleClass="bodyPanes" />
+      <Pane fx:id="pane" prefHeight="363.0" prefWidth="460.0" styleClass="bodyPanes" />
    </children>
    <opaqueInsets>
       <Insets />
