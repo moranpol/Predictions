@@ -1,6 +1,9 @@
 package requests;
 
+import com.google.gson.Gson;
 import details.DtoWorldsList;
+import error.ErrorDialog;
+import http.HttpClientUtil;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import mainPage.MainPageController;
+import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
 import refresher.RequestsRefresher;
 import refresher.WorldInfoRefresher;
 
@@ -137,8 +142,36 @@ public class RequestsController implements Closeable {
 
     @FXML
     void submitButtonClicked(ActionEvent event) {
-        //todo
         DtoNewRequest dtoNewRequest = new DtoNewRequest(mainPageController.getUserName(), worldComboBox.getValue(), simulationCounterSpinner.getValue(), createDtoTermination());
+        String finalUrl = HttpUrl
+                .parse("http://localhost:8080/predictions/newRequest")
+                .newBuilder()
+                .build()
+                .toString();
+
+//        RequestBody body =
+//                new MultipartBody
+//                        .Builder()
+//                        .
+//                        .build();
+
+//        HttpClientUtil.runAsyncPost(finalUrl, body, new Callback() {
+//            @Override
+//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+//                ErrorDialog.showError(e.getMessage());
+//            }
+//            @Override
+//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+//                if (response.isSuccessful()) {
+//                    Gson gson = new Gson();
+//                    assert response.body() != null;
+//                    DtoRequestsInfo dtoRequestsInfo = gson.fromJson(response.body().charStream(), DtoRequestsInfo.class);
+//
+//                } else{
+//                    ErrorDialog.showError(response.message());
+//                }
+//            }
+//        });
     }
 
     private DtoTermination createDtoTermination(){

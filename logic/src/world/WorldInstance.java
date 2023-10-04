@@ -21,7 +21,7 @@ public class WorldInstance implements Serializable {
     private final Grid grid;
     private final Map<String, EntityCountGraph> entityCountGraphMap;
 
-    public WorldInstance(Map<String, EntityManager> entities, EnvironmentInstance environmentVariables, List<Rule> rules, Termination termination, Grid grid) {
+    public WorldInstance(Map<String, EntityManager> entities, EnvironmentInstance environmentVariables, List<Rule> rules, Grid grid) {
         this.entities = entities;
         this.environmentVariables = environmentVariables;
         this.rules = rules;
