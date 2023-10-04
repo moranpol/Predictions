@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="500.0" prefWidth="1000.0" stylesheets="@../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.secondPage.AlloctionController">
    <children>
-      <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1000.0">
+      <TableView fx:id="tableInfo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Reuest id" />
-          <TableColumn prefWidth="75.0" text="User name" />
-            <TableColumn prefWidth="75.0" text="World name" />
-            <TableColumn prefWidth="87.0" text="Total amount" />
-            <TableColumn prefWidth="97.0" text="Termaination" />
-            <TableColumn prefWidth="69.0" text="Running" />
-            <TableColumn prefWidth="66.0" text="Finish" />
+          <TableColumn fx:id="requestIdRow" prefWidth="128.0" styleClass="TableColumn" text="Request id" />
+          <TableColumn fx:id="userNameRow" prefWidth="128.0" styleClass="TableColumn" text="User name" />
+            <TableColumn fx:id="worldNameRow" prefWidth="128.0" styleClass="TableColumn" text="World name" />
+            <TableColumn fx:id="totalAmountRow" prefWidth="128.0" styleClass="TableColumn" text="Total amount" />
+            <TableColumn fx:id="termainationRow" prefWidth="128.0" styleClass="TableColumn" text="Termaination" />
+            <TableColumn fx:id="runningRow" prefWidth="128.0" styleClass="TableColumn" text="Running" />
+            <TableColumn fx:id="finishRow" prefWidth="128.0" styleClass="TableColumn" text="Finish" />
         </columns>
       </TableView>
+      <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="1000.0" spacing="20.0">
+         <children>
+            <Button fx:id="AproveButton" disable="true" mnemonicParsing="false" onAction="#AproveButtonClicked" styleClass="button-show" text="Approve" />
+            <Button fx:id="RejectButton" disable="true" mnemonicParsing="false" onAction="#RejectButtonClicked" styleClass="button-show" text="Reject" />
+         </children>
+         <VBox.margin>
+            <Insets right="30.0" />
+         </VBox.margin>
+      </HBox>
    </children>
 </VBox>

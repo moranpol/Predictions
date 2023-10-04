@@ -1,5 +1,7 @@
 package body.firstPagemanagement;
 import ThreadInfoRefresher.ThreadInfoRefresher;
+import body.firstPagemanagement.simulationDetails.DetailsController;
+import error.ErrorDialog;
 import header.DtoSimulationQueue;
 import http.HttpClientUtil;
 import javafx.application.Platform;
@@ -54,6 +56,9 @@ public class ManagementBodyControll {
     private ThreadInfoRefresher threadInfoRefresher;
 
     @FXML
+    private DetailsController detailsController;
+
+    @FXML
     void SetThreadsCountButtonClicked(ActionEvent event) {
         String baseUrl = "http://localhost:8080/predictions/threadInfo";
         HttpUrl.Builder urlBuilder = HttpUrl
@@ -73,7 +78,9 @@ public class ManagementBodyControll {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                // todo pop window
+                if(!response.isSuccessful()) {
+                    ErrorDialog.showError(response.message());
+                }
             }
         });
     }
