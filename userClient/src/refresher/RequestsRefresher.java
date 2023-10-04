@@ -30,6 +30,7 @@ public class RequestsRefresher extends TimerTask {
         String finalUrl = HttpUrl
                 .parse("http://localhost:8080/predictions/userRequests")
                 .newBuilder()
+                .addQueryParameter("username", username)
                 .build()
                 .toString();
 

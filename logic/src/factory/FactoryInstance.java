@@ -24,7 +24,7 @@ public abstract class FactoryInstance {
         }
 
         return new WorldInstance(entities, createEnvironmentInstance(worldDefinition.getEnvironmentVariables()),
-                worldDefinition.getRules(), worldDefinition.getTermination(), grid);
+                worldDefinition.getRules(), grid);
     }
 
     private static Grid createGrid(Grid definitionGrid){

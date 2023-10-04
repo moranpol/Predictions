@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "user requests servlet", urlPatterns = "/userRequests")
 @MultipartConfig
-public class userRequestServlet extends HttpServlet {
+public class UserRequestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
@@ -22,7 +22,7 @@ public class userRequestServlet extends HttpServlet {
         Gson gson = new Gson();
 
         try{
-            DtoRequestsInfo dtoRequestsInfo = manager.createDtoRequestsInfoForUser();
+            DtoRequestsInfo dtoRequestsInfo = manager.createDtoRequestsInfoForUser(request.getParameter("username"));
             String jsonResponse = gson.toJson(dtoRequestsInfo);
             try (PrintWriter out = response.getWriter()) {
                 out.print(jsonResponse);
