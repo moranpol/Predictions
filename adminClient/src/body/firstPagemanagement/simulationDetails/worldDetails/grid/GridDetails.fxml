@@ -6,15 +6,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="489.0" stylesheets="@../../../../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPagemanagement.simulationDetails.worldDetails.grid.GridDetailsController">
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="440.0" stylesheets="@../../../../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPagemanagement.simulationDetails.worldDetails.grid.GridDetailsController">
    <children>
-      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="630.0" spacing="10.0">
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" prefWidth="374.0" spacing="10.0">
          <children>
             <Label styleClass="label-title" text="Rows:" />
             <Text fx:id="rowsLabel" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" wrappingWidth="280.0" />
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="630.0" spacing="10.0">
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="153.0" prefWidth="419.0" spacing="10.0">
          <children>
             <Label styleClass="label-title" text="Cols:" />
             <Text fx:id="colsLabel" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" wrappingWidth="341.0" />
