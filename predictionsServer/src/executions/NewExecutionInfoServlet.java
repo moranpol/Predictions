@@ -1,4 +1,4 @@
-package simulationRequests;
+package executions;
 
 import com.google.gson.Gson;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -7,23 +7,22 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import manager.LogicManager;
-import requests.DtoRequestsInfo;
+import newExecution.DtoNewExecution;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "user requests servlet", urlPatterns = "/userRequests")
+@WebServlet(name = "new execution info servlet", urlPatterns = "/newExecutionInfo")
 @MultipartConfig
-public class UserRequestServlet extends HttpServlet {
+public class NewExecutionInfoServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("application/json");
         LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
         Gson gson = new Gson();
 
         try{
-            DtoRequestsInfo dtoRequestsInfo = manager.createDtoRequestsInfoForUser(request.getParameter("username"));
-            String jsonResponse = gson.toJson(dtoRequestsInfo);
+            DtoNewExecution dtoNewExecution = manager.createDtoNewExecution(Integer.parseInt(request.getParameter("request id")));
+            String jsonResponse = gson.toJson(dtoNewExecution);
             try (PrintWriter out = response.getWriter()) {
                 out.print(jsonResponse);
                 out.flush();

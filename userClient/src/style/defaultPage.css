@@ -53,7 +53,7 @@
 /* Style the TableColumns */
 TableColumn {
     -fx-font-size: 16px; /* Font size */
-    -fx-alignment: CENTER_LEFT; /* Center-align column content */
+    -fx-alignment: CENTER; /* Center-align column content */
     -fx-padding: 5px; /* Padding around the Labels */
     -fx-font-weight: bold;/* Bold text */
 }

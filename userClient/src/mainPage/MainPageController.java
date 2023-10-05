@@ -1,12 +1,15 @@
 package mainPage;
 
+import execution.executionStart.ExecutionStartController;
+import execution.newExecution.NewExecutionController;
 import header.HeaderController;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import loginHeader.LoginHeaderController;
+import newExecution.DtoStartExecution;
 import requests.RequestsController;
 import simulationDetails.DetailsController;
 
@@ -31,7 +34,6 @@ public class MainPageController {
 
     public void initialize(){
         loadLoginHeaderController();
-
     }
 
     public void setUserName(String userName) {
@@ -46,8 +48,10 @@ public class MainPageController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/loginHeader/LoginHeader.fxml"));
             Parent login = loader.load();
-            headerPane.getChildren().clear();
-            headerPane.getChildren().add(login);
+            Platform.runLater(() -> {
+                headerPane.getChildren().clear();
+                headerPane.getChildren().add(login);
+            });
 
             LoginHeaderController loginHeaderController = loader.getController();
             loginHeaderController.setter(this);
@@ -59,8 +63,10 @@ public class MainPageController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/header/Header.fxml"));
             Parent header = loader.load();
-            headerPane.getChildren().clear();
-            headerPane.getChildren().add(header);
+            Platform.runLater(() -> {
+                headerPane.getChildren().clear();
+                headerPane.getChildren().add(header);
+            });
 
             headerController = loader.getController();
             headerController.setter(this, userName);
@@ -72,8 +78,10 @@ public class MainPageController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/simulationDetails/Details.fxml"));
             Parent details = loader.load();
-            bodyPane.getChildren().clear();
-            bodyPane.getChildren().add(details);
+            Platform.runLater(() ->{
+                bodyPane.getChildren().clear();
+                bodyPane.getChildren().add(details);
+            });
 
             detailsController = loader.getController();
             detailsController.worldListRefresher();
@@ -85,8 +93,10 @@ public class MainPageController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/requests/Requests.fxml"));
             Parent details = loader.load();
-            bodyPane.getChildren().clear();
-            bodyPane.getChildren().add(details);
+            Platform.runLater(() -> {
+                bodyPane.getChildren().clear();
+                bodyPane.getChildren().add(details);
+            });
 
             requestsController = loader.getController();
             requestsController.setter(this);
@@ -94,5 +104,33 @@ public class MainPageController {
         }
     }
 
+    public void loadNewExecutionController(Integer requestId) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/execution/newExecution/NewExecution.fxml"));
+            Parent newExecution = loader.load();
+            Platform.runLater(() -> {
+                bodyPane.getChildren().clear();
+                bodyPane.getChildren().add(newExecution);
+            });
 
+            NewExecutionController newExecutionController = loader.getController();
+            newExecutionController.setter(this, requestId);
+        } catch (IOException ignored) {
+        }
+    }
+
+    public void loadExecutionStartController(DtoStartExecution dtoStartExecution) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/execution/executionStart/ExecutionStart.fxml"));
+            Parent executionStart = loader.load();
+            Platform.runLater(() -> {
+                bodyPane.getChildren().clear();
+                bodyPane.getChildren().add(executionStart);
+            });
+
+            ExecutionStartController executionStartController = loader.getController();
+            executionStartController.setter(dtoStartExecution);
+        } catch (IOException ignored) {
+        }
+    }
 }

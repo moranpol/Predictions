@@ -5,11 +5,11 @@ import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
 
 import java.util.List;
 
-public class DtoRerunExecution {
+public class DtoStartExecution {
     private final List<DtoEntitiesPopulation> dtoEntitiesPopulationList;
     private final List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList;
 
-    public DtoRerunExecution(List<DtoEntitiesPopulation> dtoEntitiesPopulationList, List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList) {
+    public DtoStartExecution(List<DtoEntitiesPopulation> dtoEntitiesPopulationList, List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList) {
         this.dtoEntitiesPopulationList = dtoEntitiesPopulationList;
         this.dtoEnvironmentInitializeList = dtoEnvironmentInitializeList;
     }

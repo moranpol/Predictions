@@ -10,11 +10,11 @@ import factory.FactoryInstance;
 import helpers.CheckFunctions;
 import helpers.ParseFunctions;
 import jaxb.LoadXml;
-import newExecution.DtoRerunExecution;
+import newExecution.DtoNewExecution;
+import newExecution.DtoStartExecution;
 import newExecution.dtoEntities.DtoEntitiesPopulation;
 import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
 import newExecution.dtoEntities.DtoEntityNames;
-import newExecution.dtoEntities.DtoGrid;
 import newExecution.dtoEnvironment.DtoEnvironment;
 import property.PropertyDefinition;
 import results.*;
@@ -212,7 +212,7 @@ public class WorldManager {
         return dtoEnvironmentInfoList;
     }
 
-    public DtoEntityNames createEntityNameDto(){
+    private DtoEntityNames createEntityNameDto(){
         List<String> entityNames = new ArrayList<>();
 
         for(EntityDefinition entityDefinition : worldDefinition.getEntities().values()){
@@ -222,11 +222,11 @@ public class WorldManager {
         return new DtoEntityNames(entityNames);
     }
 
-    public DtoGrid createGridDto(){
-        return new DtoGrid(worldDefinition.getGrid().getRows(), worldDefinition.getGrid().getCols());
+    public DtoNewExecution createDtoNewExecution(){
+        return new DtoNewExecution(createEntityNameDto(), createDtoEnvironment(), worldDefinition.getGrid().getRows() * worldDefinition.getGrid().getCols());
     }
 
-    public List<DtoEnvironment> createDtoEnvironment(){
+    private List<DtoEnvironment> createDtoEnvironment(){
         List<DtoEnvironment> environmentInfos= new ArrayList<>();
 
         for (PropertyDefinition environment : worldDefinition.getEnvironmentVariables().getProperties().values()){
@@ -241,8 +241,8 @@ public class WorldManager {
         return environmentInfos;
     }
 
-    public DtoRerunExecution createDtoRerunExecution(DtoSimulationChoice simulationId){
-        return new DtoRerunExecution(createDtoEntitiesPopulationList(simulationId), createDtoEnvironmentInitializeList(simulationId));
+    public DtoStartExecution createDtoRerunExecution(DtoSimulationChoice simulationId){
+        return new DtoStartExecution(createDtoEntitiesPopulationList(simulationId), createDtoEnvironmentInitializeList(simulationId));
     }
 
     private List<DtoEnvironmentInitialize> createDtoEnvironmentInitializeList(DtoSimulationChoice simulationId) {

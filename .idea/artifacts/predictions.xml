@@ -5,9 +5,9 @@
       <element id="javaee-facet-resources" facet="predictionsServer/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="javaee-facet-classes" facet="predictionsServer/web/Web" />
-          <element id="module-output" name="logic" />
+          <element id="module-output" name="predictionsServer" />
           <element id="module-output" name="dto" />
+          <element id="module-output" name="logic" />
         </element>
         <element id="directory" name="lib">
           <element id="file-copy" path="$PROJECT_DIR$/predictionsServer/web/WEB-INF/lib/gson-2.8.8.jar" />
