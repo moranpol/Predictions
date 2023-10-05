@@ -11,14 +11,13 @@
    <children>
       <TableView fx:id="tableInfo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#rowTableClicked" prefHeight="400.0" prefWidth="900.0">
         <columns>
-          <TableColumn fx:id="requestIdRow" prefWidth="110.0" styleClass="TableColumn" text="Request id" />
-          <TableColumn fx:id="userNameRow" prefWidth="110.0" styleClass="TableColumn" text="User name" />
-            <TableColumn fx:id="worldNameRow" prefWidth="110.0" styleClass="TableColumn" text="World name" />
-            <TableColumn fx:id="totalAmountRow" prefWidth="110.0" styleClass="TableColumn" text="Total amount" />
-            <TableColumn fx:id="StatusRow" prefWidth="110.0" styleClass="TableColumn" text="Status" />
-            <TableColumn fx:id="termainationRow" prefWidth="110.0" styleClass="TableColumn" text="Termaination" />
-            <TableColumn fx:id="runningRow" prefWidth="110.0" styleClass="TableColumn" text="Running" />
-            <TableColumn fx:id="finishRow" prefWidth="110.0" styleClass="TableColumn" text="Finish" />
+          <TableColumn fx:id="requestIdRow" prefWidth="128.0" styleClass="TableColumn" text="Request id" />
+          <TableColumn fx:id="userNameRow" prefWidth="128.0" styleClass="TableColumn" text="User name" />
+            <TableColumn fx:id="worldNameRow" prefWidth="128.0" styleClass="TableColumn" text="World name" />
+            <TableColumn fx:id="totalAmountRow" prefWidth="128.0" styleClass="TableColumn" text="Total amount" />
+            <TableColumn fx:id="termainationRow" prefWidth="128.0" styleClass="TableColumn" text="Termaination" />
+            <TableColumn fx:id="runningRow" prefWidth="128.0" styleClass="TableColumn" text="Running" />
+            <TableColumn fx:id="finishRow" prefWidth="128.0" styleClass="TableColumn" text="Finish" />
         </columns>
       </TableView>
       <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="1000.0" spacing="20.0">

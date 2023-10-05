@@ -17,11 +17,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import okhttp3.*;
 import refresher.RequestsRefresher;
-import refresher.WorldInfoRefresher;
 import requests.DtoRequestInfo;
 import requests.DtoRequestsInfo;
-
-import java.awt.event.MouseEvent;
+import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -123,6 +121,7 @@ public class AlloctionController {
         RejectButton.setVisible(false);
     }
 
+
     @FXML
     void rowTableClicked(MouseEvent event) {
         if(Objects.equals(StatusRow.getText(), "PENDING")){
@@ -130,6 +129,9 @@ public class AlloctionController {
             RejectButton.setVisible(true);
         }
     }
+
+
+
 
 
     public void initialize(){
@@ -169,6 +171,7 @@ public class AlloctionController {
         });
 
         //checkIfRowsCliecked();
+        refresher();
 
     }
 
@@ -201,5 +204,5 @@ public class AlloctionController {
         timer.schedule(requestsRefresher, 2000, 1);
     }
 
-}
+  }
 
