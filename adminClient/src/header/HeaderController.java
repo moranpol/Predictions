@@ -23,7 +23,7 @@ public class HeaderController {
 
     @FXML
     void allocationsButtonClicked(ActionEvent event) {
-
+        mainPageController.loadAllocationBodyController();
     }
 
     @FXML

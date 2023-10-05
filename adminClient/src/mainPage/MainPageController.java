@@ -38,4 +38,20 @@ public class MainPageController {
         } catch (IOException ignore) {
         }
     }
+
+    public void loadAllocationBodyController(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/body/secondPage/alloction.fxml"));
+            Parent alloction = loader.load();
+            Platform.runLater(() -> {
+                body.getChildren().clear();
+                body.getChildren().add(alloction);
+            });
+            body.layout(); //
+            //ManagementBodyControll managementBodyControll = loader.getController();
+
+        } catch (IOException ignore) {
+            System.out.println(ignore);
+        }
+    }
 }
