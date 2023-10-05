@@ -1,5 +1,5 @@
 package body.firstPagemanagement;
-import ThreadInfoRefresher.ThreadInfoRefresher;
+import refresher.ThreadInfoRefresher;
 import body.firstPagemanagement.simulationDetails.DetailsController;
 import error.ErrorDialog;
 import header.DtoSimulationQueue;
