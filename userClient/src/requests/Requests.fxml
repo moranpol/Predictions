@@ -86,7 +86,7 @@
                               <TableColumn fx:id="runsCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="runs requested" />
                               <TableColumn fx:id="statusCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="status" />
                               <TableColumn fx:id="runningCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="currently running" />
-                              <TableColumn fx:id="endedCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="simulations ended" />
+                              <TableColumn fx:id="endedCol" maxWidth="131.0" minWidth="131.0" prefWidth="131.0" text="simulations ended" />
                           </columns>
                         </TableView>
                      </content>

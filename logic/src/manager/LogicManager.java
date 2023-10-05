@@ -42,6 +42,10 @@ public class LogicManager {
         simulationRequests.addSimulationRequest(dtoNewRequest);
     }
 
+    public void check() {
+        simulationRequests.getRequestList().get(0).setEndedSimulations(1);
+    }
+
     public DtoRequestsInfo createDtoRequestsInfoForUser(String username){
         List<DtoRequestInfo> requestInfoList = new ArrayList<>();
 

@@ -9,7 +9,7 @@ public class Request {
     private final String worldName;
     private final Integer numOfWantedSimulations;
     private final Termination termination;
-    private RequestStatus requestStatus = RequestStatus.PENDING;
+    private RequestStatus requestStatus = RequestStatus.APPROVED;
     private Integer runningSimulations = 0;
     private Integer endedSimulations = 0;
 

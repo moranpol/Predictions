@@ -81,12 +81,16 @@ public class RequestsController implements Closeable {
 
     private Timer timer;
 
+    private ObservableList<DtoRequestInfo> data = FXCollections.observableArrayList();
+
     public void initialize(){
         secondsTermination.setVisible(false);
         secondsSpinner.setVisible(false);
         ticksSpinner.setVisible(false);
         ticksTermination.setVisible(false);
+        submitButton.setDisable(true);
         initializeSpinners();
+        initializeTable();
 
         statusCol.setCellValueFactory(cellData -> {
             SimpleStringProperty property = new SimpleStringProperty();
@@ -120,6 +124,16 @@ public class RequestsController implements Closeable {
         });
     }
 
+    private void initializeTable(){
+        Platform.runLater(() -> {
+            requestsTable.setItems(data);
+            if (data.isEmpty()) {
+                Label emptyLabel = new Label("No requests :(");
+                requestsTable.setPlaceholder(emptyLabel);
+            }
+        });
+    }
+
     public void setter(MainPageController mainPageController) {
         setMainPageController(mainPageController);
         refresher();
@@ -130,48 +144,59 @@ public class RequestsController implements Closeable {
     }
 
     private void initializeSpinners(){
-        secondsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
-        ticksSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
-        simulationCounterSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
+        Platform.runLater(() -> {
+            secondsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
+            ticksSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
+            simulationCounterSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
+        });
     }
 
     @FXML
     void executeButtonClicked(ActionEvent event) {
-
+        String finalUrl = HttpUrl
+                .parse("http://localhost:8080/predictions/check")
+                .newBuilder()
+                .build()
+                .toString();
+        HttpClientUtil.runAsyncGet(finalUrl, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                ErrorDialog.showError(e.getMessage());
+            }
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    ErrorDialog.showError(response.message());
+                }
+            }
+        });
     }
 
     @FXML
     void submitButtonClicked(ActionEvent event) {
-        DtoNewRequest dtoNewRequest = new DtoNewRequest(mainPageController.getUserName(), worldComboBox.getValue(), simulationCounterSpinner.getValue(), createDtoTermination());
         String finalUrl = HttpUrl
                 .parse("http://localhost:8080/predictions/newRequest")
                 .newBuilder()
                 .build()
                 .toString();
 
-//        RequestBody body =
-//                new MultipartBody
-//                        .Builder()
-//                        .
-//                        .build();
+        DtoNewRequest dtoNewRequest = new DtoNewRequest(mainPageController.getUserName(), worldComboBox.getValue(), simulationCounterSpinner.getValue(), createDtoTermination());
+        Gson gson = new Gson();
+        String jsonRequest = gson.toJson(dtoNewRequest);
+        RequestBody body = RequestBody.create(jsonRequest, MediaType.parse("application/json; charset=utf-8"));
 
-//        HttpClientUtil.runAsyncPost(finalUrl, body, new Callback() {
-//            @Override
-//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-//                ErrorDialog.showError(e.getMessage());
-//            }
-//            @Override
-//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-//                if (response.isSuccessful()) {
-//                    Gson gson = new Gson();
-//                    assert response.body() != null;
-//                    DtoRequestsInfo dtoRequestsInfo = gson.fromJson(response.body().charStream(), DtoRequestsInfo.class);
-//
-//                } else{
-//                    ErrorDialog.showError(response.message());
-//                }
-//            }
-//        });
+        HttpClientUtil.runAsyncPost(finalUrl, body, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                ErrorDialog.showError(e.getMessage());
+            }
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    ErrorDialog.showError(response.message());
+                }
+            }
+        });
     }
 
     private DtoTermination createDtoTermination(){
@@ -229,12 +254,18 @@ public class RequestsController implements Closeable {
 
     public void setTable(DtoRequestsInfo requestInfoList){
         Platform.runLater(() -> {
-            ObservableList<DtoRequestInfo> data = FXCollections.observableArrayList(requestInfoList.getRequestList());
-            if (data.isEmpty()) {
-                Label emptyLabel = new Label("No requests :(");
-                requestsTable.setPlaceholder(emptyLabel);
-            } else {
-                requestsTable.setItems(data);
+            for (DtoRequestInfo dtoRequestsInfo : requestInfoList.getRequestList()) {
+                boolean found = false;
+                for (int i = 0; i < data.size(); i++) {
+                    if (data.get(i).getId() == dtoRequestsInfo.getId()) {
+                        data.set(i, dtoRequestsInfo);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    data.add(dtoRequestsInfo);
+                }
             }
         });
     }
