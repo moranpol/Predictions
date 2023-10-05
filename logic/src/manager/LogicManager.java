@@ -5,6 +5,7 @@ import enums.RequestStatus;
 import enums.SimulationMode;
 import exceptions.InvalidNameException;
 import header.DtoSimulationQueue;
+import newExecution.DtoNewExecution;
 import requests.DtoNewRequest;
 import requests.DtoRequestInfo;
 import requests.DtoRequestsInfo;
@@ -43,7 +44,10 @@ public class LogicManager {
     }
 
     public void check() {
-        simulationRequests.getRequestList().get(0).setEndedSimulations(1);
+        for(Request request : simulationRequests.getRequestList())
+        {
+            request.setEndedSimulations(1);
+        }
     }
 
     public DtoRequestsInfo createDtoRequestsInfoForUser(String username){
@@ -101,5 +105,7 @@ public class LogicManager {
 
     }
 
-
+    public DtoNewExecution createDtoNewExecution(Integer requestId){
+        return worldManagerMap.get(simulationRequests.getRequestList().get(requestId).getWorldName()).createDtoNewExecution();
+    }
 }

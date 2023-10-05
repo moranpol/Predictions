@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import mainPage.MainPageController;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +21,7 @@ import refresher.WorldInfoRefresher;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.util.List;
+import java.util.Objects;
 import java.util.Timer;
 
 public class RequestsController implements Closeable {
@@ -81,16 +82,14 @@ public class RequestsController implements Closeable {
 
     private Timer timer;
 
-    private ObservableList<DtoRequestInfo> data = FXCollections.observableArrayList();
-
     public void initialize(){
         secondsTermination.setVisible(false);
         secondsSpinner.setVisible(false);
         ticksSpinner.setVisible(false);
         ticksTermination.setVisible(false);
         submitButton.setDisable(true);
+        executeButton.setDisable(true);
         initializeSpinners();
-        initializeTable();
 
         statusCol.setCellValueFactory(cellData -> {
             SimpleStringProperty property = new SimpleStringProperty();
@@ -124,16 +123,6 @@ public class RequestsController implements Closeable {
         });
     }
 
-    private void initializeTable(){
-        Platform.runLater(() -> {
-            requestsTable.setItems(data);
-            if (data.isEmpty()) {
-                Label emptyLabel = new Label("No requests :(");
-                requestsTable.setPlaceholder(emptyLabel);
-            }
-        });
-    }
-
     public void setter(MainPageController mainPageController) {
         setMainPageController(mainPageController);
         refresher();
@@ -153,23 +142,37 @@ public class RequestsController implements Closeable {
 
     @FXML
     void executeButtonClicked(ActionEvent event) {
-        String finalUrl = HttpUrl
-                .parse("http://localhost:8080/predictions/check")
-                .newBuilder()
-                .build()
-                .toString();
-        HttpClientUtil.runAsyncGet(finalUrl, new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                ErrorDialog.showError(e.getMessage());
-            }
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    ErrorDialog.showError(response.message());
-                }
-            }
-        });
+//        String finalUrl = HttpUrl
+//                .parse("http://localhost:8080/predictions/check")
+//                .newBuilder()
+//                .build()
+//                .toString();
+//        HttpClientUtil.runAsyncGet(finalUrl, new Callback() {
+//            @Override
+//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+//                ErrorDialog.showError(e.getMessage());
+//            }
+//            @Override
+//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+//                if (!response.isSuccessful()) {
+//                    ErrorDialog.showError(response.message());
+//                }
+//            }
+//        });
+
+        mainPageController.loadNewExecutionController(requestsTable.getSelectionModel().getSelectedItem().getId());
+    }
+
+
+
+    @FXML
+    void tableRowClicked(MouseEvent event) {
+        if (requestsTable.getSelectionModel().getSelectedItem() != null){
+            DtoRequestInfo dtoRequestInfo = requestsTable.getSelectionModel().getSelectedItem();
+            executeButton.setDisable(!dtoRequestInfo.getRequestStatus().equals("approved") || dtoRequestInfo.getEndedSimulations() + dtoRequestInfo.getRunningSimulations() >= dtoRequestInfo.getNumOfWantedSimulations());
+        } else{
+            executeButton.setDisable(true);
+        }
     }
 
     @FXML
@@ -191,7 +194,7 @@ public class RequestsController implements Closeable {
                 ErrorDialog.showError(e.getMessage());
             }
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
                 if (!response.isSuccessful()) {
                     ErrorDialog.showError(response.message());
                 }
@@ -254,19 +257,46 @@ public class RequestsController implements Closeable {
 
     public void setTable(DtoRequestsInfo requestInfoList){
         Platform.runLater(() -> {
-            for (DtoRequestInfo dtoRequestsInfo : requestInfoList.getRequestList()) {
-                boolean found = false;
-                for (int i = 0; i < data.size(); i++) {
-                    if (data.get(i).getId() == dtoRequestsInfo.getId()) {
-                        data.set(i, dtoRequestsInfo);
-                        found = true;
+            Integer chosenItemId = null;
+            TableView.TableViewSelectionModel<DtoRequestInfo> selectionModel = null;
+            if (requestsTable.getSelectionModel().getSelectedItem() != null) {
+                chosenItemId = requestsTable.getSelectionModel().getSelectedItem().getId();
+                selectionModel = requestsTable.getSelectionModel();
+            }
+
+            ObservableList<DtoRequestInfo> data = FXCollections.observableArrayList(requestInfoList.getRequestList());
+            requestsTable.setItems(data);
+
+            if (data.isEmpty()) {
+                Label emptyLabel = new Label("No requests :(");
+                requestsTable.setPlaceholder(emptyLabel);
+            }
+
+            if(chosenItemId != null){
+                for (DtoRequestInfo item : data) {
+                    if (Objects.equals(item.getId(), chosenItemId)) {
+                        selectionModel.select(item);
                         break;
                     }
                 }
-                if (!found) {
-                    data.add(dtoRequestsInfo);
-                }
             }
+
+//            for (DtoRequestInfo dtoRequestsInfo : requestInfoList.getRequestList()) {
+//                boolean found = false;
+//                for (int i = 0; i < data.size(); i++) {
+//                    if (Objects.equals(data.get(i).getId(), dtoRequestsInfo.getId())) {
+//                        found = true;
+//                        if(!Objects.equals(data.get(i).getEndedSimulations(), dtoRequestsInfo.getEndedSimulations()) || !Objects.equals(data.get(i).getRunningSimulations(), dtoRequestsInfo.getRunningSimulations())){
+//                            data.set(i, dtoRequestsInfo);
+//                            requestsTable.refresh();
+//                        }
+//                        break;
+//                    }
+//                }
+//                if (!found) {
+//                    data.add(dtoRequestsInfo);
+//                }
+//            }
         });
     }
 
@@ -287,7 +317,7 @@ public class RequestsController implements Closeable {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         worldInfoRefresher.cancel();
         requestsRefresher.cancel();
         timer.cancel();
