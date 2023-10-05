@@ -58,6 +58,15 @@ public class LogicManager {
         return new DtoRequestsInfo(requestInfoList);
     }
 
+    public DtoRequestsInfo createDtoRequestsInfoForManager(){
+        List<DtoRequestInfo> requestInfoList = new ArrayList<>();
+
+        for(Request request : simulationRequests.getRequestList()){
+                requestInfoList.add(createDtoRequestInfo(request));
+        }
+        return new DtoRequestsInfo(requestInfoList);
+    }
+
     private DtoRequestInfo createDtoRequestInfo(Request request) {
         String termination;
         if (request.getTermination().getHuman()){
@@ -98,8 +107,10 @@ public class LogicManager {
 
     public void changeThreadPoolSize(Integer threadNum) {
         executorService.setCorePoolSize(threadNum);
-
     }
 
 
+    public void updateRequestStatus(Integer requestId, String requestStatus) {
+        simulationRequests.getRequestList().get(requestId).setRequestStatus(RequestStatus.valueOf(requestStatus));
+    }
 }

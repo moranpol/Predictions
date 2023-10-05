@@ -1,21 +1,32 @@
-package ThreadInfoServlet;
+package simulationRequests;
 
 import com.google.gson.Gson;
-import details.DtoWorldsList;
-import header.DtoSimulationQueue;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import manager.LogicManager;
+import requests.DtoNewRequest;
+import requests.DtoRequestsInfo;
+
+import java.io.*;
+
+import com.google.gson.Gson;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import manager.LogicManager;
+import requests.DtoRequestsInfo;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "thread info servlet", urlPatterns = "/threadInfo")
+@WebServlet(name = "manager requests servlet", urlPatterns = "/managerRequests")
 @MultipartConfig
-public class ThreadInfoServlet  extends HttpServlet{
+public class ManagerRequestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
@@ -23,8 +34,8 @@ public class ThreadInfoServlet  extends HttpServlet{
         Gson gson = new Gson();
 
         try{
-            DtoSimulationQueue dtoSimulationQueue = manager.createDtoSimulationQueue();
-            String jsonResponse = gson.toJson(dtoSimulationQueue);
+            DtoRequestsInfo dtoRequestsInfo = manager.createDtoRequestsInfoForManager();
+            String jsonResponse = gson.toJson(dtoRequestsInfo);
             try (PrintWriter out = response.getWriter()) {
                 out.print(jsonResponse);
                 out.flush();
@@ -32,14 +43,16 @@ public class ThreadInfoServlet  extends HttpServlet{
         } catch (Exception ignore){
         }
     }
+
     @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/plain;charset=UTF-8");
         LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
 
         try (PrintWriter out = response.getWriter()) {
-            Integer threadNum = Integer.parseInt(request.getParameter("threadNamber")); /// exception
-            manager.changeThreadPoolSize(threadNum);
+            String requestStatus = request.getParameter("requestStatus");
+            Integer requestId = Integer.parseInt(request.getParameter("requestId")); /// exception
+            manager.updateRequestStatus(requestId,requestStatus);
 
         } catch (Exception ignore) {
 

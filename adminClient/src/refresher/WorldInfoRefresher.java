@@ -1,8 +1,7 @@
-package ThreadInfoRefresher;
+package refresher;
 
 import com.google.gson.Gson;
 import details.DtoWorldsList;
-import header.DtoSimulationQueue;
 import http.HttpClientUtil;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -14,17 +13,17 @@ import java.io.IOException;
 import java.util.TimerTask;
 import java.util.function.Consumer;
 
-public class ThreadInfoRefresher extends TimerTask {
-    private final Consumer<DtoSimulationQueue> threadInfoConsumer;
+public class WorldInfoRefresher extends TimerTask {
+    private final Consumer<DtoWorldsList> worldsListConsumer;
 
-    public ThreadInfoRefresher(Consumer<DtoSimulationQueue> threadInfoConsumer) {
-        this.threadInfoConsumer = threadInfoConsumer;
+    public WorldInfoRefresher(Consumer<DtoWorldsList> worldsListConsumer) {
+        this.worldsListConsumer = worldsListConsumer;
     }
 
     @Override
     public void run() {
         String finalUrl = HttpUrl
-                .parse("http://localhost:8080/predictions/threadInfo")
+                .parse("http://localhost:8080/predictions/worldsName")
                 .newBuilder()
                 .build()
                 .toString();
@@ -38,8 +37,8 @@ public class ThreadInfoRefresher extends TimerTask {
                 if (response.isSuccessful()) {
                     Gson gson = new Gson();
                     assert response.body() != null;
-                    DtoSimulationQueue dtoSimulationQueue = gson.fromJson(response.body().charStream(), DtoSimulationQueue.class);
-                    threadInfoConsumer.accept(dtoSimulationQueue);
+                    DtoWorldsList dtoWorldsList = gson.fromJson(response.body().charStream(), DtoWorldsList.class);
+                    worldsListConsumer.accept(dtoWorldsList);
                 }
             }
         });
