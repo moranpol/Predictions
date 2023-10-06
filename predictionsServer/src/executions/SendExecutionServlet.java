@@ -1,4 +1,4 @@
-package simulationRequests;
+package executions;
 
 import com.google.gson.Gson;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -7,17 +7,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import manager.LogicManager;
-import requests.DtoNewRequest;
+import newExecution.DtoStartExecution;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
-@WebServlet(name = "new request servlet", urlPatterns = "/newRequest")
+@WebServlet(name = "send execution servlet", urlPatterns = "/sendExecution")
 @MultipartConfig
-public class NewRequestServlet extends HttpServlet {
+public class SendExecutionServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
             LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
             Gson gson = new Gson();
@@ -30,8 +29,11 @@ public class NewRequestServlet extends HttpServlet {
             }
 
             String json = requestBody.toString();
-            DtoNewRequest dtoNewRequest = gson.fromJson(json, DtoNewRequest.class);
-            manager.createSimulationRequest(dtoNewRequest);
+            DtoStartExecution dtoSendExecution = gson.fromJson(json, DtoStartExecution.class);
+            DtoStartExecution dtoStartExecution = manager.createNewSimulation(dtoSendExecution, Integer.parseInt(request.getParameter("request id")));
+            String jsonResponse = gson.toJson(dtoStartExecution);
+            response.getWriter().print(jsonResponse);
+            response.getWriter().flush();
         } catch (Exception e){
             response.setStatus(HttpServletResponse.SC_CONFLICT);
         }

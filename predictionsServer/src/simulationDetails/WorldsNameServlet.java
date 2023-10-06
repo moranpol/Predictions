@@ -9,25 +9,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import manager.LogicManager;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 @WebServlet (name = "worlds name servlet", urlPatterns = "/worldsName")
 @MultipartConfig
 public class WorldsNameServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("application/json");
-        LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
-        Gson gson = new Gson();
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         try{
+            response.setContentType("application/json");
+            LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
+            Gson gson = new Gson();
+
             DtoWorldsList dtoWorldsList = manager.getDtoWorldsList();
             String jsonResponse = gson.toJson(dtoWorldsList);
-           try (PrintWriter out = response.getWriter()) {
-                out.print(jsonResponse);
-                out.flush();
-           }
+           response.getWriter().print(jsonResponse);
+           response.getWriter().flush();
         } catch (Exception ignore){
         }
     }

@@ -17,6 +17,7 @@ import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
 import newExecution.dtoEntities.DtoEntityNames;
 import newExecution.dtoEnvironment.DtoEnvironment;
 import property.PropertyDefinition;
+import property.PropertyInstance;
 import results.*;
 import results.simulationEnded.*;
 import results.simulations.DtoSimulationInfo;
@@ -168,7 +169,7 @@ public class WorldManager {
 
     private Map<String, DtoEntityInfo> createDtoEntityMap() {
         Map<String, DtoEntityInfo> dtoEntityInfoMap = new HashMap<>();
-        for (EntityDefinition entity : worldDefinition.getEntities().values()) { // null !
+        for (EntityDefinition entity : worldDefinition.getEntities().values()) {
             dtoEntityInfoMap.put(entity.getName() , createDtoEntityMap(entity));
         }
         return dtoEntityInfoMap;
@@ -241,43 +242,44 @@ public class WorldManager {
         return environmentInfos;
     }
 
-    public DtoStartExecution createDtoRerunExecution(DtoSimulationChoice simulationId){
-        return new DtoStartExecution(createDtoEntitiesPopulationList(simulationId), createDtoEnvironmentInitializeList(simulationId));
-    }
+//    public DtoStartExecution createDtoRerunExecution(Integer simulationId){
+//        return new DtoStartExecution(createDtoEntitiesPopulationList(simulationId), createDtoEnvironmentInitializeList(simulationId), simulationCount);
+//    }
 
-    private List<DtoEnvironmentInitialize> createDtoEnvironmentInitializeList(DtoSimulationChoice simulationId) {
+    private List<DtoEnvironmentInitialize> createDtoEnvironmentInitializeList(Integer simulationId) {
         List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList = new ArrayList<>();
 
-        for(PropertyDefinition environment : simulations.get(simulationId.getId()).getWorldDefinition().getEnvironmentVariables().getProperties().values()){
-            if(!environment.isRandomInit()){
-                dtoEnvironmentInitializeList.add(new DtoEnvironmentInitialize(environment.getName(), environment.getValue()));
-            }
+        for(PropertyInstance environment : simulations.get(simulationId).getWorldInstance().getEnvironmentVariables().getProperties().values()){
+                dtoEnvironmentInitializeList.add(new DtoEnvironmentInitialize(environment.getName(), environment.getCurrValue()));
         }
 
         return dtoEnvironmentInitializeList;
     }
 
-    private List<DtoEntitiesPopulation> createDtoEntitiesPopulationList(DtoSimulationChoice simulationId) {
+    private List<DtoEntitiesPopulation> createDtoEntitiesPopulationList(Integer simulationId) {
         List<DtoEntitiesPopulation> dtoEntitiesPopulationList = new ArrayList<>();
 
-        for(EntityDefinition entityDefinition : simulations.get(simulationId.getId()).getWorldDefinition().getEntities().values()){
+        for(EntityDefinition entityDefinition : simulations.get(simulationId).getWorldDefinition().getEntities().values()){
             dtoEntitiesPopulationList.add(new DtoEntitiesPopulation(entityDefinition.getName(), entityDefinition.getPopulation()));
         }
 
         return dtoEntitiesPopulationList;
     }
 
-    public void startSimulation(ThreadPoolExecutor executorService, List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList, List<DtoEntitiesPopulation> dtoEntitiesPopulationList, Termination termination) {
+    public synchronized DtoStartExecution createNewSimulation(DtoStartExecution dtoSendExecution, Termination termination, Integer requestId) {
         WorldDefinition newWorldDefinition = new WorldDefinition(worldDefinition);
-        updateEnvironment(dtoEnvironmentInitializeList, newWorldDefinition);
-        updateEntitiesPopulation(dtoEntitiesPopulationList, newWorldDefinition);
+        updateEnvironment(dtoSendExecution.getDtoEnvironmentInitializeList(), newWorldDefinition);
+        updateEntitiesPopulation(dtoSendExecution.getDtoEntitiesPopulationList(), newWorldDefinition);
         Simulation simulation = new Simulation(simulationCount, FactoryInstance.createWorldInstance(newWorldDefinition), newWorldDefinition, termination);
         simulations.add(simulationCount, simulation);
+        DtoStartExecution dtoStartExecution = new DtoStartExecution(createDtoEntitiesPopulationList(simulationCount), createDtoEnvironmentInitializeList(simulationCount), simulationCount, requestId);
         simulationCount++;
-        simulationRun(executorService, simulation);
+
+        return dtoStartExecution;
     }
 
-    public void simulationRun(ThreadPoolExecutor executorService, Simulation simulation){
+    public void simulationRun(ThreadPoolExecutor executorService, Integer simulationId){
+        Simulation simulation = simulations.get(simulationId);
         executorService.submit(simulation);
     }
 
@@ -294,9 +296,9 @@ public class WorldManager {
         }
     }
 
-    public DtoSimulationEndedDetails createDtoSimulationEndedDetails(DtoSimulationChoice simulationId){
-        Simulation simulation = simulations.get(simulationId.getId());
-        return new DtoSimulationEndedDetails(simulation.getId(), simulation.getStartDateFormat(), createDtoEntityMap(simulation));
+    public DtoSimulationEndedDetails createDtoSimulationEndedDetails(Integer id){
+        Simulation simulation = simulations.get(id);
+        return new DtoSimulationEndedDetails(id, simulation.getStartDateFormat(), createDtoEntityMap(simulation));
     }
 
     private Map<String, DtoSimulationEndedEntity> createDtoEntityMap(Simulation simulation){
@@ -372,8 +374,8 @@ public class WorldManager {
         return simulationDetails;
     }
 
-    public DtoSimulationInfo createDtoSimulationInfo(DtoSimulationChoice simulationId){
-        Simulation simulation = simulations.get(simulationId.getId());
+    public DtoSimulationInfo createDtoSimulationInfo(Integer simulationId){
+        Simulation simulation = simulations.get(simulationId);
         return new DtoSimulationInfo(simulation.getId(), simulation.getSimulationMode().toString().toLowerCase(),
                 simulation.getFailedReason(), simulation.getStartDateFormat(), simulation.getTicks(), simulation.getSeconds(), createDtoSimulationEntityList(simulation));
     }
@@ -413,32 +415,32 @@ public class WorldManager {
         return average / population;
     }
 
-    public void stopSimulation(DtoSimulationChoice simulationChoice) {
-        Simulation simulation = simulations.get(simulationChoice.getId());
+    public void stopSimulation(Integer simulationId) {
+        Simulation simulation = simulations.get(simulationId);
         if(simulation.getSimulationMode() == SimulationMode.PAUSE){
-            simulations.get(simulationChoice.getId()).setSimulationMode(SimulationMode.ENDED);
+            simulations.get(simulationId).setSimulationMode(SimulationMode.ENDED);
             synchronized (simulation){
                 simulation.notify();
             }
         } else{
-            simulations.get(simulationChoice.getId()).setSimulationMode(SimulationMode.ENDED);
+            simulations.get(simulationId).setSimulationMode(SimulationMode.ENDED);
         }
     }
 
-    public void pauseSimulation(DtoSimulationChoice simulationChoice){
-        simulations.get(simulationChoice.getId()).setSimulationMode(SimulationMode.PAUSE);
+    public void pauseSimulation(Integer simulationId){
+        simulations.get(simulationId).setSimulationMode(SimulationMode.PAUSE);
     }
 
-    public void resumeSimulation(DtoSimulationChoice simulationChoice){
-        Simulation simulation = simulations.get(simulationChoice.getId());
+    public void resumeSimulation(Integer simulationId){
+        Simulation simulation = simulations.get(simulationId);
         simulation.setSimulationMode(SimulationMode.RUNNING);
         synchronized (simulation){
             simulation.notify();
         }
     }
 
-    public void futureSimulation(DtoSimulationChoice simulationChoice){
-        Simulation simulation = simulations.get(simulationChoice.getId());
+    public void futureSimulation(Integer simulationId){
+        Simulation simulation = simulations.get(simulationId);
         simulation.setSimulationMode(SimulationMode.FUTURE);
         synchronized (simulation){
             simulation.notify();

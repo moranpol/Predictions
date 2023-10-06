@@ -1,5 +1,8 @@
 package execution.executionStart;
 
+import com.google.gson.Gson;
+import error.ErrorDialog;
+import http.HttpClientUtil;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,10 +13,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import newExecution.DtoNewExecution;
 import newExecution.DtoStartExecution;
 import newExecution.dtoEntities.DtoEntitiesPopulation;
 import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.Response;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ExecutionStartController {
@@ -35,6 +45,10 @@ public class ExecutionStartController {
 
     @FXML
     private TableColumn<DtoEnvironmentInitialize, String> valueCol;
+
+    private Integer simulationId;
+
+    private Integer requestId;
 
     public void initialize(){
         entityNameCol.setCellValueFactory(cellData -> {
@@ -60,6 +74,8 @@ public class ExecutionStartController {
     }
 
     public void setter(DtoStartExecution dtoStartExecution){
+        simulationId = dtoStartExecution.getSimulationId();
+        requestId = dtoStartExecution.getRequestId();
         setEntitiesTable(dtoStartExecution.getDtoEntitiesPopulationList());
         setEnvironmentTable(dtoStartExecution.getDtoEnvironmentInitializeList());
     }
@@ -90,7 +106,27 @@ public class ExecutionStartController {
 
     @FXML
     void startButtonClicked(ActionEvent event) {
+        String finalUrl = HttpUrl
+                .parse("http://localhost:8080/predictions/startExecution")
+                .newBuilder()
+                .addQueryParameter("simulation id", String.valueOf(simulationId))
+                .addQueryParameter("request id", String.valueOf(requestId))
+                .build()
+                .toString();
 
+        HttpClientUtil.runAsyncGet(finalUrl, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                ErrorDialog.showError(e.getMessage());
+            }
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+                if (response.isSuccessful()) {
+                    //todo - load page 4
+                } else{
+                    ErrorDialog.showError(response.message());
+                }
+            }
+        });
     }
-
 }

@@ -8,10 +8,14 @@ import java.util.List;
 public class DtoStartExecution {
     private final List<DtoEntitiesPopulation> dtoEntitiesPopulationList;
     private final List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList;
+    private final Integer simulationId;
+    private final Integer requestId;
 
-    public DtoStartExecution(List<DtoEntitiesPopulation> dtoEntitiesPopulationList, List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList) {
+    public DtoStartExecution(List<DtoEntitiesPopulation> dtoEntitiesPopulationList, List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList, Integer simulationId, Integer requestId) {
         this.dtoEntitiesPopulationList = dtoEntitiesPopulationList;
         this.dtoEnvironmentInitializeList = dtoEnvironmentInitializeList;
+        this.simulationId = simulationId;
+        this.requestId = requestId;
     }
 
     public List<DtoEntitiesPopulation> getDtoEntitiesPopulationList() {
@@ -20,5 +24,13 @@ public class DtoStartExecution {
 
     public List<DtoEnvironmentInitialize> getDtoEnvironmentInitializeList() {
         return dtoEnvironmentInitializeList;
+    }
+
+    public Integer getSimulationId() {
+        return simulationId;
+    }
+
+    public Integer getRequestId() {
+        return requestId;
     }
 }
