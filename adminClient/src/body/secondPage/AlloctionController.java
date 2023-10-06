@@ -1,10 +1,7 @@
 package body.secondPage;
-import alloction.DtoAlloction;
-import details.DtoEnvironmentInfo;
-import error.ErrorDialog;
+import alert.AlertDialog;
 import http.HttpClientUtil;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -21,7 +18,6 @@ import requests.DtoRequestInfo;
 import requests.DtoRequestsInfo;
 import javafx.scene.input.MouseEvent;
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
 
@@ -84,7 +80,7 @@ public class AlloctionController {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if(!response.isSuccessful()) {
-                    ErrorDialog.showError(response.message());
+                    AlertDialog.showError(response.message());
                 }
             }
         });
@@ -113,7 +109,7 @@ public class AlloctionController {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if(!response.isSuccessful()) {
-                    ErrorDialog.showError(response.message());
+                    AlertDialog.showError(response.message());
                 }
             }
         });

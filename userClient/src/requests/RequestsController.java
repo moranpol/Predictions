@@ -2,7 +2,7 @@ package requests;
 
 import com.google.gson.Gson;
 import details.DtoWorldsList;
-import error.ErrorDialog;
+import alert.AlertDialog;
 import http.HttpClientUtil;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -80,6 +80,8 @@ public class RequestsController implements Closeable {
 
     private RequestsRefresher requestsRefresher;
 
+    private ObservableList<DtoRequestInfo> data = FXCollections.observableArrayList();
+
     private Timer timer;
 
     public void initialize(){
@@ -125,7 +127,19 @@ public class RequestsController implements Closeable {
 
     public void setter(MainPageController mainPageController) {
         setMainPageController(mainPageController);
+        initializeTable();
         refresher();
+    }
+
+    private void initializeTable(){
+        requestsTable.setItems(data);
+
+        Platform.runLater(() -> {
+            if (data.isEmpty()) {
+                Label emptyLabel = new Label("No requests :(");
+                requestsTable.setPlaceholder(emptyLabel);
+            }
+        });
     }
 
     private void setMainPageController(MainPageController mainPageController) {
@@ -142,24 +156,6 @@ public class RequestsController implements Closeable {
 
     @FXML
     void executeButtonClicked(ActionEvent event) {
-//        String finalUrl = HttpUrl
-//                .parse("http://localhost:8080/predictions/check")
-//                .newBuilder()
-//                .build()
-//                .toString();
-//        HttpClientUtil.runAsyncGet(finalUrl, new Callback() {
-//            @Override
-//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-//                ErrorDialog.showError(e.getMessage());
-//            }
-//            @Override
-//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-//                if (!response.isSuccessful()) {
-//                    ErrorDialog.showError(response.message());
-//                }
-//            }
-//        });
-
         mainPageController.loadNewExecutionController(requestsTable.getSelectionModel().getSelectedItem().getId());
     }
 
@@ -169,7 +165,7 @@ public class RequestsController implements Closeable {
     void tableRowClicked(MouseEvent event) {
         if (requestsTable.getSelectionModel().getSelectedItem() != null){
             DtoRequestInfo dtoRequestInfo = requestsTable.getSelectionModel().getSelectedItem();
-            executeButton.setDisable(!dtoRequestInfo.getRequestStatus().equals("approved") || dtoRequestInfo.getEndedSimulations() + dtoRequestInfo.getRunningSimulations() >= dtoRequestInfo.getNumOfWantedSimulations());
+            executeButton.setDisable(!dtoRequestInfo.getRequestStatus().equals("approved"));
         } else{
             executeButton.setDisable(true);
         }
@@ -191,12 +187,14 @@ public class RequestsController implements Closeable {
         HttpClientUtil.runAsyncPost(finalUrl, body, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                ErrorDialog.showError(e.getMessage());
+                AlertDialog.showError(e.getMessage());
             }
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) {
                 if (!response.isSuccessful()) {
-                    ErrorDialog.showError(response.message());
+                    AlertDialog.showError(response.message());
+                } else{
+                    AlertDialog.showSuccess("Request sent successfully.");
                 }
             }
         });
@@ -257,46 +255,21 @@ public class RequestsController implements Closeable {
 
     public void setTable(DtoRequestsInfo requestInfoList){
         Platform.runLater(() -> {
-            Integer chosenItemId = null;
-            TableView.TableViewSelectionModel<DtoRequestInfo> selectionModel = null;
-            if (requestsTable.getSelectionModel().getSelectedItem() != null) {
-                chosenItemId = requestsTable.getSelectionModel().getSelectedItem().getId();
-                selectionModel = requestsTable.getSelectionModel();
-            }
-
-            ObservableList<DtoRequestInfo> data = FXCollections.observableArrayList(requestInfoList.getRequestList());
-            requestsTable.setItems(data);
-
-            if (data.isEmpty()) {
-                Label emptyLabel = new Label("No requests :(");
-                requestsTable.setPlaceholder(emptyLabel);
-            }
-
-            if(chosenItemId != null){
-                for (DtoRequestInfo item : data) {
-                    if (Objects.equals(item.getId(), chosenItemId)) {
-                        selectionModel.select(item);
+            for (DtoRequestInfo dtoRequestsInfo : requestInfoList.getRequestList()) {
+                boolean found = false;
+                for (int i = 0; i < data.size(); i++) {
+                    if (Objects.equals(data.get(i).getId(), dtoRequestsInfo.getId())) {
+                        found = true;
+                        if(!Objects.equals(data.get(i).getEndedSimulations(), dtoRequestsInfo.getEndedSimulations()) || !Objects.equals(data.get(i).getRunningSimulations(), dtoRequestsInfo.getRunningSimulations())){
+                            data.set(i, dtoRequestsInfo);
+                        }
                         break;
                     }
                 }
+                if (!found) {
+                    data.add(dtoRequestsInfo);
+                }
             }
-
-//            for (DtoRequestInfo dtoRequestsInfo : requestInfoList.getRequestList()) {
-//                boolean found = false;
-//                for (int i = 0; i < data.size(); i++) {
-//                    if (Objects.equals(data.get(i).getId(), dtoRequestsInfo.getId())) {
-//                        found = true;
-//                        if(!Objects.equals(data.get(i).getEndedSimulations(), dtoRequestsInfo.getEndedSimulations()) || !Objects.equals(data.get(i).getRunningSimulations(), dtoRequestsInfo.getRunningSimulations())){
-//                            data.set(i, dtoRequestsInfo);
-//                            requestsTable.refresh();
-//                        }
-//                        break;
-//                    }
-//                }
-//                if (!found) {
-//                    data.add(dtoRequestsInfo);
-//                }
-//            }
         });
     }
 
@@ -312,8 +285,8 @@ public class RequestsController implements Closeable {
         worldInfoRefresher = new WorldInfoRefresher(this::setWorldCBox);
         requestsRefresher = new RequestsRefresher(this::setTable, mainPageController.getUserName());
         timer = new Timer();
-        timer.schedule(worldInfoRefresher, 2000, 1);
-        timer.schedule(requestsRefresher, 2000, 1);
+        timer.schedule(worldInfoRefresher, 1000, 1000);
+        timer.schedule(requestsRefresher, 1000, 1000);
     }
 
     @Override

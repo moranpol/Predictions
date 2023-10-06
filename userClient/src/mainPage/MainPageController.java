@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import loginHeader.LoginHeaderController;
 import newExecution.DtoStartExecution;
 import requests.RequestsController;
+import results.ResultsController;
 import simulationDetails.DetailsController;
 
 import java.io.IOException;
@@ -129,7 +130,22 @@ public class MainPageController {
             });
 
             ExecutionStartController executionStartController = loader.getController();
-            executionStartController.setter(dtoStartExecution);
+            executionStartController.setter(dtoStartExecution, this);
+        } catch (IOException ignored) {
+        }
+    }
+
+    public void loadResultsController() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/results/Results.fxml"));
+            Parent results = loader.load();
+            Platform.runLater(() -> {
+                bodyPane.getChildren().clear();
+                bodyPane.getChildren().add(results);
+            });
+
+            ResultsController resultsController = loader.getController();
+            resultsController.setter(this);
         } catch (IOException ignored) {
         }
     }

@@ -48,11 +48,13 @@ public class SimulationEntitiesPopulationController {
         populationCountListeners = new LinkedList<>();
     }
 
-    public void setNewExecutionController(NewExecutionController newExecutionController) {
+    public void setter(NewExecutionController newExecutionController, DtoEntityNames dtoEntityNames, Integer maxPopulationSize){
         this.newExecutionController = newExecutionController;
+        setMaxPopulationCount(maxPopulationSize);
+        setEntitiesCount(dtoEntityNames, maxPopulationSize);
     }
 
-    public void setEntitiesCount(DtoEntityNames dtoEntityNames){
+    private void setEntitiesCount(DtoEntityNames dtoEntityNames, Integer maxPopulationSize){
         Platform.runLater(() -> entitiesCount.getChildren().clear());
         for (String name : dtoEntityNames.getEntityNames()){
             try {
@@ -61,7 +63,7 @@ public class SimulationEntitiesPopulationController {
                 Platform.runLater(() -> entitiesCount.getChildren().add(entityCount));
 
                 EntityCountController entityCountController = loader.getController();
-                entityCountController.setter(newExecutionController, name, Integer.parseInt(maxPopulationCountLabel.getText()), this);
+                entityCountController.setter(newExecutionController, name, maxPopulationSize, this);
                 populationCountListeners.add(entityCountController);
                 newExecutionController.addListenerToStartButton(entityCountController);
                 entitiesCounterMap.put(name, entityCountController);
@@ -70,7 +72,7 @@ public class SimulationEntitiesPopulationController {
         }
     }
 
-    public void setMaxPopulationCount(Integer maxPopulationSize) {
+    private void setMaxPopulationCount(Integer maxPopulationSize) {
         Platform.runLater(() -> maxPopulationCountLabel.setText(maxPopulationSize.toString()));
     }
 

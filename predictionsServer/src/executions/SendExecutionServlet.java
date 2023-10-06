@@ -10,13 +10,14 @@ import manager.LogicManager;
 import newExecution.DtoStartExecution;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 @WebServlet(name = "send execution servlet", urlPatterns = "/sendExecution")
 @MultipartConfig
 public class SendExecutionServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
             Gson gson = new Gson();
@@ -35,7 +36,7 @@ public class SendExecutionServlet extends HttpServlet {
             response.getWriter().print(jsonResponse);
             response.getWriter().flush();
         } catch (Exception e){
-            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            response.sendError(HttpServletResponse.SC_CONFLICT, e.getMessage());
         }
     }
 }

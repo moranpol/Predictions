@@ -29,7 +29,8 @@ public class ThreadInfoServlet  extends HttpServlet{
                 out.print(jsonResponse);
                 out.flush();
             }
-        } catch (Exception ignore){
+        } catch (Exception e){
+            response.sendError(HttpServletResponse.SC_BAD_GATEWAY, e.getMessage());
         }
     }
     @Override
@@ -38,11 +39,11 @@ public class ThreadInfoServlet  extends HttpServlet{
         LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
 
         try (PrintWriter out = response.getWriter()) {
-            Integer threadNum = Integer.parseInt(request.getParameter("threadNamber")); /// exception
+            Integer threadNum = Integer.parseInt(request.getParameter("threadNumber")); /// exception
             manager.changeThreadPoolSize(threadNum);
 
-        } catch (Exception ignore) {
-
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_CONFLICT, e.getMessage());
         }
     }
 }

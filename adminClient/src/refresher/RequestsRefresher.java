@@ -1,7 +1,7 @@
 package refresher;
 
 import com.google.gson.Gson;
-import error.ErrorDialog;
+import alert.AlertDialog;
 import http.HttpClientUtil;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -32,7 +32,7 @@ import java.util.function.Consumer;
             HttpClientUtil.runAsyncGet(finalUrl, new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    ErrorDialog.showError(e.getMessage());
+                    AlertDialog.showError(e.getMessage());
                 }
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
@@ -42,7 +42,7 @@ import java.util.function.Consumer;
                         DtoRequestsInfo dtoRequestsInfo = gson.fromJson(response.body().charStream(), DtoRequestsInfo.class);
                         requestsConsumer.accept(dtoRequestsInfo);
                     } else{
-                        ErrorDialog.showError(response.message());
+                        AlertDialog.showError(response.message());
                     }
                 }
             });

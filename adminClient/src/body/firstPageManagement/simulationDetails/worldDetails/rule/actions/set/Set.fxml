@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="vBox" prefHeight="328.0" prefWidth="226.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPageManagement.simulationDetails.worldDetails.rule.actions.set.SetController">
+   <children>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="226.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-text-variable" text="Name:" />
+            <Text fx:id="nameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="168.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="226.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-text-variable" text="Main Entity Name:" />
+            <Text fx:id="mainEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="112.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="226.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-text-variable" text="Secondary Entity Name:" />
+            <Text fx:id="secondaryEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="82.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="226.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-text-variable" text="Property:" />
+            <Text fx:id="propertyVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="150.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="226.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-text-variable" text="Value:" />
+            <Text fx:id="valueVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="163.0" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

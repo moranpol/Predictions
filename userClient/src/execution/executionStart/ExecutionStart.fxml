@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox alignment="CENTER" fillWidth="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" spacing="10.0" styleClass="bodyPanes" stylesheets="@../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="execution.executionStart.ExecutionStartController">
    <children>
       <Label styleClass="topLabels" text="Entities population" />

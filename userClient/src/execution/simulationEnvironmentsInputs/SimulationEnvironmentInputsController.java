@@ -31,11 +31,12 @@ public class SimulationEnvironmentInputsController {
     @FXML
     private Label titleLabel;
 
-    public void setNewExecutionController(NewExecutionController newExecutionController) {
+    public void setter(NewExecutionController newExecutionController, List<DtoEnvironment> environments){
         this.newExecutionController = newExecutionController;
+        setEnvironmentInputs(environments);
     }
 
-    public void setEnvironmentInputs(List<DtoEnvironment> environments){
+    private void setEnvironmentInputs(List<DtoEnvironment> environments){
         Platform.runLater(() -> environmentInputsVBox.getChildren().clear());
         for(DtoEnvironment environment : environments){
             switch (environment.getType()){

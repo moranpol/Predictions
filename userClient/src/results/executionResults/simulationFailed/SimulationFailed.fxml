@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="results.executionResults.simulationFailed.SimulationFailedController">
+   <content>
+      <VBox id="failedVBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="800.0" spacing="5.0">
+         <children>
+            <Label fx:id="simulationLabel" styleClass="simulationIdLabels" text="Label" />
+            <Label fx:id="simulationStartTime" styleClass="simulationIdLabels" text="Label" />
+            <HBox>
+               <children>
+                  <Label alignment="TOP_LEFT" styleClass="errorLabels" text="Error - " />
+                  <Label fx:id="simulationError" alignment="TOP_LEFT" styleClass="errorLabels" text="Label" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </VBox>
+   </content>
+</ScrollPane>

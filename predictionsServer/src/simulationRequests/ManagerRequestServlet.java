@@ -29,33 +29,29 @@ import java.io.PrintWriter;
 public class ManagerRequestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("application/json");
-        LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
-        Gson gson = new Gson();
-
         try{
+            response.setContentType("application/json");
+            LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
+            Gson gson = new Gson();
             DtoRequestsInfo dtoRequestsInfo = manager.createDtoRequestsInfoForManager();
             String jsonResponse = gson.toJson(dtoRequestsInfo);
-            try (PrintWriter out = response.getWriter()) {
-                out.print(jsonResponse);
-                out.flush();
-            }
-        } catch (Exception ignore){
+            response.getWriter().print(jsonResponse);
+            response.getWriter().flush();
+        } catch (Exception e){
+            response.sendError(HttpServletResponse.SC_BAD_GATEWAY, e.getMessage());
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/plain;charset=UTF-8");
-        LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
-
-        try (PrintWriter out = response.getWriter()) {
+        try {
+            response.setContentType("text/plain;charset=UTF-8");
+            LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
             String requestStatus = request.getParameter("requestStatus");
             Integer requestId = Integer.parseInt(request.getParameter("requestId")); /// exception
             manager.updateRequestStatus(requestId,requestStatus);
-
-        } catch (Exception ignore) {
-
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_CONFLICT, e.getMessage());
         }
     }
 }

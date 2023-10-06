@@ -1,6 +1,5 @@
 package mainPage;
 
-import body.firstPagemanagement.ManagementBodyControll;
 import header.HeaderController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -26,7 +25,7 @@ public class MainPageController {
 
     public void loadManagementBodyController(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/body/firstPagemanagement/managementBody.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/body/firstPageManagement/managementBody.fxml"));
             Parent management = loader.load();
             Platform.runLater(() -> {
                 body.getChildren().clear();

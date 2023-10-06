@@ -1,6 +1,6 @@
 package loginHeader;
 
-import error.ErrorDialog;
+import alert.AlertDialog;
 import http.HttpClientUtil;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -34,7 +34,7 @@ public class LoginHeaderController {
     void loginButtonClicked(ActionEvent event) {
         String userName = userNameTextField.getText();
         if (userName.isEmpty()) {
-            ErrorDialog.showError("User name is empty. You can't login with empty user name");
+            AlertDialog.showError("User name is empty. You can't login with empty user name");
             return;
         }
 
@@ -48,7 +48,7 @@ public class LoginHeaderController {
         HttpClientUtil.runAsyncGet(finalUrl, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Platform.runLater(() -> ErrorDialog.showError("Something went wrong: " + e.getMessage()));
+                Platform.runLater(() -> AlertDialog.showError("Something went wrong: " + e.getMessage()));
             }
 
             @Override
@@ -56,7 +56,7 @@ public class LoginHeaderController {
                 if (response.code() != 200) {
                     String responseBody = response.body().string();
                     Platform.runLater(() ->
-                            ErrorDialog.showError("Something went wrong: " + responseBody)
+                            AlertDialog.showError("Something went wrong: " + responseBody)
                     );
                 } else {
                     Platform.runLater(() -> {

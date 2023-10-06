@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" fillWidth="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="440.0" spacing="10.0" styleClass="bodyPanes" stylesheets="@../../../../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPageManagement.simulationDetails.worldDetails.entity.EntityDetailsController">
+   <children>
+      <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="387.0" spacing="10.0">
+         <children>
+            <Label styleClass="label-title" text="Name:" />
+            <Text fx:id="nameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" wrappingWidth="283.0" />
+         </children>
+         <VBox.margin>
+            <Insets left="15.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="406.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="96.0" styleClass="label-title" text="Properties:">
+               <HBox.margin>
+                  <Insets right="250.0" />
+               </HBox.margin></Label>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <ScrollPane>
+         <content>
+            <TableView fx:id="propertiesTableView" prefHeight="168.0" prefWidth="410.0">
+              <columns>
+                  <TableColumn fx:id="nameCol" maxWidth="180.0" minWidth="63.33336126804352" prefWidth="76.0" text="Name" />
+                <TableColumn fx:id="typeCol" maxWidth="216.66665649414062" minWidth="71.0" prefWidth="71.0" text="Type" />
+                <TableColumn fx:id="fromCol" maxWidth="221.99996948242188" minWidth="56.0" prefWidth="85.0" text="Range - from" />
+                  <TableColumn fx:id="toCol" maxWidth="265.99993896484375" minWidth="69.33328247070312" prefWidth="71.0" text="Range - to" />
+                  <TableColumn fx:id="randomCol" maxWidth="281.3333435058594" minWidth="113.99990844726562" prefWidth="141.0" text="Is random initialize" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+   </children>
+   <padding>
+      <Insets left="10.0" right="10.0" />
+   </padding>
+</VBox>

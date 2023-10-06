@@ -9,11 +9,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import manager.LogicManager;
 
+import java.io.IOException;
+
 @WebServlet (name = "worlds name servlet", urlPatterns = "/worldsName")
 @MultipartConfig
 public class WorldsNameServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try{
             response.setContentType("application/json");
             LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
@@ -23,7 +25,8 @@ public class WorldsNameServlet extends HttpServlet {
             String jsonResponse = gson.toJson(dtoWorldsList);
            response.getWriter().print(jsonResponse);
            response.getWriter().flush();
-        } catch (Exception ignore){
+        } catch (Exception e){
+            response.sendError(HttpServletResponse.SC_BAD_GATEWAY, e.getMessage());
         }
     }
 }
