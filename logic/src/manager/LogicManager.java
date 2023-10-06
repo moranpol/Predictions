@@ -6,6 +6,7 @@ import enums.SimulationMode;
 import exceptions.InvalidNameException;
 import header.DtoSimulationQueue;
 import newExecution.DtoNewExecution;
+import newExecution.DtoStartExecution;
 import requests.DtoNewRequest;
 import requests.DtoRequestInfo;
 import requests.DtoRequestsInfo;
@@ -41,13 +42,6 @@ public class LogicManager {
 
     public void createSimulationRequest(DtoNewRequest dtoNewRequest){
         simulationRequests.addSimulationRequest(dtoNewRequest);
-    }
-
-    public void check() {
-        for(Request request : simulationRequests.getRequestList())
-        {
-            request.setEndedSimulations(1);
-        }
     }
 
     public DtoRequestsInfo createDtoRequestsInfoForUser(String username){
@@ -113,13 +107,22 @@ public class LogicManager {
         executorService.setCorePoolSize(threadNum);
     }
 
-
     public DtoNewExecution createDtoNewExecution(Integer requestId){
         return worldManagerMap.get(simulationRequests.getRequestList().get(requestId).getWorldName()).createDtoNewExecution();
     }
 
-
     public void updateRequestStatus(Integer requestId, String requestStatus) {
         simulationRequests.getRequestList().get(requestId).setRequestStatus(RequestStatus.valueOf(requestStatus));
+    }
+
+    public DtoStartExecution createNewSimulation(DtoStartExecution dtoSendExecution, Integer requestId) {
+        Request request = simulationRequests.getRequestList().get(requestId);
+        return worldManagerMap.get(request.getWorldName()).createNewSimulation(dtoSendExecution, request.getTermination(), requestId);
+    }
+
+    public void startSimulation(Integer simulationId, Integer requestId) {
+        Request request = simulationRequests.getRequestList().get(requestId);
+        worldManagerMap.get(request.getWorldName()).simulationRun(executorService, simulationId);
+        request.setRunningSimulations(request.getRunningSimulations() - 1);
     }
 }

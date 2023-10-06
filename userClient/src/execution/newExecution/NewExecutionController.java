@@ -15,10 +15,7 @@ import newExecution.DtoNewExecution;
 import newExecution.DtoStartExecution;
 import newExecution.dtoEntities.DtoEntitiesPopulation;
 import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.HttpUrl;
-import okhttp3.Response;
+import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -122,7 +119,34 @@ public class NewExecutionController {
         for (SendButtonListener listener : startNewExecutionListeners){
             listener.sendOnClicked();
         }
-        //pageController.sendSimulation(dtoEnvironmentInitializeList, dtoEntitiesPopulationList);
+
+        String finalUrl = HttpUrl
+                .parse("http://localhost:8080/predictions/sendExecution")
+                .newBuilder()
+                .addQueryParameter("request id", requestId.toString())
+                .build()
+                .toString();
+
+        Gson gson = new Gson();
+        DtoStartExecution dtoSendExecution = new DtoStartExecution(dtoEntitiesPopulationList, dtoEnvironmentInitializeList, null, null);
+        String jsonRequest = gson.toJson(dtoSendExecution);
+        RequestBody body = RequestBody.create(jsonRequest, MediaType.parse("application/json; charset=utf-8"));
+
+        HttpClientUtil.runAsyncPost(finalUrl, body, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                ErrorDialog.showError(e.getMessage());
+            }
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+                if (response.isSuccessful()) {
+                    DtoStartExecution dtoStartExecution = gson.fromJson(response.body().charStream(), DtoStartExecution.class);
+                    mainPageController.loadExecutionStartController(dtoStartExecution);
+                } else {
+                    ErrorDialog.showError(response.message());
+                }
+            }
+        });
     }
 
     public void addListenerToStartButton(SendButtonListener listener) {

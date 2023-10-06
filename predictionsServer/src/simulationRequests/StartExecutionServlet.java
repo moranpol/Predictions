@@ -1,27 +1,21 @@
 package simulationRequests;
 
-import com.google.gson.Gson;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import manager.LogicManager;
-import requests.DtoRequestsInfo;
 
-@WebServlet(name = "user requests servlet", urlPatterns = "/userRequests")
+@WebServlet(name = "start execution servlet", urlPatterns = "/startExecution")
 @MultipartConfig
-public class UserRequestServlet extends HttpServlet {
+public class StartExecutionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         try{
-            response.setContentType("application/json");
             LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
-            Gson gson = new Gson();
-            DtoRequestsInfo dtoRequestsInfo = manager.createDtoRequestsInfoForUser(request.getParameter("username"));
-            String jsonResponse = gson.toJson(dtoRequestsInfo);
-            response.getWriter().print(jsonResponse);
-            response.getWriter().flush();
+            manager.startSimulation(Integer.parseInt(request.getParameter("simulation id")), Integer.parseInt(request.getParameter("request id")));
+
         } catch (Exception e){
             response.setStatus(HttpServletResponse.SC_BAD_GATEWAY);
         }

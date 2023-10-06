@@ -11,6 +11,7 @@ import java.io.IOException;
 
 @WebServlet(name = "login servlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         String usernameFromSession = SessionUtils.getUsername(request);
