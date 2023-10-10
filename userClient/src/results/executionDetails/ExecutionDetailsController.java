@@ -1,5 +1,8 @@
 package results.executionDetails;
 
+import alert.AlertDialog;
+import com.google.gson.Gson;
+import http.HttpClientUtil;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,10 +15,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
-import mainPage.MainPageController;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.Response;
+import org.jetbrains.annotations.NotNull;
 import refresher.ExecutionDetailsRefresher;
 import results.simulationRunningDetails.DtoSimulationRunningDetails;
-import results.simulations.DtoSimulationInfo;
 import results.simulationRunningDetails.DtoSimulationEntity;
 import results.ResultsController;
 import results.executionDetails.buttons.RerunController;
@@ -49,7 +55,7 @@ public class ExecutionDetailsController implements Closeable {
     @FXML
     private TableColumn<DtoSimulationEntity, String> entityNameCol;
 
-    private RerunController rerunController;
+    //private RerunController rerunController;
 
     private RunningController runningController;
 
@@ -97,28 +103,33 @@ public class ExecutionDetailsController implements Closeable {
         this.requestId = requestId;
         this.resultsController = resultsController;
         setSimulationLabel();
-        refresher();
-        initializeButtonsVBox(simulationMode);
-        setButtonsVBox(simulationMode);
+        loadRunningController(simulationMode);
+        refresher ();
+
+        //initializeButtonsVBox(simulationMode);
     }
 
     public void setController(DtoSimulationRunningDetails dtoSimulationRunningDetails){
         setLabels(dtoSimulationRunningDetails.getSeconds(), dtoSimulationRunningDetails.getTicks());
         setTable(dtoSimulationRunningDetails.getSimulationEntities());
-        setButtonsVBox(dtoSimulationRunningDetails.getSimulationMode());
+        setResultsVBox(dtoSimulationRunningDetails.getSimulationMode());
     }
 
-    public void initializeButtonsVBox(String simulationMode){
-        if(simulationMode.equals("running") || simulationMode.equals("pause")){
-            loadRunningController(simulationMode);
-        } else{
-            loadRerunController();
-        }
-    }
+//    public void initializeButtonsVBox(String simulationMode){
+//        if(simulationMode.equals("running") || simulationMode.equals("paused")){
+//            loadRunningController(simulationMode);
+//        } else{
+//            loadRerunController();
+//            loadDetailsOnce();
+//        }
+//    }
 
-    public void setButtonsVBox(String simulationMode){
+    public void setResultsVBox(String simulationMode){
         if(simulationMode.equals("failed") || simulationMode.equals("ended")){
-            loadRerunController();
+            //loadRerunController();
+            close();
+            resultsController.updateExecutionResults(simulationId, requestId, simulationMode);
+            runningController.setButtons(simulationMode);
         }
     }
 
@@ -138,21 +149,21 @@ public class ExecutionDetailsController implements Closeable {
         }
     }
 
-    private void loadRerunController(){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/results/executionDetails/buttons/Rerun.fxml"));
-            Parent rerun = loader.load();
-            Platform.runLater(() -> {
-                buttonsVBox.getChildren().clear();
-                buttonsVBox.getChildren().add(rerun);
-            });
-
-            rerunController = loader.getController();
-            rerunController.setter(requestId, simulationId);
-        }
-        catch (IOException ignored) {
-        }
-    }
+//    private void loadRerunController(){
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/results/executionDetails/buttons/Rerun.fxml"));
+//            Parent rerun = loader.load();
+//            Platform.runLater(() -> {
+//                buttonsVBox.getChildren().clear();
+//                buttonsVBox.getChildren().add(rerun);
+//            });
+//
+//            rerunController = loader.getController();
+//            rerunController.setter(requestId, simulationId);
+//        }
+//        catch (IOException ignored) {
+//        }
+//    }
 
     public void setLabels(Integer seconds, Integer ticks){
         setSecondsCount(seconds);
@@ -174,12 +185,16 @@ public class ExecutionDetailsController implements Closeable {
     public void refresher() {
         executionDetailsRefresher = new ExecutionDetailsRefresher(this::setController, simulationId, requestId);
         timer = new Timer();
-        timer.schedule(executionDetailsRefresher, 1000, 1000);
+        timer.schedule(executionDetailsRefresher, 1, 1000);
     }
 
     @Override
     public void close() {
-        executionDetailsRefresher.cancel();
-        timer.cancel();
+        if(executionDetailsRefresher != null){
+            executionDetailsRefresher.cancel();
+        }
+        if(timer != null) {
+            timer.cancel();
+        }
     }
 }

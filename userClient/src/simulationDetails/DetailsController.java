@@ -97,11 +97,11 @@ public class DetailsController implements Closeable {
     public void worldListRefresher() {
         worldInfoRefresher = new WorldInfoRefresher(this::setWorldCBox);
         timer = new Timer();
-        timer.schedule(worldInfoRefresher, 1000, 1000);
+        timer.schedule(worldInfoRefresher, 1, 1000);
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         timer.cancel();
         worldInfoRefresher.cancel();
     }

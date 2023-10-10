@@ -23,7 +23,6 @@ import results.simulationFailed.DtoSimulationFailedDetails;
 import results.simulationRunningDetails.DtoSimulationRunningDetails;
 import results.simulations.DtoSimulationInfo;
 import results.simulationRunningDetails.DtoSimulationEntity;
-import results.simulations.DtoSimulationsInfoList;
 import rule.Activation;
 import rule.Rule;
 import rule.action.*;
@@ -42,18 +41,18 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class WorldManager {
     private String worldName;
     private WorldDefinition worldDefinition;
-    private final List<Simulation> simulations;
-    private Integer simulationCount = 0;
+    private final Map<Integer, Simulation> simulations;
+
 
     public WorldManager() {
-        simulations = new ArrayList<>();
+        simulations = new HashMap<>();
     }
 
     public String getWorldName() {
         return worldName;
     }
 
-    public List<Simulation> getSimulations() {
+    public Map<Integer, Simulation> getSimulations() {
         return simulations;
     }
 
@@ -61,7 +60,6 @@ public class WorldManager {
         LoadXml loadXml = new LoadXml();
         worldDefinition = loadXml.loadAndValidateXml(xmlFile);
         worldName = loadXml.getPrdWorld().getName();
-        simulationCount = 0;
     }
 
     private List<DtoProperty> createDtoEntityPropertyList(Map<String, PropertyDefinition> propertyDefinitionMap) {
@@ -208,7 +206,7 @@ public class WorldManager {
                 dtoEnvironmentInfoList.add(new DtoEnvironmentInfo(environment.getName(), environment.getType().toString().toLowerCase(),
                         environment.getRange().getFrom(), environment.getRange().getTo()));
             } else{
-                dtoEnvironmentInfoList.add(new DtoEnvironmentInfo(environment.getName(), environment.getType().toString().toLowerCase(), 0.0, 0.0));
+                dtoEnvironmentInfoList.add(new DtoEnvironmentInfo(environment.getName(), environment.getType().toString().toLowerCase(), null, null));
             }
         }
 
@@ -244,10 +242,6 @@ public class WorldManager {
         return environmentInfos;
     }
 
-//    public DtoStartExecution createDtoRerunExecution(Integer simulationId){
-//        return new DtoStartExecution(createDtoEntitiesPopulationList(simulationId), createDtoEnvironmentInitializeList(simulationId), simulationCount);
-//    }
-
     private List<DtoEnvironmentInitialize> createDtoEnvironmentInitializeList(Integer simulationId) {
         List<DtoEnvironmentInitialize> dtoEnvironmentInitializeList = new ArrayList<>();
 
@@ -268,16 +262,14 @@ public class WorldManager {
         return dtoEntitiesPopulationList;
     }
 
-    public synchronized DtoStartExecution createNewSimulation(DtoStartExecution dtoSendExecution, Request request) {
+    public synchronized DtoStartExecution createNewSimulation(DtoStartExecution dtoSendExecution, Request request, Integer simulationCount) {
         WorldDefinition newWorldDefinition = new WorldDefinition(worldDefinition);
         updateEnvironment(dtoSendExecution.getDtoEnvironmentInitializeList(), newWorldDefinition);
         updateEntitiesPopulation(dtoSendExecution.getDtoEntitiesPopulationList(), newWorldDefinition);
         Simulation simulation = new Simulation(simulationCount, FactoryInstance.createWorldInstance(newWorldDefinition), newWorldDefinition, request.getTermination(), request);
-        simulations.add(simulationCount, simulation);
-        DtoStartExecution dtoStartExecution = createDtoStartExecution(simulationCount, request.getId());
-        simulationCount++;
+        simulations.put(simulationCount, simulation);
 
-        return dtoStartExecution;
+        return createDtoStartExecution(simulationCount, request.getId());
     }
 
     public DtoStartExecution createDtoStartExecution(Integer simulationId, Integer requestId){
@@ -412,7 +404,7 @@ public class WorldManager {
 
     public void stopSimulation(Integer simulationId) {
         Simulation simulation = simulations.get(simulationId);
-        if(simulation.getSimulationMode() == SimulationMode.PAUSE){
+        if(simulation.getSimulationMode() == SimulationMode.PAUSED){
             simulations.get(simulationId).setSimulationMode(SimulationMode.ENDED);
             synchronized (simulation){
                 simulation.notify();
@@ -423,7 +415,7 @@ public class WorldManager {
     }
 
     public void pauseSimulation(Integer simulationId){
-        simulations.get(simulationId).setSimulationMode(SimulationMode.PAUSE);
+        simulations.get(simulationId).setSimulationMode(SimulationMode.PAUSED);
     }
 
     public void resumeSimulation(Integer simulationId){

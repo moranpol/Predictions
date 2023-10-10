@@ -4,7 +4,6 @@ import entity.EntityDefinition;
 import environment.EnvironmentDefinition;
 import grid.Grid;
 import rule.Rule;
-import termination.Termination;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -16,12 +15,14 @@ public class WorldDefinition implements Serializable {
     private final Map<String, EntityDefinition> entities;
     private final List<Rule> rules;
     private final Grid grid;
+    private final Integer sleep;
 
-    public WorldDefinition(EnvironmentDefinition environmentVariables, Map<String, EntityDefinition> entities, List<Rule> rules, Grid grid) {
+    public WorldDefinition(EnvironmentDefinition environmentVariables, Map<String, EntityDefinition> entities, List<Rule> rules, Grid grid, Integer sleep) {
         this.environmentVariables = environmentVariables;
         this.entities = entities;
         this.rules = rules;
         this.grid = grid;
+        this.sleep = sleep;
     }
 
     public WorldDefinition(WorldDefinition otherWorldDefinition){
@@ -32,6 +33,7 @@ public class WorldDefinition implements Serializable {
         }
         this.rules = otherWorldDefinition.getRules();
         this.grid = otherWorldDefinition.getGrid();
+        this.sleep = otherWorldDefinition.getSleep();
     }
 
     public EnvironmentDefinition getEnvironmentVariables() {
@@ -48,5 +50,9 @@ public class WorldDefinition implements Serializable {
 
     public Grid getGrid() {
         return grid;
+    }
+
+    public Integer getSleep() {
+        return sleep;
     }
 }

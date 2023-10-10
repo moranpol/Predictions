@@ -219,7 +219,7 @@ public class RuleDetailsController {
 
     private void createDecreaseActionToShow(DtoAction dtoAction) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/simulationDetails/worldDetails/rule/actions/decrease/Decrease.fxmll"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/simulationDetails/worldDetails/rule/actions/decrease/Decrease.fxml"));
             Parent decreaseInfo  = loader.load();
             Platform.runLater(() -> {
                 actionVBox.getChildren().clear();

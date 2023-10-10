@@ -35,7 +35,7 @@ import java.util.function.Consumer;
                     AlertDialog.showError(e.getMessage());
                 }
                 @Override
-                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                public void onResponse(@NotNull Call call, @NotNull Response response) {
                     if (response.isSuccessful()) {
                         Gson gson = new Gson();
                         assert response.body() != null;

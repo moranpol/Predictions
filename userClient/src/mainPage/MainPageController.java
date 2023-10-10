@@ -137,6 +137,7 @@ public class MainPageController {
 
     public void loadResultsController() {
         try {
+            headerController.setResultsButton();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/results/Results.fxml"));
             Parent results = loader.load();
             Platform.runLater(() -> {

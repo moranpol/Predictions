@@ -37,7 +37,7 @@ public class ExecutionListController implements Closeable {
                     executionList.add("(Running) simulation id: " + simulation.getSimulationId() + " request id: " + simulation.getRequestId());
                 } else if(simulation.getSimulationMode().equals("failed")){
                     executionList.add("(Failed) simulation id: " + simulation.getSimulationId() + " request id: " + simulation.getRequestId());
-                } else if(simulation.getSimulationMode().equals("pause")){
+                } else if(simulation.getSimulationMode().equals("paused")){
                     executionList.add("(Paused) simulation id: " + simulation.getSimulationId() + " request id: " + simulation.getRequestId());
                 } else{
                     executionList.add("(Ended) simulation id: " + simulation.getSimulationId() + " request id: " + simulation.getRequestId());
@@ -64,7 +64,7 @@ public class ExecutionListController implements Closeable {
     private void refresher() {
         simulationsInfoRefresher = new SimulationsInfoRefresher(resultsController.getMainPageController().getUserName(), this::setExecutionListView);
         timer = new Timer();
-        timer.schedule(simulationsInfoRefresher, 1000, 1000);
+        timer.schedule(simulationsInfoRefresher, 1, 1000);
     }
 
     @Override

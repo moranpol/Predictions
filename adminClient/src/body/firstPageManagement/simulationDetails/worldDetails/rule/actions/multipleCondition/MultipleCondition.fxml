@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="vBox" prefHeight="328.0" prefWidth="226.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPageManagement.simulationDetails.worldDetails.rule.actions.multipleCondition.MultipleConditionController">
+<VBox fx:id="vBox" prefHeight="435.0" prefWidth="270.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPageManagement.simulationDetails.worldDetails.rule.actions.multipleCondition.MultipleConditionController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="226.0" spacing="10.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="87.0" prefWidth="250.0" spacing="10.0">
          <children>
             <Label styleClass="action-text-variable" text="Name:" />
             <Text fx:id="nameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" text="Text" wrappingWidth="156.28271484375" />
@@ -17,34 +17,34 @@
             <Insets left="5.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="226.0" spacing="10.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="87.0" prefWidth="250.0" spacing="10.0">
          <children>
             <Label styleClass="action-text-variable" text="Main Entity Name:" />
-            <Text fx:id="mainEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" text="Text" wrappingWidth="144.28271484375" />
+            <Text fx:id="mainEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" text="Text" wrappingWidth="109.28271484375" />
          </children>
          <padding>
             <Insets left="5.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="226.0" spacing="10.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="87.0" prefWidth="250.0" spacing="10.0">
          <children>
             <Label styleClass="action-text-variable" text="Secondary Entity Name:" />
-            <Text fx:id="secondaryEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" text="Text" wrappingWidth="118.28271484375" />
+            <Text fx:id="secondaryEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" text="Text" wrappingWidth="80.28271484375" />
          </children>
          <padding>
             <Insets left="5.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="226.0" spacing="10.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="87.0" prefWidth="250.0" spacing="10.0">
          <children>
             <Label styleClass="action-text-variable" text="Conditions Amount:" />
-            <Text fx:id="conditionsAmountVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" text="Text" wrappingWidth="129.28271484375" />
+            <Text fx:id="conditionsAmountVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" text="Text" wrappingWidth="111.28271484375" />
          </children>
          <padding>
             <Insets left="5.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="226.0" spacing="10.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="87.0" prefWidth="250.0" spacing="10.0">
          <children>
             <Label styleClass="action-text-variable" text="Logic:" />
             <Text fx:id="logicVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" text="Text" wrappingWidth="165.28271484375" />
@@ -54,4 +54,7 @@
          </padding>
       </HBox>
    </children>
+   <padding>
+      <Insets left="10.0" right="10.0" />
+   </padding>
 </VBox>

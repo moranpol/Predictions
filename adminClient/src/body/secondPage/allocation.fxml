@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="1000.0" spacing="10.0" stylesheets="@../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.secondPage.AllocationController">
+   <children>
+      <Label styleClass="label-title" text="Allocations" />
+      <TableView fx:id="tableInfo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#rowTableClicked" prefHeight="450.0" prefWidth="900.0">
+        <columns>
+          <TableColumn fx:id="requestIdRow" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Request id" />
+          <TableColumn fx:id="userNameRow" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" text="User name" />
+            <TableColumn fx:id="worldNameRow" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="World name" />
+            <TableColumn fx:id="totalAmountRow" maxWidth="135.0" minWidth="135.0" prefWidth="135.0" text="Simulations amount" />
+            <TableColumn fx:id="statusRow" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Status" />
+            <TableColumn fx:id="terminationRow" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" text="Termination" />
+            <TableColumn fx:id="runningRow" maxWidth="80.0" minWidth="80.0" text="Running" />
+            <TableColumn fx:id="finishRow" maxWidth="80.0" minWidth="80.0" text="Finish" />
+        </columns>
+      </TableView>
+      <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="900.0" spacing="20.0">
+         <children>
+            <Button fx:id="approveButton" mnemonicParsing="false" onAction="#approveButtonClicked" prefHeight="30.0" prefWidth="100.0" styleClass="button-show" text="Approve" />
+            <Button fx:id="rejectButton" mnemonicParsing="false" onAction="#rejectButtonClicked" prefHeight="30.0" prefWidth="100.0" styleClass="button-show" text="Reject">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
+         </children>
+         <VBox.margin>
+            <Insets right="50.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -47,16 +46,12 @@
             <Label fx:id="simulationLabel" alignment="CENTER" prefHeight="17.0" prefWidth="348.0" styleClass="detailsLabels" text="Label" GridPane.columnSpan="2" />
          </children>
       </GridPane>
-      <ScrollPane fitToHeight="true" fitToWidth="true">
-         <content>
-            <TableView fx:id="tableView" prefHeight="145.0" prefWidth="349.0">
-              <columns>
-                <TableColumn fx:id="entityNameCol" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Entity Name" />
-                <TableColumn fx:id="entityAmountCol" maxWidth="148.0" minWidth="148.0" prefWidth="148.0" text="Entity Amount" />
-              </columns>
-            </TableView>
-         </content>
-      </ScrollPane>
+      <TableView fx:id="tableView" prefHeight="145.0" prefWidth="349.0">
+        <columns>
+          <TableColumn fx:id="entityNameCol" maxWidth="200.0" minWidth="186.0" prefWidth="186.0" text="Entity Name" />
+          <TableColumn fx:id="entityAmountCol" maxWidth="162.0" minWidth="140.0" prefWidth="161.0" text="Entity Amount" />
+        </columns>
+      </TableView>
       <VBox fx:id="buttonsVBox" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="145.0" prefWidth="195.0" styleClass="executionResults" />
    </children>
 </HBox>

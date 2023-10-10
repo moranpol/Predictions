@@ -1,4 +1,5 @@
 package body.secondPage;
+
 import alert.AlertDialog;
 import http.HttpClientUtil;
 import javafx.application.Platform;
@@ -13,21 +14,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
 import refresher.RequestsRefresher;
 import requests.DtoRequestInfo;
 import requests.DtoRequestsInfo;
 import javafx.scene.input.MouseEvent;
+
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Timer;
 
-public class AlloctionController {
+public class AllocationController implements Closeable {
 
     @FXML
     private TableColumn<DtoRequestInfo, Integer> finishRow;
 
     @FXML
-    private TableColumn<DtoRequestInfo, String> StatusRow;
+    private TableColumn<DtoRequestInfo, String> statusRow;
 
     @FXML
     private TableColumn<DtoRequestInfo, Integer> requestIdRow;
@@ -39,7 +43,7 @@ public class AlloctionController {
     private TableView<DtoRequestInfo> tableInfo;
 
     @FXML
-    private TableColumn<DtoRequestInfo, String> termainationRow;
+    private TableColumn<DtoRequestInfo, String> terminationRow;
 
     @FXML
     private TableColumn<DtoRequestInfo, Integer> totalAmountRow;
@@ -51,21 +55,25 @@ public class AlloctionController {
     private TableColumn<DtoRequestInfo, String> worldNameRow;
 
     @FXML
-    private Button AproveButton;
+    private Button approveButton;
 
     @FXML
-    private Button RejectButton;
+    private Button rejectButton;
 
     private RequestsRefresher requestsRefresher;
+
     private Timer timer;
+
+    private ObservableList<DtoRequestInfo> data = FXCollections.observableArrayList();
+
     @FXML
-    void AproveButtonClicked(ActionEvent event) {
+    void approveButtonClicked(ActionEvent event) {
         String baseUrl = "http://localhost:8080/predictions/managerRequests";
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(baseUrl).
                 newBuilder();
-        urlBuilder.addEncodedQueryParameter("requestStatus", "APPROVED");
-        urlBuilder.addEncodedQueryParameter("requestId", String.valueOf(requestIdRow));
+        urlBuilder.addEncodedQueryParameter("requestStatus", "approved");
+        urlBuilder.addEncodedQueryParameter("requestId", tableInfo.getSelectionModel().getSelectedItem().getId().toString());
 
         String finalUrl = urlBuilder.
                 build().
@@ -75,27 +83,32 @@ public class AlloctionController {
 
         HttpClientUtil.runAsyncPost(finalUrl, body, new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {}
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                AlertDialog.showError(e.getMessage());
+            }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
                 if(!response.isSuccessful()) {
                     AlertDialog.showError(response.message());
+                } else{
+                    approveButton.setVisible(false);
+                    rejectButton.setVisible(false);
+                    AlertDialog.showSuccess("Status set successfully.");
                 }
             }
         });
-        AproveButton.setVisible(false);
-        RejectButton.setVisible(false);
+
     }
 
     @FXML
-    void RejectButtonClicked(ActionEvent event) {
+    void rejectButtonClicked(ActionEvent event) {
         String baseUrl = "http://localhost:8080/predictions/managerRequests";
         HttpUrl.Builder urlBuilder = HttpUrl
                 .parse(baseUrl).
                 newBuilder();
-        urlBuilder.addEncodedQueryParameter("requestStatus", "REJECTED");
-        urlBuilder.addEncodedQueryParameter("requestId", String.valueOf(requestIdRow));
+        urlBuilder.addEncodedQueryParameter("requestStatus", "rejected");
+        urlBuilder.addEncodedQueryParameter("requestId", tableInfo.getSelectionModel().getSelectedItem().getId().toString());
 
         String finalUrl = urlBuilder.
                 build().
@@ -104,31 +117,46 @@ public class AlloctionController {
         RequestBody body = RequestBody.create(null, new byte[0]);
         HttpClientUtil.runAsyncPost(finalUrl, body, new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {}
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                AlertDialog.showError(e.getMessage());
+            }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
                 if(!response.isSuccessful()) {
                     AlertDialog.showError(response.message());
+                } else{
+                    approveButton.setVisible(false);
+                    rejectButton.setVisible(false);
+                    AlertDialog.showSuccess("Status set successfully.");
                 }
             }
         });
-        AproveButton.setVisible(false);
-        RejectButton.setVisible(false);
     }
 
+    private void initializeTable(){
+        tableInfo.setItems(data);
+
+        Platform.runLater(() -> {
+            if (data.isEmpty()) {
+                Label emptyLabel = new Label("No requests :(");
+                tableInfo.setPlaceholder(emptyLabel);
+            }
+        });
+    }
 
     @FXML
     void rowTableClicked(MouseEvent event) {
-        if(Objects.equals(StatusRow.getText(), "PENDING")){
-            AproveButton.setVisible(true);
-            RejectButton.setVisible(true);
+        if(tableInfo.getSelectionModel().getSelectedItem() != null) {
+            if (Objects.equals(tableInfo.getSelectionModel().getSelectedItem().getRequestStatus(), "pending")) {
+                approveButton.setVisible(true);
+                rejectButton.setVisible(true);
+            } else {
+                approveButton.setVisible(false);
+                rejectButton.setVisible(false);
+            }
         }
     }
-
-
-
-
 
     public void initialize(){
         requestIdRow.setCellValueFactory(cellData -> {
@@ -136,43 +164,51 @@ public class AlloctionController {
             property.setValue(cellData.getValue().getId());
             return property.asObject();
         });
-
         totalAmountRow.setCellValueFactory(cellData -> {
             SimpleIntegerProperty property = new SimpleIntegerProperty();
             property.setValue(cellData.getValue().getNumOfWantedSimulations());
             return property.asObject();
         });
-
-        termainationRow.setCellValueFactory(cellData -> {
+        terminationRow.setCellValueFactory(cellData -> {
             SimpleStringProperty property = new SimpleStringProperty();
             property.setValue(cellData.getValue().getTermination());
             return property;
         });
-
         userNameRow.setCellValueFactory(cellData -> {
             SimpleStringProperty property = new SimpleStringProperty();
             property.setValue(cellData.getValue().getUserName());
             return property;
         });
-
         worldNameRow.setCellValueFactory(cellData -> {
             SimpleStringProperty property = new SimpleStringProperty();
             property.setValue(cellData.getValue().getWorldName());
             return property;
         });
-        StatusRow.setCellValueFactory(cellData -> {
+        statusRow.setCellValueFactory(cellData -> {
             SimpleStringProperty property = new SimpleStringProperty();
             property.setValue(cellData.getValue().getRequestStatus());
             return property;
         });
+        finishRow.setCellValueFactory(cellData -> {
+            SimpleIntegerProperty property = new SimpleIntegerProperty();
+            property.setValue(cellData.getValue().getEndedSimulations());
+            return property.asObject();
+        });
+        runningRow.setCellValueFactory(cellData -> {
+            SimpleIntegerProperty property = new SimpleIntegerProperty();
+            property.setValue(cellData.getValue().getRunningSimulations());
+            return property.asObject();
+        });
 
-        //checkIfRowsCliecked();
+        //checkIfRowsClicked();
         refresher();
-
+        approveButton.setVisible(false);
+        rejectButton.setVisible(false);
+        initializeTable();
     }
 
     /*
-    private void checkIfRowsCliecked() {
+    private void checkIfRowsClicked() {
         tableInfo.getColumns().addAll(requestIdRow, userNameRow, worldNameRow, totalAmountRow, StatusRow, termainationRow, runningRow, finishRow); //
         for(DtoRequestInfo dtoRequestInfo: tableInfo.getItems()){
             if(!Objects.equals(dtoRequestInfo.getRequestStatus(), "PENDING")){
@@ -184,12 +220,21 @@ public class AlloctionController {
 
     public void setTable(DtoRequestsInfo dtoRequestsInfo) {
         Platform.runLater(() -> {
-            ObservableList<DtoRequestInfo> data = FXCollections.observableArrayList(dtoRequestsInfo.getRequestList());
-            if (data.isEmpty()) {
-                Label emptyLabel = new Label("No environments :(");
-                tableInfo.setPlaceholder(emptyLabel);
-            } else {
-                tableInfo.setItems(data);
+            for (DtoRequestInfo dtoRequestInfo : dtoRequestsInfo.getRequestList()) {
+                boolean found = false;
+                for (int i = 0; i < data.size(); i++) {
+                    if (Objects.equals(data.get(i).getId(), dtoRequestInfo.getId())) {
+                        found = true;
+                        if(!Objects.equals(data.get(i).getEndedSimulations(), dtoRequestInfo.getEndedSimulations()) || !Objects.equals(data.get(i).getRunningSimulations(), dtoRequestInfo.getRunningSimulations())
+                                || !Objects.equals(data.get(i).getRequestStatus(), dtoRequestInfo.getRequestStatus())){
+                            data.set(i, dtoRequestInfo);
+                        }
+                        break;
+                    }
+                }
+                if (!found) {
+                    data.add(dtoRequestInfo);
+                }
             }
         });
     }
@@ -197,8 +242,13 @@ public class AlloctionController {
     private void refresher() {
         requestsRefresher = new RequestsRefresher(this::setTable);
         timer = new Timer();
-        timer.schedule(requestsRefresher, 2000, 1);
+        timer.schedule(requestsRefresher, 1, 1000);
     }
 
-  }
+    @Override
+    public void close() {
+        requestsRefresher.cancel();
+        timer.cancel();
+    }
+}
 

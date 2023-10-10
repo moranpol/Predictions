@@ -16,7 +16,7 @@ public class Requests {
     }
 
     public synchronized void addSimulationRequest(DtoNewRequest dtoNewRequest) {
-        requestList.add(new Request(numOfRequests, dtoNewRequest.getUserName(), dtoNewRequest.getWorldName(), dtoNewRequest.getNumOfWantedSimulations(), createTermination(dtoNewRequest.getTermination())));
+        requestList.add(numOfRequests, new Request(numOfRequests, dtoNewRequest.getUserName(), dtoNewRequest.getWorldName(), dtoNewRequest.getNumOfWantedSimulations(), createTermination(dtoNewRequest.getTermination())));
         numOfRequests++;
     }
 

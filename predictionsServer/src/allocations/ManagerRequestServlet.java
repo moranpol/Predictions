@@ -1,4 +1,4 @@
-package simulationRequests;
+package allocations;
 
 import com.google.gson.Gson;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -48,8 +48,8 @@ public class ManagerRequestServlet extends HttpServlet {
             response.setContentType("text/plain;charset=UTF-8");
             LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
             String requestStatus = request.getParameter("requestStatus");
-            Integer requestId = Integer.parseInt(request.getParameter("requestId")); /// exception
-            manager.updateRequestStatus(requestId,requestStatus);
+            Integer requestId = Integer.parseInt(request.getParameter("requestId"));
+            manager.updateRequestStatus(requestId, requestStatus);
         } catch (Exception e) {
             response.sendError(HttpServletResponse.SC_CONFLICT, e.getMessage());
         }

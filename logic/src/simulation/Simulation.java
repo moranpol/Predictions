@@ -84,7 +84,6 @@ public class Simulation implements Serializable, Runnable {
         startTime = System.currentTimeMillis();
         Integer maxSeconds = termination.getSeconds();
         Integer maxTicks = termination.getTicks();
-        request.setRunningSimulations(request.getRunningSimulations() + 1);
 
         try {
             if (maxTicks != null && maxSeconds != null) {
@@ -111,6 +110,7 @@ public class Simulation implements Serializable, Runnable {
         long maxRunTimeMilliSec = maxSeconds * 1000;
 
         for (ticks = 1; ticks <= maxTicks; ticks++){
+            checkSleep();
             setSeconds();
             if(simulationMode == SimulationMode.ENDED){
                 break;
@@ -127,6 +127,7 @@ public class Simulation implements Serializable, Runnable {
         long maxRunTimeMilliSec = maxSeconds * 1000;
 
         while (System.currentTimeMillis() - startTime - (pauseTime * 1000) < maxRunTimeMilliSec){
+            checkSleep();
             setSeconds();
             if(simulationMode == SimulationMode.ENDED){
                 break;
@@ -141,6 +142,7 @@ public class Simulation implements Serializable, Runnable {
     private void runSimulationByTicks(Integer maxTicks){
 
         for (ticks = 1; ticks <= maxTicks; ticks++){
+            checkSleep();
             setSeconds();
             if(simulationMode == SimulationMode.ENDED){
                 break;
@@ -153,6 +155,7 @@ public class Simulation implements Serializable, Runnable {
 
     private void runSimulationByUser(){
         while (simulationMode != SimulationMode.ENDED) {
+            checkSleep();
             setSeconds();
             worldInstance.runSimulationTick(ticks, worldDefinition);
             checkPause();
@@ -161,7 +164,7 @@ public class Simulation implements Serializable, Runnable {
     }
 
     private void checkPause(){
-        if(simulationMode == SimulationMode.PAUSE){
+        if(simulationMode == SimulationMode.PAUSED){
             long pauseStartTime = System.currentTimeMillis();
             synchronized (this){
                 try{
@@ -169,6 +172,16 @@ public class Simulation implements Serializable, Runnable {
                 } catch (Exception ignore){}
             }
             pauseTime += (int)((System.currentTimeMillis() - pauseStartTime) / 1000);
+        }
+    }
+
+    private void checkSleep(){
+        if(worldInstance.getSleep() != null){
+            try {
+                Thread.sleep(worldInstance.getSleep());
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 

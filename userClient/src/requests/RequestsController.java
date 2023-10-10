@@ -260,7 +260,8 @@ public class RequestsController implements Closeable {
                 for (int i = 0; i < data.size(); i++) {
                     if (Objects.equals(data.get(i).getId(), dtoRequestsInfo.getId())) {
                         found = true;
-                        if(!Objects.equals(data.get(i).getEndedSimulations(), dtoRequestsInfo.getEndedSimulations()) || !Objects.equals(data.get(i).getRunningSimulations(), dtoRequestsInfo.getRunningSimulations())){
+                        if(!Objects.equals(data.get(i).getEndedSimulations(), dtoRequestsInfo.getEndedSimulations()) || !Objects.equals(data.get(i).getRunningSimulations(), dtoRequestsInfo.getRunningSimulations())
+                            || !Objects.equals(data.get(i).getRequestStatus(), dtoRequestsInfo.getRequestStatus())){
                             data.set(i, dtoRequestsInfo);
                         }
                         break;
@@ -285,8 +286,8 @@ public class RequestsController implements Closeable {
         worldInfoRefresher = new WorldInfoRefresher(this::setWorldCBox);
         requestsRefresher = new RequestsRefresher(this::setTable, mainPageController.getUserName());
         timer = new Timer();
-        timer.schedule(worldInfoRefresher, 1000, 1000);
-        timer.schedule(requestsRefresher, 1000, 1000);
+        timer.schedule(worldInfoRefresher, 1, 1000);
+        timer.schedule(requestsRefresher, 1, 1000);
     }
 
     @Override

@@ -56,6 +56,10 @@ public class ResultsController {
         Platform.runLater(() -> executionResultPane.getChildren().clear());
         loadExecutionDetailsController(simulationId, requestId, simulationMode);
         loadStartExecutionDetailsController(simulationId, requestId);
+        updateExecutionResults(simulationId, requestId, simulationMode);
+    }
+
+    public void updateExecutionResults(Integer simulationId, Integer requestId, String simulationMode){
         if(simulationMode.equals("failed")){
             loadSimulationFailedController(simulationId, requestId);
         } else if(simulationMode.equals("ended")) {

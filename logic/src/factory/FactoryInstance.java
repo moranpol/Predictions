@@ -6,7 +6,6 @@ import entity.EntityManager;
 import environment.EnvironmentDefinition;
 import environment.EnvironmentInstance;
 import grid.Grid;
-import property.*;
 import world.WorldDefinition;
 import world.WorldInstance;
 
@@ -24,7 +23,7 @@ public abstract class FactoryInstance {
         }
 
         return new WorldInstance(entities, createEnvironmentInstance(worldDefinition.getEnvironmentVariables()),
-                worldDefinition.getRules(), grid);
+                worldDefinition.getRules(), grid, worldDefinition.getSleep());
     }
 
     private static Grid createGrid(Grid definitionGrid){

@@ -105,10 +105,13 @@ public class RunningController {
             }
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) {
-                if (response.isSuccessful()) {
-                    executionDetailsController.getResultsController().updateScreenBySimulationChoice(simulationId, requestId, "ended");
-                } else{
+                if (!response.isSuccessful()) {
                     AlertDialog.showError(response.message());
+                } else{
+                    resumeButton.setDisable(true);
+                    pauseButton.setDisable(true);
+                    stopButton.setDisable(true);
+                    executionDetailsController.getResultsController().updateExecutionResults(simulationId, requestId, "ended");
                 }
             }
         });
@@ -116,9 +119,19 @@ public class RunningController {
 
     public void setter(String simulationMode, Integer requestId, Integer simulationId, ExecutionDetailsController executionDetailsController) {
         this.executionDetailsController = executionDetailsController;
-        resumeButton.setDisable(!simulationMode.equals("pause"));
-        pauseButton.setDisable(simulationMode.equals("pause"));
         this.requestId = requestId;
         this.simulationId = simulationId;
+        setButtons(simulationMode);
+    }
+
+    public void setButtons(String simulationMode){
+        if(simulationMode.equals("ended") || simulationMode.equals("failed")){
+            resumeButton.setDisable(true);
+            pauseButton.setDisable(true);
+            stopButton.setDisable(true);
+        } else {
+            resumeButton.setDisable(!simulationMode.equals("paused"));
+            pauseButton.setDisable(simulationMode.equals("paused"));
+        }
     }
 }

@@ -31,6 +31,7 @@ public class LogicManager {
     private final Map<String, WorldManager> worldManagerMap = new HashMap<>();
     private ThreadPoolExecutor executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
     private final Requests simulationRequests = new Requests();
+    private Integer simulationCount = 0;
 
     public void ReadXmlFile(InputStream xmlFile){
         try {
@@ -53,7 +54,7 @@ public class LogicManager {
         List<DtoRequestInfo> requestInfoList = new ArrayList<>();
 
         for(Request request : simulationRequests.getRequestList()){
-            if((request.getRequestStatus() == RequestStatus.APPROVED || request.getRequestStatus() == RequestStatus.REJECTED) && request.getUserName().equals(username)){
+            if(request.getRequestStatus() != RequestStatus.PENDING && request.getUserName().equals(username)){
                 requestInfoList.add(createDtoRequestInfo(request));
             }
         }
@@ -65,7 +66,7 @@ public class LogicManager {
         List<DtoRequestInfo> requestInfoList = new ArrayList<>();
 
         for(Request request : simulationRequests.getRequestList()){
-                requestInfoList.add(createDtoRequestInfo(request));
+            requestInfoList.add(createDtoRequestInfo(request));
         }
         return new DtoRequestsInfo(requestInfoList);
     }
@@ -98,7 +99,7 @@ public class LogicManager {
         int countEnded = 0;
 
         for(WorldManager worldManager: worldManagerMap.values()) {
-            for(Simulation simulation : worldManager.getSimulations()){
+            for(Simulation simulation : worldManager.getSimulations().values()){
                 if(simulation.getSimulationMode() == SimulationMode.ENDED || simulation.getSimulationMode() == SimulationMode.FAILED){
                     countEnded++;
                 }
@@ -117,17 +118,24 @@ public class LogicManager {
     }
 
     public void updateRequestStatus(Integer requestId, String requestStatus) {
-        simulationRequests.getRequestList().get(requestId).setRequestStatus(RequestStatus.valueOf(requestStatus));
+        simulationRequests.getRequestList().get(requestId).setRequestStatus(RequestStatus.valueOf(requestStatus.toUpperCase()));
     }
 
     public DtoStartExecution createNewSimulation(DtoStartExecution dtoSendExecution, Integer requestId) {
         Request request = simulationRequests.getRequestList().get(requestId);
-        return worldManagerMap.get(request.getWorldName()).createNewSimulation(dtoSendExecution, request);
+        DtoStartExecution dtoStartExecution = worldManagerMap.get(request.getWorldName()).createNewSimulation(dtoSendExecution, request, simulationCount);
+
+        synchronized (this){
+            simulationCount++;
+        }
+
+        return dtoStartExecution;
     }
 
     public void startSimulation(Integer simulationId, Integer requestId) {
         Request request = simulationRequests.getRequestList().get(requestId);
         worldManagerMap.get(request.getWorldName()).simulationRun(executorService, simulationId);
+        request.setRunningSimulations(request.getRunningSimulations() + 1);
         if(request.getEndedSimulations() + request.getRunningSimulations() == request.getNumOfWantedSimulations()){
             request.setRequestStatus(RequestStatus.FINISHED);
         }
@@ -142,7 +150,7 @@ public class LogicManager {
         List<DtoSimulationInfo> dtoSimulationInfoList = new ArrayList<>();
 
         for(WorldManager worldManager : worldManagerMap.values()){
-            for (Simulation simulation : worldManager.getSimulations()){
+            for (Simulation simulation : worldManager.getSimulations().values()){
                 if(simulation.getRequest().getUserName().equals(username)){
                     dtoSimulationInfoList.add(worldManager.createDtoSimulationInfo(simulation.getId()));
                 }
