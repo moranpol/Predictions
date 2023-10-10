@@ -1,7 +1,7 @@
 package execution.newExecution;
 
 import com.google.gson.Gson;
-import error.ErrorDialog;
+import alert.AlertDialog;
 import execution.simulationEntitiesPopulation.SimulationEntitiesPopulationController;
 import execution.simulationEnvironmentsInputs.SimulationEnvironmentInputsController;
 import http.HttpClientUtil;
@@ -74,9 +74,6 @@ public class NewExecutionController {
     }
 
     public void setEnvironmentAndEntities(){
-        entitiesPopulationController.setNewExecutionController(this);
-        environmentInputsController.setNewExecutionController(this);
-
         String finalUrl = HttpUrl
                 .parse("http://localhost:8080/predictions/newExecutionInfo")
                 .newBuilder()
@@ -87,7 +84,7 @@ public class NewExecutionController {
         HttpClientUtil.runAsyncGet(finalUrl, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                ErrorDialog.showError(e.getMessage());
+                AlertDialog.showError(e.getMessage());
             }
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) {
@@ -95,11 +92,10 @@ public class NewExecutionController {
                     Gson gson = new Gson();
                     assert response.body() != null;
                     DtoNewExecution dtoNewExecution = gson.fromJson(response.body().charStream(), DtoNewExecution.class);
-                    entitiesPopulationController.setMaxPopulationCount(dtoNewExecution.getMaxPopulation());
-                    entitiesPopulationController.setEntitiesCount(dtoNewExecution.getDtoEntityNames());
-                    environmentInputsController.setEnvironmentInputs(dtoNewExecution.getDtoEnvironmentList());
+                    entitiesPopulationController.setter(NewExecutionController.this, dtoNewExecution.getDtoEntityNames(), dtoNewExecution.getMaxPopulation());
+                    environmentInputsController.setter(NewExecutionController.this, dtoNewExecution.getDtoEnvironmentList());
                 } else{
-                    ErrorDialog.showError(response.message());
+                    AlertDialog.showError(response.message());
                 }
             }
         });
@@ -135,7 +131,7 @@ public class NewExecutionController {
         HttpClientUtil.runAsyncPost(finalUrl, body, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                ErrorDialog.showError(e.getMessage());
+                AlertDialog.showError(e.getMessage());
             }
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) {
@@ -143,7 +139,7 @@ public class NewExecutionController {
                     DtoStartExecution dtoStartExecution = gson.fromJson(response.body().charStream(), DtoStartExecution.class);
                     mainPageController.loadExecutionStartController(dtoStartExecution);
                 } else {
-                    ErrorDialog.showError(response.message());
+                    AlertDialog.showError(response.message());
                 }
             }
         });

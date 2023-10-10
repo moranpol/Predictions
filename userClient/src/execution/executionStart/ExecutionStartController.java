@@ -1,7 +1,6 @@
 package execution.executionStart;
 
-import com.google.gson.Gson;
-import error.ErrorDialog;
+import alert.AlertDialog;
 import http.HttpClientUtil;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -13,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import newExecution.DtoNewExecution;
+import mainPage.MainPageController;
 import newExecution.DtoStartExecution;
 import newExecution.dtoEntities.DtoEntitiesPopulation;
 import newExecution.dtoEnvironment.DtoEnvironmentInitialize;
@@ -50,6 +49,8 @@ public class ExecutionStartController {
 
     private Integer requestId;
 
+    private MainPageController mainPageController;
+
     public void initialize(){
         entityNameCol.setCellValueFactory(cellData -> {
             SimpleStringProperty property = new SimpleStringProperty();
@@ -73,7 +74,8 @@ public class ExecutionStartController {
         });
     }
 
-    public void setter(DtoStartExecution dtoStartExecution){
+    public void setter(DtoStartExecution dtoStartExecution, MainPageController mainPageController){
+        this.mainPageController = mainPageController;
         simulationId = dtoStartExecution.getSimulationId();
         requestId = dtoStartExecution.getRequestId();
         setEntitiesTable(dtoStartExecution.getDtoEntitiesPopulationList());
@@ -117,14 +119,14 @@ public class ExecutionStartController {
         HttpClientUtil.runAsyncGet(finalUrl, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                ErrorDialog.showError(e.getMessage());
+                AlertDialog.showError(e.getMessage());
             }
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) {
                 if (response.isSuccessful()) {
-                    //todo - load page 4
+                    mainPageController.loadResultsController();
                 } else{
-                    ErrorDialog.showError(response.message());
+                    AlertDialog.showError(response.message());
                 }
             }
         });

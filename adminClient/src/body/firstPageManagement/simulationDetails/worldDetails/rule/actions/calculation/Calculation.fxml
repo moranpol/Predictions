@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="vBox" prefHeight="435.0" prefWidth="270.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPageManagement.simulationDetails.worldDetails.rule.actions.calculation.CalculationController">
+   <children>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="250.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-text-variable" text="Name:" />
+            <Text fx:id="nameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="161.0" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="250.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-text-variable" text="Main Entity Name:" />
+            <Text fx:id="mainEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="115.0" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="250.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-text-variable" text="Secondary Entity Name:" />
+            <Text fx:id="secondaryEntityNameVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="90.0" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="250.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-text-variable" text="Argument 1:" />
+            <Text fx:id="arg1VariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="140.0" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="250.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-text-variable" text="Argument 2:" />
+            <Text fx:id="arg2VariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="136.0" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="250.0" spacing="10.0">
+         <children>
+            <Label styleClass="action-text-variable" text="Arithmetic:" />
+            <Text fx:id="arithmeticVariableText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="action-text-variable" wrappingWidth="149.0" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+   </children>
+   <padding>
+      <Insets left="10.0" right="10.0" />
+   </padding>
+</VBox>

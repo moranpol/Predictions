@@ -1,6 +1,5 @@
 package mainPage;
 
-import body.firstPagemanagement.ManagementBodyControll;
 import header.HeaderController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -15,8 +14,10 @@ public class MainPageController {
 
     @FXML
     private GridPane header;
+
     @FXML
     private HeaderController headerController;
+
     @FXML
     private AnchorPane body;
 
@@ -26,14 +27,12 @@ public class MainPageController {
 
     public void loadManagementBodyController(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/body/firstPagemanagement/managementBody.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/body/firstPageManagement/managementBody.fxml"));
             Parent management = loader.load();
             Platform.runLater(() -> {
                 body.getChildren().clear();
                 body.getChildren().add(management);
             });
-
-            //ManagementBodyControll managementBodyControll = loader.getController();
 
         } catch (IOException ignore) {
         }
@@ -41,17 +40,14 @@ public class MainPageController {
 
     public void loadAllocationBodyController(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/body/secondPage/alloction.fxml"));
-            Parent alloction = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/body/secondPage/allocation.fxml"));
+            Parent allocation = loader.load();
             Platform.runLater(() -> {
                 body.getChildren().clear();
-                body.getChildren().add(alloction);
+                body.getChildren().add(allocation);
             });
-            body.layout(); //
-            //ManagementBodyControll managementBodyControll = loader.getController();
 
         } catch (IOException ignore) {
-            System.out.println(ignore);
         }
     }
 }

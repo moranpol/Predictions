@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" fillWidth="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="490.0" spacing="20.0" styleClass="bodyPanes" stylesheets="@../../../../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPageManagement.simulationDetails.worldDetails.environment.EnvironmentDetailsController">
+   <children>
+      <Label styleClass="label-title" text="Environments" />
+      <TableView fx:id="environmentTableView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="450.0">
+        <columns>
+          <TableColumn fx:id="nameCol" maxWidth="138.0" minWidth="138.0" prefWidth="138.0" text="Name" />
+          <TableColumn fx:id="typeCol" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" text="Type" />
+            <TableColumn fx:id="rangeFromCol" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Range - from" />
+            <TableColumn fx:id="rangeToCol" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Range - to" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

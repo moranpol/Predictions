@@ -7,17 +7,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import manager.LogicManager;
 
+import java.io.IOException;
+
 @WebServlet(name = "start execution servlet", urlPatterns = "/startExecution")
 @MultipartConfig
 public class StartExecutionServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try{
             LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
             manager.startSimulation(Integer.parseInt(request.getParameter("simulation id")), Integer.parseInt(request.getParameter("request id")));
 
         } catch (Exception e){
-            response.setStatus(HttpServletResponse.SC_BAD_GATEWAY);
+            response.sendError(HttpServletResponse.SC_BAD_GATEWAY, e.getMessage());
         }
     }
 }

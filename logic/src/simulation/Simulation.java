@@ -2,6 +2,7 @@ package simulation;
 
 import enums.SimulationMode;
 import termination.Termination;
+import userRequests.Request;
 import world.WorldDefinition;
 import world.WorldInstance;
 
@@ -15,6 +16,7 @@ public class Simulation implements Serializable, Runnable {
     private final WorldInstance worldInstance;
     private final WorldDefinition worldDefinition;
     private final Termination termination;
+    private final Request request;
     private SimulationMode simulationMode;
     private Integer ticks;
     private Integer seconds;
@@ -22,11 +24,12 @@ public class Simulation implements Serializable, Runnable {
     private Integer pauseTime;
     private long startTime;
 
-    public Simulation(Integer id, WorldInstance worldInstance, WorldDefinition worldDefinition, Termination termination) {
+    public Simulation(Integer id, WorldInstance worldInstance, WorldDefinition worldDefinition, Termination termination, Request request) {
         this.id = id;
         this.worldInstance = worldInstance;
         this.worldDefinition = worldDefinition;
         this.termination = termination;
+        this.request = request;
         simulationMode = SimulationMode.RUNNING;
         ticks = 1;
         seconds = 0;
@@ -36,6 +39,10 @@ public class Simulation implements Serializable, Runnable {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy | HH:mm:ss");
         startDateFormat = now.format(format);
+    }
+
+    public Request getRequest() {
+        return request;
     }
 
     public String getStartDateFormat() {
@@ -77,6 +84,7 @@ public class Simulation implements Serializable, Runnable {
         startTime = System.currentTimeMillis();
         Integer maxSeconds = termination.getSeconds();
         Integer maxTicks = termination.getTicks();
+
         try {
             if (maxTicks != null && maxSeconds != null) {
                 runSimulationByTicksAndSeconds(maxTicks, maxSeconds);
@@ -92,6 +100,9 @@ public class Simulation implements Serializable, Runnable {
         } catch (Exception e){
             simulationMode = SimulationMode.FAILED;
             failedReason = "Simulation id " + id + " failed.\n" + e.getMessage();
+        } finally {
+            request.setRunningSimulations(request.getRunningSimulations() - 1);
+            request.setEndedSimulations(request.getEndedSimulations() + 1);
         }
     }
 
@@ -99,6 +110,7 @@ public class Simulation implements Serializable, Runnable {
         long maxRunTimeMilliSec = maxSeconds * 1000;
 
         for (ticks = 1; ticks <= maxTicks; ticks++){
+            checkSleep();
             setSeconds();
             if(simulationMode == SimulationMode.ENDED){
                 break;
@@ -107,7 +119,6 @@ public class Simulation implements Serializable, Runnable {
             }
 
             worldInstance.runSimulationTick(ticks, worldDefinition);
-            checkFuture();
             checkPause();
         }
     }
@@ -116,13 +127,13 @@ public class Simulation implements Serializable, Runnable {
         long maxRunTimeMilliSec = maxSeconds * 1000;
 
         while (System.currentTimeMillis() - startTime - (pauseTime * 1000) < maxRunTimeMilliSec){
+            checkSleep();
             setSeconds();
             if(simulationMode == SimulationMode.ENDED){
                 break;
             }
 
             worldInstance.runSimulationTick(ticks, worldDefinition);
-            checkFuture();
             checkPause();
             ticks++;
         }
@@ -131,35 +142,29 @@ public class Simulation implements Serializable, Runnable {
     private void runSimulationByTicks(Integer maxTicks){
 
         for (ticks = 1; ticks <= maxTicks; ticks++){
+            checkSleep();
             setSeconds();
             if(simulationMode == SimulationMode.ENDED){
                 break;
             }
 
             worldInstance.runSimulationTick(ticks, worldDefinition);
-            checkFuture();
             checkPause();
         }
     }
 
     private void runSimulationByUser(){
         while (simulationMode != SimulationMode.ENDED) {
+            checkSleep();
             setSeconds();
             worldInstance.runSimulationTick(ticks, worldDefinition);
-            checkFuture();
             checkPause();
             ticks++;
         }
     }
 
-    private void checkFuture(){
-        if(simulationMode == SimulationMode.FUTURE){
-            simulationMode = SimulationMode.PAUSE;
-        }
-    }
-
     private void checkPause(){
-        if(simulationMode == SimulationMode.PAUSE){
+        if(simulationMode == SimulationMode.PAUSED){
             long pauseStartTime = System.currentTimeMillis();
             synchronized (this){
                 try{
@@ -167,6 +172,16 @@ public class Simulation implements Serializable, Runnable {
                 } catch (Exception ignore){}
             }
             pauseTime += (int)((System.currentTimeMillis() - pauseStartTime) / 1000);
+        }
+    }
+
+    private void checkSleep(){
+        if(worldInstance.getSleep() != null){
+            try {
+                Thread.sleep(worldInstance.getSleep());
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 

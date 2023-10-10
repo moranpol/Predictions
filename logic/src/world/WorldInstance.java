@@ -6,13 +6,11 @@ import environment.EnvironmentInstance;
 import grid.Grid;
 import property.PropertyInstance;
 import rule.Rule;
-import termination.Termination;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class WorldInstance implements Serializable {
     private final Map<String, EntityManager> entities;
@@ -20,18 +18,24 @@ public class WorldInstance implements Serializable {
     private final List<Rule> rules;
     private final Grid grid;
     private final Map<String, EntityCountGraph> entityCountGraphMap;
+    private final Integer sleep;
 
-    public WorldInstance(Map<String, EntityManager> entities, EnvironmentInstance environmentVariables, List<Rule> rules, Grid grid) {
+    public WorldInstance(Map<String, EntityManager> entities, EnvironmentInstance environmentVariables, List<Rule> rules, Grid grid, Integer sleep) {
         this.entities = entities;
         this.environmentVariables = environmentVariables;
         this.rules = rules;
         this.grid = grid;
+        this.sleep = sleep;
         entityCountGraphMap = new HashMap<>();
         updateEntityCountGraphMap();
     }
 
     public EnvironmentInstance getEnvironmentVariables() {
         return environmentVariables;
+    }
+
+    public Integer getSleep() {
+        return sleep;
     }
 
     private void updateEntityCountGraphMap(){

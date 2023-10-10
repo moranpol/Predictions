@@ -3,18 +3,20 @@ package results.simulationEnded;
 import java.util.Map;
 
 public class DtoSimulationEndedDetails {
-    private final Integer id;
+    private final Integer simulationId;
+    private final Integer requestId;
     private final String startTime;
     private final Map<String, DtoSimulationEndedEntity> dtoEntityMap;
 
-    public DtoSimulationEndedDetails(Integer id, String startTime, Map<String, DtoSimulationEndedEntity> dtoEntityMap) {
-        this.id = id;
+    public DtoSimulationEndedDetails(Integer simulationId, Integer requestId, String startTime, Map<String, DtoSimulationEndedEntity> dtoEntityMap) {
+        this.simulationId = simulationId;
+        this.requestId = requestId;
         this.startTime = startTime;
         this.dtoEntityMap = dtoEntityMap;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getSimulationId() {
+        return simulationId;
     }
 
     public String getStartTime() {
@@ -23,5 +25,9 @@ public class DtoSimulationEndedDetails {
 
     public Map<String, DtoSimulationEndedEntity> getDtoEntityMap() {
         return dtoEntityMap;
+    }
+
+    public Integer getRequestId() {
+        return requestId;
     }
 }

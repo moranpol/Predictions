@@ -7,7 +7,6 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -77,20 +76,16 @@
             <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="345.0" prefWidth="800.0" spacing="10.0">
                <children>
                   <Label styleClass="topLabels" stylesheets="@../style/defaultPage.css" text="Requests Table" />
-                  <ScrollPane fitToHeight="true" fitToWidth="true">
-                     <content>
-                        <TableView fx:id="requestsTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#tableRowClicked" prefHeight="290.0" prefWidth="798.0">
-                          <columns>
-                            <TableColumn fx:id="serialNumberCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="Serial number" />
-                            <TableColumn fx:id="worldNameCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="World name" />
-                              <TableColumn fx:id="runsCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="runs requested" />
-                              <TableColumn fx:id="statusCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="status" />
-                              <TableColumn fx:id="runningCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="currently running" />
-                              <TableColumn fx:id="endedCol" maxWidth="131.0" minWidth="131.0" prefWidth="131.0" text="simulations ended" />
-                          </columns>
-                        </TableView>
-                     </content>
-                  </ScrollPane>
+                  <TableView fx:id="requestsTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#tableRowClicked" prefHeight="290.0" prefWidth="798.0">
+                    <columns>
+                      <TableColumn fx:id="serialNumberCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="Serial number" />
+                      <TableColumn fx:id="worldNameCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="World name" />
+                        <TableColumn fx:id="runsCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="runs requested" />
+                        <TableColumn fx:id="statusCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="status" />
+                        <TableColumn fx:id="runningCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="currently running" />
+                        <TableColumn fx:id="endedCol" maxWidth="131.0" minWidth="131.0" prefWidth="131.0" text="simulations ended" />
+                    </columns>
+                  </TableView>
                </children>
                <HBox.margin>
                   <Insets left="30.0" top="10.0" />

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="body.firstPageManagement.ManagementBodyController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="1000.0" spacing="10.0">
+         <children>
+            <TextField fx:id="textFieldFilePath" prefHeight="25.0" prefWidth="836.0" promptText="File Path" />
+            <Button fx:id="loadFileButton" mnemonicParsing="false" onAction="#loadFileButtonClicked" prefHeight="30.0" prefWidth="148.0" styleClass="button-show" text="Load File " />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="515.0" prefWidth="990.0" spacing="5.0">
+         <children>
+            <fx:include source="simulationDetails/Details.fxml" />
+            <VBox alignment="TOP_CENTER" prefHeight="515.0" prefWidth="200.0" styleClass="bodyPanes">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" text="Number of threads:" />
+                        <Spinner fx:id="spinnerThreadsNum" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </HBox>
+                  <Button fx:id="setThreadsCountButton" mnemonicParsing="false" onAction="#setThreadsCountButtonClicked" prefHeight="30.0" prefWidth="148.0" styleClass="button-show" text="Set Threads Count" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" text="Simulations queue counter" />
+                        <Label fx:id="queueCounter" styleClass="text-variable" text="0" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets left="15.0" right="15.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" text="Simulations running counter" />
+                        <Label fx:id="runningCounter" styleClass="text-variable" text="0" />
+                     </children>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" styleClass="text-variable">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-variable" text="Simulations ended counter" />
+                        <Label fx:id="endedCounter" text="0" />
+                     </children>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets left="5.0" right="5.0" />
+   </padding>
+</VBox>

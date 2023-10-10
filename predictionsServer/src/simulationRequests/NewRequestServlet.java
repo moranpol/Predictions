@@ -33,7 +33,7 @@ public class NewRequestServlet extends HttpServlet {
             DtoNewRequest dtoNewRequest = gson.fromJson(json, DtoNewRequest.class);
             manager.createSimulationRequest(dtoNewRequest);
         } catch (Exception e){
-            response.setStatus(HttpServletResponse.SC_CONFLICT);
+            response.sendError(HttpServletResponse.SC_CONFLICT, e.getMessage());
         }
     }
 }

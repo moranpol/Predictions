@@ -55,7 +55,10 @@ public class HeaderController {
 
     @FXML
     void resultsButtonClicked(ActionEvent event) {
-
+        mainPageController.loadResultsController();
     }
 
+    public void setResultsButton() {
+        resultsButton.setDisable(false);
+    }
 }

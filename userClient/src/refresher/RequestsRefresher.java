@@ -1,9 +1,7 @@
 package refresher;
 
-
 import com.google.gson.Gson;
-import details.DtoWorldsList;
-import error.ErrorDialog;
+import alert.AlertDialog;
 import http.HttpClientUtil;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -37,17 +35,17 @@ public class RequestsRefresher extends TimerTask {
         HttpClientUtil.runAsyncGet(finalUrl, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                ErrorDialog.showError(e.getMessage());
+                AlertDialog.showError(e.getMessage());
             }
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
                 if (response.isSuccessful()) {
                     Gson gson = new Gson();
                     assert response.body() != null;
                     DtoRequestsInfo dtoRequestsInfo = gson.fromJson(response.body().charStream(), DtoRequestsInfo.class);
                     requestsConsumer.accept(dtoRequestsInfo);
                 } else{
-                    ErrorDialog.showError(response.message());
+                    AlertDialog.showError(response.message());
                 }
             }
         });

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="200.0" styleClass="executionResults" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="results.executionList.ExecutionListController">
+   <children>
+      <Label id="executionListTitle" prefHeight="40.0" text="Execution List" />
+      <ScrollPane fitToHeight="true" fitToWidth="true">
+         <content>
+            <ListView fx:id="executionListView" onMouseClicked="#executionListViewChoice" prefHeight="540.0" prefWidth="189.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>

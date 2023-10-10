@@ -9,11 +9,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import manager.LogicManager;
 import requests.DtoRequestsInfo;
 
+import java.io.IOException;
+
 @WebServlet(name = "user requests servlet", urlPatterns = "/userRequests")
 @MultipartConfig
 public class UserRequestServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try{
             response.setContentType("application/json");
             LogicManager manager = (LogicManager) getServletContext().getAttribute("manager");
@@ -23,7 +25,7 @@ public class UserRequestServlet extends HttpServlet {
             response.getWriter().print(jsonResponse);
             response.getWriter().flush();
         } catch (Exception e){
-            response.setStatus(HttpServletResponse.SC_BAD_GATEWAY);
+            response.sendError(HttpServletResponse.SC_BAD_GATEWAY, e.getMessage());
         }
     }
 }

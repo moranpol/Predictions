@@ -6,7 +6,6 @@ import environment.EnvironmentDefinition;
 import exceptions.InvalidNameException;
 import exceptions.MissMatchValuesException;
 import grid.Grid;
-import helpers.CheckFunctions;
 import jaxb.schema.generated.*;
 import helpers.ParseFunctions;
 import property.PropertyDefinition;
@@ -14,7 +13,6 @@ import property.Range;
 import rule.Activation;
 import rule.Rule;
 import rule.action.Action;
-import termination.Termination;
 import world.WorldDefinition;
 
 import java.util.*;
@@ -34,7 +32,7 @@ public abstract class FactoryDefinition {
             rules.add(createRule(entities, rule, environment));
         }
 
-        return new WorldDefinition(environment, entities, rules, createGrid(prdWorld.getPRDGrid()));
+        return new WorldDefinition(environment, entities, rules, createGrid(prdWorld.getPRDGrid()), prdWorld.getSleep());
     }
 
     private static Grid createGrid(PRDWorld.PRDGrid prdGrid){

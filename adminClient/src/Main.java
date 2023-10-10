@@ -21,7 +21,7 @@ public class Main extends Application{
         Parent scrollPane = fxmlLoader.load(url.openStream());
         //PageController pageController = fxmlLoader.getController();
         //pageController.setPrimaryStage(primaryStage);
-        Scene scene = new Scene(scrollPane, 1005, 715);
+        Scene scene = new Scene(scrollPane, 1010, 720);
         //scene.getStylesheets().add("/pageComponent/style/defaultPage.css");
         primaryStage.setMinWidth(400);
         primaryStage.setMinHeight(400);

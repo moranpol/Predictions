@@ -17,9 +17,9 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Button fx:id="allocationsButton" mnemonicParsing="false" onAction="#allocationsButtonClicked" prefHeight="30.0" prefWidth="130.0" styleClass="HeaderButtons" text="Allocations" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Button fx:id="executionsHistoryButton" mnemonicParsing="false" onAction="#executionsHistoryButtonClicked" prefHeight="30.0" prefWidth="130.0" styleClass="HeaderButtons" text="Executions History" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <Button fx:id="allocationsButton" mnemonicParsing="false" onAction="#allocationsButtonClicked" prefHeight="30.0" prefWidth="150.0" styleClass="HeaderButtons" text="Allocations" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Button fx:id="executionsHistoryButton" mnemonicParsing="false" onAction="#executionsHistoryButtonClicked" prefHeight="30.0" prefWidth="150.0" styleClass="HeaderButtons" text="Executions History" GridPane.columnIndex="2" GridPane.rowIndex="1" />
         <Label id="predictionsTitle" prefHeight="36.0" prefWidth="366.0" text="Predictions - Administrator" GridPane.columnIndex="1" />
-        <Button fx:id="managementButton" mnemonicParsing="false" onAction="#managementButtonClicked" prefHeight="30.0" prefWidth="130.0" styleClass="HeaderButtons" text="Management" GridPane.rowIndex="1" />
+        <Button fx:id="managementButton" mnemonicParsing="false" onAction="#managementButtonClicked" prefHeight="30.0" prefWidth="150.0" styleClass="HeaderButtons" text="Management" GridPane.rowIndex="1" />
     </children>
 </GridPane>
