@@ -1,6 +1,6 @@
 package mainPage;
 
-import header.HeaderController;
+import adminHeader.HeaderController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
