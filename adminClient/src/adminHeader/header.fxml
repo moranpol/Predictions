@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="header.HeaderController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../style/defaultPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminHeader.HeaderController">
     <columnConstraints>
         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="350.0" minWidth="250.0" prefWidth="328.0" />
         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="367.0" minWidth="250.0" prefWidth="289.0" />
@@ -17,8 +17,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Button fx:id="allocationsButton" mnemonicParsing="false" onAction="#allocationsButtonClicked" prefHeight="30.0" prefWidth="150.0" styleClass="HeaderButtons" text="Allocations" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Button fx:id="executionsHistoryButton" mnemonicParsing="false" onAction="#executionsHistoryButtonClicked" prefHeight="30.0" prefWidth="150.0" styleClass="HeaderButtons" text="Executions History" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <Button fx:id="allocationsButton" mnemonicParsing="false" onAction="#allocationsButtonClicked" prefHeight="30.0" prefWidth="150.0" styleClass="HeaderButtons" text="Allocations" GridPane.columnIndex="2" GridPane.rowIndex="1" />
         <Label id="predictionsTitle" prefHeight="36.0" prefWidth="366.0" text="Predictions - Administrator" GridPane.columnIndex="1" />
         <Button fx:id="managementButton" mnemonicParsing="false" onAction="#managementButtonClicked" prefHeight="30.0" prefWidth="150.0" styleClass="HeaderButtons" text="Management" GridPane.rowIndex="1" />
     </children>
